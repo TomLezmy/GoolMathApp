@@ -3,4 +3,12 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorBtn2">#f7aeb5</color>
+    <color name="colorStokeBtn2">#F8CFD3</color>
+    <color name="colorBtn1">#b4daf7</color>
+    <color name="colorStrokeBtn1">#CBE6FB</color>
+    <color name="colorBtn3">#9FE1AE</color>
+    <color name="colorStrokeBtn3">#C1ECCB</color>
+    <color name="colorMainHeaderPurple">#9a8abf</color>
+    <color name="white">#FFF</color>
 </resources>

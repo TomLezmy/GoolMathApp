@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="4"
+    android:id="@+id/learn_layout"
+    android:background="@drawable/background_image_with_alpha">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_settings_black_24dp"
+        android:id="@+id/settings"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/FontLocalized"
+        android:gravity="top|center"
+        android:text="@string/learn_btn_txt"
+        android:textColor="#9FE1AE"
+        android:textSize="60sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_below="@id/title"
+            android:id="@+id/video_view"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:background="@drawable/button_3_design"
+            style="@style/FontLocalized"
+            android:text="@string/back_btn_txt"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:layout_gravity="left|bottom"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_3_design"
+            style="@style/FontLocalized"
+            android:text="@string/next_btn_txt"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:layout_gravity="right|bottom"/>
+    </LinearLayout>
+
+
+</LinearLayout>
