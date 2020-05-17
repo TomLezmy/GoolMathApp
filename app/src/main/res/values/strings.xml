@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GoolMathApp</string>
+    <string name="practice_btn_txt">Practice</string>
+    <string name="learn_btn_txt">Learn</string>
+    <string name="progress_btn_txt">Progress</string>
+    <string name="select_subject_btn_txt">Select a Subject</string>
+    <string name="next_btn_txt">Next</string>
+    <string name="back_btn_txt">Back</string>
+    <string name="continue_btn_txt">Continue</string>
 </resources>
