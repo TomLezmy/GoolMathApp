@@ -1,14 +1,14 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="6"
+    android:layout_weight="5"
     android:background="@drawable/background_image_with_alpha"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:orientation="vertical"
         android:id="@+id/main_layout">
 
@@ -21,13 +21,12 @@
             android:alpha="1"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
             style="@style/FontLocalized"
             android:text="@string/practice_btn_txt"
             android:gravity="center"
             android:textColor="@color/colorBtn1"
-            android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
             android:textSize="60sp"
             android:textStyle="bold" />
@@ -36,57 +35,56 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5"
-        android:orientation="vertical">
-    <Button
-        android:id="@+id/btn_continue"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:layout_marginVertical="10dp"
-        android:layout_gravity="bottom|center"
-        android:background="@drawable/button_1_design"
-        android:text="@string/continue_btn_txt"
-        android:textSize="30sp"
-        style="@style/FontLocalized"
-        android:textColor="@color/white"
-        android:layout_marginTop="25dp"
-        android:padding="10dp" />
-
-    <Button
-        android:id="@+id/btn_select_subject"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1.2"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/button_1_design"
-        android:text="@string/select_subject_btn_txt"
-        android:textSize="28sp"
-        android:textColor="@color/white"
-        style="@style/FontLocalized"
-        android:padding="10dp"/>
+        android:layout_margin="10dp">
+        <Button
+            android:id="@+id/btn_continue_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_1_design"
+            android:text="@string/continue_btn_txt"
+            android:textSize="30sp"
+            style="@style/FontLocalized"
+            android:textColor="@color/white"
+            android:padding="10dp" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:layout_marginTop="10dp"
+        android:layout_weight="0.8"
         android:orientation="vertical"
-        android:gravity="left">
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:background="@drawable/button_1_design"
-        android:text="@string/back_btn_txt"
-        android:textSize="22sp"
-        style="@style/FontLocalized"
-        android:textColor="@color/white"
-        android:padding="10dp"/>
-</LinearLayout>
-</LinearLayout>
+        android:id="@+id/empty_layout"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="20dp">
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_1_design"
+            android:text="@string/back_btn_txt"
+            android:textSize="25sp"
+            style="@style/FontLocalized"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btn_select_subject"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_1_design"
+            android:text="@string/select_subject_btn_txt"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            style="@style/FontLocalized"
+            android:padding="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"/>
+    </RelativeLayout>
+    </LinearLayout>

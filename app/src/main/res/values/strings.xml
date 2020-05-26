@@ -6,5 +6,12 @@
     <string name="select_subject_btn_txt">Select a Subject</string>
     <string name="next_btn_txt">Next</string>
     <string name="back_btn_txt">Back</string>
-    <string name="continue_btn_txt">Continue</string>
+    <string name="continue_btn_txt">Continue Game</string>
+    <string name="start_learn_btn_txt">Start Learn_txt</string>
+    <string name="addition_subtraction_category_txt">Addition And Subtraction</string>
+    <string name="multiplication_category_txt">Multiplication</string>
+    <string name="division_category_txt">Division</string>
+    <string name="fractions_category_txt">Fraction</string>
+    <string name="percentages_category_txt">Percentages</string>
+    <string name="decimal_numbers_category_txt">Decimal Numbers</string>
 </resources>

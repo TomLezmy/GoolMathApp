@@ -7,5 +7,12 @@
     <string name="select_subject_btn_txt">בחר נושא</string>
     <string name="next_btn_txt">הבא</string>
     <string name="back_btn_txt">חזור</string>
-    <string name="continue_btn_txt">המשך</string>
+    <string name="continue_btn_txt">המשך משחק</string>
+    <string name="start_learn_btn_txt">התחל לימוד</string>
+    <string name="addition_subtraction_category_txt">חיבור וחיסור</string>
+    <string name="multiplication_category_txt">כפל</string>
+    <string name="division_category_txt">חילוק</string>
+    <string name="fractions_category_txt">שברים</string>
+    <string name="percentages_category_txt">אחוזים</string>
+    <string name="decimal_numbers_category_txt">מספרים עשרוניים</string>
 </resources>
