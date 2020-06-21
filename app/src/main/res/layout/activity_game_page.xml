@@ -19,10 +19,11 @@
             android:id="@+id/background_two"/>
     </FrameLayout>
     <RelativeLayout
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
         android:id="@+id/dialog_layout"
         android:gravity="center"
+        android:layout_marginTop="30dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
     <ImageView
@@ -50,6 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_start_txt"
+            android:background="@drawable/game_button_design"
+            android:textColor="@color/white"
             style="@style/FontLocalized"
             android:layout_margin="10dp"
             android:id="@+id/start_walk"/>
@@ -66,6 +69,7 @@
             android:text="@string/score_is_zero_txt"
             style="@style/FontLocalized"
             android:textStyle="bold"
+            android:textColor="@color/white"
             android:id="@+id/score_text"
             android:layout_alignParentEnd="true"
             android:layout_margin="10dp"

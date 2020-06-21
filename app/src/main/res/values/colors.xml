@@ -10,5 +10,9 @@
     <color name="colorBtn3">#83CD94</color>
     <color name="colorStrokeBtn3">#ADE8BB</color>
     <color name="colorMainHeaderPurple">#8D77BC</color>
+    <color name="colorOrangeRedBtn">#FF9B7B</color>
+    <color name="colorOrangeRedBtnStoke">#FFB49C</color>
     <color name="white">#FFF</color>
+    <color name="yellow_orange">#FFCA28</color>
+    <color name="yellowLight">#F8CB43</color>
 </resources>

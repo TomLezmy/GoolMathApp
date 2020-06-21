@@ -16,4 +16,5 @@
     <string name="decimal_numbers_category_txt">Decimal Numbers</string>
     <string name="btn_start_txt">Start</string>
     <string name="score_is_zero_txt">Score: 0</string>
+    <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
 </resources>
