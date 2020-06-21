@@ -2,41 +2,77 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/game_image_option_1"
+            android:id="@+id/background_one"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/game_image_option_1"
+            android:id="@+id/background_two"/>
+    </FrameLayout>
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/dialog_layout"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:src="@drawable/rock"
+        android:scaleType="fitEnd"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-100dp"
+        android:id="@+id/obstacle"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentEnd="true"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/game_image_option_1"
         android:id="@+id/game_layout">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/player"
             android:layout_marginBottom="70dp"
-            android:background="@null"
+            android:src="@drawable/walk1"
+            android:id="@+id/player_image"
             android:layout_alignParentBottom="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start"
+            android:layout_margin="10dp"
+            android:id="@+id/start_walk"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="stand"
+            android:id="@+id/start_stand"
+            android:layout_toEndOf="@id/start_walk"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score : 0"
+            android:textStyle="bold"
+            android:id="@+id/score_text"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp"
+            android:textSize="20sp"/>
     </RelativeLayout>
-    <!--    <Button-->
-    <!--        android:id="@+id/to_subject_btn"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_width="120dp"-->
-    <!--        android:layout_height="80dp"-->
-    <!--        android:layout_margin="25dp"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:background="@drawable/button_2_design"-->
-    <!--        android:text="לימוד"-->
-    <!--        android:textSize="27sp"-->
-    <!--        android:textStyle="bold" />-->
-    <!--    <Button-->
-    <!--        android:id="@+id/back"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_alignParentStart="true"-->
-    <!--        android:layout_width="120dp"-->
-    <!--        android:layout_height="80dp"-->
-    <!--        android:layout_margin="25dp"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:background="@drawable/button_3_design"-->
-    <!--        android:text="חזור"-->
-    <!--        android:textSize="27sp"-->
-    <!--        android:textStyle="bold" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:id="@+id/button_fragment_layout"/>
 </RelativeLayout>
