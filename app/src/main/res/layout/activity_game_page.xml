@@ -9,13 +9,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/game_image_option_1"
+            android:src="@drawable/game_image_option_5"
             android:id="@+id/background_one"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/game_image_option_1"
+            android:src="@drawable/game_image_option_5"
             android:id="@+id/background_two"/>
     </FrameLayout>
     <RelativeLayout
@@ -42,14 +42,15 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="30dp"
             android:src="@drawable/walk1"
             android:id="@+id/player_image"
             android:layout_alignParentBottom="true"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="start"
+            android:text="@string/btn_start_txt"
+            style="@style/FontLocalized"
             android:layout_margin="10dp"
             android:id="@+id/start_walk"/>
         <Button
@@ -62,7 +63,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Score : 0"
+            android:text="@string/score_is_zero_txt"
+            style="@style/FontLocalized"
             android:textStyle="bold"
             android:id="@+id/score_text"
             android:layout_alignParentEnd="true"

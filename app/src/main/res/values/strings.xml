@@ -14,4 +14,6 @@
     <string name="fractions_category_txt">Fraction</string>
     <string name="percentages_category_txt">Percentages</string>
     <string name="decimal_numbers_category_txt">Decimal Numbers</string>
+    <string name="btn_start_txt">Start</string>
+    <string name="score_is_zero_txt">Score: 0</string>
 </resources>

@@ -15,4 +15,6 @@
     <string name="fractions_category_txt">שברים</string>
     <string name="percentages_category_txt">אחוזים</string>
     <string name="decimal_numbers_category_txt">מספרים עשרוניים</string>
+    <string name="btn_start_txt">התחל</string>
+    <string name="score_is_zero_txt">"ניקוד: 0 "</string>
 </resources>
