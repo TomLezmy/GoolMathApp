@@ -4,7 +4,8 @@
     android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,7 +35,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-100dp"
         android:id="@+id/obstacle"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         android:layout_alignParentEnd="true"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,7 +44,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="70dp"
             android:src="@drawable/walk1"
             android:id="@+id/player_image"
             android:layout_alignParentBottom="true"/>
@@ -78,6 +79,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="#A1553D"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:id="@+id/button_fragment_layout"/>

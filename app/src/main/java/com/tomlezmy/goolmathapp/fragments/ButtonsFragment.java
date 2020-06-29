@@ -2,12 +2,13 @@ package com.tomlezmy.goolmathapp.fragments;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -91,6 +92,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
         if (options != null) {
             callBack.onReturn(Integer.parseInt(((Button)v).getText().toString()));
         }
@@ -138,4 +140,5 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
     public void returnResult(String result) {
         callBack.onReturn(Integer.parseInt(result));
     }
+
 }

@@ -12,6 +12,9 @@
     <color name="colorMainHeaderPurple">#8D77BC</color>
     <color name="colorOrangeRedBtn">#FF9B7B</color>
     <color name="colorOrangeRedBtnStoke">#FFB49C</color>
+    <color name="rockBackground">#7A7A7A</color>
+    <color name="puddleBackground">#14B5FF</color>
+    <color name="doorBackground">#4A4A4A</color>
     <color name="white">#FFF</color>
     <color name="yellow_orange">#FFCA28</color>
     <color name="yellowLight">#F8CB43</color>

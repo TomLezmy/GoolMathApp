@@ -3,7 +3,11 @@ package com.tomlezmy.goolmathapp;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -11,6 +15,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +36,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     // 1 = puddle
     // 2 = door
     int test = 0;
+    int buttonFragmentColor = Color.WHITE;
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     boolean userAnswered = false;
@@ -40,6 +46,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     AnimationDrawable walkingAnimation;
     CustomAnimationDrawable jumpAnimation;
     CustomAnimationDrawable fallingAnimation;
+    RelativeLayout buttonLayout;
     ImageView player;
     ImageView obstacle;
     ImageView backgroundOne;
@@ -56,6 +63,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         setContentView(R.layout.activity_game_page);
         Button walk = findViewById(R.id.start_walk);
         final Button stand = findViewById(R.id.start_stand);
+        buttonLayout = findViewById(R.id.button_fragment_layout);
+        buttonLayout.setBackgroundColor(buttonFragmentColor);
         player = findViewById(R.id.player_image);
         obstacle = findViewById(R.id.obstacle);
         backgroundOne = findViewById(R.id.background_one);
@@ -277,19 +286,36 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
     public void showQuestion() {
         questionFragment = new QuestionFragment(levelManager.getCurrentQuestion());
+        ValueAnimator animator;
 
         // Rock question
         if (test == 0) {
             buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(2));
+            animator = ValueAnimator.ofArgb(buttonFragmentColor, getResources().getColor(R.color.rockBackground, null));
+            buttonFragmentColor = getResources().getColor(R.color.rockBackground, null);
         }
         // Puddle question
         else if (test == 1) {
             buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(4));
+            animator = ValueAnimator.ofArgb(buttonFragmentColor, getResources().getColor(R.color.puddleBackground, null));
+            buttonFragmentColor = getResources().getColor(R.color.puddleBackground, null);
         }
         // Door question
         else {
             buttonsFragment = ButtonsFragment.newInstance(null);
+            animator = ValueAnimator.ofArgb(buttonFragmentColor, getResources().getColor(R.color.doorBackground, null));
+            buttonFragmentColor = getResources().getColor(R.color.doorBackground, null);
         }
+
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                buttonLayout.setBackgroundColor((Integer)valueAnimator.getAnimatedValue());
+            }
+        });
+
+        animator.setDuration(300);
+        animator.start();
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, "BUTTON_TAG").commit();
