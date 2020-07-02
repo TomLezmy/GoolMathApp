@@ -20,8 +20,10 @@ import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ButtonsFragment extends Fragment implements View.OnClickListener{
+    int btnDesigns[] = new int[] {R.drawable.banana_button, R.drawable.rock_button, R.drawable.water_button};
     ArrayList<String> options;
     MyDialogListener callBack;
     SendMessage sendMessage;
@@ -38,11 +40,12 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public static ButtonsFragment newInstance(List<String> options) {
+    public static ButtonsFragment newInstance(List<String> options, int currentObstacle) {
         ButtonsFragment buttonsFragment = new ButtonsFragment();
         Bundle bundle = new Bundle();
         if (options != null) {
             bundle.putStringArrayList("options", (ArrayList<String>)options);
+            bundle.putInt("currentObstacle", currentObstacle);
         }
         buttonsFragment.setArguments(bundle);
         return buttonsFragment;
@@ -55,9 +58,10 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         LinearLayout buttonLayout = rootView.findViewById(R.id.buttons_layout);
         options = getArguments().getStringArrayList("options");
         if (options != null) {
-            int btnDesign = R.drawable.rock_button;
-            if (options.size() == 4) {
-                btnDesign = R.drawable.water_button;
+            int btnDesign = btnDesigns[getArguments().getInt("currentObstacle")];
+            int btnColor = Color.BLACK;
+            if (btnDesign == R.drawable.water_button) {
+                btnColor = Color.WHITE;
             }
             for (int i = 0; i < options.size(); i++) {
                 Button btn = new Button(getContext());
@@ -65,6 +69,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 lp.setMargins(10,10,10,10);
                 lp.weight = 1;
                 btn.setLayoutParams(lp);
+                btn.setTextColor(btnColor);
                 btn.setText(options.get(i));
                 btn.setOnClickListener(this);
                 btn.setBackgroundResource(btnDesign);
