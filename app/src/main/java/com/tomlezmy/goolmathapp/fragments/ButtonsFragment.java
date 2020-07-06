@@ -59,20 +59,17 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         options = getArguments().getStringArrayList("options");
         if (options != null) {
             int btnDesign = btnDesigns[getArguments().getInt("currentObstacle")];
-            int btnColor = Color.BLACK;
-            if (btnDesign == R.drawable.water_button) {
-                btnColor = Color.WHITE;
-            }
             for (int i = 0; i < options.size(); i++) {
                 Button btn = new Button(getContext());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setMargins(10,10,10,10);
                 lp.weight = 1;
                 btn.setLayoutParams(lp);
-                btn.setTextColor(btnColor);
                 btn.setText(options.get(i));
                 btn.setOnClickListener(this);
                 btn.setBackgroundResource(btnDesign);
+                btn.setTextAppearance(R.style.FontLocalized);
+                btn.setTextSize(15f);
                 buttonLayout.addView(btn);
             }
         }

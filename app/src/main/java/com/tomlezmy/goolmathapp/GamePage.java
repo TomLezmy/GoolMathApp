@@ -9,17 +9,27 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
+import com.hanks.htextview.line.LineTextView;
 import com.plattysoft.leonids.ParticleSystem;
 import com.tomlezmy.goolmathapp.fragments.ButtonsFragment;
 import com.tomlezmy.goolmathapp.fragments.QuestionFragment;
@@ -34,31 +44,29 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
     float gameSpeed = 1.5f;
     // temp int and objectImages for test
-    // 0 = rock
-    // 1 = puddle
-    // 2 = door
+    // 0 = banana
+    // 1 = rock
+    // 2 = puddle
+    // 3 = door
     int test = 0;
-    int buttonFragmentColor;
+    int buttonFragmentColor, score = 0, userAnswer;
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     boolean userAnswered = false;
-    int userAnswer;
     int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle, R.drawable.closed_door};
     ValueAnimator valueAnimator;
     AnimationDrawable walkingAnimation;
-    CustomAnimationDrawable jumpAnimation;
-    CustomAnimationDrawable fallingAnimation;
+    CustomAnimationDrawable jumpAnimation, fallingAnimation;
     RelativeLayout buttonLayout;
-    ImageView player;
-    ImageView obstacle;
-    ImageView backgroundOne;
-    ImageView backgroundTwo;
+    ImageView player, obstacle, backgroundOne, backgroundTwo;
     TextView scoreText;
-    int score = 0;
-    float screenWidth;
+    LineTextView timerText;
+    float screenWidth, timeToCrash, linearValue;
     boolean beforeQuestion = true;
     LevelManager levelManager;
     Random rand;
+    CountDownTimer countDownTimer;
+    double valueDelta, framesPerMilliSec = (double)1000 / 60;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +83,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         backgroundOne = findViewById(R.id.background_one);
         backgroundTwo = findViewById(R.id.background_two);
         scoreText = findViewById(R.id.score_text);
+        timerText = findViewById(R.id.timer_text);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
@@ -141,19 +150,22 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setDuration((int)(10000 / gameSpeed));
+        linearValue = 0f;
+        valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-
                 if (beforeQuestion) {
                     if (obstacle.getX() > (player.getWidth() + 25)) {
-                        obstacle.setTranslationX(obstacle.getTranslationX() - (3.4f * gameSpeed));
+                        obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
                     }
                     else {
                         // Was correct or not
                         beforeQuestion = false;
                         if (userAnswered) {
                             animationResponse(levelManager.checkCorrectAnswer(userAnswer));
+                            gameSpeed = 1.5f;
+                            valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
                         }
                         else {
                             removeQuestion();
@@ -165,7 +177,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                 else {
                     // Until object disappears to left screen continue moving it
                     if (obstacle.getX() > -obstacle.getWidth()) {
-                        obstacle.setTranslationX(obstacle.getTranslationX() - (3.4f * gameSpeed));
+                        obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
                     }
                     else {
                         beforeQuestion = true;
@@ -187,10 +199,21 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         }
                         // Move object out of screen
                         obstacle.setX(screenWidth);
+                        timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
+
+                        timerText.setVisibility(View.VISIBLE);
+                        countDownTimer.start();
+//                        Log.d("TTT", timeToCrash + "");
                     }
                 }
 
-                final float progress = (float) animation.getAnimatedValue();
+                //final float progress = (float) animation.getAnimatedValue();
+                linearValue -= valueDelta;
+                if (linearValue < -1) {
+                    linearValue = 0;
+                }
+                final float progress = linearValue;
+                //Log.d("TTT", (float) animation.getAnimatedValue() + "," + linearValue);
                 final float width = backgroundOne.getWidth();
                 final float translationX = width * progress;
 
@@ -215,6 +238,23 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                     test = 0;
                     obstacle.setImageResource(objectImages[test]);
                     player.setImageDrawable(walkingAnimation);
+                    // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
+                    timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
+//                    Log.d("TTT", timeToCrash + "");
+                    countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timerText.animateText((millisUntilFinished / 1000) + "");
+                            //Log.d("TTT","seconds remaining: " + millisUntilFinished / 1000);
+                        }
+
+                        public void onFinish() {
+                            timerText.setVisibility(View.INVISIBLE);
+                            timerText.setText("");
+                        }
+                    };
+                    timerText.setVisibility(View.VISIBLE);
+                    countDownTimer.start();
                     walkingAnimation.start();
                     if (valueAnimator.isPaused()) {
                         valueAnimator.resume();
@@ -224,6 +264,21 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                     }
                     levelManager.generateQuestions();
                     showQuestion();
+                }
+                else {
+                    if (!valueAnimator.isPaused()) {
+                        valueAnimator.pause();
+                        if (gameSpeed == 1.5f) {
+                            gameSpeed = 2f;
+                        }
+                        else {
+                            gameSpeed = 1.5f;
+                        }
+                        valueAnimator.setInterpolator(new LinearInterpolator());
+                        valueAnimator.setDuration((int) (10000 / gameSpeed));
+                    } else {
+                        valueAnimator.resume();
+                    }
                 }
             }
         });
@@ -241,6 +296,11 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
     @Override
     public void onReturn(int answer) {
+        countDownTimer.cancel();
+        timerText.setVisibility(View.INVISIBLE);
+        timerText.setText("");
+        gameSpeed = 3.5f;
+        valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
         removeQuestion();
         userAnswer = answer;
         userAnswered = true;
@@ -252,7 +312,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             scoreText.setText("Score : " + score);
             new ParticleSystem(this, 20, R.drawable.star_pink, 1000)
                     .setSpeedRange(0.2f, 0.5f)
-                    .oneShot(scoreText, 20);
+                    .oneShot(scoreText, 200);
         }
 
         // Response for every obstacle but the door

@@ -44,6 +44,8 @@ public class QuestionFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_question,container,false);
         questionText = rootView.findViewById(R.id.question_text);
         questionText.setText(question);
+        questionText.setTextAppearance(R.style.FontLocalized);
+        questionText.setTextSize(20f);
         return rootView;
     }
 
