@@ -1,11 +1,15 @@
 package com.tomlezmy.goolmathapp.fragments;
 
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,7 +24,6 @@ import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ButtonsFragment extends Fragment implements View.OnClickListener{
 //    int btnDesigns[] = new int[] {R.drawable.button_4_design, R.drawable.button_4_design, R.drawable.button_4_design};
@@ -51,6 +54,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         return buttonsFragment;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +75,42 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 btn.setTextAppearance(R.style.FontLocalized);
                 btn.setTextSize(15f);
                 btn.setTextColor(Color.WHITE);
+                btn.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(v,
+                                        "scaleX", 0.8f);
+                                ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(v,
+                                        "scaleY", 0.8f);
+                                scaleDownX.setDuration(100);
+                                scaleDownY.setDuration(100);
+
+                                AnimatorSet scaleDown = new AnimatorSet();
+                                scaleDown.play(scaleDownX).with(scaleDownY);
+
+                                scaleDown.start();
+
+                                break;
+
+                            case MotionEvent.ACTION_UP:
+                                ObjectAnimator scaleDownX2 = ObjectAnimator.ofFloat(
+                                        v, "scaleX", 1f);
+                                ObjectAnimator scaleDownY2 = ObjectAnimator.ofFloat(
+                                        v, "scaleY", 1f);
+                                scaleDownX2.setDuration(100);
+                                scaleDownY2.setDuration(100);
+
+                                AnimatorSet scaleDown2 = new AnimatorSet();
+                                scaleDown2.play(scaleDownX2).with(scaleDownY2);
+
+                                scaleDown2.start();
+                                break;
+                        }
+                        return false;
+                    }
+                });
                 buttonLayout.addView(btn);
             }
         }

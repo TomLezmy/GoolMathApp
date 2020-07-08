@@ -60,7 +60,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     RelativeLayout buttonLayout;
     ImageView player, obstacle, backgroundOne, backgroundTwo;
     TextView scoreText;
-    LineTextView timerText;
+    TextView timerText;
     float screenWidth, timeToCrash, linearValue;
     boolean beforeQuestion = true;
     LevelManager levelManager;
@@ -244,7 +244,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                     countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timerText.animateText((millisUntilFinished / 1000) + "");
+                            //timerText.animateText((millisUntilFinished / 1000) + "");
+                            timerText.setText((millisUntilFinished / 1000) + "");
                             //Log.d("TTT","seconds remaining: " + millisUntilFinished / 1000);
                         }
 
