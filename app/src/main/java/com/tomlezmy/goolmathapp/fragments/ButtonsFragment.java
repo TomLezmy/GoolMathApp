@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ButtonsFragment extends Fragment implements View.OnClickListener{
-    int btnDesigns[] = new int[] {R.drawable.banana_button, R.drawable.rock_button, R.drawable.water_button};
+//    int btnDesigns[] = new int[] {R.drawable.button_4_design, R.drawable.button_4_design, R.drawable.button_4_design};
     ArrayList<String> options;
     MyDialogListener callBack;
     SendMessage sendMessage;
@@ -58,7 +58,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         LinearLayout buttonLayout = rootView.findViewById(R.id.buttons_layout);
         options = getArguments().getStringArrayList("options");
         if (options != null) {
-            int btnDesign = btnDesigns[getArguments().getInt("currentObstacle")];
+//            int btnDesign = btnDesigns[getArguments().getInt("currentObstacle")];
             for (int i = 0; i < options.size(); i++) {
                 Button btn = new Button(getContext());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -67,9 +67,10 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 btn.setLayoutParams(lp);
                 btn.setText(options.get(i));
                 btn.setOnClickListener(this);
-                btn.setBackgroundResource(btnDesign);
+                btn.setBackgroundResource(R.drawable.button_4_design);
                 btn.setTextAppearance(R.style.FontLocalized);
                 btn.setTextSize(15f);
+                btn.setTextColor(Color.WHITE);
                 buttonLayout.addView(btn);
             }
         }
@@ -85,6 +86,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 btn.setBackgroundResource(nums[i]);
                 btn.setId(i);
                 btn.setOnClickListener(this);
+                btn.setTextColor(Color.WHITE);
                 buttonLayout.addView(btn);
             }
         }
