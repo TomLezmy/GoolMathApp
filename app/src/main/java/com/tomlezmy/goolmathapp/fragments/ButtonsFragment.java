@@ -62,7 +62,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
             for (int i = 0; i < options.size(); i++) {
                 Button btn = new Button(getContext());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                lp.setMargins(10,10,10,10);
+                lp.setMargins(15,20,15,30);
                 lp.weight = 1;
                 btn.setLayoutParams(lp);
                 btn.setText(options.get(i));
