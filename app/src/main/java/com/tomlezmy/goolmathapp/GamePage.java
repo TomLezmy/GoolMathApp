@@ -53,7 +53,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     boolean userAnswered = false;
-    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle, R.drawable.closed_door};
+    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle};//, R.drawable.closed_door};
     ValueAnimator valueAnimator;
     AnimationDrawable walkingAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;
@@ -61,7 +61,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     ImageView player, obstacle, backgroundOne, backgroundTwo;
     TextView scoreText;
     TextView timerText;
-    float screenWidth, timeToCrash, linearValue;
+    float screenWidth, timeToCrash, linearValue, objectHeight;
     boolean beforeQuestion = true;
     LevelManager levelManager;
     Random rand;
@@ -119,15 +119,15 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             }
         };
         AnimationDrawable jump = new AnimationDrawable();
-        jump.addFrame(getResources().getDrawable(R.drawable.good1), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good2), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good3), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good4), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good5), (int)(450 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good6), (int)(450 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good7), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good8), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good9), (int)(200 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good2, null), (int)(200 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good3, null), (int)(200 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good4, null), (int)(200 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good5, null), (int)(450 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good6, null), (int)(450 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good7, null), (int)(200 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good8, null), (int)(200 / gameSpeed));
+        jump.addFrame(getResources().getDrawable(R.drawable.good9, null), (int)(200 / gameSpeed));
         jumpAnimation = new CustomAnimationDrawable(jump) {
             @Override
             public void onAnimationFinish() {
@@ -137,7 +137,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
             @Override
             public void onAnimationStart() {
-                ObjectAnimator up = ObjectAnimator.ofFloat(player, "Y",obstacle.getY() - 200);
+                ObjectAnimator up = ObjectAnimator.ofFloat(player, "Y", objectHeight - 200);
                 up.setRepeatCount(1);
                 up.setStartDelay((int)(700 / gameSpeed));
                 up.setRepeatMode(ValueAnimator.REVERSE);
@@ -181,7 +181,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                     }
                     else {
                         beforeQuestion = true;
-                        test = (test + 1) % 4;
+                        test = (test + 1) % 3;
                         obstacle.setImageResource(objectImages[test]);
 
                         // If there is a next question
@@ -224,10 +224,10 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         });
 
         walkingAnimation = new AnimationDrawable();
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk1), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk1, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
         walkingAnimation.setOneShot(false);
 
         walk.setOnClickListener(new View.OnClickListener() {
@@ -319,6 +319,13 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         // Response for every obstacle but the door
         if (test != 3) {
             if (correct) {
+                // Change jump height for banana
+                if (test == 0) {
+                    objectHeight = obstacle.getY() + 200;
+                }
+                else {
+                    objectHeight = obstacle.getY();
+                }
                 player.setImageDrawable(jumpAnimation);
                 jumpAnimation.start();
             }
