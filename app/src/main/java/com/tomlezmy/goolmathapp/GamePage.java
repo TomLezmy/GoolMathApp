@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+//import android.media.MediaPlayer;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -67,6 +68,9 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     Random rand;
     CountDownTimer countDownTimer;
     double valueDelta, framesPerMilliSec = (double)1000 / 60;
+//    MediaPlayer ring;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,13 +204,14 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         // Move object out of screen
                         obstacle.setX(screenWidth);
                         timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
-
                         timerText.setVisibility(View.VISIBLE);
                         countDownTimer.start();
+                        // test add sound clock ticking
+//                        ring = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
+//                        ring.start();
 //                        Log.d("TTT", timeToCrash + "");
                     }
                 }
-
                 //final float progress = (float) animation.getAnimatedValue();
                 linearValue -= valueDelta;
                 if (linearValue < -1) {

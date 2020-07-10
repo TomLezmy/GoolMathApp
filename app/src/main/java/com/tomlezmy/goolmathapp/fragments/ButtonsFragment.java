@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,8 +17,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.tomlezmy.goolmathapp.GamePage;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.interfaces.MyDialogListener;
 import com.tomlezmy.goolmathapp.interfaces.SendMessage;
@@ -72,8 +75,10 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 btn.setText(options.get(i));
                 btn.setOnClickListener(this);
                 btn.setBackgroundResource(R.drawable.button_4_design);
-                btn.setTextAppearance(R.style.FontLocalized);
-                btn.setTextSize(15f);
+                Typeface typeface = ResourcesCompat.getFont(this.getContext(),R.font.patua_one);
+                btn.setTypeface(typeface, Typeface.BOLD);
+
+                btn.setTextSize(17f);
                 btn.setTextColor(Color.WHITE);
                 btn.setOnTouchListener(new View.OnTouchListener() {
                     @Override

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/one_plus_one_equal_to_txt"
         android:gravity="center"
-        android:textColor="@color/colorBtn1"
+        android:textColor="@color/clock_txt"
         android:layout_centerInParent="true"
         style="@style/FontLocalized"
         android:id="@+id/question_text"
