@@ -78,7 +78,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 Typeface typeface = ResourcesCompat.getFont(this.getContext(),R.font.patua_one);
                 btn.setTypeface(typeface, Typeface.BOLD);
 
-                btn.setTextSize(17f);
+                btn.setTextSize(18f);
                 btn.setTextColor(Color.WHITE);
                 btn.setOnTouchListener(new View.OnTouchListener() {
                     @Override
