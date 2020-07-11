@@ -3,21 +3,34 @@ package com.tomlezmy.goolmathapp;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
+//import android.media.MediaPlayer;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
+import com.hanks.htextview.line.LineTextView;
 import com.plattysoft.leonids.ParticleSystem;
 import com.tomlezmy.goolmathapp.fragments.ButtonsFragment;
 import com.tomlezmy.goolmathapp.fragments.QuestionFragment;
@@ -55,20 +68,14 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     Random rand;
     CountDownTimer countDownTimer;
     double valueDelta, framesPerMilliSec = (double)1000 / 60;
-    MediaPlayer gameBackgroundRing;
-    MediaPlayer clockTickingRing;
+//    MediaPlayer ring;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
-        //  Set background sound
-        clockTickingRing = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
-        gameBackgroundRing = MediaPlayer.create(GamePage.this,R.raw.bensound_creativeminds);
-        gameBackgroundRing.setVolume(1,1);
-        gameBackgroundRing.start();
-
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
         Button walk = findViewById(R.id.start_walk);
@@ -199,6 +206,9 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
                         timerText.setVisibility(View.VISIBLE);
                         countDownTimer.start();
+                        // test add sound clock ticking
+//                        ring = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
+//                        ring.start();
 //                        Log.d("TTT", timeToCrash + "");
                     }
                 }
@@ -240,9 +250,6 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
                         public void onTick(long millisUntilFinished) {
                             //timerText.animateText((millisUntilFinished / 1000) + "");
-                            // Set Clock ticking sound while count down timer
-                            clockTickingRing.setVolume(1000,1000);
-                            clockTickingRing.start();
                             timerText.setText((millisUntilFinished / 1000) + "");
                             //Log.d("TTT","seconds remaining: " + millisUntilFinished / 1000);
                         }
