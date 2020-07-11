@@ -71,7 +71,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         gameBackgroundRing = MediaPlayer.create(GamePage.this,R.raw.bensound_cute);
         correctRing = MediaPlayer.create(GamePage.this,R.raw.correct_answer);
         wrongRing = MediaPlayer.create(GamePage.this,R.raw.wrong_answer);
-        gameBackgroundRing.setVolume(-1000,-1000);
+        wrongRing.setVolume(0.4f, 0.4f);
+        gameBackgroundRing.setVolume(0.5f,0.5f);
         gameBackgroundRing.start();
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
@@ -260,7 +261,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         public void onTick(long millisUntilFinished) {
                             //timerText.animateText((millisUntilFinished / 1000) + "");
                             // Set Clock ticking sound while count down timer
-                            clockTickingRing.setVolume(1000,1000);
+                            clockTickingRing.setVolume(1,1);
                             clockTickingRing.start();
                             timerText.setText((millisUntilFinished / 1000) + "");
                             //Log.d("TTT","seconds remaining: " + millisUntilFinished / 1000);
@@ -415,8 +416,19 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     protected void onPause() {
         if (valueAnimator.isRunning()) {
             valueAnimator.end();
+            walkingAnimation.stop();
+        }
+        gameBackgroundRing.pause();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        gameBackgroundRing.start();
+        super.onResume();
     }
 
     @Override
