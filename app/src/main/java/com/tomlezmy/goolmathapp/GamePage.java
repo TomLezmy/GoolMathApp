@@ -63,7 +63,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     TextView scoreText;
     TextView timerText;
     float screenWidth, timeToCrash, linearValue, objectHeight;
-    boolean beforeQuestion = true;
+    boolean beforeResponse = true;
     LevelManager levelManager;
     Random rand;
     CountDownTimer countDownTimer;
@@ -92,15 +92,15 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         AnimationDrawable fall = new AnimationDrawable();
-        fall.addFrame(getResources().getDrawable(R.drawable.bad1), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad2), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad3), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad4), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad5), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad6), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad7), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad8), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad9), (int)(400 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad1, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad2, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad6, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad7, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad8, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad9, null), (int)(400 / gameSpeed));
         fallingAnimation = new CustomAnimationDrawable(fall) {
             @Override
             public void onAnimationFinish() {
@@ -116,7 +116,15 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            obstacle.setImageResource(R.drawable.puddle_splash);
+                            AnimationDrawable splash = new AnimationDrawable();
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash, null), 100);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_2, null), 100);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_3, null), 100);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_4, null), 100);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle, null), 100);
+                            splash.setOneShot(true);
+                            obstacle.setImageDrawable(splash);
+                            splash.start();
                         }
                     }, (int)(1600 / gameSpeed));
                 }
@@ -159,13 +167,13 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                if (beforeQuestion) {
+                if (beforeResponse) {
                     if (obstacle.getX() > (player.getWidth() + 25)) {
                         obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
                     }
                     else {
                         // Was correct or not
-                        beforeQuestion = false;
+                        beforeResponse = false;
                         if (userAnswered) {
                             animationResponse(levelManager.checkCorrectAnswer(userAnswer));
                             gameSpeed = 1.5f;
@@ -184,13 +192,19 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
                     }
                     else {
-                        beforeQuestion = true;
+                        beforeResponse = true;
                         test = (test + 1) % 3;
                         obstacle.setImageResource(objectImages[test]);
+
+                        // Move object out of screen
+                        obstacle.setX(screenWidth);
 
                         // If there is a next question
                         if (levelManager.nextQuestion()) {
                             showQuestion();
+                            timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
+                            timerText.setVisibility(View.VISIBLE);
+                            countDownTimer.start();
                         }
                         else {
                             walkingAnimation.stop();
@@ -201,11 +215,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                                     .setSpeedRange(0.2f, 0.5f)
                                     .oneShot(scoreText, 100);
                         }
-                        // Move object out of screen
-                        obstacle.setX(screenWidth);
-                        timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
-                        timerText.setVisibility(View.VISIBLE);
-                        countDownTimer.start();
+
                         // test add sound clock ticking
 //                        ring = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
 //                        ring.start();
@@ -241,6 +251,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                 if (!walkingAnimation.isRunning()) {
                     levelManager = new LevelManager(10, ECategory.ADDITION, 90);
                     test = 0;
+                    score = 0;
                     obstacle.setImageResource(objectImages[test]);
                     player.setImageDrawable(walkingAnimation);
                     // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
