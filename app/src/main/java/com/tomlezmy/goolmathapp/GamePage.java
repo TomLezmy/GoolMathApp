@@ -68,7 +68,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     Random rand;
     CountDownTimer countDownTimer;
     double valueDelta, framesPerMilliSec = (double)1000 / 60;
-//    MediaPlayer ring;
+    MediaPlayer gameBackgroundRing;
+    MediaPlayer clockTickingRing;
 
 
 
@@ -76,6 +77,11 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
+        //  Set background sound
+        clockTickingRing = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
+        gameBackgroundRing = MediaPlayer.create(GamePage.this,R.raw.bensound_creativeminds);
+        gameBackgroundRing.setVolume(1,1);
+        gameBackgroundRing.start();
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
         Button walk = findViewById(R.id.start_walk);
@@ -250,6 +256,9 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
                         public void onTick(long millisUntilFinished) {
                             //timerText.animateText((millisUntilFinished / 1000) + "");
+                            // Set Clock ticking sound while count down timer
+                            clockTickingRing.setVolume(1000,1000);
+                            clockTickingRing.start();
                             timerText.setText((millisUntilFinished / 1000) + "");
                             //Log.d("TTT","seconds remaining: " + millisUntilFinished / 1000);
                         }
