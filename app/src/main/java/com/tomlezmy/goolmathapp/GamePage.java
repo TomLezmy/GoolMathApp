@@ -3,11 +3,7 @@ package com.tomlezmy.goolmathapp;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
-//import android.media.MediaPlayer;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,20 +11,13 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
-import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
 import com.hanks.htextview.line.LineTextView;
 import com.plattysoft.leonids.ParticleSystem;
@@ -69,7 +58,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     CountDownTimer countDownTimer;
     double valueDelta, framesPerMilliSec = (double)1000 / 60;
     MediaPlayer gameBackgroundRing;
-    MediaPlayer clockTickingRing;
+    MediaPlayer clockTickingRing, correctRing, wrongRing;
 
 
 
@@ -79,8 +68,10 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         setContentView(R.layout.activity_game_page);
         //  Set background sound
         clockTickingRing = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
-        gameBackgroundRing = MediaPlayer.create(GamePage.this,R.raw.bensound_creativeminds);
-        gameBackgroundRing.setVolume(1,1);
+        gameBackgroundRing = MediaPlayer.create(GamePage.this,R.raw.bensound_cute);
+        correctRing = MediaPlayer.create(GamePage.this,R.raw.correct_answer);
+        wrongRing = MediaPlayer.create(GamePage.this,R.raw.wrong_answer);
+        gameBackgroundRing.setVolume(-1000,-1000);
         gameBackgroundRing.start();
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
@@ -98,15 +89,15 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         AnimationDrawable fall = new AnimationDrawable();
-        fall.addFrame(getResources().getDrawable(R.drawable.bad1), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad2), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad3), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad4), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad5), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad6), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad7), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad8), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad9), (int)(400 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad1, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad2, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad6, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad7, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad8, null), (int)(200 / gameSpeed));
+        fall.addFrame(getResources().getDrawable(R.drawable.bad9, null), (int)(400 / gameSpeed));
         fallingAnimation = new CustomAnimationDrawable(fall) {
             @Override
             public void onAnimationFinish() {
@@ -122,7 +113,15 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            obstacle.setImageResource(R.drawable.puddle_splash);
+                            AnimationDrawable splash = new AnimationDrawable();
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash, null), 200);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_2, null), 200);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_3, null), 200);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_4, null), 200);
+                            splash.addFrame(getResources().getDrawable(R.drawable.puddle, null), 200);
+                            splash.setOneShot(true);
+                            obstacle.setImageDrawable(splash);
+                            splash.start();
                         }
                     }, (int)(1600 / gameSpeed));
                 }
@@ -194,9 +193,15 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         test = (test + 1) % 3;
                         obstacle.setImageResource(objectImages[test]);
 
+                        // Move object out of screen
+                        obstacle.setX(screenWidth);
+
                         // If there is a next question
                         if (levelManager.nextQuestion()) {
                             showQuestion();
+                            timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
+                            timerText.setVisibility(View.VISIBLE);
+                            countDownTimer.start();
                         }
                         else {
                             walkingAnimation.stop();
@@ -207,11 +212,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                                     .setSpeedRange(0.2f, 0.5f)
                                     .oneShot(scoreText, 100);
                         }
-                        // Move object out of screen
-                        obstacle.setX(screenWidth);
-                        timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
-                        timerText.setVisibility(View.VISIBLE);
-                        countDownTimer.start();
+
+
                         // test add sound clock ticking
 //                        ring = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
 //                        ring.start();
@@ -241,6 +243,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
         walkingAnimation.setOneShot(false);
 
+        walk.setOnTouchListener(new ButtonTouchAnimation());
         walk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -323,22 +326,26 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
     public void animationResponse(boolean correct) {
         if (correct) {
+            correctRing.start();
             score++;
             scoreText.setText("Score : " + score);
             new ParticleSystem(this, 20, R.drawable.star_pink, 1000)
                     .setSpeedRange(0.2f, 0.5f)
                     .oneShot(scoreText, 200);
         }
+        else {
+            wrongRing.start();
+        }
 
         // Response for every obstacle but the door
         if (test != 3) {
             if (correct) {
-                // Change jump height for banana
-                if (test == 0) {
+                // Change jump height for banana and rock
+                if (test != 2) {
                     objectHeight = obstacle.getY() + 200;
                 }
                 else {
-                    objectHeight = obstacle.getY();
+                    objectHeight = obstacle.getY() + 100;
                 }
                 player.setImageDrawable(jumpAnimation);
                 jumpAnimation.start();
@@ -410,6 +417,28 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             valueAnimator.end();
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (clockTickingRing != null) {
+            clockTickingRing.release();
+            clockTickingRing = null;
+        }
+        if (gameBackgroundRing != null) {
+            gameBackgroundRing.release();
+            gameBackgroundRing = null;
+        }
+        if (correctRing != null) {
+            correctRing.release();
+            gameBackgroundRing = null;
+        }
+        if (wrongRing != null) {
+            wrongRing.release();
+            wrongRing = null;
+        }
+
+        super.onDestroy();
     }
 
     @Override

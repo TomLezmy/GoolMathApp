@@ -47,7 +47,7 @@
             android:layout_height="100dp"
             android:layout_marginBottom="70dp"
             android:src="@drawable/walk1"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:id="@+id/player_image"
             android:layout_alignParentBottom="true"/>
         <Button
