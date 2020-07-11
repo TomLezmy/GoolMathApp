@@ -168,7 +168,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 if (beforeResponse) {
-                    if (obstacle.getX() > (player.getWidth() + 25)) {
+                    if (obstacle.getX() > (player.getWidth() + 35)) {
                         obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
                     }
                     else {
@@ -177,7 +177,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         if (userAnswered) {
                             animationResponse(levelManager.checkCorrectAnswer(userAnswer));
                             gameSpeed = 1.5f;
-                            valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
+                            valueDelta = (double)(framesPerMilliSec / (int)((int)(10000 / gameSpeed)));
                         }
                         else {
                             removeQuestion();
@@ -244,7 +244,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
         walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
         walkingAnimation.setOneShot(false);
-
+        walk.setOnTouchListener(new ButtonTouchAnimation());
         walk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -335,8 +335,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         // Response for every obstacle but the door
         if (test != 3) {
             if (correct) {
-                // Change jump height for banana
-                if (test == 0) {
+                // Change jump height for banana and rock
+                if (test != 2) {
                     objectHeight = obstacle.getY() + 200;
                 }
                 else {
