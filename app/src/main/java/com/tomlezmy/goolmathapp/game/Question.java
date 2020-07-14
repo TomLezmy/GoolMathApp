@@ -1,6 +1,5 @@
 package com.tomlezmy.goolmathapp.game;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class Question {
@@ -8,7 +7,7 @@ public class Question {
     private String sign;
     private int numOne;
     private int numTwo;
-    private int result;
+    private float result;
 
     public Question(ECategory category, int numOne, int numTwo) {
         this.category = category;
@@ -16,23 +15,32 @@ public class Question {
         this.numTwo = numTwo;
         switch (category) {
             case ADDITION:
-                this.result = numOne + numTwo;
+                this.result = this.numOne + this.numTwo;
                 sign = "+";
                 break;
             case SUBTRACTION:
-                this.result = numOne - numTwo;
+                this.result = this.numOne - this.numTwo;
                 sign = "-";
                 break;
             case MULTIPLICATION:
-                this.result = numOne * numTwo;
+                this.result = this.numOne * this.numTwo;
                 sign = "*";
                 break;
             case DIVISION:
-                this.result = numOne / numTwo;
+                this.result = ((float)this.numOne / (float)this.numTwo);
+                if ((int)result != result) {
+                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                }
                 sign = "/";
                 break;
+            case PERCENTS:
+                this.result = (float)(this.numOne * this.numTwo) / 100;
+                if ((int)result != result) {
+                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                }
+                sign = "*";
+                break;
         }
-
     }
 
     public ECategory getCategory() {
@@ -47,23 +55,19 @@ public class Question {
         return numTwo;
     }
 
-    public int getResult() {
-        return result;
-    }
+    public float getResult()  { return result; }
 
     public String getQuestionHiddenAnswer() {
+        if (category == ECategory.PERCENTS) {
+            return numTwo + "% of " + numOne + " = ?";
+        }
         return numOne + sign + numTwo + "= ?";
     }
 
     @Override
     public boolean equals(@Nullable Object obj) {
         Question questionToCompare = (Question) obj;
-        return (numOne == questionToCompare.getNumOne() && numTwo == questionToCompare.getNumTwo());
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return numOne + sign + numTwo + "=" + result;
+        return ((numOne == questionToCompare.getNumOne() && numTwo == questionToCompare.getNumTwo()) ||
+                (numTwo == questionToCompare.getNumOne() && numOne == questionToCompare.getNumTwo()));
     }
 }

@@ -10,14 +10,16 @@ public class LevelManager {
     private Random rand;
     private int numberOfQuestions;
     private ECategory levelCategory;
-    private int levelLimit;
+    private int level;
     private int currentQuestion;
     private List<Question> questions;
+    private LevelValueLimits levelValueLimits;
 
-    public LevelManager(int numberOfQuestions, ECategory levelCategory, int levelLimit) {
+    public LevelManager(int numberOfQuestions, ECategory levelCategory, int level) {
         this.numberOfQuestions = numberOfQuestions;
         this.levelCategory = levelCategory;
-        this.levelLimit = levelLimit;
+        this.level = level;
+        this.levelValueLimits = LimitFactory.getLevelValues(levelCategory, level);
         rand = new Random();
     }
 
@@ -34,7 +36,7 @@ public class LevelManager {
     }
 
     private Question generateQuestion() {
-        return new Question(levelCategory, rand.nextInt(levelLimit) + 10, rand.nextInt(levelLimit) + 10);
+        return new Question(levelCategory, levelValueLimits.getFirstNumberLimit().generateValue(), levelValueLimits.getSecondNumberLimit().generateValue());
     }
 
     public String getCurrentQuestion() {
@@ -51,20 +53,47 @@ public class LevelManager {
         List<String> options = null;
         if (numOfOptions != 0) {
             options = new ArrayList<>();
-            int answer = questions.get(currentQuestion - 1).getResult();
-            //int numbersToRand[] = getRandomizedNumbers(numOfOptions);
-            options.add(answer + "");
+            float answer = questions.get(currentQuestion - 1).getResult();
             String option;
-            for (int i = 0; i < numOfOptions - 1; i++) {
-                do {
-                    if (rand.nextInt(2) == 1) {
-                        option = (answer + rand.nextInt(16)) + "";
-                    }
-                    else {
-                        option = (answer - rand.nextInt(16)) + "";
-                    }
-                } while(options.contains(option));
-                options.add(option);
+            // For Whole numbers
+            if (levelCategory != ECategory.DIVISION && levelCategory != ECategory.PERCENTS) {
+                options.add((int)answer + "");
+                for (int i = 0; i < numOfOptions - 1; i++) {
+                    do {
+                        if (rand.nextInt(2) == 1) {
+                            option = ((int)answer + rand.nextInt(16)) + "";
+                        } else {
+                            option = ((int)answer - rand.nextInt(16)) + "";
+                        }
+                    } while (options.contains(option));
+                    options.add(option);
+                }
+            }
+            // For Decimal numbers
+            else {
+                if ((int)answer == answer) {
+                    options.add((int)answer + "");
+                }
+                else {
+                    options.add(answer + "");
+                }
+                for (int i = 0; i < numOfOptions - 1; i++) {
+                    do {
+                        double value;
+                        if (rand.nextInt(2) == 1) {
+                            value = answer + (float)(rand.nextInt(16)) / 10;
+                        } else {
+                            value = answer - (float)(rand.nextInt(16)) / 10;
+                        }
+                        if ((int)value == value) {
+                            option = (int)value + "";
+                        }
+                        else {
+                            option = String.format("%.3f", value).replaceAll("0*$", "");
+                        }
+                    } while (options.contains(option));
+                    options.add(option);
+                }
             }
             for (int i = numOfOptions - 1; i > 0; i--)
             {
@@ -78,27 +107,7 @@ public class LevelManager {
         return options;
     }
 
-    private int[] getRandomizedNumbers(int numOfOptions) {
-        int numbersToRand[];
-        if (numOfOptions == 2) {
-            numbersToRand = new int[] {0 , 1};
-        }
-        else {
-            numbersToRand = new int[] {0, 1, 2, 3};
-        }
-
-        for (int i = numbersToRand.length - 1; i > 0; i--)
-        {
-            int index = rand.nextInt(i + 1);
-            int temp = numbersToRand[index];
-            numbersToRand[index] = numbersToRand[i];
-            numbersToRand[i] = temp;
-        }
-
-        return numbersToRand;
-    }
-
-    public Boolean checkCorrectAnswer(int guess) {
+    public Boolean checkCorrectAnswer(float guess) {
         return guess == questions.get(currentQuestion - 1).getResult();
     }
 
@@ -110,7 +119,7 @@ public class LevelManager {
         return levelCategory;
     }
 
-    public int getLevelLimit() {
-        return levelLimit;
+    public int getLevel() {
+        return level;
     }
 }

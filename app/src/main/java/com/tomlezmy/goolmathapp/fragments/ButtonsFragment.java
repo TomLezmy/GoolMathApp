@@ -104,7 +104,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
 
         if (options != null) {
-            callBack.onReturn(Integer.parseInt(((Button)v).getText().toString()));
+            callBack.onReturn(Float.parseFloat(((Button)v).getText().toString()));
         }
         else {
             char numToAdd = 'E';

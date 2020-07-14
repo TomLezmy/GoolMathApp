@@ -1,4 +1,4 @@
-package com.tomlezmy.goolmathapp;
+package com.tomlezmy.goolmathapp.activities;
 
 
 import android.animation.ObjectAnimator;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -19,8 +18,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hanks.htextview.line.LineTextView;
 import com.plattysoft.leonids.ParticleSystem;
+import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
+import com.tomlezmy.goolmathapp.CustomAnimationDrawable;
+import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.ButtonsFragment;
 import com.tomlezmy.goolmathapp.fragments.QuestionFragment;
 import com.tomlezmy.goolmathapp.game.ECategory;
@@ -39,7 +40,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     // 2 = puddle
     // 3 = door
     int test = 0;
-    int buttonFragmentColor, score = 0, userAnswer;
+    int buttonFragmentColor, score = 0;
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     boolean userAnswered = false;
@@ -51,7 +52,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     ImageView player, obstacle, backgroundOne, backgroundTwo;
     TextView scoreText;
     TextView timerText;
-    float screenWidth, timeToCrash, linearValue, objectHeight;
+    float screenWidth, timeToCrash, linearValue, objectHeight, userAnswer;
     boolean beforeQuestion = true;
     LevelManager levelManager;
     Random rand;
@@ -213,11 +214,6 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                                     .setSpeedRange(0.2f, 0.5f)
                                     .oneShot(scoreText, 100);
                         }
-
-
-                        // test add sound clock ticking
-//                        ring = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
-//                        ring.start();
 //                        Log.d("TTT", timeToCrash + "");
                     }
                 }
@@ -249,7 +245,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             @Override
             public void onClick(View v) {
                 if (!walkingAnimation.isRunning()) {
-                    levelManager = new LevelManager(10, ECategory.ADDITION, 90);
+                    levelManager = new LevelManager(10, ECategory.ADDITION, 2);
+                    score = 0;
                     test = 0;
                     obstacle.setImageResource(objectImages[test]);
                     player.setImageDrawable(walkingAnimation);
@@ -314,7 +311,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     }
 
     @Override
-    public void onReturn(int answer) {
+    public void onReturn(float answer) {
         countDownTimer.cancel();
         timerText.setVisibility(View.INVISIBLE);
         timerText.setText("");
@@ -371,7 +368,6 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
     public void showQuestion() {
         questionFragment = new QuestionFragment(levelManager.getCurrentQuestion());
-//        ValueAnimator animator;
 
         if (test != 3) {
             int options = 4;
@@ -380,26 +376,11 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                 options = 2;
             }
             buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(options), test);
-            //            animator = ValueAnimator.ofArgb(buttonFragmentColor, getResources().getColor(R.color.rockBackground, null));
-            //buttonFragmentColor = getResources().getColor(R.color.rockBackground, null);
-
         }
         // Door question
         else {
             buttonsFragment = ButtonsFragment.newInstance(null, 0);
-//            animator = ValueAnimator.ofArgb(buttonFragmentColor, getResources().getColor(R.color.doorBackground, null));
-            //buttonFragmentColor = getResources().getColor(R.color.doorBackground, null);
         }
-
-//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                buttonLayout.setBackgroundColor((Integer)valueAnimator.getAnimatedValue());
-//            }
-//        });
-//
-//        animator.setDuration(300);
-//        animator.start();
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, "BUTTON_TAG").commit();
