@@ -9,7 +9,7 @@
     <string name="back_btn_txt">חזור</string>
     <string name="continue_btn_txt">המשך משחק</string>
     <string name="start_learn_btn_txt">התחל לימוד</string>
-    <string name="addition_subtraction_category_txt">חיבור וחיסור</string>
+    <string name="addition_category_txt">חיבור</string>
     <string name="multiplication_category_txt">כפל</string>
     <string name="division_category_txt">חילוק</string>
     <string name="fractions_category_txt">שברים</string>
@@ -18,4 +18,5 @@
     <string name="btn_start_txt">התחל</string>
     <string name="score_is_zero_txt">"ניקוד: 0 "</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
+    <string name="subtraction_category_txt">חיסור</string>
 </resources>
