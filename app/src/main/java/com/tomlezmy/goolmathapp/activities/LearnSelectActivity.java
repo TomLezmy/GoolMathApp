@@ -1,12 +1,13 @@
 package com.tomlezmy.goolmathapp.activities;
 
-import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.SubjectsFragment;
 
-class LearnSelectActivity extends AppCompatActivity {
+public class LearnSelectActivity extends AppCompatActivity {
 
     SubjectsFragment subjectsFragment;
 

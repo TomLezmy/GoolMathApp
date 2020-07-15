@@ -46,7 +46,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     boolean userAnswered = false;
     int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle};//, R.drawable.closed_door};
     ValueAnimator valueAnimator;
-    AnimationDrawable walkingAnimation;
+    AnimationDrawable walkingAnimation, runningAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;
     RelativeLayout buttonLayout;
     ImageView player, obstacle, backgroundOne, backgroundTwo;
@@ -177,6 +177,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                             animationResponse(levelManager.checkCorrectAnswer(userAnswer));
                             gameSpeed = 1.5f;
                             valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
+                            player.setImageDrawable(walkingAnimation);
+                            walkingAnimation.start();
                         }
                         else {
                             removeQuestion();
@@ -234,18 +236,33 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         });
 
         walkingAnimation = new AnimationDrawable();
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk1, null), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk1, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk2, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk3, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk4, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk5, null), (int)(200 / gameSpeed));
+        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk6, null), (int)(200 / gameSpeed));
+//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk1, null), (int)(200 / gameSpeed));
+//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
         walkingAnimation.setOneShot(false);
+
+        runningAnimation = new AnimationDrawable();
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk7, null), (int)(200 / gameSpeed));
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk8, null), (int)(200 / gameSpeed));
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk9, null), (int)(200 / gameSpeed));
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk10, null), (int)(200 / gameSpeed));
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk11, null), (int)(200 / gameSpeed));
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk12, null), (int)(200 / gameSpeed));
+        runningAnimation.setOneShot(false);
 
         walk.setOnTouchListener(new ButtonTouchAnimation());
         walk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!walkingAnimation.isRunning()) {
-                    levelManager = new LevelManager(10, ECategory.ADDITION, 2);
+                    levelManager = new LevelManager(10, ECategory.DIVISION, 1);
                     score = 0;
                     test = 0;
                     obstacle.setImageResource(objectImages[test]);
@@ -317,6 +334,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         timerText.setText("");
         gameSpeed = 3.5f;
         valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
+        player.setImageDrawable(runningAnimation);
+        runningAnimation.start();
         removeQuestion();
         userAnswer = answer;
         userAnswered = true;

@@ -36,6 +36,14 @@ public class LevelManager {
     }
 
     private Question generateQuestion() {
+        if (levelCategory == ECategory.DIVISION) {
+            int num1, num2;
+            do {
+                num1 = levelValueLimits.getFirstNumberLimit().generateValue();
+                num2 = levelValueLimits.getSecondNumberLimit().generateValue();
+            } while (num1 % num2 != 0);
+            return new Question(levelCategory, num1, num2);
+        }
         return new Question(levelCategory, levelValueLimits.getFirstNumberLimit().generateValue(), levelValueLimits.getSecondNumberLimit().generateValue());
     }
 
@@ -56,7 +64,7 @@ public class LevelManager {
             float answer = questions.get(currentQuestion - 1).getResult();
             String option;
             // For Whole numbers
-            if (levelCategory != ECategory.DIVISION && levelCategory != ECategory.PERCENTS) {
+            if (levelCategory != ECategory.PERCENTS) {
                 options.add((int)answer + "");
                 for (int i = 0; i < numOfOptions - 1; i++) {
                     do {

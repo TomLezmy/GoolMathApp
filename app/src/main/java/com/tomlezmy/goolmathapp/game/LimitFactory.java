@@ -60,30 +60,30 @@ public class LimitFactory {
                         break;
                     case 3:
                         levelValues.setFirstNumberLimit(new int[]{10,20,30,40,50,60,70,80,90});
-                        levelValues.setSecondNumberLimit(1,9);
+                        levelValues.setSecondNumberLimit(new int[]{10});
                         break;
                     case 4:
-                        levelValues.setFirstNumberLimit(new int[]{100,200,300,400,500,600,700,800,900});
+                        levelValues.setFirstNumberLimit(new int[]{10,20,30,40,50,60,70,80,90});
                         levelValues.setSecondNumberLimit(1,9);
                         break;
                     case 5:
-                        levelValues.setFirstNumberLimit(new int[]{10,20,30,40,50,60,70,80,90});
-                        levelValues.setSecondNumberLimit(new int[]{10});
+                        levelValues.setFirstNumberLimit(new int[]{100,200,300,400,500,600,700,800,900});
+                        levelValues.setSecondNumberLimit(1,9);
                         break;
                 }
                 break;
             case PERCENTS:
                 switch (level) {
                     case 1:
-                        levelValues.setFirstNumberLimit(1,1000000);
+                        levelValues.setFirstNumberLimit(1,10000);
                         levelValues.setSecondNumberLimit(new int[] {1});
                         break;
                     case 2:
-                        levelValues.setFirstNumberLimit(1,1000000);
+                        levelValues.setFirstNumberLimit(1,10000);
                         levelValues.setSecondNumberLimit(new int[] {10});
                         break;
                     case 3:
-                        levelValues.setFirstNumberLimit(1,1000000);
+                        levelValues.setFirstNumberLimit(1,10000);
                         levelValues.setSecondNumberLimit(new int[] {50});
                         break;
                     case 4:
@@ -96,7 +96,7 @@ public class LimitFactory {
                         break;
                     case 6:
                         levelValues.setFirstNumberLimit(1,1000);
-                        levelValues.setSecondNumberLimit(new int[] {3,4,30,32});
+                        levelValues.setSecondNumberLimit(1,100);
                         break;
                     case 7:
                         levelValues.setFirstNumberLimit(1,1000);
