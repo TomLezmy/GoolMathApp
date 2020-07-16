@@ -18,4 +18,38 @@
     <string name="score_is_zero_txt">Score: 0</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">Subtraction</string>
+    <string name="titleSubSubjectsDialog">Pick One Sub Category</string>
+
+
+    <string-array name="additionSubCategories">
+        <item>Single Digit Numbers Addition</item>
+        <item>Two Digit Numbers Addition</item>
+    </string-array>
+
+    <string-array name="subtractionSubCategories">
+        <item>Single Digit Numbers Subtraction</item>
+        <item>Two Digit Numbers Subtraction</item>
+        <item>Subtraction From 1000</item>
+    </string-array>
+
+    <string-array name="multiplicationSubCategories">
+        <item>Multiplication Up To 5</item>
+        <item>Multiplication Up to 10</item>
+        <item>Two Digit Multiplication at 11</item>
+        <item>Multiplication Of Single Digit In a Two Digit Round Numbers</item>
+        <item>Multiplication In a Round Triple Digit Numbers</item>
+    </string-array>
+
+
+    <string-array name="divisionSubCategories">
+        <item>Division Up To 5</item>
+        <item>Division Up to 10</item>
+        <item>Division Two Digit Round Numbers In a Single Digit Numbers</item>
+        <item>Division Triple Digit Round Numbers In a Two Digit Numbers</item>
+        <item>Division Of a Round Number at 10</item>
+    </string-array>
+    <string name="pick_sub_category_txt">Pick a Sub Category:</string>
+    <string name="ok_txt">Ok</string>
+
+
 </resources>

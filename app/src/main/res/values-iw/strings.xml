@@ -19,4 +19,36 @@
     <string name="score_is_zero_txt">"ניקוד: 0 "</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">חיסור</string>
+    <string name="titleSubSubjectsDialog">בחר תת קטגוריה אחת</string>
+
+    <string-array name="additionSubCategories">
+        <item>חיבור מספרים חד ספרתיים</item>
+        <item>חיבור מספרים דו ספרתיים</item>
+    </string-array>
+
+    <string-array name="subtractionSubCategories">
+        <item>חיסור מספרים חד ספרתיים</item>
+        <item>חיסור מספרים דו ספרתיים</item>
+        <item>החסרה מ- 1000</item>
+    </string-array>
+
+    <string-array name="multiplicationSubCategories">
+        <item>כפל עד 5</item>
+        <item>כפל עד 10</item>
+        <item>כפל דו ספרתי ב-11</item>
+        <item>כפל ספרה אחת במספר דו ספרתי עגול</item>
+        <item>כפל במספר תלת ספרתי עגול</item>
+    </string-array>
+
+    <string-array name="divisionSubCategories">
+        <item>חילוק עד 5</item>
+        <item>חילוק עד 10</item>
+        <item>חלוקת מספר דו ספרתי עגול במספר חד ספרתי</item>
+        <item>חילוק מספר תלת ספרתי במספר דו ספרתי</item>
+        <item>חלוקה של מספר עגול ב 10</item>
+    </string-array>
+    <string name="pick_sub_category_txt">בחר בתת קטגוריה:</string>
+    <string name="ok_txt">אישור</string>
+
+
 </resources>

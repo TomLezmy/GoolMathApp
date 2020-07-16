@@ -48,7 +48,7 @@
     <!--    The Subjects Fragment Will be here-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:id="@+id/subjects_display_layout"
         android:gravity="center"/>
 
@@ -61,7 +61,7 @@
         android:layout_margin="20dp">
 
         <Button
-            android:id="@+id/btn_select_subject"
+            android:id="@+id/btn_start_learning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
