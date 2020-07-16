@@ -26,4 +26,5 @@ public class LevelValueLimits {
     public void setSecondNumberLimit(int[] array) {
         this.secondNumberLimit = new ValueArray(array);
     }
+
 }

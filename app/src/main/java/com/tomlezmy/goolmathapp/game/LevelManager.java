@@ -36,15 +36,7 @@ public class LevelManager {
     }
 
     private Question generateQuestion() {
-        if (levelCategory == ECategory.DIVISION) {
-            int num1, num2;
-            do {
-                num1 = levelValueLimits.getFirstNumberLimit().generateValue();
-                num2 = levelValueLimits.getSecondNumberLimit().generateValue();
-            } while (num1 % num2 != 0);
-            return new Question(levelCategory, num1, num2);
-        }
-        return new Question(levelCategory, levelValueLimits.getFirstNumberLimit().generateValue(), levelValueLimits.getSecondNumberLimit().generateValue());
+        return Question.createQuestion(levelCategory, levelValueLimits);
     }
 
     public String getCurrentQuestion() {
@@ -59,52 +51,68 @@ public class LevelManager {
     @Nullable
     public List<String> getCurrentQuestionOptions(int numOfOptions) {
         List<String> options = null;
+        String option;
         if (numOfOptions != 0) {
             options = new ArrayList<>();
-            float answer = questions.get(currentQuestion - 1).getResult();
-            String option;
-            // For Whole numbers
-            if (levelCategory != ECategory.PERCENTS) {
-                options.add((int)answer + "");
-                for (int i = 0; i < numOfOptions - 1; i++) {
-                    do {
-                        if (rand.nextInt(2) == 1) {
-                            option = ((int)answer + rand.nextInt(16)) + "";
-                        } else {
-                            option = ((int)answer - rand.nextInt(16)) + "";
-                        }
-                    } while (options.contains(option));
-                    options.add(option);
+            if (levelCategory != ECategory.FRACTIONS) {
+                float answer = questions.get(currentQuestion - 1).getResult();
+                // For Whole numbers
+                if (levelCategory != ECategory.PERCENTS) {
+                    options.add((int) answer + "");
+                    for (int i = 0; i < numOfOptions - 1; i++) {
+                        do {
+                            if (rand.nextInt(2) == 1) {
+                                option = ((int) answer + rand.nextInt(16)) + "";
+                            } else {
+                                option = ((int) answer - rand.nextInt(16)) + "";
+                            }
+                        } while (options.contains(option));
+                        options.add(option);
+                    }
                 }
-            }
-            // For Decimal numbers
-            else {
-                if ((int)answer == answer) {
-                    options.add((int)answer + "");
-                }
+                // For Decimal numbers
                 else {
-                    options.add(answer + "");
+                    if ((int) answer == answer) {
+                        options.add((int) answer + "");
+                    } else {
+                        options.add(answer + "");
+                    }
+                    for (int i = 0; i < numOfOptions - 1; i++) {
+                        do {
+                            float value;
+                            if (rand.nextInt(2) == 1) {
+                                value = answer + (float) (rand.nextInt(16)) / 10;
+                            } else {
+                                value = answer - (float) (rand.nextInt(16)) / 10;
+                            }
+                            if ((int) value == value) {
+                                option = (int) value + "";
+                            } else {
+                                option = String.format("%.3f", value).replaceAll("0*$", "");
+                            }
+                        } while (options.contains(option));
+                        options.add(option);
+                    }
                 }
+            }
+            // Fractions
+            else {
+                String fractionAnswer = ((FractionQuestion)questions.get(currentQuestion - 1)).getFractionAnswer();
+                options.add(fractionAnswer);
+                int numerator = ((FractionQuestion)questions.get(currentQuestion - 1)).getAnswerNumerator();
+                int denominator = ((FractionQuestion)questions.get(currentQuestion - 1)).getAnswerDenominator();
                 for (int i = 0; i < numOfOptions - 1; i++) {
                     do {
-                        double value;
                         if (rand.nextInt(2) == 1) {
-                            value = answer + (float)(rand.nextInt(16)) / 10;
+                            option = ((int) numerator + rand.nextInt(16)) + "/" + denominator;
                         } else {
-                            value = answer - (float)(rand.nextInt(16)) / 10;
-                        }
-                        if ((int)value == value) {
-                            option = (int)value + "";
-                        }
-                        else {
-                            option = String.format("%.3f", value).replaceAll("0*$", "");
+                            option = ((int) numerator - rand.nextInt(16)) + "/" + denominator;
                         }
                     } while (options.contains(option));
                     options.add(option);
                 }
             }
-            for (int i = numOfOptions - 1; i > 0; i--)
-            {
+            for (int i = numOfOptions - 1; i > 0; i--) {
                 int index = rand.nextInt(i + 1);
                 String temp = options.get(index);
                 options.set(index, options.get(i));

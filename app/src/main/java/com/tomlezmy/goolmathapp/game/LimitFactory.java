@@ -59,7 +59,13 @@ public class LimitFactory {
                         levelValues.setSecondNumberLimit(1,10);
                         break;
                     case 3:
-                        levelValues.setFirstNumberLimit(new int[]{10,20,30,40,50,60,70,80,90});
+                        int[] array = new int[10000];
+                        int index = 0;
+                        for (int i = 10; i <= 100000; i+=10) {
+                            array[index++] = i;
+                        }
+                        levelValues.setFirstNumberLimit(array);
+                        //levelValues.setFirstNumberLimit(new int[]{10,20,30,40,50,60,70,80,90});
                         levelValues.setSecondNumberLimit(new int[]{10});
                         break;
                     case 4:
@@ -105,6 +111,14 @@ public class LimitFactory {
                     case 8:
                         levelValues.setFirstNumberLimit(1,1000);
                         levelValues.setSecondNumberLimit(new int[] {120,250});
+                        break;
+                }
+                break;
+            case FRACTIONS:
+                switch (level) {
+                    case 2:
+                        levelValues.setFirstNumberLimit(new int[]{1});
+                        levelValues.setSecondNumberLimit(2,10);
                         break;
                 }
                 break;

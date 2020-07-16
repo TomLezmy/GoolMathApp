@@ -44,10 +44,16 @@
     <string-array name="divisionSubCategories">
         <item>Division Up To 5</item>
         <item>Division Up to 10</item>
+        <item>Division Of a Round Number at 10</item>
         <item>Division Two Digit Round Numbers In a Single Digit Numbers</item>
         <item>Division Triple Digit Round Numbers In a Two Digit Numbers</item>
-        <item>Division Of a Round Number at 10</item>
     </string-array>
+
+    <string-array name="fractionsSubCategories">
+        <item>Level 1</item>
+        <item>Level 2</item>
+    </string-array>
+
     <string name="pick_sub_category_txt">Pick a Sub Category:</string>
     <string name="ok_txt">Ok</string>
 

@@ -104,7 +104,14 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
 
         if (options != null) {
-            callBack.onReturn(Float.parseFloat(((Button)v).getText().toString()));
+            String buttonText = ((Button)v).getText().toString();
+            if (!buttonText.contains("/")) {
+                callBack.onReturn(Float.parseFloat(buttonText));
+            }
+            else {
+                String split[] = buttonText.split("/");
+                callBack.onReturn(Float.parseFloat(split[0]) / Float.parseFloat(split[1]));
+            }
         }
         else {
             char numToAdd = 'E';

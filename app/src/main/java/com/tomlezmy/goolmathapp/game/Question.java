@@ -5,14 +5,24 @@ import androidx.annotation.Nullable;
 public class Question {
     private ECategory category;
     private String sign;
-    private int numOne;
-    private int numTwo;
-    private float result;
+    protected int numOne;
+    protected int numTwo;
+    protected float result;
 
-    public Question(ECategory category, int numOne, int numTwo) {
+    public static Question createQuestion(ECategory category, LevelValueLimits valueLimits) {
+        if (category != ECategory.FRACTIONS) {
+            return new Question(category, valueLimits);
+        }
+        return new FractionQuestion(category,valueLimits);
+    }
+
+    public Question() {
+    }
+
+    public Question(ECategory category, LevelValueLimits valueLimits) {
         this.category = category;
-        this.numOne = numOne;
-        this.numTwo = numTwo;
+        this.numOne = valueLimits.getFirstNumberLimit().generateValue();
+        this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
         switch (category) {
             case ADDITION:
                 this.result = this.numOne + this.numTwo;
@@ -27,6 +37,10 @@ public class Question {
                 sign = "*";
                 break;
             case DIVISION:
+                while (numOne % numTwo != 0) {
+                    this.numOne = valueLimits.getFirstNumberLimit().generateValue();
+                    this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
+                }
                 this.result = ((float)this.numOne / (float)this.numTwo);
                 if ((int)result != result) {
                     result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
@@ -40,11 +54,10 @@ public class Question {
                 }
                 sign = "*";
                 break;
-        }
-    }
+            case FRACTIONS:
 
-    public ECategory getCategory() {
-        return category;
+                break;
+        }
     }
 
     public int getNumOne() {

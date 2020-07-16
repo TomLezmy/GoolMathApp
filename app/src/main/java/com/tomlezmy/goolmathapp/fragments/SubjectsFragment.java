@@ -73,6 +73,7 @@ public class SubjectsFragment extends Fragment {
 
         // !!! I need to add the sub categories string array in strings.xml for those categories
         fractionsCard = rootView.findViewById(R.id.card_fractions_category);
+        fractionsCard.setOnClickListener(new CategoryCardsOnClickListener(4, getResources().getStringArray(R.array.fractionsSubCategories)));
         percentagesCard = rootView.findViewById(R.id.card_percentages_category);
         decimal_numbersCard = rootView.findViewById(R.id.card_decimal_numbers_category);
 

@@ -11,17 +11,21 @@
         <activity android:name=".activities.MainActivity">
 
         </activity>
-        <activity android:name=".activities.LearnSelectActivity">
-
+        <activity android:name=".activities.PracticeSelectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.LearnSelectActivity">
+
+
+        </activity>
         <activity
             android:name=".activities.GamePage"
             android:screenOrientation="landscape">
+
         </activity>
         <meta-data
             android:name="preloaded_fonts"
