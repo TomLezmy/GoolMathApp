@@ -4,19 +4,16 @@ import androidx.annotation.Nullable;
 
 public class Question {
     private ECategory category;
-    private String sign;
+    protected String sign;
     protected int numOne;
     protected int numTwo;
     protected float result;
 
-    public static Question createQuestion(ECategory category, LevelValueLimits valueLimits) {
+    public static Question createQuestion(ECategory category, LevelValueLimits valueLimits, int level) {
         if (category != ECategory.FRACTIONS) {
             return new Question(category, valueLimits);
         }
-        return new FractionQuestion(category,valueLimits);
-    }
-
-    public Question() {
+        return new FractionQuestion(category, valueLimits, level);
     }
 
     public Question(ECategory category, LevelValueLimits valueLimits) {
@@ -54,8 +51,11 @@ public class Question {
                 }
                 sign = "*";
                 break;
-            case FRACTIONS:
-
+            case DECIMALS:
+                this.result = (float) this.numOne / 100;
+                if ((int)result != result) {
+                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                }
                 break;
         }
     }
@@ -73,6 +73,9 @@ public class Question {
     public String getQuestionHiddenAnswer() {
         if (category == ECategory.PERCENTS) {
             return numTwo + "% of " + numOne + " = ?";
+        }
+        else if (category == ECategory.DECIMALS) {
+            return "What is " + numOne + "% in decimal?";
         }
         return numOne + sign + numTwo + "= ?";
     }

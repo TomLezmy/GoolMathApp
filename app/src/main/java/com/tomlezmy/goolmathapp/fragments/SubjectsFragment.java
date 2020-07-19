@@ -75,7 +75,9 @@ public class SubjectsFragment extends Fragment {
         fractionsCard = rootView.findViewById(R.id.card_fractions_category);
         fractionsCard.setOnClickListener(new CategoryCardsOnClickListener(4, getResources().getStringArray(R.array.fractionsSubCategories)));
         percentagesCard = rootView.findViewById(R.id.card_percentages_category);
+        percentagesCard.setOnClickListener(new CategoryCardsOnClickListener(5, getResources().getStringArray(R.array.percentsSubCategories)));
         decimal_numbersCard = rootView.findViewById(R.id.card_decimal_numbers_category);
+        decimal_numbersCard.setOnClickListener(new CategoryCardsOnClickListener(6, getResources().getStringArray(R.array.decimalsSubCategories)));
 
         // Set card color
         additionCard.setCardBackgroundColor(this.cardsColor);

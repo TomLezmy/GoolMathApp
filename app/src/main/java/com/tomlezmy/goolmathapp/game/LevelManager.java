@@ -36,7 +36,7 @@ public class LevelManager {
     }
 
     private Question generateQuestion() {
-        return Question.createQuestion(levelCategory, levelValueLimits);
+        return Question.createQuestion(levelCategory, levelValueLimits, level);
     }
 
     public String getCurrentQuestion() {
@@ -57,7 +57,7 @@ public class LevelManager {
             if (levelCategory != ECategory.FRACTIONS) {
                 float answer = questions.get(currentQuestion - 1).getResult();
                 // For Whole numbers
-                if (levelCategory != ECategory.PERCENTS) {
+                if (levelCategory != ECategory.PERCENTS && levelCategory != ECategory.DECIMALS) {
                     options.add((int) answer + "");
                     for (int i = 0; i < numOfOptions - 1; i++) {
                         do {

@@ -52,6 +52,33 @@
     <string-array name="fractionsSubCategories">
         <item>Level 1</item>
         <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+        <item>Level 7</item>
+        <item>Level 8</item>
+        <item>Level 9</item>
+        <item>Level 10</item>
+        <item>Level 11</item>
+        <item>Level 12</item>
+        <item>Level 13</item>
+    </string-array>
+
+    <string-array name="percentsSubCategories">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+        <item>Level 7</item>
+        <item>Level 8</item>
+    </string-array>
+
+    <string-array name="decimalsSubCategories">
+        <item>Level 1</item>
+        <item>Level 2</item>
     </string-array>
 
     <string name="pick_sub_category_txt">Pick a Sub Category:</string>

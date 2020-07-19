@@ -1,7 +1,7 @@
 package com.tomlezmy.goolmathapp.game;
 
 public class LevelValueLimits {
-    private ValueLimit firstNumberLimit, secondNumberLimit;
+    protected ValueLimit firstNumberLimit, secondNumberLimit;
 
     public ValueLimit getFirstNumberLimit() {
         return firstNumberLimit;

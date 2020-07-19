@@ -115,10 +115,60 @@ public class LimitFactory {
                 }
                 break;
             case FRACTIONS:
+                levelValues = new LevelValueFractionLimits();
                 switch (level) {
                     case 2:
+                    case 4:
                         levelValues.setFirstNumberLimit(new int[]{1});
                         levelValues.setSecondNumberLimit(2,10);
+                        ((LevelValueFractionLimits)levelValues).setMultiplierLimit(20);
+                        break;
+                    case 3:
+                    case 5:
+                        levelValues.setFirstNumberLimit(1,10);
+                        levelValues.setSecondNumberLimit(2,10);
+                        ((LevelValueFractionLimits)levelValues).setMultiplierLimit(20);
+                        break;
+                    case 6:
+                    case 7:
+                        levelValues.setFirstNumberLimit(1,100);
+                        levelValues.setSecondNumberLimit(2,100);
+                        ((LevelValueFractionLimits)levelValues).setMultiplierLimit(100);
+                        break;
+                    case 8:
+                    case 11:
+                        levelValues.setFirstNumberLimit(1,10);
+                        levelValues.setSecondNumberLimit(new int[] {1,2,3,5,7,9,11,13,17,19});
+                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
+                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(new int[] {1,2,3,5,7,9,11,13,17,19});
+                        break;
+                    case 9:
+                        levelValues.setFirstNumberLimit(1,10);
+                        levelValues.setSecondNumberLimit(2,9);
+                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
+                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(2,9);
+                        break;
+                    case 10:
+                        levelValues.setFirstNumberLimit(1,10);
+                        levelValues.setSecondNumberLimit(10,99);
+                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
+                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(10,99);
+                        break;
+                    case 12:
+                    case 13:
+                        levelValues.setFirstNumberLimit(1,10);
+                        levelValues.setSecondNumberLimit(1,10);
+                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
+                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(1,10);
+                        break;
+                }
+                break;
+            case DECIMALS:
+                switch (level) {
+                    case 2:
+                        levelValues.setFirstNumberLimit(1,100);
+                        // No need for two limits, setting empty value
+                        levelValues.setSecondNumberLimit(0,0);
                         break;
                 }
                 break;

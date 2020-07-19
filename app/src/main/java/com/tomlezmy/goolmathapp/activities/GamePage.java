@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +34,7 @@ import java.util.Random;
 
 public class GamePage extends AppCompatActivity implements MyDialogListener, SendMessage {
 
-    float gameSpeed = 1.5f;
+    float gameSpeed;
     // temp int and objectImages for test
     // 0 = banana
     // 1 = rock
@@ -71,6 +72,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         // Get level and category
         category = getIntent().getIntExtra("category",0);
         level = getIntent().getIntExtra("level",0);
+        changeGameSpeed(1.5f);
         //  Set background sound
         clockTickingRing = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
         gameBackgroundRing = MediaPlayer.create(GamePage.this,R.raw.bensound_cute);
@@ -182,7 +184,6 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setDuration((int)(10000 / gameSpeed));
         linearValue = 0f;
-        valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -195,8 +196,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                         beforeQuestion = false;
                         if (userAnswered) {
                             animationResponse(levelManager.checkCorrectAnswer(userAnswer));
-                            gameSpeed = 1.5f;
-                            valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
+                            changeGameSpeed(1.5f);
                         }
                         else {
                             removeQuestion();
@@ -316,21 +316,6 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                     levelManager.generateQuestions();
                     showQuestion();
                 }
-                else {
-                    if (!valueAnimator.isPaused()) {
-                        valueAnimator.pause();
-                        if (gameSpeed == 1.5f) {
-                            gameSpeed = 2f;
-                        }
-                        else {
-                            gameSpeed = 1.5f;
-                        }
-                        valueAnimator.setInterpolator(new LinearInterpolator());
-                        valueAnimator.setDuration((int) (10000 / gameSpeed));
-                    } else {
-                        valueAnimator.resume();
-                    }
-                }
             }
         });
 
@@ -350,8 +335,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         countDownTimer.cancel();
         timerText.setVisibility(View.INVISIBLE);
         timerText.setText("");
-        gameSpeed = 3.5f;
-        valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
+        changeGameSpeed(3.5f);
 //        player.setImageDrawable(runningAnimation);
 //        runningAnimation.start();
         removeQuestion();
@@ -469,6 +453,11 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         }
 
         super.onDestroy();
+    }
+
+    private void changeGameSpeed(float speed) {
+        gameSpeed = speed;
+        valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
     }
 
     @Override
