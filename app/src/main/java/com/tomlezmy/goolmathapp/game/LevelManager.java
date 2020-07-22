@@ -1,6 +1,10 @@
 package com.tomlezmy.goolmathapp.game;
 
+import android.content.Context;
+
 import androidx.annotation.Nullable;
+
+import com.tomlezmy.goolmathapp.FileManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +15,55 @@ public class LevelManager {
     private int level;
     private int currentQuestion;
     private List<Question> questions;
+    private List<Integer> questionsSubLevel;
     private ProbabilityGenerator levelValueLimitsAndProbability;
+    private FileManager fileManager;
 
-    public LevelManager(int numberOfQuestions, ECategory levelCategory, int level) {
+    public LevelManager(Context context, int numberOfQuestions, ECategory levelCategory, int level) {
         this.numberOfQuestions = numberOfQuestions;
         this.levelCategory = levelCategory;
         this.level = level;
-        this.levelValueLimitsAndProbability = LimitFactory.getLevelValuesAndProbabilities(levelCategory, level);
+        this.levelValueLimitsAndProbability = LimitFactory.getLevelValuesAndProbabilities(context, levelCategory, level);
+        fileManager = FileManager.getInstance(context);
+        //LevelValueLimitProbabilities p = levelValueLimitsAndProbability.getLevelValueLimitByProbability();
+        //;
+        //p.setProbabilityWeight(3);
+        //FileManager.getInstance(context).updateSubLevelWeight(levelCategory, level - 1, 0, 1);
+
     }
 
     public void generateQuestions() {
         questions = new ArrayList<>();
+        questionsSubLevel = new ArrayList<>();
         for (int i = 0; i < numberOfQuestions; i++) {
-            Question q = generateQuestion();
+            int index = levelValueLimitsAndProbability.getLevelValueLimitIndexByProbability();
+            Question q = generateQuestion(index);
             while (questions.contains(q)) {
-                q = generateQuestion();
+                index = levelValueLimitsAndProbability.getLevelValueLimitIndexByProbability();
+                q = generateQuestion(index);
             }
+            questionsSubLevel.add(index);
             questions.add(q);
         }
         currentQuestion = 1;
     }
 
-    private Question generateQuestion() {
-        return Question.createQuestion(levelCategory, levelValueLimitsAndProbability.getLevelValueLimitByProbability().getLevelValueLimits(), level);
+    public void updateDataFromUserAnswer(boolean wasCorrect) {
+        int subLevelWeight;
+        if (wasCorrect) {
+            subLevelWeight = fileManager.getSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1));
+            if (subLevelWeight != 1) {
+                fileManager.updateSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1), --subLevelWeight);
+            }
+        }
+        else {
+            subLevelWeight = fileManager.getSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1));
+            fileManager.updateSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1), ++subLevelWeight);
+        }
+    }
+
+    private Question generateQuestion(int subLevelIndex) {
+        return Question.createQuestion(levelCategory, levelValueLimitsAndProbability.getLevelValueLimit(subLevelIndex).getLevelValueLimits(), level);
     }
 
     public String getCurrentQuestion() {

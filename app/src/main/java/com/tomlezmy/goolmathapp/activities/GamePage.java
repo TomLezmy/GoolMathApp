@@ -287,7 +287,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             @Override
             public void onClick(View v) {
                 if (!walkingAnimation.isRunning()) {
-                    levelManager = new LevelManager(10, ECategory.values()[category], level);
+                    levelManager = new LevelManager(GamePage.this,10, ECategory.values()[category], level);
                     score = 0;
                     test = 0;
                     obstacle.setImageResource(objectImages[test]);
@@ -350,8 +350,9 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         userAnswered = true;
     }
 
-    public void animationResponse(boolean correct) {
-        if (correct) {
+    public void animationResponse(boolean wasCorrect) {
+        levelManager.updateDataFromUserAnswer(wasCorrect);
+        if (wasCorrect) {
             correctRing.start();
             score++;
             scoreText.setText("Score : " + score);
@@ -365,7 +366,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
 
         // Response for every obstacle but the door
         if (test != 3) {
-            if (correct) {
+            if (wasCorrect) {
                 // Change jump height for banana and rock
                 if (test != 2) {
                     objectHeight = obstacle.getY() + 200;
@@ -383,7 +384,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         }
         // Door response
         else {
-            if (correct) {
+            if (wasCorrect) {
                 //Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
                 obstacle.setImageResource(R.drawable.open_door);
             }
