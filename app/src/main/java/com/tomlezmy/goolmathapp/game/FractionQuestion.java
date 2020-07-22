@@ -9,74 +9,83 @@ public class FractionQuestion extends Question {
     private String questionHiddenAnswer;
 
     public FractionQuestion(ECategory category, LevelValueLimits valueLimits, int level) {
-        super(category, valueLimits);
-        calculateResult(level, (LevelValueFractionLimits)valueLimits);
+        super(valueLimits);
+        calculateResult(category, level, (LevelValueFractionLimits)valueLimits);
     }
 
-    private void calculateResult(int level, LevelValueFractionLimits valueLimits) {
+    private void calculateResult(ECategory category, int level, LevelValueFractionLimits valueLimits) {
         Random rand = new Random();
         int mul;
-        switch (level) {
-            case 2:
-            case 3:
-            case 6:
-                mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
-                result = numOne * mul;
-                resultDenominator = numTwo * mul;
-                questionHiddenAnswer = numOne + "/" + numTwo + " = ?";
-                break;
-            case 4:
-            case 5:
-            case 7:
-                mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
-                result = numOne * mul;
-                resultDenominator = numTwo * mul;
-                int temp = (int) result;
-                result = numOne;
-                numOne = temp;
-                temp = resultDenominator;
-                resultDenominator = numTwo;
-                numTwo = temp;
-                questionHiddenAnswer = numOne + "/" + numTwo + " = ?";
-                break;
-            case 8:
-            case 9:
-            case 10:
-                numThree = valueLimits.getThirdNumberLimit().generateValue();
-                numFour = valueLimits.getFourthNumberLimit().generateValue();
-                int lcd = lcm(numTwo, numFour);
-                int numOneAfterLcd = numOne * (lcd / numTwo);
-                int numThreeAfterLcd = numThree * (lcd / numFour);
-                resultDenominator = lcd;
-                if (rand.nextInt(2) == 0) {
-                    sign = "+";
-                    result = numOneAfterLcd + numThreeAfterLcd;
-                } else {
-                    sign = "-";
-                    result = numOneAfterLcd - numThreeAfterLcd;
-                }
-                questionHiddenAnswer = numOne + "/" + numTwo + " " + sign + " " + numThree + "/" + numFour + " = ?";
-                break;
-            case 11:
-            case 12:
-                while (numTwo < numOne) {
-                    numTwo = valueLimits.getSecondNumberLimit().generateValue();
-                }
-                numThree = valueLimits.getThirdNumberLimit().generateValue();
-                do {
+        if (category == ECategory.FRACTIONS) {
+            switch (level) {
+                case 2:
+                case 3:
+                case 6:
+                    mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
+                    result = numOne * mul;
+                    resultDenominator = numTwo * mul;
+                    questionHiddenAnswer = numOne + "/" + numTwo + " = ?";
+                    break;
+                case 4:
+                case 5:
+                case 7:
+                    mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
+                    result = numOne * mul;
+                    resultDenominator = numTwo * mul;
+                    int temp = (int) result;
+                    result = numOne;
+                    numOne = temp;
+                    temp = resultDenominator;
+                    resultDenominator = numTwo;
+                    numTwo = temp;
+                    questionHiddenAnswer = numOne + "/" + numTwo + " = ?";
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                    numThree = valueLimits.getThirdNumberLimit().generateValue();
                     numFour = valueLimits.getFourthNumberLimit().generateValue();
-                } while (numFour < numThree);
-                result = numOne * numThree;
-                resultDenominator = numTwo * numFour;
-                questionHiddenAnswer = numOne + "/" + numTwo + " " + sign + " " + numThree + "/" + numFour + " = ?";
-                break;
-            case 13:
-                numThree = valueLimits.getThirdNumberLimit().generateValue();
-                numFour = valueLimits.getFourthNumberLimit().generateValue();
-                result = numOne * numThree;
-                resultDenominator = numTwo * numFour;
-                questionHiddenAnswer = numOne + "/" + numTwo + " " + sign + " " + numThree + "/" + numFour + " = ?";
-                break;
+                    int lcd = lcm(numTwo, numFour);
+                    int numOneAfterLcd = numOne * (lcd / numTwo);
+                    int numThreeAfterLcd = numThree * (lcd / numFour);
+                    resultDenominator = lcd;
+                    if (rand.nextInt(2) == 0) {
+                        sign = "+";
+                        result = numOneAfterLcd + numThreeAfterLcd;
+                    } else {
+                        sign = "-";
+                        result = numOneAfterLcd - numThreeAfterLcd;
+                    }
+                    questionHiddenAnswer = numOne + "/" + numTwo + " " + sign + " " + numThree + "/" + numFour + " = ?";
+                    break;
+                case 11:
+                case 12:
+                    while (numTwo < numOne) {
+                        numTwo = valueLimits.getSecondNumberLimit().generateValue();
+                    }
+                    numThree = valueLimits.getThirdNumberLimit().generateValue();
+                    do {
+                        numFour = valueLimits.getFourthNumberLimit().generateValue();
+                    } while (numFour < numThree);
+                    result = numOne * numThree;
+                    resultDenominator = numTwo * numFour;
+                    questionHiddenAnswer = numOne + "/" + numTwo + " " + sign + " " + numThree + "/" + numFour + " = ?";
+                    break;
+                case 13:
+                    numThree = valueLimits.getThirdNumberLimit().generateValue();
+                    numFour = valueLimits.getFourthNumberLimit().generateValue();
+                    result = numOne * numThree;
+                    resultDenominator = numTwo * numFour;
+                    questionHiddenAnswer = numOne + "/" + numTwo + " " + sign + " " + numThree + "/" + numFour + " = ?";
+                    break;
+            }
+        }
+        // Decimals
+        else {
+            int gcdResult = gcd(numOne,100);
+            result = numOne / gcdResult;
+            resultDenominator = 100 / gcdResult;
+            questionHiddenAnswer = "What is " + numOne + "% in fractions?";
         }
     }
 

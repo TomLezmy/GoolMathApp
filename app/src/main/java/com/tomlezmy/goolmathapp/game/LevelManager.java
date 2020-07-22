@@ -11,15 +11,13 @@ public class LevelManager {
     private int level;
     private int currentQuestion;
     private List<Question> questions;
-    private LevelValueLimits levelValueLimits;
     private ProbabilityGenerator levelValueLimitsAndProbability;
 
     public LevelManager(int numberOfQuestions, ECategory levelCategory, int level) {
         this.numberOfQuestions = numberOfQuestions;
         this.levelCategory = levelCategory;
         this.level = level;
-        //levelValueLimitsAndProbability = LimitFactory.getLevelValuesAndProbabilities(levelCategory, level);
-        this.levelValueLimits = LimitFactory.getLevelValues(levelCategory, level);
+        this.levelValueLimitsAndProbability = LimitFactory.getLevelValuesAndProbabilities(levelCategory, level);
     }
 
     public void generateQuestions() {
@@ -35,7 +33,7 @@ public class LevelManager {
     }
 
     private Question generateQuestion() {
-        return Question.createQuestion(levelCategory, levelValueLimits, level);
+        return Question.createQuestion(levelCategory, levelValueLimitsAndProbability.getLevelValueLimitByProbability().getLevelValueLimits(), level);
     }
 
     public String getCurrentQuestion() {

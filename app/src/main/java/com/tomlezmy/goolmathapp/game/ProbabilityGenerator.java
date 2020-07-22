@@ -22,7 +22,7 @@ public class ProbabilityGenerator {
         int sum = 0;
         int i = 0;
         while(sum < index) {
-            sum = sum + valueLimitProbabilities.get(i++).getProbabilityWeight();
+            sum += valueLimitProbabilities.get(i++).getProbabilityWeight();
         }
         return valueLimitProbabilities.get(i - 1);
     }
