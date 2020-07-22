@@ -8,15 +8,21 @@ public class Question {
     protected int numOne;
     protected int numTwo;
     protected float result;
+    private String questionHiddenAnswer;
 
     public static Question createQuestion(ECategory category, LevelValueLimits valueLimits, int level) {
-        if (category != ECategory.FRACTIONS) {
-            return new Question(category, valueLimits);
+        if (category == ECategory.FRACTIONS || (category == ECategory.DECIMALS && level == 6)) {
+            return new FractionQuestion(category, valueLimits, level);
         }
-        return new FractionQuestion(category, valueLimits, level);
+        return new Question(category, valueLimits, level);
     }
 
-    public Question(ECategory category, LevelValueLimits valueLimits) {
+    protected Question(LevelValueLimits valueLimits) {
+        this.numOne = valueLimits.getFirstNumberLimit().generateValue();
+        this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
+    }
+
+    public Question(ECategory category, LevelValueLimits valueLimits, int level) {
         this.category = category;
         this.numOne = valueLimits.getFirstNumberLimit().generateValue();
         this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
@@ -24,14 +30,17 @@ public class Question {
             case ADDITION:
                 this.result = this.numOne + this.numTwo;
                 sign = "+";
+                questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case SUBTRACTION:
                 this.result = this.numOne - this.numTwo;
                 sign = "-";
+                questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case MULTIPLICATION:
                 this.result = this.numOne * this.numTwo;
                 sign = "*";
+                questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case DIVISION:
                 while (numOne % numTwo != 0) {
@@ -43,20 +52,49 @@ public class Question {
                     result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
                 }
                 sign = "/";
+                questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case PERCENTS:
-                this.result = (float)(this.numOne * this.numTwo) / 100;
-                if ((int)result != result) {
-                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                int percentDenominator = 100, percentNumerator = numTwo;
+
+                // Needs to be 33.3333, can't pass it normally because numTwo and limitValues are integers
+                if (level == 4 && numTwo == 33) {
+                    percentDenominator = 3;
+                    percentNumerator = 1;
+                    questionHiddenAnswer = "33.3333";
                 }
+                else {
+                    questionHiddenAnswer = numTwo + "";
+                }
+
+                result = (float)(numOne * percentNumerator) / percentDenominator;
+                while ((int)result != result) {
+                    numOne = valueLimits.getFirstNumberLimit().generateValue();
+                    result = (float)(numOne * percentNumerator) / percentDenominator;
+                }
+
                 sign = "*";
+                questionHiddenAnswer += "% of " + numOne + " = ?";
                 break;
             case DECIMALS:
-                this.result = (float) this.numOne / 100;
-                if ((int)result != result) {
-                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                switch (level) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        result = (float) numOne / 100;
+                        if ((int)result != result) {
+                            result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                        }
+                        questionHiddenAnswer = "What is " + numOne + "% in decimal?";
+                        break;
+                    case 5:
+                        result = (float)numOne / (float) numTwo;
+                        result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                        questionHiddenAnswer = "What is " + numOne + "/" + numTwo + " in decimal?";
+                        break;
                 }
-                break;
+
         }
     }
 
@@ -71,13 +109,7 @@ public class Question {
     public float getResult()  { return result; }
 
     public String getQuestionHiddenAnswer() {
-        if (category == ECategory.PERCENTS) {
-            return numTwo + "% of " + numOne + " = ?";
-        }
-        else if (category == ECategory.DECIMALS) {
-            return "What is " + numOne + "% in decimal?";
-        }
-        return numOne + sign + numTwo + "= ?";
+        return questionHiddenAnswer;
     }
 
     @Override

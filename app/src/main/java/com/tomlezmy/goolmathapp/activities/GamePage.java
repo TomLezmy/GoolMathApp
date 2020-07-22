@@ -97,24 +97,25 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         AnimationDrawable fall = new AnimationDrawable();
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk1, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk2, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk3, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk4, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk5, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk6, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nfall1, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nfall2, null), (int)(200 / gameSpeed));
-//        fall.addFrame(getResources().getDrawable(R.drawable.nfall3, null), (int)(400 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad1, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad2, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad6, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad7, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad8, null), (int)(200 / gameSpeed));
-        fall.addFrame(getResources().getDrawable(R.drawable.bad9, null), (int)(400 / gameSpeed));
+//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk1, null), (int)(200 / gameSpeed));//Stand
+//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk7, null), (int)(200 / gameSpeed));//Run
+//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk8, null), (int)(200 / gameSpeed));//Run
+//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk9, null), (int)(200 / gameSpeed));//Run
+//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk10, null), (int)(200 / gameSpeed));//TouchFloor
+//        fall.addFrame(getResources().getDrawable(R.drawable.nfall1, null), (int)(200 / gameSpeed));//SadFace
+//        fall.addFrame(getResources().getDrawable(R.drawable.nfall2, null), (int)(200 / gameSpeed));//Trip
+//        fall.addFrame(getResources().getDrawable(R.drawable.nfall2, null), (int)(200 / gameSpeed));//Trip
+//        fall.addFrame(getResources().getDrawable(R.drawable.nfall3, null), (int)(400 / gameSpeed));//Ground
+
+        fall.addFrame(getResources().getDrawable(R.drawable.bad1, null), (int)(200 / gameSpeed));//Stand
+        fall.addFrame(getResources().getDrawable(R.drawable.bad2, null), (int)(200 / gameSpeed));//Run
+        fall.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));//Run
+        fall.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));//Run
+        fall.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));//TouchFloor
+        fall.addFrame(getResources().getDrawable(R.drawable.bad6, null), (int)(200 / gameSpeed));//SadFace
+        fall.addFrame(getResources().getDrawable(R.drawable.bad7, null), (int)(200 / gameSpeed));//Trip
+        fall.addFrame(getResources().getDrawable(R.drawable.bad8, null), (int)(200 / gameSpeed));//Trip
+        fall.addFrame(getResources().getDrawable(R.drawable.bad9, null), (int)(400 / gameSpeed));//Ground
         fallingAnimation = new CustomAnimationDrawable(fall) {
             @Override
             public void onAnimationFinish() {
@@ -145,13 +146,16 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             }
         };
         AnimationDrawable jump = new AnimationDrawable();
-//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk2, null), (int)(200 / gameSpeed));
-//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk3, null), (int)(300 / gameSpeed));
-//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk4, null), (int)(300 / gameSpeed));
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump2, null), (int)(450 / gameSpeed));
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump3, null), (int)(450 / gameSpeed));
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump4, null), (int)(400 / gameSpeed));
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump5, null), (int)(200 / gameSpeed));
+//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk1, null), (int)(200 / gameSpeed));//Stand
+//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk2, null), (int)(200 / gameSpeed));//Walk
+//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk3, null), (int)(200 / gameSpeed));//Prep
+//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk4, null), (int)(200 / gameSpeed));//Prep
+//        jump.addFrame(getResources().getDrawable(R.drawable.njump2, null), (int)(450 / gameSpeed));//Jump
+//        jump.addFrame(getResources().getDrawable(R.drawable.njump3, null), (int)(450 / gameSpeed));//HighPoint
+//        jump.addFrame(getResources().getDrawable(R.drawable.njump4, null), (int)(200 / gameSpeed));//Descend
+//        jump.addFrame(getResources().getDrawable(R.drawable.njump4, null), (int)(200 / gameSpeed));//Descend
+//        jump.addFrame(getResources().getDrawable(R.drawable.njump5, null), (int)(200 / gameSpeed));//Land
+
         jump.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
         jump.addFrame(getResources().getDrawable(R.drawable.good2, null), (int)(200 / gameSpeed));
         jump.addFrame(getResources().getDrawable(R.drawable.good3, null), (int)(200 / gameSpeed));
@@ -266,7 +270,10 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
         walkingAnimation.setOneShot(false);
 
-//        runningAnimation = new AnimationDrawable();
+        runningAnimation = new AnimationDrawable();
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));
+        runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));
 //        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk7, null), (int)(200 / gameSpeed));
 //        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk8, null), (int)(200 / gameSpeed));
 //        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk9, null), (int)(200 / gameSpeed));
@@ -336,8 +343,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         timerText.setVisibility(View.INVISIBLE);
         timerText.setText("");
         changeGameSpeed(3.5f);
-//        player.setImageDrawable(runningAnimation);
-//        runningAnimation.start();
+        player.setImageDrawable(runningAnimation);
+        runningAnimation.start();
         removeQuestion();
         userAnswer = answer;
         userAnswered = true;
