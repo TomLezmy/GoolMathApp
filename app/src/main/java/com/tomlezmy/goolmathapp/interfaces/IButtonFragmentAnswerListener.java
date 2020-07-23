@@ -1,5 +1,5 @@
 package com.tomlezmy.goolmathapp.interfaces;
 
-public interface MyDialogListener {
+public interface IButtonFragmentAnswerListener {
     void onReturn(float answer);
 }

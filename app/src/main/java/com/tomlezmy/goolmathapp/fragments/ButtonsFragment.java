@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
-import com.tomlezmy.goolmathapp.interfaces.MyDialogListener;
+import com.tomlezmy.goolmathapp.interfaces.IButtonFragmentAnswerListener;
 import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.List;
 public class ButtonsFragment extends Fragment implements View.OnClickListener{
 //    int btnDesigns[] = new int[] {R.drawable.button_4_design, R.drawable.button_4_design, R.drawable.button_4_design};
     ArrayList<String> options;
-    MyDialogListener callBack;
+    IButtonFragmentAnswerListener callBack;
     SendMessage sendMessage;
 
     @Override
@@ -35,7 +35,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         super.onAttach(context);
 
         try {
-            callBack = (MyDialogListener)context;
+            callBack = (IButtonFragmentAnswerListener)context;
             sendMessage = (SendMessage) context;
         }catch (ClassCastException ex) {
             throw new ClassCastException("The activity must implement MyDialogListener and SendMessage interface");

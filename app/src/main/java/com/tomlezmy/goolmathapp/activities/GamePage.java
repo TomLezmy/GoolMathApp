@@ -3,6 +3,7 @@ package com.tomlezmy.goolmathapp.activities;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -24,16 +25,19 @@ import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.CustomAnimationDrawable;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.ButtonsFragment;
+import com.tomlezmy.goolmathapp.fragments.GameFinishedFragment;
 import com.tomlezmy.goolmathapp.fragments.QuestionFragment;
 import com.tomlezmy.goolmathapp.game.ECategory;
 import com.tomlezmy.goolmathapp.game.LevelManager;
-import com.tomlezmy.goolmathapp.interfaces.MyDialogListener;
+import com.tomlezmy.goolmathapp.interfaces.IButtonFragmentAnswerListener;
+import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
 import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 import java.util.Random;
 
-public class GamePage extends AppCompatActivity implements MyDialogListener, SendMessage {
+public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, SendMessage, IResultFragmentListener {
 
+    final String QUESTION_TAG = "QUESTION_TAG", BUTTONS_TAG = "BUTTONS_TAG", RESULT_TAG = "RESULT_TAG";
     float gameSpeed;
     // temp int and objectImages for test
     // 0 = banana
@@ -44,6 +48,7 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     int buttonFragmentColor, score = 0, category, level;
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
+    GameFinishedFragment gameFinishedFragment;
     boolean userAnswered = false;
     int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle};//, R.drawable.closed_door};
     ValueAnimator valueAnimator;
@@ -230,10 +235,14 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
                             countDownTimer.start();
                         }
                         else {
+                            // Level finished
                             walkingAnimation.stop();
                             fallingAnimation.stop();
                             player.setImageResource(R.drawable.good1);
                             valueAnimator.pause();
+                            gameFinishedFragment = new GameFinishedFragment(score == 10);
+                            getSupportFragmentManager().beginTransaction()
+                                    .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();
                             new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
                                     .setSpeedRange(0.2f, 0.5f)
                                     .oneShot(scoreText, 100);
@@ -288,7 +297,6 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
             public void onClick(View v) {
                 if (!walkingAnimation.isRunning()) {
                     levelManager = new LevelManager(GamePage.this,10, ECategory.values()[category], level);
-                    score = 0;
                     test = 0;
                     obstacle.setImageResource(objectImages[test]);
                     player.setImageDrawable(walkingAnimation);
@@ -351,7 +359,8 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     }
 
     public void animationResponse(boolean wasCorrect) {
-        levelManager.updateDataFromUserAnswer(wasCorrect);
+        // Uncomment|Comment this line to toggle learning mode
+        //levelManager.updateDataFromUserAnswer(wasCorrect);
         if (wasCorrect) {
             correctRing.start();
             score++;
@@ -412,9 +421,9 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
         }
 
         getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, "BUTTON_TAG").commit();
+                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, BUTTONS_TAG).commit();
         getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.dialog_layout, questionFragment, "QUESTION_TAG").commit();
+                .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
 
     }
     public void removeQuestion() {
@@ -476,6 +485,26 @@ public class GamePage extends AppCompatActivity implements MyDialogListener, Sen
     @Override
     public void sendResult(String result) {
         buttonsFragment.returnResult(result);
+    }
+
+    @Override
+    public void onPressBack() {
+        finish();
+    }
+
+    @Override
+    public void onPressContinue(boolean moveToNextLevel) {
+        score = 0;
+        scoreText.setText(score + "");
+        if (moveToNextLevel) {
+            level++;
+            if (ECategory.values()[category].getNumberOfLevels() < level) {
+                level = 1;
+                category++;
+                //TODO check for last category
+            }
+        }
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();
     }
 }
 
