@@ -49,6 +49,7 @@ public class QuestionFragment extends Fragment {
         return rootView;
     }
 
+
     public void updateUserInput(char addition) {
         if (addition == '-') {
             if (userInput.length() > 0) {

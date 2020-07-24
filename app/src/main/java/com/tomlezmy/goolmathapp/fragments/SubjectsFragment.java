@@ -92,7 +92,6 @@ public class SubjectsFragment extends Fragment {
         return rootView;
     }
 
-
     // Set Card's Style and create list view to show all sub categories each time we click on a category
     void displaySubCategories(final int categoryIndex, String[] subCategoriesArray) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -116,7 +115,6 @@ public class SubjectsFragment extends Fragment {
         }).show();
     }
 
-
     // Private class for handling cards on click listener
     private class CategoryCardsOnClickListener implements View.OnClickListener {
         String[] subCategoriesArray;
@@ -131,6 +129,5 @@ public class SubjectsFragment extends Fragment {
             displaySubCategories(this.categoryIndex,this.subCategoriesArray);
         }
     }
-
 
 }

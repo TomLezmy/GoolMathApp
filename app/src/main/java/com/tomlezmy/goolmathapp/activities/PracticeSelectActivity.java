@@ -29,7 +29,6 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
                 .add(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }
 
-
     @Override
     public void onSelectedSubCategory(int categoryId, int subCategoryId) {
         //Toast.makeText(this, "categoryId=" + " "  + categoryId + " " + "subCategory=" + subCategoryId, Toast.LENGTH_LONG).show();
