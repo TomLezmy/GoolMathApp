@@ -1,39 +1,45 @@
 package com.tomlezmy.goolmathapp.fragments;
 
-import android.annotation.SuppressLint;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import com.tomlezmy.goolmathapp.R;
+
+import java.util.Locale;
 
 
 public class SubjectsFragment extends Fragment {
 
     // Data members
-    int cardsColor;
+    int cardColorId;
+    int titleColorId;
     CardView additionCard;
     CardView subtractionCard;
     CardView multiplicationCard;
+    TextView tvMultiplicationCard;
     CardView divisionCard;
     CardView fractionsCard;
     CardView percentagesCard;
     CardView decimal_numbersCard;
     ArrayAdapter<String> adapter;
+    String language;
+    Typeface typeface;
+
     public interface OnSelectedSubCategoryListener {
         void onSelectedSubCategory(int categoryId, int subCategoryId);
     }
@@ -41,8 +47,9 @@ public class SubjectsFragment extends Fragment {
     OnSelectedSubCategoryListener callback;
 
     // Constructor
-    public SubjectsFragment(int cardsColor) {
-        this.cardsColor = cardsColor;
+    public SubjectsFragment(int cardColorId, int titleColorId) {
+        this.cardColorId = cardColorId;
+        this.titleColorId = titleColorId;
     }
 
 
@@ -67,6 +74,18 @@ public class SubjectsFragment extends Fragment {
         subtractionCard = rootView.findViewById(R.id.card_subtraction_category);
         subtractionCard.setOnClickListener(new CategoryCardsOnClickListener(1,getResources().getStringArray(R.array.subtractionSubCategories)));
         multiplicationCard = rootView.findViewById(R.id.card_multiplication_category);
+        tvMultiplicationCard = rootView.findViewById(R.id.tv_multiplicationCard);
+
+        // Set unique text size for multiplication Card for english
+        this.language = Locale.getDefault().getDisplayLanguage();
+        if ( this.language.equalsIgnoreCase("English")) {
+            this.typeface = ResourcesCompat.getFont(getContext(), R.font.patua_one);
+            tvMultiplicationCard.setTextSize(14f);
+        }
+        else {
+            this.typeface = ResourcesCompat.getFont(getContext(), R.font.hebrew_font);
+        }
+
         multiplicationCard.setOnClickListener(new CategoryCardsOnClickListener(2,getResources().getStringArray(R.array.multiplicationSubCategories)));
         divisionCard = rootView.findViewById(R.id.card_division_category);
         divisionCard.setOnClickListener(new CategoryCardsOnClickListener(3,getResources().getStringArray(R.array.divisionSubCategories)));
@@ -80,29 +99,30 @@ public class SubjectsFragment extends Fragment {
         decimal_numbersCard.setOnClickListener(new CategoryCardsOnClickListener(6, getResources().getStringArray(R.array.decimalsSubCategories)));
 
         // Set card color
-        additionCard.setCardBackgroundColor(this.cardsColor);
-        subtractionCard.setCardBackgroundColor(this.cardsColor);
-        multiplicationCard.setCardBackgroundColor(this.cardsColor);
-        divisionCard.setCardBackgroundColor(this.cardsColor);
-        fractionsCard.setCardBackgroundColor(this.cardsColor);
-        percentagesCard.setCardBackgroundColor(this.cardsColor);
-        decimal_numbersCard.setCardBackgroundColor(this.cardsColor);
-
+        additionCard.setCardBackgroundColor(this.cardColorId);
+        subtractionCard.setCardBackgroundColor(this.cardColorId);
+        multiplicationCard.setCardBackgroundColor(this.cardColorId);
+        divisionCard.setCardBackgroundColor(this.cardColorId);
+        fractionsCard.setCardBackgroundColor(this.cardColorId);
+        percentagesCard.setCardBackgroundColor(this.cardColorId);
+        decimal_numbersCard.setCardBackgroundColor(this.cardColorId);
 
         return rootView;
     }
 
     // Set Card's Style and create list view to show all sub categories each time we click on a category
     void displaySubCategories(final int categoryIndex, String[] subCategoriesArray) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.CustomAlertDialog);
+
+
         TextView titleTv = new TextView(getContext());
         titleTv.setText(R.string.pick_sub_category_txt);
-        titleTv.setTextSize(18f);
-        titleTv.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        titleTv.setPadding(20,10,20,10);
-        titleTv.setTextColor(this.cardsColor);
-        Typeface typeface = ResourcesCompat.getFont(getContext(),R.font.patua_one);
-        titleTv.setTypeface(typeface, Typeface.NORMAL);
+        titleTv.setTextSize(22f);
+        titleTv.setGravity(Gravity.CENTER);
+        titleTv.setPadding(20,5,20,5);
+        titleTv.setTextColor(this.titleColorId);
+        titleTv.setTypeface(this.typeface, Typeface.BOLD);
+
         builder.setCustomTitle(titleTv);
         adapter = new ArrayAdapter<String>(getContext(), R.layout.sub_category_list_view, subCategoriesArray);
         builder.setAdapter(adapter,  new DialogInterface.OnClickListener() {
