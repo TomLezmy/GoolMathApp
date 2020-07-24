@@ -45,7 +45,12 @@ public class QuestionFragment extends Fragment {
         questionText = rootView.findViewById(R.id.question_text);
         questionText.setText(question);
         questionText.setTextAppearance(R.style.FontLocalized);
-        questionText.setTextSize(20f);
+        int questionLen = questionText.length();
+        if (questionLen < 11) {
+            questionText.setTextSize(20f);
+        } else {
+            questionText.setTextSize(17f);
+        }
         return rootView;
     }
 
