@@ -11,7 +11,7 @@ import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.SubjectsFragment;
 
 public class PracticeSelectActivity extends AppCompatActivity implements SubjectsFragment.OnSelectedSubCategoryListener {
-    SubjectsFragment subjectsFragment;
+    public SubjectsFragment subjectsFragment;
     int categorySelected;
     int subCategorySelected;
 
@@ -23,8 +23,9 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
     }
 
     public void displaySubjects() {
-        int colorId = ContextCompat.getColor(this, R.color.blue_card);
-        subjectsFragment = new SubjectsFragment(colorId);
+        int cardColorId = ContextCompat.getColor(this, R.color.blue_card);
+        int titleColorId = ContextCompat.getColor(this, R.color.blue_title);
+        subjectsFragment = new SubjectsFragment(cardColorId,titleColorId);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }
