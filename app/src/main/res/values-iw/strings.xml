@@ -19,7 +19,7 @@
     <string name="score_is_zero_txt">"ניקוד: 0 "</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">חיסור</string>
-    <string name="titleSubSubjectsDialog">בחר תת קטגוריה אחת</string>
+    <string name="titleSubSubjectsDialog">בחר בתת נושא אחד</string>
 
     <string-array name="additionSubCategories">
         <item>חיבור מספרים חד ספרתיים</item>
@@ -47,8 +47,12 @@
         <item>חילוק מספר תלת ספרתי במספר דו ספרתי</item>
         <item>חלוקה של מספר עגול ב 10</item>
     </string-array>
-    <string name="pick_sub_category_txt">בחר בתת קטגוריה:</string>
+    <string name="pick_sub_category_txt">בחר בתת נושא:</string>
     <string name="ok_txt">אישור</string>
+    <string name="title_learn_sub_categories">בחרו נושא שאותו תרצו ללמוד!</string>
+    <string name="title_practice_sub_categories">בחרו נושא שאותו תרצו לתרגל!</string>
+    <string name="title_learn_sub_categories_option2">מה נלמד היום?</string>
+    <string name="title_practice_sub_categores_option2">מה נתרגל היום?</string>
 
 
 </resources>

@@ -20,6 +20,9 @@
     <color name="yellowLight">#F8CB43</color>
     <color name="green">#629b2a</color>
     <color name="clock_txt">#63A5D1</color>
-    <color name="green_card">#C8E6C9</color>
-    <color name="blue_card">#90CAF9</color>
+    <color name="green_card">#A6ECBB</color>
+    <color name="blue_card">#B3DDFF</color>
+    <color name="green_title">#61AE72</color>
+    <color name="blue_title">#63A5D1</color>
+
 </resources>

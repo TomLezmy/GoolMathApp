@@ -12,7 +12,7 @@
     <string name="multiplication_category_txt">Multiplication</string>
     <string name="division_category_txt">Division</string>
     <string name="fractions_category_txt">Fraction</string>
-    <string name="percentages_category_txt">Percentages</string>
+    <string name="percentages_category_txt">Percentage</string>
     <string name="decimal_numbers_category_txt">Decimal Numbers</string>
     <string name="btn_start_txt">Start</string>
     <string name="score_is_zero_txt">Score: 0</string>
@@ -85,8 +85,12 @@
         <item>Level 6</item>
     </string-array>
 
-    <string name="pick_sub_category_txt">Pick a Sub Category:</string>
-    <string name="ok_txt">Ok</string>
+    <string name="pick_sub_category_txt">Pick a Sub Topic:</string>
+    <string name="ok_txt">OK</string>
+    <string name="title_learn_sub_categories">Choose a topic that you would like to learn!</string>
+    <string name="title_practice_sub_categories">Choose a topic that you would like to practice!</string>
+    <string name="title_learn_sub_categories_option2">What are we going to learn today?</string>
+    <string name="title_practice_sub_categores_option2">What are we going to practice today?</string>
 
 
 </resources>
