@@ -1,7 +1,8 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background_image_with_alpha">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,18 +32,26 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            style="@style/FontLocalized"
-            android:textColor="@color/colorBtn3"
-            android:text="@string/select_subject_btn_txt"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        style="@style/FontLocalized"
+        android:textColor="@color/green_title"
+        android:text="@string/title_learn_sub_categories_option2"
+        android:layout_margin="20dp"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="20dp"
+        android:id="@+id/empty_layout_learn">
     </LinearLayout>
 
     <!--    The Subjects Fragment Will be here-->
@@ -50,29 +59,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/subjects_display_layout"
-        android:gravity="center"/>
+        android:gravity="center">
+    </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="120dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_margin="20dp">-->
 
-        <Button
-            android:id="@+id/btn_start_learning"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/button_3_design"
-            style="@style/FontLocalized"
-            android:text="@string/start_learn_btn_txt"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:padding="10dp">
-        </Button>
+<!--        <Button-->
+<!--            android:id="@+id/btn_start_learning"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:background="@drawable/button_3_design"-->
+<!--            style="@style/FontLocalized"-->
+<!--            android:text="@string/start_learn_btn_txt"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="25sp"-->
+<!--            android:padding="10dp">-->
+<!--        </Button>-->
 
-</LinearLayout>
+<!--</LinearLayout>-->
 </LinearLayout>

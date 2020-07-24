@@ -23,8 +23,9 @@
         style="@style/FontLocalized"
         android:gravity="top|center"
         android:text="@string/learn_btn_txt"
-        android:textColor="#9FE1AE"
-        android:textSize="60sp" />
+        android:textStyle="bold"
+        android:textColor="@color/colorBtn3"
+        android:textSize="@dimen/main_title_size" />
 
     <LinearLayout
         android:layout_width="match_parent"

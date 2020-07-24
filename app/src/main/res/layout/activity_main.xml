@@ -29,175 +29,86 @@
             android:layout_gravity="bottom"
             android:layout_margin="15dp"
             style="@style/FontLocalized"
+            android:textSize="@dimen/main_title_size"
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="#9a8abf"
-            android:textSize="50sp"
             android:textStyle="bold"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="20dp">
-
+        android:gravity="top">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/learn_layout"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/learn"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/button_1_design"
+                android:layout_height="wrap_content"
+                android:id="@+id/learn_layout"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_practice"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_1_design"
+                    android:layout_centerInParent="true"
+                    style="@style/FontLocalized"
+                    android:includeFontPadding="false"
+                    android:text="@string/practice_btn_txt"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                style="@style/FontLocalized"
-                android:includeFontPadding="false"
-                android:text="@string/practice_btn_txt"
-                android:textColor="@color/white"
-                android:textSize="35sp"
-                android:textAllCaps="false" />
+                android:id="@+id/practice_layout"
+                android:gravity="center">
+                <Button
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:background="@drawable/button_3_design"
+                    android:layout_gravity="center"
+                    android:layout_toStartOf="@+id/progress_btn"
+                    android:textSize="22sp"
+                    android:layout_margin="5dp"
+                    android:text="@string/learn_btn_txt"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    style="@style/FontLocalized"
+                    android:id="@+id/btn_learn"/>
+
+                <Button
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:background="@drawable/button_2_design"
+                    android:layout_gravity="center"
+                    android:textSize="22sp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/btn_progress"
+                    android:text="@string/progress_btn_txt"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    style="@style/FontLocalized" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:id="@+id/practice_layout"
-            android:gravity="center">
-            <Button
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:background="@drawable/button_3_design"
-                android:layout_gravity="center"
-                android:layout_toStartOf="@+id/progress_btn"
-                android:textSize="22sp"
-                android:layout_margin="5dp"
-                android:text="@string/learn_btn_txt"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                style="@style/FontLocalized" />
-
-            <Button
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:background="@drawable/button_2_design"
-                android:layout_gravity="center"
-                android:textSize="22sp"
-                android:layout_margin="5dp"
-                android:id="@+id/progress_btn"
-                android:text="@string/progress_btn_txt"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                style="@style/FontLocalized" />
-        </LinearLayout>
 
     </LinearLayout>
 
+
+
 </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--<RelativeLayout-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:background="@drawable/background_image_with_alpha"-->
-    <!--    xmlns:android="http://schemas.android.com/apk/res/android">-->
-
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:id="@+id/title_layout">-->
-
-
-    <!--        <ImageView-->
-    <!--            android:layout_width="30dp"-->
-    <!--            android:layout_height="20dp"-->
-    <!--            android:layout_gravity="right"-->
-    <!--            android:src="@drawable/ic_settings_black_24dp"-->
-    <!--            android:id="@+id/settings"-->
-    <!--            android:alpha="1"/>-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_gravity="bottom"-->
-    <!--            android:layout_margin="25dp"-->
-    <!--            style="@style/FontLocalized"-->
-
-    <!--            android:gravity="center"-->
-    <!--            android:text="@string/app_name"-->
-    <!--            android:textColor="#9a8abf"-->
-    <!--            android:textSize="50sp"-->
-    <!--            android:textStyle="bold"/>-->
-    <!--    </LinearLayout>-->
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:id="@+id/practice_layout"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:layout_below="@+id/title_layout"-->
-    <!--        android:gravity="center">-->
-    <!--        <Button-->
-    <!--            android:id="@+id/learn"-->
-    <!--            android:layout_width="250dp"-->
-    <!--            android:layout_height="125dp"-->
-    <!--            android:layout_margin="5dp"-->
-    <!--            android:background="@drawable/button_1_design"-->
-    <!--            style="@style/FontLocalized"-->
-    <!--            android:text="@string/practice_btn_txt"-->
-    <!--            android:textColor="@color/white"-->
-    <!--            android:textSize="35sp"-->
-    <!--            android:textAllCaps="false" />-->
-    <!--    </LinearLayout>-->
-
-
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:id="@+id/progress_learn_layout"-->
-    <!--        android:layout_below="@id/practice_layout">-->
-    <!--        <Button-->
-    <!--            android:layout_width="125dp"-->
-    <!--            android:layout_height="125dp"-->
-    <!--            android:background="@drawable/button_3_design"-->
-    <!--            android:layout_marginRight="70dp"-->
-    <!--            android:text="@string/learn_btn_txt"-->
-    <!--            android:textColor="@color/white"-->
-    <!--            android:textAllCaps="false"-->
-    <!--            style="@style/FontLocalized"-->
-    <!--            android:id="@+id/btn_learn"-->
-    <!--            android:layout_alignParentRight="true"/>-->
-
-    <!--        <Button-->
-    <!--            android:layout_width="125dp"-->
-    <!--            android:layout_height="125dp"-->
-    <!--            android:background="@drawable/button_2_design"-->
-    <!--            android:id="@+id/progress_btn"-->
-    <!--            android:text="@string/progress_btn_txt"-->
-    <!--            android:textColor="@color/white"-->
-    <!--            android:textAllCaps="false"-->
-    <!--            style="@style/FontLocalized"-->
-    <!--            android:layout_marginLeft="80dp"-->
-    <!--            android:layout_alignParentLeft="true"  />-->
-    <!--    </RelativeLayout>-->
-
-    <!--</RelativeLayout>-->
