@@ -47,13 +47,13 @@ public class GameFinishedFragment extends Fragment {
         backButton.setOnTouchListener(new ButtonTouchAnimation());
         continueGameButton.setOnTouchListener(new ButtonTouchAnimation());
         if (levelComplete) {
-            continueGameButton.setText("Next Level");
-            gameResultText.setText("Successfully finished the level,\ngood job!");
+            continueGameButton.setText(R.string.next_level_txt);
+            gameResultText.setText(R.string.successfully_finished_the_level_txt);
             moveToNextLevel = true;
         }
         else {
-            continueGameButton.setText("Start Again");
-            gameResultText.setText("Level finished, nice work but you can do better!\n");
+            continueGameButton.setText(R.string.start_again_txt);
+            gameResultText.setText(getString(R.string.level_finished_txt) + "\n" + getString(R.string.you_can_do_better_txt));
         }
 
         continueGameButton.setOnClickListener(new View.OnClickListener() {
