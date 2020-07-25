@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:weightSum="4"
     android:id="@+id/learn_layout"
-    android:background="@drawable/background_image_with_alpha">
+    android:background="@drawable/learn_background_design">
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"

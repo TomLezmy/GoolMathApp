@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 <item>
-    <bitmap android:src="@drawable/white_background_with_colorful_numbers"
-        android:alpha="0.1"
+    <bitmap android:src="@drawable/background_green_numbers"
+    android:alpha="0.16"
         android:gravity="fill">
     </bitmap>
 </item>

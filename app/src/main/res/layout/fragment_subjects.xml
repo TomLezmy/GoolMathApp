@@ -1,17 +1,22 @@
-<!--    Option without button -->
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:layoutDirection="rtl"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/category_cards_layout_1">
 
         <androidx.cardview.widget.CardView
@@ -82,10 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="5dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:id="@+id/category_cards_layout_3">
+        android:id="@+id/category_cards_layout_2">
 
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
@@ -106,18 +108,6 @@
                 style="@style/FontLocalized"
                 android:layout_gravity="center"/>
         </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:id="@+id/category_cards_layout_2">
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
@@ -159,8 +149,17 @@
                 android:layout_gravity="center"/>
         </androidx.cardview.widget.CardView>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end"
+        android:id="@+id/category_cards_layout_3">
+
         <androidx.cardview.widget.CardView
-            android:layout_width="110dp"
+            android:layout_width="220dp"
             android:layout_height="110dp"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
@@ -178,6 +177,7 @@
                 style="@style/FontLocalized"
                 android:layout_gravity="center"/>
         </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
     </LinearLayout>
 
@@ -189,409 +189,5 @@
         style="@style/FontLocalized"
         android:id="@+id/sub_categories_lv">
     </ListView>
+
 </LinearLayout>
-
-
-
-
-    <!--    Option without button -->
-<!--<LinearLayout android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:orientation="vertical"-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android">-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:gravity="center"-->
-<!--        android:layout_margin="5dp"-->
-<!--        android:id="@+id/category_cards_layout_1">-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:elevation="8dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:contentPadding="5dp"-->
-<!--            android:id="@+id/card_addition_category">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/addition_category_txt"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="@dimen/cards_text_size"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:layout_gravity="center" />-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:elevation="8dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:contentPadding="5dp"-->
-<!--            android:id="@+id/card_subtraction_category">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/subtraction_category_txt"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="@dimen/cards_text_size"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:layout_gravity="center"/>-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:elevation="8dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:contentPadding="3dp"-->
-<!--            android:id="@+id/card_multiplication_category">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/multiplication_category_txt"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="@dimen/cards_text_size"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:id="@+id/tv_multiplicationCard"-->
-<!--                />-->
-<!--        </androidx.cardview.widget.CardView>-->
-<!--    </LinearLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_margin="5dp"-->
-<!--        android:gravity="center"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:id="@+id/category_cards_layout_2">-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:elevation="8dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:contentPadding="5dp"-->
-<!--            android:id="@+id/card_division_category">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/division_category_txt"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="@dimen/cards_text_size"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:layout_gravity="center"/>-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:elevation="8dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:contentPadding="5dp"-->
-<!--            android:id="@+id/card_fractions_category">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/fractions_category_txt"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="@dimen/cards_text_size"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:layout_gravity="center"/>-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:elevation="8dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:contentPadding="5dp"-->
-<!--            android:id="@+id/card_percentages_category">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/percentages_category_txt"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="@dimen/cards_text_size"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:layout_gravity="center"/>-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-<!--    </LinearLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_margin="5dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:gravity="center"-->
-<!--        android:id="@+id/category_cards_layout_3">-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:elevation="8dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:contentPadding="5dp"-->
-<!--            android:id="@+id/card_decimal_numbers_category">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/decimal_numbers_category_txt"-->
-<!--                android:gravity="center"-->
-<!--                android:textSize="@dimen/cards_text_size"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:layout_gravity="center"/>-->
-<!--        </androidx.cardview.widget.CardView>-->
-<!--    </LinearLayout>-->
-<!--    <ListView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/FontLocalized"-->
-<!--        android:id="@+id/sub_categories_lv">-->
-<!--    </ListView>-->
-<!--</LinearLayout>-->
-
-
-
-
-    <!--    Option with bac button -->
-<!--<LinearLayout android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--android:orientation="vertical"-->
-<!--xmlns:android="http://schemas.android.com/apk/res/android">-->
-<!--&lt;!&ndash;    Option with bac button &ndash;&gt;-->
-<!--<LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:orientation="horizontal"-->
-<!--    android:layout_gravity="center"-->
-<!--    android:gravity="center"-->
-<!--    android:layout_margin="5dp"-->
-<!--    android:id="@+id/category_cards_layout_1">-->
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="110dp"-->
-<!--        android:elevation="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:contentPadding="5dp"-->
-<!--        android:id="@+id/card_addition_category">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/addition_category_txt"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/cards_text_size"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textStyle="bold"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:layout_gravity="center" />-->
-<!--    </androidx.cardview.widget.CardView>-->
-
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="110dp"-->
-<!--        android:elevation="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:contentPadding="5dp"-->
-<!--        android:id="@+id/card_subtraction_category">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/subtraction_category_txt"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/cards_text_size"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textStyle="bold"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:layout_gravity="center"/>-->
-<!--    </androidx.cardview.widget.CardView>-->
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="110dp"-->
-<!--        android:elevation="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:contentPadding="3dp"-->
-<!--        android:id="@+id/card_multiplication_category">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/multiplication_category_txt"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/cards_text_size"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textStyle="bold"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:id="@+id/tv_multiplicationCard"-->
-<!--            />-->
-<!--    </androidx.cardview.widget.CardView>-->
-<!--</LinearLayout>-->
-
-<!--<LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:orientation="horizontal"-->
-<!--    android:layout_margin="5dp"-->
-<!--    android:gravity="center"-->
-<!--    android:layout_gravity="center"-->
-<!--    android:id="@+id/category_cards_layout_2">-->
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="110dp"-->
-<!--        android:elevation="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:contentPadding="5dp"-->
-<!--        android:id="@+id/card_division_category">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/division_category_txt"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/cards_text_size"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textStyle="bold"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:layout_gravity="center"/>-->
-<!--    </androidx.cardview.widget.CardView>-->
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="110dp"-->
-<!--        android:elevation="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:contentPadding="5dp"-->
-<!--        android:id="@+id/card_fractions_category">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/fractions_category_txt"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/cards_text_size"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textStyle="bold"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:layout_gravity="center"/>-->
-<!--    </androidx.cardview.widget.CardView>-->
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="110dp"-->
-<!--        android:elevation="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:contentPadding="5dp"-->
-<!--        android:id="@+id/card_percentages_category">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/percentages_category_txt"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/cards_text_size"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textStyle="bold"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:layout_gravity="center"/>-->
-<!--    </androidx.cardview.widget.CardView>-->
-
-<!--</LinearLayout>-->
-
-<!--<LinearLayout-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:orientation="horizontal"-->
-<!--    android:layout_margin="5dp"-->
-<!--    android:layout_gravity="center"-->
-<!--    android:gravity="center"-->
-<!--    android:id="@+id/category_cards_layout_3">-->
-
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="110dp"-->
-<!--        android:elevation="8dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:contentPadding="5dp"-->
-<!--        android:id="@+id/card_decimal_numbers_category">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/decimal_numbers_category_txt"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="@dimen/cards_text_size"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textStyle="bold"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:layout_gravity="center"/>-->
-<!--    </androidx.cardview.widget.CardView>-->
-
-<!--    <Button-->
-<!--        android:layout_width="210dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:text="@string/back_btn_txt"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColor="@color/white"-->
-<!--        style="@style/FontLocalized"-->
-<!--        android:layout_marginStart="5dp"-->
-<!--        android:layout_marginEnd="5dp"-->
-<!--        android:textSize="20sp"-->
-<!--        android:id="@+id/btn_back">-->
-
-<!--    </Button>-->
-<!--</LinearLayout>-->
-<!--<ListView-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_margin="10dp"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    style="@style/FontLocalized"-->
-<!--    android:id="@+id/sub_categories_lv">-->
-<!--</ListView>-->
-<!--</LinearLayout>-->
-
-
-
-
-
-
-
