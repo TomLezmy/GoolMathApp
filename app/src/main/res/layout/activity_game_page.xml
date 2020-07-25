@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
+    android:id="@+id/root_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <FrameLayout
         android:layout_width="match_parent"
@@ -70,13 +71,6 @@
             android:textStyle="bold"
             android:layout_margin="10dp"
             android:id="@+id/start_walk"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="stand"
-            android:id="@+id/start_stand"
-            android:layout_toEndOf="@id/start_walk"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,4 +127,18 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:id="@+id/button_fragment_layout"/>
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_4_design"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        style="@style/FontLocalized"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:text="Jump"
+        android:id="@+id/start_stand" />
 </RelativeLayout>

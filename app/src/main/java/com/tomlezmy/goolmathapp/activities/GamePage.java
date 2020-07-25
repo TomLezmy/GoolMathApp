@@ -1,22 +1,32 @@
 package com.tomlezmy.goolmathapp.activities;
 
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.PixelCopy;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,7 +55,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     // 2 = puddle
     // 3 = door
     int test = 0;
-    int buttonFragmentColor, score = 0, category, level;
+    int buttonFragmentColor, score = 0, category, level, coinAmount;
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     GameFinishedFragment gameFinishedFragment;
@@ -54,12 +64,12 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     ValueAnimator valueAnimator;
     AnimationDrawable walkingAnimation, runningAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;
-    RelativeLayout buttonLayout;
-    ImageView player, obstacle, backgroundOne, backgroundTwo;
+    RelativeLayout buttonLayout, rootLayout;
+    ImageView player, obstacle, backgroundOne, backgroundTwo, coin;
     TextView scoreText;
     TextView timerText;
-    float screenWidth, timeToCrash, linearValue, objectHeight, userAnswer;
-    boolean beforeQuestion = true;
+    float screenWidth, screenHeight, timeToCrash, linearValue, objectHeight, userAnswer;
+    boolean beforeQuestion = true, isBonus = false;
     LevelManager levelManager;
     Random rand;
     CountDownTimer countDownTimer;
@@ -89,10 +99,13 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
         Button walk = findViewById(R.id.start_walk);
-        final Button stand = findViewById(R.id.start_stand);
+        final Button jumpBtn = findViewById(R.id.start_stand);
+        jumpBtn.setOnTouchListener(new ButtonTouchAnimation());
         buttonLayout = findViewById(R.id.button_fragment_layout);
         buttonLayout.setBackgroundColor(buttonFragmentColor);
+        rootLayout = findViewById(R.id.root_layout);
         player = findViewById(R.id.player_image);
+        player.setDrawingCacheEnabled(true);
         obstacle = findViewById(R.id.obstacle);
         backgroundOne = findViewById(R.id.background_one);
         backgroundTwo = findViewById(R.id.background_two);
@@ -101,16 +114,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
         AnimationDrawable fall = new AnimationDrawable();
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk1, null), (int)(200 / gameSpeed));//Stand
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk7, null), (int)(200 / gameSpeed));//Run
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk8, null), (int)(200 / gameSpeed));//Run
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk9, null), (int)(200 / gameSpeed));//Run
-//        fall.addFrame(getResources().getDrawable(R.drawable.nwalk10, null), (int)(200 / gameSpeed));//TouchFloor
-//        fall.addFrame(getResources().getDrawable(R.drawable.nfall1, null), (int)(200 / gameSpeed));//SadFace
-//        fall.addFrame(getResources().getDrawable(R.drawable.nfall2, null), (int)(200 / gameSpeed));//Trip
-//        fall.addFrame(getResources().getDrawable(R.drawable.nfall2, null), (int)(200 / gameSpeed));//Trip
-//        fall.addFrame(getResources().getDrawable(R.drawable.nfall3, null), (int)(400 / gameSpeed));//Ground
 
         fall.addFrame(getResources().getDrawable(R.drawable.bad1, null), (int)(200 / gameSpeed));//Stand
         fall.addFrame(getResources().getDrawable(R.drawable.bad2, null), (int)(200 / gameSpeed));//Run
@@ -150,17 +155,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 }
             }
         };
-        AnimationDrawable jump = new AnimationDrawable();
-//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk1, null), (int)(200 / gameSpeed));//Stand
-//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk2, null), (int)(200 / gameSpeed));//Walk
-//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk3, null), (int)(200 / gameSpeed));//Prep
-//        jump.addFrame(getResources().getDrawable(R.drawable.nwalk4, null), (int)(200 / gameSpeed));//Prep
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump2, null), (int)(450 / gameSpeed));//Jump
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump3, null), (int)(450 / gameSpeed));//HighPoint
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump4, null), (int)(200 / gameSpeed));//Descend
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump4, null), (int)(200 / gameSpeed));//Descend
-//        jump.addFrame(getResources().getDrawable(R.drawable.njump5, null), (int)(200 / gameSpeed));//Land
-
+        final AnimationDrawable jump = new AnimationDrawable();
         jump.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
         jump.addFrame(getResources().getDrawable(R.drawable.good2, null), (int)(200 / gameSpeed));
         jump.addFrame(getResources().getDrawable(R.drawable.good3, null), (int)(200 / gameSpeed));
@@ -175,6 +170,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             public void onAnimationFinish() {
                 player.setImageDrawable(walkingAnimation);
                 walkingAnimation.start();
+                if (isBonus) {
+                    jumpBtn.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -220,34 +218,59 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
                     }
                     else {
-                        beforeQuestion = true;
-                        test = (test + 1) % 3;
-                        obstacle.setImageResource(objectImages[test]);
-
-                        // Move object out of screen
-                        obstacle.setX(screenWidth);
-
-                        // If there is a next question
-                        if (levelManager.nextQuestion()) {
-                            showQuestion();
-                            timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
-                            timerText.setVisibility(View.VISIBLE);
-                            countDownTimer.start();
+                        if (!isBonus) {
+                            if(rand.nextInt(5) == 0) {
+                                Animation slideIn = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_in_bottom);
+                                jumpBtn.startAnimation(slideIn);
+                                jumpBtn.setVisibility(View.VISIBLE);
+                                // Change jump height
+                                objectHeight = obstacle.getY() + 100;
+                                isBonus = true;
+                                coin = new ImageView(GamePage.this);
+                                coin.setImageResource(R.drawable.coin);
+                                coin.setScaleType(ImageView.ScaleType.FIT_XY);
+                                ViewGroup.LayoutParams coinParams = new ViewGroup.LayoutParams(50,50);
+                                coin.setLayoutParams(coinParams);
+                                rootLayout.addView(coin);
+                                coin.setX(screenWidth);
+                                //coin.setY(objectHeight - 1);
+                                coin.setY(objectHeight - rand.nextInt(191));
+                                coin.setDrawingCacheEnabled(true);
+                                coinAmount = 0;
+                            }
+                            else {
+                                nextQuestion();
+                            }
                         }
                         else {
-                            // Level finished
-                            walkingAnimation.stop();
-                            fallingAnimation.stop();
-                            player.setImageResource(R.drawable.good1);
-                            valueAnimator.pause();
-                            gameFinishedFragment = new GameFinishedFragment(score == 10);
-                            getSupportFragmentManager().beginTransaction()
-                                    .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();
-                            new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
-                                    .setSpeedRange(0.2f, 0.5f)
-                                    .oneShot(scoreText, 100);
+                            if (coin.getX() > -coin.getWidth()) {
+                                if (checkCollision()) {
+                                    score++;
+                                    scoreText.setText("Score : " + score);
+                                    new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
+                                            .setSpeedRange(0.2f, 0.5f)
+                                            .oneShot(scoreText, 100);
+                                    coin.setX(-coin.getWidth());
+                                } else {
+                                    coin.setX(coin.getX() - (3.4f * gameSpeed));
+                                }
+                            } else {
+                                coinAmount++;
+                                if (coinAmount < 3) {
+                                    coin.setY(objectHeight - rand.nextInt(191));
+                                    coin.setX(screenWidth);
+                                }
+                                else {
+                                    isBonus = false;
+                                    Animation slideOut = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_out_bottom);
+                                    if (jumpBtn.getVisibility() != View.GONE) {
+                                        jumpBtn.startAnimation(slideOut);
+                                        jumpBtn.setVisibility(View.GONE);
+                                    }
+                                    nextQuestion();
+                                }
+                            }
                         }
-//                        Log.d("TTT", timeToCrash + "");
                     }
                 }
                 //final float progress = (float) animation.getAnimatedValue();
@@ -267,12 +290,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         });
 
         walkingAnimation = new AnimationDrawable();
-//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk1, null), (int)(200 / gameSpeed));
-//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk2, null), (int)(200 / gameSpeed));
-//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk3, null), (int)(200 / gameSpeed));
-//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk4, null), (int)(200 / gameSpeed));
-//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk5, null), (int)(200 / gameSpeed));
-//        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk6, null), (int)(200 / gameSpeed));
         walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
         walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk1, null), (int)(200 / gameSpeed));
         walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
@@ -283,13 +300,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));
         runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));
         runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));
-//        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk7, null), (int)(200 / gameSpeed));
-//        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk8, null), (int)(200 / gameSpeed));
-//        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk9, null), (int)(200 / gameSpeed));
-//        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk10, null), (int)(200 / gameSpeed));
-//        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk11, null), (int)(200 / gameSpeed));
-//        runningAnimation.addFrame(getResources().getDrawable(R.drawable.nwalk12, null), (int)(200 / gameSpeed));
-//        runningAnimation.setOneShot(false);
+        runningAnimation.setOneShot(false);
 
         walk.setOnTouchListener(new ButtonTouchAnimation());
         walk.setOnClickListener(new View.OnClickListener() {
@@ -334,15 +345,44 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             }
         });
 
-        stand.setOnClickListener(new View.OnClickListener() {
+        jumpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (walkingAnimation.isRunning()) {
-                    walkingAnimation.stop();
-                    valueAnimator.pause();
-                }
+                jumpBtn.setVisibility(View.GONE);
+                player.setImageDrawable(jumpAnimation);
+                jumpAnimation.start();
             }
         });
+    }
+
+    private void nextQuestion() {
+        beforeQuestion = true;
+        test = (test + 1) % 3;
+        obstacle.setImageResource(objectImages[test]);
+        // Move object out of screen
+        obstacle.setX(screenWidth);
+
+        // If there is a next question
+        if (levelManager.nextQuestion()) {
+            showQuestion();
+            timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
+            timerText.setVisibility(View.VISIBLE);
+            countDownTimer.start();
+        }
+        else {
+            // Level finished
+            walkingAnimation.stop();
+            fallingAnimation.stop();
+            player.setImageResource(R.drawable.good1);
+            valueAnimator.pause();
+            gameFinishedFragment = new GameFinishedFragment(score == 10);
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();
+            new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
+                    .setSpeedRange(0.2f, 0.5f)
+                    .oneShot(scoreText, 100);
+        }
+        //Log.d("TTT", timeToCrash + "");
     }
 
     @Override
@@ -431,6 +471,48 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 .setCustomAnimations(R.anim.slide_out_bottom, R.anim.slide_out_bottom).remove(buttonsFragment).commit();
     }
 
+    public boolean checkCollision() {
+        if ((coin.getBottom() + coin.getTranslationY()) < (player.getTop() + player.getTranslationY())) {
+            return false;
+        }
+        if ((coin.getTop() + coin.getTranslationY()) > (player.getBottom() + player.getTranslationY())){
+            return false;
+        }
+        if ((coin.getRight() + coin.getTranslationX()) < (player.getLeft() + player.getTranslationX())){
+            return false;
+        }
+        if ((coin.getLeft() + coin.getTranslationX()) > (player.getRight() + player.getTranslationX())){
+            return false;
+        }
+        // Bounding box overlap
+        Bitmap coinBitmap = coin.getDrawingCache();
+        Bitmap playerBitmap = player.getDrawingCache();
+        //Bitmap playerBitmap = ((BitmapDrawable)player.getDrawable()).getBitmap();
+        int[] coinLocation = new int[2];
+        coin.getLocationOnScreen(coinLocation);
+        Rect coinRect = new Rect(coinLocation[0], coinLocation[1], coinLocation[0] + coin.getWidth(), coinLocation[1] + coin.getHeight());
+        int[] playerLocation = new int[2];
+        player.getLocationOnScreen(playerLocation);
+        Rect playerRect = new Rect(playerLocation[0], playerLocation[1], playerLocation[0] + player.getWidth(), playerLocation[1] + player.getHeight());
+        // After intersect playerRect is changed to intersection rect
+        Rect playerRectCopy = new Rect(playerRect);
+        playerRect.intersect(coinRect);
+        for (int i = playerRect.left; i < playerRect.right; i++) {
+            for (int j = playerRect.top; j < playerRect.bottom; j++) {
+                if (playerBitmap.getPixel(i - playerRectCopy.left, j - playerRectCopy.top)!= Color.TRANSPARENT) {
+                    //Log.d("TTT", i +" - " + coinRect.left + "," + j + " - " + coinRect.top);
+                    if ((i - coinRect.left) >= 0 && (i - coinRect.left) < coinBitmap.getWidth() && (j - coinRect.top) >= 0 && (j - coinRect.top) < coinBitmap.getHeight()) {
+                        if (coinBitmap.getPixel(i - coinRect.left, j - coinRect.top) != Color.TRANSPARENT) {
+                            // Collision
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     protected void onPause() {
         if (valueAnimator.isRunning()) {
@@ -495,7 +577,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     @Override
     public void onPressContinue(boolean moveToNextLevel) {
         score = 0;
-        scoreText.setText(score + "");
+        scoreText.setText("Score : " + score);
         if (moveToNextLevel) {
             level++;
             if (ECategory.values()[category].getNumberOfLevels() < level) {
