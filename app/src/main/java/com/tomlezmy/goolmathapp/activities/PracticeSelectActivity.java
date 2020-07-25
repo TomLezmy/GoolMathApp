@@ -8,10 +8,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.fragments.SubCategoriesFragment;
 import com.tomlezmy.goolmathapp.fragments.SubjectsFragment;
 
-public class PracticeSelectActivity extends AppCompatActivity implements SubjectsFragment.OnSelectedSubCategoryListener {
+public class PracticeSelectActivity extends AppCompatActivity implements SubjectsFragment.OnSelectedSubCategoryListener, SubCategoriesFragment.OnSubCategoryListener {
     public SubjectsFragment subjectsFragment;
+
+    @Override
+    public void onSubCategory(int subCategoryId) {
+        this.subCategorySelected = subCategorySelected;
+        Intent intent = new Intent(this, GamePage.class);
+        intent.putExtra("category", this.categorySelected);
+        intent.putExtra("level", this.subCategorySelected + 1);
+        startActivity(intent);
+
+    }
+
     int categorySelected;
     int subCategorySelected;
 
@@ -31,13 +43,12 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
     }
 
     @Override
-    public void onSelectedSubCategory(int categoryId, int subCategoryId) {
+    public void onSelectedSubCategory(int categoryId) {
         //Toast.makeText(this, "categoryId=" + " "  + categoryId + " " + "subCategory=" + subCategoryId, Toast.LENGTH_LONG).show();
         this.categorySelected = categoryId;
-        this.subCategorySelected = subCategoryId;
-        Intent intent = new Intent(this, GamePage.class);
-        intent.putExtra("category", categorySelected);
-        intent.putExtra("level", subCategorySelected + 1);
-        startActivity(intent);
+//        Intent intent = new Intent(this, GamePage.class);
+//        intent.putExtra("category", this.categorySelected);
+//        intent.putExtra("level", this.subCategorySelected + 1);
+//        startActivity(intent);
     }
 }

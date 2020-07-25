@@ -8,9 +8,16 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.fragments.SubCategoriesFragment;
 import com.tomlezmy.goolmathapp.fragments.SubjectsFragment;
 
-public class LearnSelectActivity extends AppCompatActivity implements SubjectsFragment.OnSelectedSubCategoryListener {
+public class LearnSelectActivity extends AppCompatActivity implements SubjectsFragment.OnSelectedSubCategoryListener, SubCategoriesFragment.OnSubCategoryListener {
+    @Override
+    public void onSubCategory(int subCategoryId) {
+        this.subCategorySelected = subCategoryId;
+        Intent intent = new Intent(this, LearnActivity.class);
+        startActivity(intent);
+    }
 
     SubjectsFragment subjectsFragment;
     int categorySelected;
@@ -33,13 +40,8 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
     }
 
     @Override
-    public void onSelectedSubCategory(int categoryId, int subCategoryId) {
+    public void onSelectedSubCategory(int categoryId) {
 //        Toast.makeText(this, "categoryId=" + " "  + categoryId + " " + "subCategory=" + subCategoryId, Toast.LENGTH_LONG).show();
         this.categorySelected = categoryId;
-        this.subCategorySelected = subCategoryId;
-
-//        // Test
-        Intent intent = new Intent(this, LearnActivity.class);
-        startActivity(intent);
     }
 }
