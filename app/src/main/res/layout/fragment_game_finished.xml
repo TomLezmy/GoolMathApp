@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_background"
+    android:background="@drawable/button_4_design"
     tools:context=".fragments.GameFinishedFragment">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:text="Game Over"
+        android:textSize="20sp"
+        android:text="@string/game_over_txt"
         android:gravity="center"
+        android:textColor="@color/white"
         style="@style/FontLocalized"
         android:id="@+id/game_result_text"
         android:layout_marginBottom="20dp"
@@ -24,9 +25,9 @@
         android:layout_below="@id/game_result_text"
         android:layout_centerHorizontal="true">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="Back"
+            android:text="@string/back_btn_txt"
             android:background="@drawable/game_button_design"
             android:textColor="@color/white"
             style="@style/FontLocalized"
@@ -35,9 +36,9 @@
             android:layout_margin="10dp"
             android:id="@+id/btn_back"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="Continue"
+            android:text="@string/continue_btn_txt"
             android:background="@drawable/game_button_design"
             android:textColor="@color/white"
             style="@style/FontLocalized"
