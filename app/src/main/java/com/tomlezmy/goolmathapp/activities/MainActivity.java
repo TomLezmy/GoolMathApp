@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         // references
         btnPractice = findViewById(R.id.btn_practice);
+        btnPractice.setOnTouchListener(new ButtonTouchAnimation());
         btnPractice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnLearn = findViewById(R.id.btn_learn);
+        btnLearn.setOnTouchListener(new ButtonTouchAnimation());
         btnLearn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnProgress = findViewById(R.id.btn_progress);
+        btnProgress.setOnTouchListener(new ButtonTouchAnimation());
 
 
     }

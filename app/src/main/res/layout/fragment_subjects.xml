@@ -22,6 +22,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
@@ -43,6 +44,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
@@ -63,6 +65,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
@@ -92,6 +95,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
@@ -112,6 +116,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
@@ -132,6 +137,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
@@ -161,6 +167,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="220dp"
             android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
