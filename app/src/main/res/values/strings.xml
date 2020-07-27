@@ -20,35 +20,35 @@
     <string name="titleSubSubjectsDialog">Pick One Sub Category</string>
 
 
-    <string-array name="additionSubCategories">
-        <item>Single Digit Numbers Addition</item>
-        <item>Two Digit Numbers Addition</item>
+    <string-array name="practice_additionSubCategories">
+        <item>Adding Single Digit Numbers</item>
+        <item>Adding Double Digit Numbers</item>
     </string-array>
 
-    <string-array name="subtractionSubCategories">
-        <item>Single Digit Numbers Subtraction</item>
-        <item>Two Digit Numbers Subtraction</item>
+    <string-array name="practice_subtractionSubCategories">
+        <item>Subtract Single Digit Numbers</item>
+        <item>Subtract Double-Digit Numbers</item>
         <item>Subtraction From 1000</item>
     </string-array>
 
-    <string-array name="multiplicationSubCategories">
+    <string-array name="practice_multiplicationSubCategories">
         <item>Multiplication Up To 5</item>
-        <item>Multiplication Up to 10</item>
-        <item>Two Digit Multiplication at 11</item>
-        <item>Multiplication Of Single Digit In a Two Digit Round Numbers</item>
-        <item>Multiplication In a Round Triple Digit Numbers</item>
+        <item>Multiplication Up To 10</item>
+        <item>Multiplication at 11</item>
+        <item>Multiplication In a Double-Digit Numbers</item>
+        <item>Multiplication In a Three-Digit numbers</item>
     </string-array>
 
 
-    <string-array name="divisionSubCategories">
+    <string-array name="practice_divisionSubCategories">
         <item>Division Up To 5</item>
-        <item>Division Up to 10</item>
-        <item>Division Of a Round Number at 10</item>
-        <item>Division Two Digit Round Numbers In a Single Digit Numbers</item>
-        <item>Division Triple Digit Round Numbers In a Two Digit Numbers</item>
+        <item>Division Up To 10</item>
+        <item>Division Of at 10</item>
+        <item>Division Double-Digit Numbers In a Single Digit Numbers</item>
+        <item>Division Three-Digit Numbers In a Double-Digit Numbers</item>
     </string-array>
 
-    <string-array name="fractionsSubCategories">
+    <string-array name="practice_fractionsSubCategories">
         <item>Level 1</item>
         <item>Level 2</item>
         <item>Level 3</item>
@@ -64,7 +64,7 @@
         <item>Level 13</item>
     </string-array>
 
-    <string-array name="percentsSubCategories">
+    <string-array name="practice_percentsSubCategories">
         <item>Level 1</item>
         <item>Level 2</item>
         <item>Level 3</item>
@@ -75,7 +75,7 @@
         <item>Level 8</item>
     </string-array>
 
-    <string-array name="decimalsSubCategories">
+    <string-array name="practice_decimalsSubCategories">
         <item>Level 1</item>
         <item>Level 2</item>
         <item>Level 3</item>
@@ -83,6 +83,42 @@
         <item>Level 5</item>
         <item>Level 6</item>
     </string-array>
+
+
+    <string-array name="learn_additionSubCategories">
+        <item>Simple Adding</item>
+    </string-array>
+
+
+    <string-array name="learn_multiplicationSubCategories">
+        <item>Simple Multiplication</item>
+        <item>Multiplication In a Double–Digit Numbers Between 10-20</item>
+        <item>Multiply In a Double-Digit Numbers, The Rest</item>
+        <item>Calculate a Double-Digit Squared Number</item>
+    </string-array>
+
+
+    <string-array name="learn_divisionSubCategories">
+        <item>Simple Division</item>
+    </string-array>
+
+    <string-array name="learn_fractionsSubCategories">
+        <item>Fractions - Part 1</item>
+        <item>Fractions - Part 2</item>
+        <item>Reduce and Expand Fractions</item>
+    </string-array>
+
+    <string-array name="learn_percentsSubCategories">
+        <item>Percents</item>
+    </string-array>
+
+    <string-array name="learn_decimalsSubCategories">
+        <item>From Simple Fraction To Decimal Fraction</item>
+        <item>From Decimal Fraction To Simple Fraction</item>
+        <item>From Percents To Decimal Fraction</item>
+    </string-array>
+
+
 
     <string name="pick_sub_category_txt">Pick a Sub Topic:</string>
     <string name="ok_txt">OK</string>

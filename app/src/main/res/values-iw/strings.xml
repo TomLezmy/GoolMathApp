@@ -21,32 +21,106 @@
     <string name="titleSubSubjectsDialog">בחר בתת נושא אחד</string>
     <string name="btn_start_game_txt">התחל לשחק</string>
 
-    <string-array name="additionSubCategories">
+    <string-array name="practice_additionSubCategories">
         <item>חיבור מספרים חד ספרתיים</item>
         <item>חיבור מספרים דו ספרתיים</item>
     </string-array>
 
-    <string-array name="subtractionSubCategories">
+    <string-array name="practice_subtractionSubCategories">
         <item>חיסור מספרים חד ספרתיים</item>
         <item>חיסור מספרים דו ספרתיים</item>
-        <item>החסרה מ- 1000</item>
+        <item>חיסור מספר מ-1000</item>
     </string-array>
 
-    <string-array name="multiplicationSubCategories">
+    <string-array name="practice_multiplicationSubCategories">
         <item>כפל עד 5</item>
         <item>כפל עד 10</item>
-        <item>כפל דו ספרתי ב-11</item>
-        <item>כפל ספרה אחת במספר דו ספרתי עגול</item>
-        <item>כפל במספר תלת ספרתי עגול</item>
+        <item>כפל ב-11</item>
+        <item>כפל במספר דו ספרתי</item>
+        <item>כפל במספר תלת ספרתי</item>
     </string-array>
 
-    <string-array name="divisionSubCategories">
+    <string-array name="practice_divisionSubCategories">
         <item>חילוק עד 5</item>
         <item>חילוק עד 10</item>
-        <item>חלוקת מספר דו ספרתי עגול במספר חד ספרתי</item>
-        <item>חילוק מספר תלת ספרתי במספר דו ספרתי</item>
-        <item>חלוקה של מספר עגול ב 10</item>
+        <item>חילוק ב- 10</item>
+        <item>חילוק דו ספרתי בחד ספרתי</item>
+        <item>חילוק תלת ספרתי בדו ספרתי</item>
     </string-array>
+
+    <string-array name="practice_fractionsSubCategories">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+        <item>Level 7</item>
+        <item>Level 8</item>
+        <item>Level 9</item>
+        <item>Level 10</item>
+        <item>Level 11</item>
+        <item>Level 12</item>
+        <item>Level 13</item>
+    </string-array>
+
+    <string-array name="practice_percentsSubCategories">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+        <item>Level 7</item>
+        <item>Level 8</item>
+    </string-array>
+
+    <string-array name="practice_decimalsSubCategories">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+    </string-array>
+
+
+
+    <string-array name="learn_additionSubCategories">
+        <item>חיבור פשוט</item>
+    </string-array>
+
+
+    <string-array name="learn_multiplicationSubCategories">
+        <item>כפל פשוט</item>
+        <item>כפל מספרים דו ספרתיים בין 10-20</item>
+        <item>כפל מספרים דו ספרתיים, כל השאר</item>
+        <item>חישוב מספר דו ספרתי בריבוע</item>
+    </string-array>
+
+
+    <string-array name="learn_divisionSubCategories">
+        <item>חילוק פשוט</item>
+    </string-array>
+
+    <string-array name="learn_fractionsSubCategories">
+        <item>שברים - חלק 1</item>
+        <item>שברים - חלק 2</item>
+        <item>צמצום והרחבת שברים</item>
+
+    </string-array>
+
+    <string-array name="learn_percentsSubCategories">
+        <item>אחוזים</item>
+    </string-array>
+
+    <string-array name="learn_decimalsSubCategories">
+        <item>מאחוזים לשברים עשרוניים</item>
+        <item>משבר פשוט לשבר עשרוני</item>
+        <item>משבר עשרוני לשבר פשוט</item>
+    </string-array>
+
+
     <string name="pick_sub_category_txt">בחר בתת נושא:</string>
     <string name="ok_txt">אישור</string>
     <string name="title_learn_sub_categories">בחרו נושא שאותו תרצו ללמוד!</string>
