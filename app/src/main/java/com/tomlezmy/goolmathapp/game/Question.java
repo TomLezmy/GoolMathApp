@@ -22,10 +22,14 @@ public class Question {
         this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
     }
 
-    public Question(ECategory category, LevelValueLimits valueLimits, int level) {
+    private Question(ECategory category, LevelValueLimits valueLimits, int level) {
         this.category = category;
         this.numOne = valueLimits.getFirstNumberLimit().generateValue();
         this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
+        buildQuestion(valueLimits, level);
+    }
+
+    private void buildQuestion(LevelValueLimits valueLimits, int level) {
         switch (category) {
             case ADDITION:
                 this.result = this.numOne + this.numTwo;
@@ -43,14 +47,21 @@ public class Question {
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case DIVISION:
-                while (numOne % numTwo != 0) {
-                    this.numOne = valueLimits.getFirstNumberLimit().generateValue();
-                    this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
+                if (level == 1 && level == 2) {
+                    int temp = numOne * numTwo;
+                    result = numOne;
+                    numOne = temp;
                 }
-                this.result = ((float)this.numOne / (float)this.numTwo);
-                if ((int)result != result) {
-                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+                else {
+                    while (numOne % numTwo != 0) {
+                        this.numOne = valueLimits.getFirstNumberLimit().generateValue();
+                        this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
+                    }
+                    this.result = ((float) this.numOne / (float) this.numTwo);
                 }
+//                if ((int)result != result) {
+//                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
+//                }
                 sign = "/";
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
@@ -94,7 +105,6 @@ public class Question {
                         questionHiddenAnswer = "What is " + numOne + "/" + numTwo + " in decimal?";
                         break;
                 }
-
         }
     }
 

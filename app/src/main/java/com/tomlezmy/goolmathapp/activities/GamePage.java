@@ -1,23 +1,17 @@
 package com.tomlezmy.goolmathapp.activities;
 
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -55,19 +49,20 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     // 2 = puddle
     // 3 = door
     int test = 0;
-    int buttonFragmentColor, score = 0, category, level, coinAmount;
+    int buttonFragmentColor, score = 0, category, level, collectablesAmount;
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     GameFinishedFragment gameFinishedFragment;
     boolean userAnswered = false;
+    int[] collectableImages = new int[] {R.drawable.orange, R.drawable.apple1, R.drawable.apple2, R.drawable.pineapple, R.drawable.persimmon, R.drawable.peach, R.drawable.plum, R.drawable.cherry, R.drawable.strawberry, R.drawable.pomegranate};
     int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle};//, R.drawable.closed_door};
     ValueAnimator valueAnimator;
     AnimationDrawable walkingAnimation, runningAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;
     RelativeLayout buttonLayout, rootLayout;
-    ImageView player, obstacle, backgroundOne, backgroundTwo, coin;
-    TextView scoreText;
-    TextView timerText;
+    ImageView player, obstacle, backgroundOne, backgroundTwo, collectable;
+    TextView scoreText, timerText;
+    Button jumpBtn;
     float screenWidth, screenHeight, timeToCrash, linearValue, objectHeight, userAnswer;
     boolean beforeQuestion = true, isBonus = false;
     LevelManager levelManager;
@@ -99,7 +94,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
         Button walk = findViewById(R.id.start_walk);
-        final Button jumpBtn = findViewById(R.id.start_stand);
+        jumpBtn = findViewById(R.id.start_stand);
         jumpBtn.setOnTouchListener(new ButtonTouchAnimation());
         buttonLayout = findViewById(R.id.button_fragment_layout);
         buttonLayout.setBackgroundColor(buttonFragmentColor);
@@ -115,76 +110,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
-        AnimationDrawable fall = new AnimationDrawable();
 
-        fall.addFrame(getResources().getDrawable(R.drawable.bad1, null), (int)(200 / gameSpeed));//Stand
-        fall.addFrame(getResources().getDrawable(R.drawable.bad2, null), (int)(200 / gameSpeed));//Run
-        fall.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));//Run
-        fall.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));//Run
-        fall.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));//TouchFloor
-        fall.addFrame(getResources().getDrawable(R.drawable.bad6, null), (int)(200 / gameSpeed));//SadFace
-        fall.addFrame(getResources().getDrawable(R.drawable.bad7, null), (int)(200 / gameSpeed));//Trip
-        fall.addFrame(getResources().getDrawable(R.drawable.bad8, null), (int)(200 / gameSpeed));//Trip
-        fall.addFrame(getResources().getDrawable(R.drawable.bad9, null), (int)(400 / gameSpeed));//Ground
-        fallingAnimation = new CustomAnimationDrawable(fall) {
-            @Override
-            public void onAnimationFinish() {
-                player.setImageDrawable(walkingAnimation);
-                walkingAnimation.start();
-            }
-
-            @Override
-            public void onAnimationStart() {
-                // Puddle splash
-                if (test == 2) {
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            AnimationDrawable splash = new AnimationDrawable();
-                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash, null), 200);
-                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_2, null), 200);
-                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_3, null), 200);
-                            splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_4, null), 200);
-                            splash.addFrame(getResources().getDrawable(R.drawable.puddle, null), 200);
-                            splash.setOneShot(true);
-                            obstacle.setImageDrawable(splash);
-                            splash.start();
-                        }
-                    }, (int)(1600 / gameSpeed));
-                }
-            }
-        };
-        final AnimationDrawable jump = new AnimationDrawable();
-        jump.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good2, null), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good3, null), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good4, null), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good5, null), (int)(450 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good6, null), (int)(450 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good7, null), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good8, null), (int)(200 / gameSpeed));
-        jump.addFrame(getResources().getDrawable(R.drawable.good9, null), (int)(200 / gameSpeed));
-        jumpAnimation = new CustomAnimationDrawable(jump) {
-            @Override
-            public void onAnimationFinish() {
-                player.setImageDrawable(walkingAnimation);
-                walkingAnimation.start();
-                if (isBonus) {
-                    jumpBtn.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onAnimationStart() {
-                ObjectAnimator up = ObjectAnimator.ofFloat(player, "Y", objectHeight - 200);
-                up.setRepeatCount(1);
-                up.setStartDelay((int)(700 / gameSpeed));
-                up.setRepeatMode(ValueAnimator.REVERSE);
-                up.setDuration((int)(900 / gameSpeed));
-                up.start();
-            }
-        };
+        prepareAnimations("jump");
+        prepareAnimations("fall");
+        prepareAnimations("walk");
+        prepareAnimations("run");
 
         valueAnimator = ValueAnimator.ofFloat(0.0f, -1.0f);
         valueAnimator.setInterpolator(new LinearInterpolator());
@@ -220,48 +150,52 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     else {
                         if (!isBonus) {
                             if(rand.nextInt(5) == 0) {
+//                                changeGameSpeed(2.5f);
+//                                prepareAnimations("jump");
                                 Animation slideIn = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_in_bottom);
                                 jumpBtn.startAnimation(slideIn);
                                 jumpBtn.setVisibility(View.VISIBLE);
                                 // Change jump height
                                 objectHeight = obstacle.getY() + 100;
                                 isBonus = true;
-                                coin = new ImageView(GamePage.this);
-                                coin.setImageResource(R.drawable.coin);
-                                coin.setScaleType(ImageView.ScaleType.FIT_XY);
-                                ViewGroup.LayoutParams coinParams = new ViewGroup.LayoutParams(50,50);
-                                coin.setLayoutParams(coinParams);
-                                rootLayout.addView(coin);
-                                coin.setX(screenWidth);
-                                //coin.setY(objectHeight - 1);
-                                coin.setY(objectHeight - rand.nextInt(191));
-                                coin.setDrawingCacheEnabled(true);
-                                coinAmount = 0;
+                                collectable = new ImageView(GamePage.this);
+                                collectable.setImageResource(collectableImages[rand.nextInt(10)]);
+                                collectable.setScaleType(ImageView.ScaleType.FIT_XY);
+                                ViewGroup.LayoutParams coinParams = new ViewGroup.LayoutParams(60,80);
+                                collectable.setLayoutParams(coinParams);
+                                rootLayout.addView(collectable);
+                                collectable.setX(screenWidth);
+                                collectable.setY(objectHeight - rand.nextInt(191));
+                                collectable.setDrawingCacheEnabled(true);
+                                collectablesAmount = 0;
                             }
                             else {
                                 nextQuestion();
                             }
                         }
                         else {
-                            if (coin.getX() > -coin.getWidth()) {
+                            if (collectable.getX() > -collectable.getWidth()) {
                                 if (checkCollision()) {
                                     score++;
                                     scoreText.setText("Score : " + score);
                                     new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
                                             .setSpeedRange(0.2f, 0.5f)
                                             .oneShot(scoreText, 100);
-                                    coin.setX(-coin.getWidth());
+                                    collectable.setX(-collectable.getWidth());
                                 } else {
-                                    coin.setX(coin.getX() - (3.4f * gameSpeed));
+                                    collectable.setX(collectable.getX() - (3.4f * gameSpeed));
                                 }
                             } else {
-                                coinAmount++;
-                                if (coinAmount < 3) {
-                                    coin.setY(objectHeight - rand.nextInt(191));
-                                    coin.setX(screenWidth);
+                                collectablesAmount++;
+                                if (collectablesAmount < 3) {
+                                    collectable.setY(objectHeight - rand.nextInt(191));
+                                    collectable.setImageResource(collectableImages[rand.nextInt(10)]);
+                                    collectable.setX(screenWidth);
                                 }
                                 else {
                                     isBonus = false;
+//                                    changeGameSpeed(1.5f);
+//                                    prepareAnimations("jump");
                                     Animation slideOut = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_out_bottom);
                                     if (jumpBtn.getVisibility() != View.GONE) {
                                         jumpBtn.startAnimation(slideOut);
@@ -288,19 +222,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 backgroundTwo.setTranslationX(translationX + width);
             }
         });
-
-        walkingAnimation = new AnimationDrawable();
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk1, null), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
-        walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
-        walkingAnimation.setOneShot(false);
-
-        runningAnimation = new AnimationDrawable();
-        runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));
-        runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));
-        runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));
-        runningAnimation.setOneShot(false);
 
         walk.setOnTouchListener(new ButtonTouchAnimation());
         walk.setOnClickListener(new View.OnClickListener() {
@@ -353,6 +274,99 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 jumpAnimation.start();
             }
         });
+    }
+
+    private void prepareAnimations(String animation) {
+        switch (animation) {
+            case "jump":
+                AnimationDrawable jump = new AnimationDrawable();
+                jump.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good2, null), (int)(200 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good3, null), (int)(200 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good4, null), (int)(200 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good5, null), (int)(450 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good6, null), (int)(450 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good7, null), (int)(200 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good8, null), (int)(200 / gameSpeed));
+                jump.addFrame(getResources().getDrawable(R.drawable.good9, null), (int)(200 / gameSpeed));
+                jumpAnimation = new CustomAnimationDrawable(jump) {
+                    @Override
+                    public void onAnimationFinish() {
+                        player.setImageDrawable(walkingAnimation);
+                        walkingAnimation.start();
+                        if (isBonus) {
+                            jumpBtn.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationStart() {
+                        ObjectAnimator up = ObjectAnimator.ofFloat(player, "Y", objectHeight - 200);
+                        up.setRepeatCount(1);
+                        up.setStartDelay((int)(700 / gameSpeed));
+                        up.setRepeatMode(ValueAnimator.REVERSE);
+                        up.setDuration((int)(900 / gameSpeed));
+                        up.start();
+                    }
+                };
+                break;
+            case "fall":
+                AnimationDrawable fall = new AnimationDrawable();
+                fall.addFrame(getResources().getDrawable(R.drawable.bad1, null), (int)(200 / gameSpeed));//Stand
+                fall.addFrame(getResources().getDrawable(R.drawable.bad2, null), (int)(200 / gameSpeed));//Run
+                fall.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));//Run
+                fall.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));//Run
+                fall.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));//TouchFloor
+                fall.addFrame(getResources().getDrawable(R.drawable.bad6, null), (int)(200 / gameSpeed));//SadFace
+                fall.addFrame(getResources().getDrawable(R.drawable.bad7, null), (int)(200 / gameSpeed));//Trip
+                fall.addFrame(getResources().getDrawable(R.drawable.bad8, null), (int)(200 / gameSpeed));//Trip
+                fall.addFrame(getResources().getDrawable(R.drawable.bad9, null), (int)(400 / gameSpeed));//Ground
+                fallingAnimation = new CustomAnimationDrawable(fall) {
+                    @Override
+                    public void onAnimationFinish() {
+                        player.setImageDrawable(walkingAnimation);
+                        walkingAnimation.start();
+                    }
+
+                    @Override
+                    public void onAnimationStart() {
+                        // Puddle splash
+                        if (test == 2) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AnimationDrawable splash = new AnimationDrawable();
+                                    splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash, null), 200);
+                                    splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_2, null), 200);
+                                    splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_3, null), 200);
+                                    splash.addFrame(getResources().getDrawable(R.drawable.puddle_splash_4, null), 200);
+                                    splash.addFrame(getResources().getDrawable(R.drawable.puddle, null), 200);
+                                    splash.setOneShot(true);
+                                    obstacle.setImageDrawable(splash);
+                                    splash.start();
+                                }
+                            }, (int)(1600 / gameSpeed));
+                        }
+                    }
+                };
+                break;
+            case "walk":
+                walkingAnimation = new AnimationDrawable();
+                walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+                walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk1, null), (int)(200 / gameSpeed));
+                walkingAnimation.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+                walkingAnimation.addFrame(getResources().getDrawable(R.drawable.walk2, null), (int)(200 / gameSpeed));
+                walkingAnimation.setOneShot(false);
+                break;
+            case "run":
+                runningAnimation = new AnimationDrawable();
+                runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad3, null), (int)(200 / gameSpeed));
+                runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad4, null), (int)(200 / gameSpeed));
+                runningAnimation.addFrame(getResources().getDrawable(R.drawable.bad5, null), (int)(200 / gameSpeed));
+                runningAnimation.setOneShot(false);
+                break;
+        }
     }
 
     private void nextQuestion() {
@@ -453,11 +467,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             if (useTwoAnswers) {
                 options = 2;
             }
-            buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(options), test);
+            buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(options));
         }
         // Door question
         else {
-            buttonsFragment = ButtonsFragment.newInstance(null, 0);
+            buttonsFragment = ButtonsFragment.newInstance(null);
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -472,25 +486,25 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     }
 
     public boolean checkCollision() {
-        if ((coin.getBottom() + coin.getTranslationY()) < (player.getTop() + player.getTranslationY())) {
+        if ((collectable.getBottom() + collectable.getTranslationY()) < (player.getTop() + player.getTranslationY())) {
             return false;
         }
-        if ((coin.getTop() + coin.getTranslationY()) > (player.getBottom() + player.getTranslationY())){
+        if ((collectable.getTop() + collectable.getTranslationY()) > (player.getBottom() + player.getTranslationY())){
             return false;
         }
-        if ((coin.getRight() + coin.getTranslationX()) < (player.getLeft() + player.getTranslationX())){
+        if ((collectable.getRight() + collectable.getTranslationX()) < (player.getLeft() + player.getTranslationX())){
             return false;
         }
-        if ((coin.getLeft() + coin.getTranslationX()) > (player.getRight() + player.getTranslationX())){
+        if ((collectable.getLeft() + collectable.getTranslationX()) > (player.getRight() + player.getTranslationX())){
             return false;
         }
         // Bounding box overlap
-        Bitmap coinBitmap = coin.getDrawingCache();
+        Bitmap coinBitmap = collectable.getDrawingCache();
         Bitmap playerBitmap = player.getDrawingCache();
         //Bitmap playerBitmap = ((BitmapDrawable)player.getDrawable()).getBitmap();
         int[] coinLocation = new int[2];
-        coin.getLocationOnScreen(coinLocation);
-        Rect coinRect = new Rect(coinLocation[0], coinLocation[1], coinLocation[0] + coin.getWidth(), coinLocation[1] + coin.getHeight());
+        collectable.getLocationOnScreen(coinLocation);
+        Rect coinRect = new Rect(coinLocation[0], coinLocation[1], coinLocation[0] + collectable.getWidth(), coinLocation[1] + collectable.getHeight());
         int[] playerLocation = new int[2];
         player.getLocationOnScreen(playerLocation);
         Rect playerRect = new Rect(playerLocation[0], playerLocation[1], playerLocation[0] + player.getWidth(), playerLocation[1] + player.getHeight());
