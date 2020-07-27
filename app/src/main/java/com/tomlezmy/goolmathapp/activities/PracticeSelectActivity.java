@@ -37,7 +37,7 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
     public void displaySubjects() {
         int cardColorId = ContextCompat.getColor(this, R.color.blue_card);
         int titleColorId = ContextCompat.getColor(this, R.color.blue_title);
-        subjectsFragment = new SubjectsFragment(cardColorId,titleColorId);
+        subjectsFragment = new SubjectsFragment(cardColorId,titleColorId,false);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }

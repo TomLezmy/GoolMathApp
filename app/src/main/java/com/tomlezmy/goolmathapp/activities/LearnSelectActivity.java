@@ -34,7 +34,7 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
     public void displaySubjectsForLearn() {
         int cardColorId = ContextCompat.getColor(this, R.color.green_card);
         int titleColorId = ContextCompat.getColor(this, R.color.green_title);
-        subjectsFragment = new SubjectsFragment(cardColorId, titleColorId);
+        subjectsFragment = new SubjectsFragment(cardColorId, titleColorId, true);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }
