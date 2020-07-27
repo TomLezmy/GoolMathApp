@@ -42,12 +42,11 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public static ButtonsFragment newInstance(List<String> options, int currentObstacle) {
+    public static ButtonsFragment newInstance(List<String> options) {
         ButtonsFragment buttonsFragment = new ButtonsFragment();
         Bundle bundle = new Bundle();
         if (options != null) {
             bundle.putStringArrayList("options", (ArrayList<String>)options);
-            bundle.putInt("currentObstacle", currentObstacle);
         }
         buttonsFragment.setArguments(bundle);
         return buttonsFragment;
@@ -61,7 +60,6 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         LinearLayout buttonLayout = rootView.findViewById(R.id.buttons_layout);
         options = getArguments().getStringArrayList("options");
         if (options != null) {
-//            int btnDesign = btnDesigns[getArguments().getInt("currentObstacle")];
             for (int i = 0; i < options.size(); i++) {
                 Button btn = new Button(getContext());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);

@@ -15,7 +15,7 @@
     </style>
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-<!--        <item name="android:windowBackground">@drawable/dialog_sub_categories</item>-->
+        <item name="android:windowBackground">@drawable/dialog_sub_categories</item>
     </style>
 
 
