@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Random;
 
 public class FirstDiagnosisActivity extends AppCompatActivity implements Button.OnClickListener{
-    final String BUTTONS_TAG = "BUTTONS_TAG";
     TextView questionText;
     String currentQuestion, currentAnswer;
     Random rand;

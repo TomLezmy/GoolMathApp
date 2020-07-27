@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/main_background_design"
+    tools:context=".activities.RegisterActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tell us about yourself"
+        android:textSize="20sp"
+        style="@style/FontLocalized"
+        android:textStyle="bold" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="name"
+        app:hintTextAppearance="@style/FontLocalized">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        app:hintTextAppearance="@style/FontLocalized">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Birth Year"
+        app:hintTextAppearance="@style/FontLocalized">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birth_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Register"
+        style="@style/FontLocalized"
+        android:background="@drawable/button_1_design"
+        android:layout_marginHorizontal="30dp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

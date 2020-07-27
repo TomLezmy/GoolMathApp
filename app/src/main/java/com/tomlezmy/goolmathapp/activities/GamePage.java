@@ -27,16 +27,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.plattysoft.leonids.ParticleSystem;
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.CustomAnimationDrawable;
+import com.tomlezmy.goolmathapp.FileManager;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.ButtonsFragment;
 import com.tomlezmy.goolmathapp.fragments.GameFinishedFragment;
 import com.tomlezmy.goolmathapp.fragments.QuestionFragment;
+import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.game.ECategory;
 import com.tomlezmy.goolmathapp.game.LevelManager;
+import com.tomlezmy.goolmathapp.game.UserData;
 import com.tomlezmy.goolmathapp.interfaces.IButtonFragmentAnswerListener;
 import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
 import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, SendMessage, IResultFragmentListener {
@@ -71,6 +76,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     double valueDelta, framesPerMilliSec = (double)1000 / 60;
     MediaPlayer gameBackgroundRing;
     MediaPlayer clockTickingRing, correctRing, wrongRing;
+    FileManager fileManager;
+    List<Integer> weightsBeforeGame;
+    CategoryProgressData categoryProgressData;
 
 
 
@@ -79,6 +87,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
 
+        fileManager = FileManager.getInstance(this);
         // Get level and category
         category = getIntent().getIntExtra("category",0);
         level = getIntent().getIntExtra("level",0);
@@ -228,6 +237,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             @Override
             public void onClick(View v) {
                 if (!walkingAnimation.isRunning()) {
+                    // Save Weights before game
+                    weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
                     levelManager = new LevelManager(GamePage.this,10, ECategory.values()[category], level);
                     test = 0;
                     obstacle.setImageResource(objectImages[test]);
@@ -389,14 +400,43 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             fallingAnimation.stop();
             player.setImageResource(R.drawable.good1);
             valueAnimator.pause();
-            gameFinishedFragment = new GameFinishedFragment(score == 10);
-            getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();
-            new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
-                    .setSpeedRange(0.2f, 0.5f)
-                    .oneShot(scoreText, 100);
+            endLevelAndCheckResults();
         }
         //Log.d("TTT", timeToCrash + "");
+    }
+
+    private void endLevelAndCheckResults() {
+        // update times played and high score
+        categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+        categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);// TODO check if updates in file manager
+        if (categoryProgressData.getMaxScore() < score) {
+            // TODO tell user
+            // New High Score
+            categoryProgressData.setMaxScore(score);
+        }
+        fileManager.updateUserDataFile();
+
+        boolean weightsAreEven = true;
+        // level complete only when weights are even and score == 10
+        int improvementCounter = 0, deteriorationCounter = 0;
+        List<Integer> weightsAfterGame = fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1);
+        for (int i = 0; i < weightsAfterGame.size(); i++) {
+            if (weightsAfterGame.get(i) != 1) {
+                weightsAreEven = false;
+            }
+            if (weightsBeforeGame.get(i) < weightsAfterGame.get(i)) {
+                deteriorationCounter++;
+            }
+            else if (weightsBeforeGame.get(i) > weightsAfterGame.get(i)) {
+                improvementCounter++;
+            }
+        }
+        gameFinishedFragment = new GameFinishedFragment(score == 10 && weightsAreEven, improvementCounter, deteriorationCounter, categoryProgressData);
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();
+        new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
+                .setSpeedRange(0.2f, 0.5f)
+                .oneShot(scoreText, 100);
     }
 
     @Override
@@ -413,8 +453,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     }
 
     public void animationResponse(boolean wasCorrect) {
-        // Uncomment|Comment this line to toggle learning mode
-        //levelManager.updateDataFromUserAnswer(wasCorrect);
+        // Uncomment|Comment this part to toggle learning mode
+        // If weights weren't updated then there was no user improvement
+//        if (!levelManager.updateWeightsFromUserAnswer(wasCorrect)) {
+//
+//        }
         if (wasCorrect) {
             correctRing.start();
             score++;
@@ -597,7 +640,20 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             if (ECategory.values()[category].getNumberOfLevels() < level) {
                 level = 1;
                 category++;
-                //TODO check for last category
+            }
+            // TODO Add message to user that there are no more games
+            // Check for last category
+            if (ECategory.values().length == category) {
+
+            }
+            else {
+                // TODO move outside of return because user might not pick continue
+                // Open next level if needed
+                categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+                if (!categoryProgressData.isOpen()) {
+                    categoryProgressData.setOpen(true);
+                    fileManager.updateUserDataFile();
+                }
             }
         }
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();

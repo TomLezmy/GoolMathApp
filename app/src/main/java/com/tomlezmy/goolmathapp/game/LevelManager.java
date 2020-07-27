@@ -48,18 +48,23 @@ public class LevelManager {
         currentQuestion = 1;
     }
 
-    public void updateDataFromUserAnswer(boolean wasCorrect) {
+    public boolean updateWeightsFromUserAnswer(boolean wasCorrect) {
+        boolean weightsUpdated = false;
         int subLevelWeight;
         if (wasCorrect) {
             subLevelWeight = fileManager.getSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1));
             if (subLevelWeight != 1) {
                 fileManager.updateSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1), --subLevelWeight);
+                weightsUpdated = true;
             }
         }
         else {
             subLevelWeight = fileManager.getSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1));
             fileManager.updateSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1), ++subLevelWeight);
+            weightsUpdated = true;
         }
+
+        return weightsUpdated;
     }
 
     private Question generateQuestion(int subLevelIndex) {
@@ -83,7 +88,6 @@ public class LevelManager {
     public Boolean checkCorrectAnswer(float guess) {
         return guess == questions.get(currentQuestion - 1).getResult();
     }
-
     public int getNumberOfQuestions() {
         return numberOfQuestions;
     }

@@ -14,17 +14,23 @@ import android.widget.TextView;
 
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
 
 public class GameFinishedFragment extends Fragment {
 
     Button backButton;
     boolean levelComplete;
+    int improvementCounter, deteriorationCounter;
     boolean moveToNextLevel = false;
+    CategoryProgressData categoryProgressData;
     IResultFragmentListener callback;
 
-    public GameFinishedFragment(boolean levelComplete) {
+    public GameFinishedFragment(boolean levelComplete, int improvementCounter, int deteriorationCounter, CategoryProgressData categoryProgressData) {
         this.levelComplete = levelComplete;
+        this.improvementCounter = improvementCounter;
+        this.deteriorationCounter = deteriorationCounter;
+        this.categoryProgressData = categoryProgressData;
     }
 
     @Override
@@ -46,6 +52,17 @@ public class GameFinishedFragment extends Fragment {
         Button continueGameButton = rootView.findViewById(R.id.btn_continue_playing);
         backButton.setOnTouchListener(new ButtonTouchAnimation());
         continueGameButton.setOnTouchListener(new ButtonTouchAnimation());
+
+        // Check if first game
+        if (categoryProgressData.getTimesPlayed() != 1) {
+            if (improvementCounter > deteriorationCounter) {
+                // TODO Add a "your'e improving" message
+            }
+            else if (improvementCounter < deteriorationCounter) {
+                // TODO Add a "maybe go to learn" message
+            }
+        }
+
         if (levelComplete) {
             continueGameButton.setText(R.string.next_level_txt);
             gameResultText.setText(R.string.successfully_finished_the_level_txt);

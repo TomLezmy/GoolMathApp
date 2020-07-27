@@ -31,6 +31,9 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
+    // Material design
+    implementation 'com.android.support:design:29.0.0'
+
     // Youtube player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 
