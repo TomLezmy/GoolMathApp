@@ -16,7 +16,7 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
 
     @Override
     public void onSubCategory(int subCategoryId) {
-        this.subCategorySelected = subCategorySelected;
+        this.subCategorySelected = subCategoryId;
         Intent intent = new Intent(this, GamePage.class);
         intent.putExtra("category", this.categorySelected);
         intent.putExtra("level", this.subCategorySelected + 1);

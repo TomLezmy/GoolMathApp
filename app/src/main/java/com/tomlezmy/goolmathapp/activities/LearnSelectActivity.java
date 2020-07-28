@@ -16,6 +16,8 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
     public void onSubCategory(int subCategoryId) {
         this.subCategorySelected = subCategoryId;
         Intent intent = new Intent(this, LearnActivity.class);
+        intent.putExtra("category", this.categorySelected);
+        intent.putExtra("sub_category", this.subCategorySelected);
         startActivity(intent);
     }
 

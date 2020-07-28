@@ -2,6 +2,7 @@ package com.tomlezmy.goolmathapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -20,6 +21,7 @@ import com.tomlezmy.goolmathapp.game.Question;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -65,9 +67,10 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         buttons[3] = findViewById(R.id.btn_answer_4);
         buttons[3].setOnTouchListener(new ButtonTouchAnimation());
         buttons[3].setOnClickListener(this);
-        //fileManager = FileManager.getInstance(this);
+        fileManager = FileManager.getInstance(this);
+        fileManager.createNewWeightsFile();
 
-        buildQuestionsRepository();
+        buildQuestionsRepository((Calendar.getInstance().get(Calendar.YEAR) - getIntent().getIntExtra("birth_year",0) > 10));
 
         nextQuestion(true);
     }
@@ -98,6 +101,10 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         }
         else {
             Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+            fileManager.createNewUserDataFile(getIntent().getStringExtra("first_name"),getIntent().getStringExtra("last_name"),getIntent().getIntExtra("birth_year",0));
+            Intent intent = new Intent(FirstDiagnosisActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -150,13 +157,13 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
             // False
             Toast.makeText(this, "False", Toast.LENGTH_SHORT).show();
             // Update relevant cell
-            //int subLevelWeight = fileManager.getSubLevelWeight(ECategory.values()[currentCategory],levelRepository.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), questionsProbabilityTableIndex.get(ECategory.values()[currentCategory]).get(currentQuestionIndex));
-            //fileManager.updateSubLevelWeight(ECategory.values()[currentCategory], levelRepository.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), questionsProbabilityTableIndex.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), ++subLevelWeight);
+            int subLevelWeight = fileManager.getSubLevelWeight(ECategory.values()[currentCategory],levelRepository.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), questionsProbabilityTableIndex.get(ECategory.values()[currentCategory]).get(currentQuestionIndex));
+            fileManager.updateSubLevelWeight(ECategory.values()[currentCategory], levelRepository.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), questionsProbabilityTableIndex.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), ++subLevelWeight);
             nextQuestion(false);
         }
     }
 
-    private void buildQuestionsRepository() {
+    private void buildQuestionsRepository(boolean isOverTen) {
         questionsRepository = new Hashtable<>();
         answersRepository = new Hashtable<>();
         optionsRepository = new Hashtable<>();
@@ -169,8 +176,10 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         options = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
-        addToRepositories("3 + 5 = ?", "8", Arrays.asList("6","8","5","9"), 2, 0);
-        addToRepositories("2 + 6 = ?", "8", Arrays.asList("6","8","4","7"), 2, 0);
+        if (!isOverTen) {
+            addToRepositories("3 + 5 = ?", "8", Arrays.asList("6","8","5","9"), 2, 0);
+            addToRepositories("2 + 6 = ?", "8", Arrays.asList("6","8","4","7"), 2, 0);
+        }
         addToRepositories("10 + 20 = ?", "30", Arrays.asList("30","25","40","31"), 0, 1);
         addToRepositories("30 + 15 = ?", "45", Arrays.asList("33","45","35","40"), 0, 1);
         addToRepositories("40 + 26 = ?", "66", Arrays.asList("66","64","56","60"), 4, 1);
@@ -186,8 +195,10 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         options = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
-        addToRepositories("7 - 4 = ?", "3", Arrays.asList("3","4","2","1"), 2, 0);
-        addToRepositories("9 - 8 = ?", "1", Arrays.asList("3","0","2","1"), 1, 0);
+        if (!isOverTen) {
+            addToRepositories("7 - 4 = ?", "3", Arrays.asList("3", "4", "2", "1"), 2, 0);
+            addToRepositories("9 - 8 = ?", "1", Arrays.asList("3", "0", "2", "1"), 1, 0);
+        }
         addToRepositories("40 - 30 = ?", "10", Arrays.asList("9","10","11","8"), 4, 1);
         addToRepositories("86 - 50 = ?", "36", Arrays.asList("36","26","30","46"), 8, 1);
         addToRepositories("27 - 13 = ?", "14", Arrays.asList("14","15","12","16"), 0, 1);

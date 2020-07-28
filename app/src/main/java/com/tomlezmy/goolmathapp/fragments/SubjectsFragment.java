@@ -2,6 +2,7 @@ package com.tomlezmy.goolmathapp.fragments;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,9 +17,13 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.tomlezmy.goolmathapp.FileManager;
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.game.CategoryProgressData;
+import com.tomlezmy.goolmathapp.game.ECategory;
 
 import java.util.Arrays;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,6 +52,7 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
     Typeface typeface;
     List<String> subCategories;
     SubCategoriesFragment subCategoriesFragment;
+    FileManager fileManager;
 
 
     // interface
@@ -127,6 +133,34 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
             fractionsCard.setOnClickListener(new CategoryCardsOnClickListener(4, getResources().getStringArray(R.array.practice_fractionsSubCategories)));
             percentagesCard.setOnClickListener(new CategoryCardsOnClickListener(5, getResources().getStringArray(R.array.practice_percentsSubCategories)));
             decimal_numbersCard.setOnClickListener(new CategoryCardsOnClickListener(6, getResources().getStringArray(R.array.practice_decimalsSubCategories)));
+
+            // Check which categories are open
+            fileManager = FileManager.getInstance(getContext());
+            Dictionary<ECategory, List<CategoryProgressData>> levelProgressData = fileManager.getUserData().getLevelsProgressData();
+            if (!levelProgressData.get(ECategory.SUBTRACTION).get(0).isOpen()) {
+                subtractionCard.setEnabled(false);
+                subtractionCard.setCardBackgroundColor(Color.GRAY);
+            }
+            if (!levelProgressData.get(ECategory.MULTIPLICATION).get(0).isOpen()) {
+                multiplicationCard.setEnabled(false);
+                multiplicationCard.setCardBackgroundColor(Color.GRAY);
+            }
+            if (!levelProgressData.get(ECategory.DIVISION).get(0).isOpen()) {
+                divisionCard.setEnabled(false);
+                divisionCard.setCardBackgroundColor(Color.GRAY);
+            }
+            if (!levelProgressData.get(ECategory.FRACTIONS).get(0).isOpen()) {
+                fractionsCard.setEnabled(false);
+                fractionsCard.setCardBackgroundColor(Color.GRAY);
+            }
+            if (!levelProgressData.get(ECategory.PERCENTS).get(0).isOpen()) {
+                percentagesCard.setEnabled(false);
+                percentagesCard.setCardBackgroundColor(Color.GRAY);
+            }
+            if (!levelProgressData.get(ECategory.DECIMALS).get(0).isOpen()) {
+                decimal_numbersCard.setEnabled(false);
+                decimal_numbersCard.setCardBackgroundColor(Color.GRAY);
+            }
         }
 
         return rootView;
@@ -136,9 +170,14 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
     void displaySubCategories(final int categoryIndex, String[] subCategoriesArray) {
         this.currentCategoryIndex = categoryIndex;
         this.subCategories = Arrays.asList(subCategoriesArray);
-        this.subCategoriesFragment = new SubCategoriesFragment(this.subCategories, this.cardColorId);
+        if (isCreatedByLearnSelectActivity) {
+            this.subCategoriesFragment = new SubCategoriesFragment(this.subCategories, this.cardColorId);
+        }
+        else {
+            this.subCategoriesFragment = new SubCategoriesFragment(this.subCategories, this.cardColorId, fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[categoryIndex]));
+        }
         final FragmentManager fm = getFragmentManager();
-        subCategoriesFragment.show(fm, "sub_categores_tag");
+        subCategoriesFragment.show(fm, "sub_categories_tag");
         callback.onSelectedSubCategory(categoryIndex);
     }
 

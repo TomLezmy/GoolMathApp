@@ -407,14 +407,14 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
     private void endLevelAndCheckResults() {
         // update times played and high score
-        categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
-        categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);// TODO check if updates in file manager
-        if (categoryProgressData.getMaxScore() < score) {
-            // TODO tell user
-            // New High Score
-            categoryProgressData.setMaxScore(score);
-        }
-        fileManager.updateUserDataFile();
+//        categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+//        categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);// TODO check if updates in file manager
+//        if (categoryProgressData.getMaxScore() < score) {
+//            // TODO tell user
+//            // New High Score
+//            categoryProgressData.setMaxScore(score);
+//        }
+//        fileManager.updateUserDataFile();
 
         boolean weightsAreEven = true;
         // level complete only when weights are even and score == 10
@@ -649,11 +649,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             else {
                 // TODO move outside of return because user might not pick continue
                 // Open next level if needed
-                categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
-                if (!categoryProgressData.isOpen()) {
-                    categoryProgressData.setOpen(true);
-                    fileManager.updateUserDataFile();
-                }
+//                categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+//                if (!categoryProgressData.isOpen()) {
+//                    categoryProgressData.setOpen(true);
+//                    fileManager.updateUserDataFile();
+//                }
             }
         }
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();

@@ -1,5 +1,6 @@
 package com.tomlezmy.goolmathapp.activities;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     private List<String> subCategories;
     private int colorId;
     private SubCategoriesListener listener;
+    List<CategoryProgressData> categoryProgressDataList;
 
     public interface SubCategoriesListener {
         void onSubCategoryClicked(int position, View view);
@@ -27,9 +30,10 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     }
 
     // constructor
-    public SubCategoryAdapter(List<String> subCategories, int colorId) {
+    public SubCategoryAdapter(List<String> subCategories, int colorId, List<CategoryProgressData> categoryProgressDataList) {
         this.subCategories = subCategories;
         this.colorId = colorId;
+        this.categoryProgressDataList = categoryProgressDataList;
     }
 
     public class SubCategoryViewHolder extends RecyclerView.ViewHolder {
@@ -65,6 +69,12 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void onBindViewHolder(@NonNull SubCategoryViewHolder holder, int position) {
         String subCategory = subCategories.get(position);
         holder.nameTv.setText(subCategory);
+        if (categoryProgressDataList != null) {
+            if (!categoryProgressDataList.get(position).isOpen()) {
+                holder.nameTv.setTextColor(Color.GRAY);
+                holder.itemView.setEnabled(false);
+            }
+        }
     }
 
     @Override

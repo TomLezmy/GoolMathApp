@@ -39,10 +39,15 @@ public class FileManager {
         else {
             try {
                 levelWeightsFile.createNewFile();
-                fillNewWeightsFile();
+                createNewWeightsFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        userDataFile = new File(context.getFilesDir().getAbsolutePath(),"user_data");
+        if (userDataFile.exists()) {
+            readFromUserDataFile();
         }
     }
 
@@ -62,6 +67,21 @@ public class FileManager {
             FileInputStream fis = new FileInputStream(levelWeightsFile);
             ObjectInputStream ois = new ObjectInputStream(fis);
             levelWeights = (Dictionary<ECategory,List<List<Integer>>>)ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readFromUserDataFile() {
+        try {
+            FileInputStream fis = new FileInputStream(userDataFile);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            userData = (UserData)ois.readObject();
             ois.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -125,7 +145,7 @@ public class FileManager {
         updateUserDataFile();
     }
 
-    private void fillNewWeightsFile() {
+    public void createNewWeightsFile() {
         levelWeights = new Hashtable<>();
         levelWeights.put(ECategory.ADDITION,Arrays.asList(Arrays.asList(1,1,1), Arrays.asList(1,1,1,1,1,1,1,1,1,1)));
         levelWeights.put(ECategory.SUBTRACTION,Arrays.asList(Arrays.asList(1,1,1), Arrays.asList(1,1,1,1,1,1,1,1,1,1), Arrays.asList(1,1,1)));

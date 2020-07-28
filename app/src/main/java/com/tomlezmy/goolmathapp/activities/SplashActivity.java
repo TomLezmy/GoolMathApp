@@ -12,7 +12,7 @@ import com.tomlezmy.goolmathapp.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    final int SPLASH_DISPLAY_LENGTH = 3000;
+    final int SPLASH_DISPLAY_LENGTH = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

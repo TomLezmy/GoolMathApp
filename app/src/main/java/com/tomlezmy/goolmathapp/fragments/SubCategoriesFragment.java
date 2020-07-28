@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.activities.SubCategoryAdapter;
+import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class SubCategoriesFragment extends DialogFragment {
     Typeface typeface;
     Window window;
     Dialog dialog;
+    List<CategoryProgressData> categoryProgressDataList;
 
     public interface OnSubCategoryListener {
         void onSubCategory(int subCategoryId);
@@ -46,6 +48,12 @@ public class SubCategoriesFragment extends DialogFragment {
     SubCategoriesFragment(List<String> subCategories, int colorId) {
         this.subCategories = subCategories;
         this.colorId = colorId;
+        this.categoryProgressDataList = null;
+    }
+    SubCategoriesFragment(List<String> subCategories, int colorId, List<CategoryProgressData> categoryProgressDataList) {
+        this.subCategories = subCategories;
+        this.colorId = colorId;
+        this.categoryProgressDataList =categoryProgressDataList;
     }
 
 
@@ -70,7 +78,7 @@ public class SubCategoriesFragment extends DialogFragment {
         recyclerView = rootView.findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        subCategoryAdapter = new SubCategoryAdapter(this.subCategories, this.colorId);
+        subCategoryAdapter = new SubCategoryAdapter(this.subCategories, this.colorId, this.categoryProgressDataList);
         recyclerView.setAdapter(subCategoryAdapter);
 
 
