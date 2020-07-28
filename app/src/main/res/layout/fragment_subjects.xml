@@ -16,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         android:id="@+id/category_cards_layout_1">
 
         <androidx.cardview.widget.CardView
@@ -194,8 +193,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/subcategories_fragment_layout">
-
-
     </LinearLayout>
 
 <!--    <ListView-->

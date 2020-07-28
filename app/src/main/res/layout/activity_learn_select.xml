@@ -1,5 +1,6 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/learn_background_design">
@@ -8,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/title_layout">
+        android:id="@+id/title_layout"
+        android:layout_margin="10dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -19,70 +21,46 @@
             android:alpha="1"/>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             style="@style/FontLocalized"
             android:gravity="center"
             android:text="@string/learn_btn_txt"
-            android:textColor="@color/colorBtn3"
-            android:textSize="60sp"
-            android:textStyle="bold"/>
+            android:textColor="@color/colorStrokeBtn3"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:id="@+id/tv_learn"/>
     </LinearLayout>
 
     <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="150dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        style="@style/FontLocalized"
-        android:textColor="@color/green_title"
-        android:text="@string/title_learn_sub_categories_option2"
-        android:layout_margin="20dp"/>
+        <com.hanks.htextview.typer.TyperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_gravity="start"
+            android:text="@string/title_learn_sub_categories_option2"
+            app:charIncrease="1"
+            android:textColor="@color/green_title_dark"
+            android:gravity="center"
+            app:typerSpeed="90"
+            android:id="@+id/tv_hanks"
+            />
 </LinearLayout>
 
+    <!--    The Subjects Fragment Will be here-->
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_height="20dp"
-        android:id="@+id/empty_layout_learn">
+        android:id="@+id/subjects_display_layout"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
     </LinearLayout>
 
-    <!--    The Subjects Fragment Will be here-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/subjects_display_layout"
-        android:gravity="center">
-    </RelativeLayout>
-
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="120dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_margin="20dp">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btn_start_learning"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:layout_margin="20dp"-->
-<!--            android:background="@drawable/button_3_design"-->
-<!--            style="@style/FontLocalized"-->
-<!--            android:text="@string/start_learn_btn_txt"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="25sp"-->
-<!--            android:padding="10dp">-->
-<!--        </Button>-->
-
-<!--</LinearLayout>-->
 </LinearLayout>

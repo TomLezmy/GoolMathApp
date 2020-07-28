@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -139,27 +140,27 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
             Dictionary<ECategory, List<CategoryProgressData>> levelProgressData = fileManager.getUserData().getLevelsProgressData();
             if (!levelProgressData.get(ECategory.SUBTRACTION).get(0).isOpen()) {
                 subtractionCard.setEnabled(false);
-                subtractionCard.setCardBackgroundColor(Color.GRAY);
+                subtractionCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.MULTIPLICATION).get(0).isOpen()) {
                 multiplicationCard.setEnabled(false);
-                multiplicationCard.setCardBackgroundColor(Color.GRAY);
+                multiplicationCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.DIVISION).get(0).isOpen()) {
                 divisionCard.setEnabled(false);
-                divisionCard.setCardBackgroundColor(Color.GRAY);
+                divisionCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.FRACTIONS).get(0).isOpen()) {
                 fractionsCard.setEnabled(false);
-                fractionsCard.setCardBackgroundColor(Color.GRAY);
+                fractionsCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.PERCENTS).get(0).isOpen()) {
                 percentagesCard.setEnabled(false);
-                percentagesCard.setCardBackgroundColor(Color.GRAY);
+                percentagesCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.DECIMALS).get(0).isOpen()) {
                 decimal_numbersCard.setEnabled(false);
-                decimal_numbersCard.setCardBackgroundColor(Color.GRAY);
+                decimal_numbersCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
         }
 

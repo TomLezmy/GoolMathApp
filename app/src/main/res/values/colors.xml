@@ -21,8 +21,20 @@
     <color name="green">#629b2a</color>
     <color name="clock_txt">#63A5D1</color>
     <color name="green_card">#A6ECBB</color>
+    <color name="green_card_option2">#A6ECBB</color>
+    <color name="green_card_option3">#8ED39D</color>
     <color name="blue_card">#B3DDFF</color>
+    <color name="blue_card_option2">#579dce</color>
+    <color name="blue_title_dark">#44708e</color>
     <color name="green_title">#61AE72</color>
+    <color name="green_title_dark">#3a7356</color>
+    <color name="green_title_light">#c9ecd1</color>
+    <color name="green_sub_title">#98d1a4</color>
+    <color name="green_sub_title_option2">#c9ecd1</color>
+    <color name="disabled_card">#bccbd5</color>
+
+
+
     <color name="blue_title">#63A5D1</color>
 
 </resources>

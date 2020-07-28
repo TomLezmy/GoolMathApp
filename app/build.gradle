@@ -43,6 +43,7 @@ dependencies {
     // TextView animation
     implementation "com.hanks:htextview-base:0.1.6"
     implementation "com.hanks:htextview-line:0.1.6"
+    implementation "com.hanks:htextview-typer:0.1.6"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

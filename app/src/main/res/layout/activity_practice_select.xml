@@ -1,5 +1,6 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/practice_background_design"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -8,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/title_layout">
+        android:id="@+id/title_layout"
+        android:layout_margin="10dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -18,50 +20,94 @@
             android:id="@+id/settings"
             android:alpha="1"/>
 
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            android:layout_margin="20dp"-->
+<!--            style="@style/FontLocalized"-->
+<!--            android:text="@string/practice_btn_txt"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/colorBtn1"-->
+<!--            android:textSize="60sp"-->
+<!--            android:textStyle="bold" />-->
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_margin="20dp"
-            style="@style/FontLocalized"
-            android:text="@string/practice_btn_txt"
-            android:gravity="center"
-            android:textColor="@color/colorBtn1"
-            android:textSize="60sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/FontLocalized"
             android:gravity="center"
+            android:text="@string/practice_btn_txt"
+            android:textColor="@color/colorStrokeBtn1"
             android:textSize="30sp"
             android:textStyle="bold"
-            style="@style/FontLocalized"
-            android:textColor="@color/clock_txt"
-            android:text="@string/title_practice_sub_categores_option2"
-            android:layout_margin="20dp"/>
+            android:id="@+id/tv_practice"/>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="20dp"
-        android:id="@+id/empty_layout_practice">
+        android:layout_height="150dp"
+        android:layout_marginHorizontal="25dp"
+        android:gravity="center">
+
+        <com.hanks.htextview.typer.TyperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_gravity="start"
+            android:text="@string/title_practice_sub_categores_option2"
+            app:charIncrease="1"
+            android:textColor="@color/blue_title_dark"
+            android:gravity="center"
+            app:typerSpeed="90"
+            android:id="@+id/tv_hanks"
+            />
     </LinearLayout>
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:textSize="30sp"-->
+<!--            android:textStyle="bold"-->
+<!--            style="@style/FontLocalized"-->
+<!--            android:textColor="@color/clock_txt"-->
+<!--            android:text="@string/title_practice_sub_categores_option2"-->
+<!--            android:layout_margin="20dp"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:id="@+id/empty_layout_practice">-->
+<!--    </LinearLayout>-->
+
     <!--    The Subjects Fragment Will be here-->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:id="@+id/subjects_display_layout"
+        android:layout_marginTop="20dp"
         android:gravity="center">
-    </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+
+    <!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/subjects_display_layout"-->
+<!--        android:gravity="center">-->
+<!--    </RelativeLayout>-->
 
 <!--    <RelativeLayout-->
 <!--        android:layout_width="match_parent"-->
