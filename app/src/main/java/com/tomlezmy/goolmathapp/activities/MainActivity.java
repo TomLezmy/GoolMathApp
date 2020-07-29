@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.fragments.ProgressFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +45,13 @@ public class MainActivity extends AppCompatActivity {
         });
         btnProgress = findViewById(R.id.btn_progress);
         btnProgress.setOnTouchListener(new ButtonTouchAnimation());
-
+        btnProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProgressActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
