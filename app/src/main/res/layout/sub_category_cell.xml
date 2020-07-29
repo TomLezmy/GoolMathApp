@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/sub_category_name_tv"
         android:textSize="20sp"
+        android:padding="10dp"
         style="@style/FontLocalized">
     </TextView>
 
