@@ -107,8 +107,8 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
         tvMultiplicationCard = rootView.findViewById(R.id.tv_multiplicationCard);
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
-            this.typeface = ResourcesCompat.getFont(getContext(), R.font.patua_one);
-            tvMultiplicationCard.setTextSize(14f);
+            this.typeface = ResourcesCompat.getFont(getContext(), R.font.helsinki);
+            tvMultiplicationCard.setTextSize(15f);
         }
         else {
             this.typeface = ResourcesCompat.getFont(getContext(), R.font.hebrew_font);

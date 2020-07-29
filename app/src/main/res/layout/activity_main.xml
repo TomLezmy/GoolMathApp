@@ -66,7 +66,7 @@
                     android:includeFontPadding="false"
                     android:text="@string/practice_btn_txt"
                     android:textColor="@color/white"
-                    android:textSize="35sp"
+                    android:textSize="40sp"
                     android:textAllCaps="false" />
             </LinearLayout>
 
@@ -82,7 +82,7 @@
                     android:background="@drawable/button_3_design"
                     android:layout_gravity="center"
                     android:layout_toStartOf="@+id/progress_btn"
-                    android:textSize="22sp"
+                    android:textSize="25sp"
                     android:layout_margin="5dp"
                     android:text="@string/learn_btn_txt"
                     android:textColor="@color/white"
@@ -95,7 +95,7 @@
                     android:layout_height="125dp"
                     android:background="@drawable/button_2_design"
                     android:layout_gravity="center"
-                    android:textSize="22sp"
+                    android:textSize="23sp"
                     android:layout_margin="5dp"
                     android:id="@+id/btn_progress"
                     android:text="@string/progress_btn_txt"

@@ -31,7 +31,6 @@ public class SubCategoriesFragment extends DialogFragment {
     RecyclerView recyclerView;
     SubCategoryAdapter subCategoryAdapter;
     int colorId;
-    Typeface typeface;
     Window window;
     Dialog dialog;
     List<CategoryProgressData> categoryProgressDataList;

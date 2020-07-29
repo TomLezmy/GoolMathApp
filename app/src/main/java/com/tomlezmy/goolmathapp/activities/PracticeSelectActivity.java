@@ -34,8 +34,9 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
-            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.lavi);
-            tvQuestion_hanks.setTextSize(40f);
+//            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.kalam_regular);
+            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.shortstack_regular);
+            tvQuestion_hanks.setTextSize(35f);
         }
         else {
             this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.motek);
