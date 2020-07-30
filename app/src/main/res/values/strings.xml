@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GoolMathApp</string>
+    <string name="app_name">Math-For-Fun</string>
     <string name="practice_btn_txt">Practice</string>
     <string name="learn_btn_txt">Learn</string>
     <string name="progress_btn_txt">Progress</string>
@@ -18,6 +18,16 @@
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">Subtraction</string>
     <string name="titleSubSubjectsDialog">Pick One Sub Category</string>
+    <string name="first_diagnostic_instructions">
+        Hello  %1$s, welcome to the Math-For-Fun app! Before we start, we would like to go over some questions with you, the questionnaire will take a few minutes (it is not possible to leave during the questionnaire otherwise the information will be deleted)
+    </string>
+
+    <string name="to_the_menu">To The Menu</string>
+    <string name="msg_right_answer">Well done, you answered %1d questions correctly</string>
+    <string name="msg_wrong_answer">You answered %1d questions incorrectly</string>
+    <string name="msg_diagnosis_finished">We\'re done...</string>
+    <string name="msg_now_can_start">Now the fun begins!</string>
+    <string name="good_luck_txt">Good Luck</string>
 
 
     <string-array name="practice_additionSubCategories">
@@ -132,6 +142,8 @@
     <string name="level_finished_txt">Level finished, nice work!</string>
     <string name="btn_start_game_txt">Start Game</string>
     <string name="you_can_do_better_txt">you can do better!</string>
+    <string name="btn_cool_lets_go">Cool, let\'s go</string>
+    <string name="txt_welcome">Welcome</string>
 
 
 </resources>

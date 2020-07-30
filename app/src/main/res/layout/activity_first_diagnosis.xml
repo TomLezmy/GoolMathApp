@@ -1,26 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/main_background_design">
-    <TextView
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/one_plus_one_equal_to_txt"
+            style="@style/FontNumbers"
+            android:textSize="40sp"
+            android:gravity="start"
+            android:textColor="@color/colorMainHeaderPurple"
+            android:layout_margin="20dp"
+            android:id="@+id/question_text"
+            android:layoutDirection="ltr"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/txt_welcome"
+            style="@style/FontLocalized"
+            android:textSize="@dimen/welcome_title_size"
+            android:textColor="@color/colorMainHeaderPurple"
+            android:layout_margin="10dp"
+            android:id="@+id/welcome_tv"
+            android:visibility="visible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_quiz_finished"
+            style="@style/FontLocalized"
+            android:text="@string/msg_diagnosis_finished"
+            android:textSize="40sp"
+            android:padding="10dp"
+            android:textColor="@color/colorMainHeaderPurple"
+            android:visibility="gone">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/first_diagnostic_instructions"
+            android:textColor="@color/colorMainHeaderPurple"
+            android:textSize="22sp"
+            style="@style/FontLocalized"
+            android:padding="10dp"
+            android:gravity="center"
+            android:id="@+id/tv_instruction"
+            android:visibility="visible">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/good_luck_txt"
+            android:textColor="@color/colorBtn1"
+            android:textSize="22sp"
+            style="@style/FontLocalized"
+            android:padding="10dp"
+            android:gravity="center"
+            android:id="@+id/tv_good_luck"
+            android:visibility="visible">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBtn3"
+                android:textSize="25sp"
+                style="@style/FontLocalized"
+                android:padding="10dp"
+                android:gravity="center"
+                android:id="@+id/tv_right_answers"
+                android:visibility="gone">
+            </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBtn2"
+                android:textSize="25sp"
+                style="@style/FontLocalized"
+                android:padding="10dp"
+                android:gravity="center"
+                android:id="@+id/tv_wrong_answers"
+                android:visibility="gone">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/colorMainHeaderPurple"
+                android:text="@string/msg_now_can_start"
+                android:textSize="30sp"
+                style="@style/FontLocalized"
+                android:padding="10dp"
+                android:gravity="center"
+                android:id="@+id/tv_fun_begins"
+                android:visibility="gone">
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="1 + 1= ?"
-        style="@style/FontLocalized"
-        android:textSize="25sp"
-        android:layout_margin="10dp"
-        android:id="@+id/question_text"/>
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="@string/btn_cool_lets_go"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            style="@style/FontLocalized"
+            android:padding="10dp"
+            android:background="@drawable/button_4_design"
+            android:id="@+id/btn_lets_go">
+        </Button>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="@string/to_the_menu"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            style="@style/FontLocalized"
+            android:padding="10dp"
+            android:background="@drawable/button_4_design"
+            android:id="@+id/btn_go_to_menue"
+            android:visibility="gone">
+        </Button>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttons_layout"
+        android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:layout_below="@id/question_text">
+        android:visibility="invisible">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -31,9 +185,9 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                style="@style/FontLocalized"
+                style="@style/FontNumbers"
                 android:id="@+id/btn_answer_1"/>
             <Button
                 android:layout_width="100dp"
@@ -42,9 +196,9 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                style="@style/FontLocalized"
+                style="@style/FontNumbers"
                 android:id="@+id/btn_answer_2"/>
         </LinearLayout>
         <LinearLayout
@@ -57,9 +211,9 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                style="@style/FontLocalized"
+                style="@style/FontNumbers"
                 android:id="@+id/btn_answer_3"/>
             <Button
                 android:layout_width="100dp"
@@ -68,12 +222,12 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                style="@style/FontLocalized"
+                style="@style/FontNumbers"
                 android:id="@+id/btn_answer_4"/>
         </LinearLayout>
+
     </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>

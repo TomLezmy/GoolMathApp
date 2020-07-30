@@ -69,7 +69,7 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 btn.setText(options.get(i));
                 btn.setOnClickListener(this);
                 btn.setBackgroundResource(R.drawable.button_4_design);
-                Typeface typeface = ResourcesCompat.getFont(this.getContext(),R.font.patua_one);
+                Typeface typeface = ResourcesCompat.getFont(this.getContext(),R.font.ganclm);
                 btn.setTypeface(typeface, Typeface.BOLD);
 
                 btn.setTextSize(18f);
