@@ -11,19 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.ProgressActivity"></activity>
-        <activity android:name=".activities.RegisterActivity"></activity>
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name=".activities.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FirstDiagnosisActivity"></activity>
-        <activity android:name=".activities.MainActivity"></activity>
-        <activity android:name=".activities.PracticeSelectActivity" />
-        <activity android:name=".activities.LearnSelectActivity" />
-        <activity android:name=".activities.LearnActivity" />
+        <activity android:name=".activities.FirstDiagnosisActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.MainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.PracticeSelectActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.LearnSelectActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.LearnActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.GamePage"
             android:screenOrientation="landscape" />

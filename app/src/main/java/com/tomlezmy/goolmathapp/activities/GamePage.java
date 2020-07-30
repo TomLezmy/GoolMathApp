@@ -35,13 +35,11 @@ import com.tomlezmy.goolmathapp.fragments.QuestionFragment;
 import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.game.ECategory;
 import com.tomlezmy.goolmathapp.game.LevelManager;
-import com.tomlezmy.goolmathapp.game.UserData;
 import com.tomlezmy.goolmathapp.interfaces.IButtonFragmentAnswerListener;
 import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
 import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -51,16 +49,12 @@ import me.toptas.fancyshowcase.FocusShape;
 import me.toptas.fancyshowcase.listener.DismissListener;
 import me.toptas.fancyshowcase.listener.OnCompleteListener;
 
-public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, SendMessage, IResultFragmentListener, View.OnClickListener {
+public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, SendMessage, IResultFragmentListener {
 
     final String QUESTION_TAG = "QUESTION_TAG", BUTTONS_TAG = "BUTTONS_TAG", RESULT_TAG = "RESULT_TAG";
     float gameSpeed;
-    // temp int and objectImages for test
-    // 0 = banana
-    // 1 = rock
-    // 2 = puddle
-    int test = 0;
-    int buttonFragmentColor, score = 0, category, level, collectablesAmount;
+    int obstacleIndex = 0; // 0 = banana 1 = rock 2 = puddle
+    int buttonFragmentColor, score = 0, correctAnswerCounter = 0, category, level, collectablesAmount;
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     GameFinishedFragment gameFinishedFragment;
@@ -86,7 +80,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     List<Integer> weightsBeforeGame;
     CategoryProgressData categoryProgressData;
 
-    // For tutorialRun
+    // For Tutorial Run
     boolean isTutorialRun = false, beforeTutorialQuestionPopup = true, endTutorialInitiated = false;
     ValueAnimator tutorialValueAnimator;
 
@@ -264,8 +258,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     // Save Weights before game
                     weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
                     levelManager = new LevelManager(GamePage.this,10, ECategory.values()[category], level);
-                    test = 0;
-                    obstacle.setImageResource(objectImages[test]);
+                    obstacleIndex = 0;
+                    obstacle.setImageResource(objectImages[obstacleIndex]);
                     player.setImageDrawable(walkingAnimation);
                     // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
                     timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
@@ -594,7 +588,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     @Override
                     public void onAnimationStart() {
                         // Puddle splash
-                        if (test == 2) {
+                        if (obstacleIndex == 2) {
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -634,8 +628,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
     private void nextQuestion() {
         beforeQuestion = true;
-        test = (test + 1) % 3;
-        obstacle.setImageResource(objectImages[test]);
+        obstacleIndex = (obstacleIndex + 1) % 3;
+        obstacle.setImageResource(objectImages[obstacleIndex]);
         // Move object out of screen
         obstacle.setX(screenWidth);
 
@@ -658,17 +652,17 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
     private void endLevelAndCheckResults() {
         // update times played and high score
-//        categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
-//        categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);// TODO check if updates in file manager
-//        if (categoryProgressData.getMaxScore() < score) {
-//            // TODO tell user
-//            // New High Score
-//            categoryProgressData.setMaxScore(score);
-//        }
-//        fileManager.updateUserDataFile();
+        categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+        categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);
+        if (categoryProgressData.getMaxScore() < score) {
+            // TODO tell user
+            // New High Score
+            categoryProgressData.setMaxScore(score);
+        }
+        fileManager.updateUserDataFile();
 
         boolean weightsAreEven = true;
-        // level complete only when weights are even and score == 10
+        // level complete only when weights are even and correctAnswerCounter == 10
         int improvementCounter = 0, deteriorationCounter = 0;
         List<Integer> weightsAfterGame = fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1);
         for (int i = 0; i < weightsAfterGame.size(); i++) {
@@ -682,7 +676,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 improvementCounter++;
             }
         }
-        gameFinishedFragment = new GameFinishedFragment(score == 10 && weightsAreEven, improvementCounter, deteriorationCounter, categoryProgressData);
+        gameFinishedFragment = new GameFinishedFragment(correctAnswerCounter == 10 && weightsAreEven, improvementCounter, deteriorationCounter, categoryProgressData);
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();
         new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
@@ -704,15 +698,14 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     }
 
     public void animationResponse(boolean wasCorrect) {
-        //Uncomment|Comment this part to toggle learning mode
-        //If weights weren't updated then there was no user improvement
-//        if (!isTutorialRun) {
-//            if (!levelManager.updateWeightsFromUserAnswer(wasCorrect)) {
-//
-//            }
-//        }
+        // Uncomment|Comment this part to toggle learning mode
+        // If weights weren't updated then there was no user improvement
+        if (!isTutorialRun) {
+            levelManager.updateWeightsFromUserAnswer(wasCorrect);
+        }
         if (wasCorrect) {
             correctRing.start();
+            correctAnswerCounter++;
             score++;
             scoreText.setText("Score : " + score);
             new ParticleSystem(this, 20, R.drawable.star_pink, 1000)
@@ -725,7 +718,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
         if (wasCorrect) {
             // Change jump height for banana and rock
-            if (test != 2) {
+            if (obstacleIndex != 2) {
                 objectHeight = obstacle.getY() + 200;
             }
             else {
@@ -866,6 +859,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     @Override
     public void onPressContinue(boolean moveToNextLevel) {
         score = 0;
+        correctAnswerCounter = 0;
         scoreText.setText("Score : " + score);
         if (moveToNextLevel) {
             level++;
@@ -881,19 +875,14 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             else {
                 // TODO move outside of return because user might not pick continue
                 // Open next level if needed
-//                categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
-//                if (!categoryProgressData.isOpen()) {
-//                    categoryProgressData.setOpen(true);
-//                    fileManager.updateUserDataFile();
-//                }
+                categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+                if (!categoryProgressData.isOpen()) {
+                    categoryProgressData.setOpen(true);
+                    fileManager.updateUserDataFile();
+                }
             }
         }
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }
 

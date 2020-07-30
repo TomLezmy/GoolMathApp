@@ -25,11 +25,6 @@ public class LevelManager {
         this.level = level;
         this.levelValueLimitsAndProbability = LimitFactory.getLevelValuesAndProbabilities(context, levelCategory, level);
         fileManager = FileManager.getInstance(context);
-        //LevelValueLimitProbabilities p = levelValueLimitsAndProbability.getLevelValueLimitByProbability();
-        //;
-        //p.setProbabilityWeight(3);
-        //FileManager.getInstance(context).updateSubLevelWeight(levelCategory, level - 1, 0, 1);
-
     }
 
     public void generateQuestions() {
@@ -81,7 +76,7 @@ public class LevelManager {
     }
 
     public boolean isLastQuestion() {
-        return currentQuestion == numberOfQuestions - 1;
+        return currentQuestion == numberOfQuestions;
     }
 
     @Nullable
