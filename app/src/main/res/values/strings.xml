@@ -156,6 +156,9 @@
     <string name="tutorial_game_objective">You get points by answering questions and going through obstacles</string>
     <string name="tutorial_score">Your score is displayed here</string>
     <string name="tutorial_timer">This timer will display the time left to answer</string>
+    <string name="in_the_level_x">In The Level %1s</string>
+    <string name="you_played_x_times">You Played %1d Times</string>
+    <string name="your_high_score_is_x">Your High Score is %1d</string>
 
 
 </resources>

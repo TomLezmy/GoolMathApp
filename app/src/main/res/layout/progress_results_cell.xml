@@ -1,0 +1,55 @@
+    <androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="180dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="10dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="10dp"
+    android:layout_gravity="start"
+    android:layout_margin="20dp"
+    app:cardBackgroundColor="@color/colorBtn2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_leve"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="5dp"
+            style="@style/FontLocalized"
+            android:textColor="@color/white"
+            android:text="@string/in_the_level_x"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/you_played_x_times"
+            style="@style/FontLocalized"
+            android:textSize="18sp"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:id="@+id/tv_times_played"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_high_score_is_x"
+            style="@style/FontLocalized"
+            android:textSize="22sp"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:id="@+id/tv_highScore"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

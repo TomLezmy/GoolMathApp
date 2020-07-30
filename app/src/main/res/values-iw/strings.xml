@@ -159,6 +159,9 @@
     <string name="tutorial_game_objective">אתם משיגים נקודות על ידי פתירת שאלות ומעבר מכשולים</string>
     <string name="tutorial_score">ניקודכם מופיע כאן</string>
     <string name="tutorial_timer">שעון זה יציג את הזמן הנותר למענה</string>
+    <string name="in_the_level_x">בשלב %1s</string>
+    <string name="you_played_x_times">שיחקת %1d פעמים</string>
+    <string name="your_high_score_is_x">הניקוד הגבוה שלך הוא %1d</string>
 
 
 </resources>
