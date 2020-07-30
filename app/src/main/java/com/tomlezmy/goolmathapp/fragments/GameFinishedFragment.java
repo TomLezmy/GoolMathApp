@@ -57,12 +57,10 @@ public class GameFinishedFragment extends Fragment {
         // Check if first game
         if (categoryProgressData.getTimesPlayed() != 1) {
             if (improvementCounter > deteriorationCounter) {
-                // TODO Localize
-                progressMessage = "Your'e improving! Keep it up!\n";
+                progressMessage = getString(R.string.improvementMessage) + "\n";
             }
             else if (improvementCounter < deteriorationCounter) {
-                // TODO Localize
-                progressMessage = "Maybe consider looking at the materials in the learning page\n";
+                progressMessage = getString(R.string.deteriorationMessage) + "\n";
             }
         }
 

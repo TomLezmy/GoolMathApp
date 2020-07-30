@@ -33,7 +33,6 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
     @Override
     public void onSubCategory(int subCategoryId) {
         callback.onSelectedSubCategory(this.currentCategoryIndex);
-
     }
 
     // Data members
@@ -49,6 +48,7 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
     CardView fractionsCard;
     CardView percentagesCard;
     CardView decimal_numbersCard;
+    CardView tutorialCard;
     String language;
     Typeface typeface;
     List<String> subCategories;
@@ -93,6 +93,7 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
         fractionsCard = rootView.findViewById(R.id.card_fractions_category);
         percentagesCard = rootView.findViewById(R.id.card_percentages_category);
         decimal_numbersCard = rootView.findViewById(R.id.card_decimal_numbers_category);
+        tutorialCard = rootView.findViewById(R.id.card_Tutorial);
 
         // Set card color
         additionCard.setCardBackgroundColor(this.cardColorId);
@@ -102,6 +103,7 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
         fractionsCard.setCardBackgroundColor(this.cardColorId);
         percentagesCard.setCardBackgroundColor(this.cardColorId);
         decimal_numbersCard.setCardBackgroundColor(this.cardColorId);
+        tutorialCard.setCardBackgroundColor(this.cardColorId);
 
         // Set unique text size for multiplication Card for english
         tvMultiplicationCard = rootView.findViewById(R.id.tv_multiplicationCard);
@@ -118,12 +120,14 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
 
             /* Set On click listener using private class named CategoryCardsOnClickListener */
             additionCard.setOnClickListener(new CategoryCardsOnClickListener(0, getResources().getStringArray(R.array.learn_additionSubCategories)));
+            subtractionCard.setEnabled(false);
+            subtractionCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             multiplicationCard.setOnClickListener(new CategoryCardsOnClickListener(2, getResources().getStringArray(R.array.learn_multiplicationSubCategories)));
             divisionCard.setOnClickListener(new CategoryCardsOnClickListener(3, getResources().getStringArray(R.array.learn_divisionSubCategories)));
             fractionsCard.setOnClickListener(new CategoryCardsOnClickListener(4, getResources().getStringArray(R.array.learn_fractionsSubCategories)));
             percentagesCard.setOnClickListener(new CategoryCardsOnClickListener(5, getResources().getStringArray(R.array.learn_percentsSubCategories)));
             decimal_numbersCard.setOnClickListener(new CategoryCardsOnClickListener(6, getResources().getStringArray(R.array.learn_decimalsSubCategories)));
-
+            tutorialCard.setVisibility(View.GONE);
         }
         else {
             /* Set On click listener using private class named CategoryCardsOnClickListener */
@@ -134,7 +138,12 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
             fractionsCard.setOnClickListener(new CategoryCardsOnClickListener(4, getResources().getStringArray(R.array.practice_fractionsSubCategories)));
             percentagesCard.setOnClickListener(new CategoryCardsOnClickListener(5, getResources().getStringArray(R.array.practice_percentsSubCategories)));
             decimal_numbersCard.setOnClickListener(new CategoryCardsOnClickListener(6, getResources().getStringArray(R.array.practice_decimalsSubCategories)));
-
+            tutorialCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.onSelectedSubCategory(-1);
+                }
+            });
             // Check which categories are open
             fileManager = FileManager.getInstance(getContext());
             Dictionary<ECategory, List<CategoryProgressData>> levelProgressData = fileManager.getUserData().getLevelsProgressData();

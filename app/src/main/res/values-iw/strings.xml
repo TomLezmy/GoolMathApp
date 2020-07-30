@@ -152,6 +152,13 @@
     <string name="birth_year">שנת לידה</string>
     <string name="register">רישום</string>
     <string name="tell_about_yourself">רגע לפני שנתחיל, ספרו לנו קצת על עצמכם</string>
+    <string name="tutorial_category_card">הדרכה</string>
+    <string name="improvementMessage">אתם משתפרים! תמשיכו כך!</string>
+    <string name="deteriorationMessage">אולי כדאי לכם לחזור על החומר בדף הלימוד</string>
+    <string name="tutorial_show_player">זה אתם, מטרתכם היא לעבור את השלב עם הניקוד הכי גבוה</string>
+    <string name="tutorial_game_objective">אתם משיגים נקודות על ידי פתירת שאלות ומעבר מכשולים</string>
+    <string name="tutorial_score">ניקודכם מופיע כאן</string>
+    <string name="tutorial_timer">שעון זה יציג את הזמן הנותר למענה</string>
 
 
 </resources>
