@@ -62,6 +62,11 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
     @Override
     public void onSelectedSubCategory(int categoryId) {
         this.categorySelected = categoryId;
+        if (categoryId == -1) {
+            Intent intent = new Intent(this, GamePage.class);
+            intent.putExtra("tutorial",true);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -70,8 +75,6 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
         Intent intent = new Intent(this, GamePage.class);
         intent.putExtra("category", this.categorySelected);
         intent.putExtra("level", this.subCategorySelected + 1);
-        //intent.putExtra("tutorial",true);
         startActivity(intent);
-
     }
 }

@@ -90,9 +90,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         setContentView(R.layout.activity_game_page);
 
         fileManager = FileManager.getInstance(this);
-        // Get level and category
-        category = getIntent().getIntExtra("category",0);
-        level = getIntent().getIntExtra("level",0);
         changeGameSpeed(1.5f);
         //  Set background sound
         clockTickingRing = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
@@ -254,39 +251,43 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
                 }
-                if (!walkingAnimation.isRunning()) {
-                    // Save Weights before game
-                    weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
-                    levelManager = new LevelManager(GamePage.this,10, ECategory.values()[category], level);
-                    obstacleIndex = 0;
-                    obstacle.setImageResource(objectImages[obstacleIndex]);
-                    player.setImageDrawable(walkingAnimation);
-                    // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
-                    timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
-                    countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
-                        public void onTick(long millisUntilFinished) {
-                            // Set Clock ticking sound while count down timer
-                            clockTickingRing.setVolume(1,1);
-                            clockTickingRing.start();
-                            timerText.setText((millisUntilFinished / 1000) + "");
-                        }
+                else {
+                    if (!walkingAnimation.isRunning()) {
+                        // Get level and category
+                        category = getIntent().getIntExtra("category",0);
+                        level = getIntent().getIntExtra("level",0);
+                        // Save Weights before game
+                        weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
+                        levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
+                        obstacleIndex = 0;
+                        obstacle.setImageResource(objectImages[obstacleIndex]);
+                        player.setImageDrawable(walkingAnimation);
+                        // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
+                        timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f * gameSpeed) * -1 * 16.665f;
+                        countDownTimer = new CountDownTimer((long) timeToCrash, 1000) {
+                            public void onTick(long millisUntilFinished) {
+                                // Set Clock ticking sound while count down timer
+                                clockTickingRing.setVolume(1, 1);
+                                clockTickingRing.start();
+                                timerText.setText((millisUntilFinished / 1000) + "");
+                            }
 
-                        public void onFinish() {
-                            timerText.setVisibility(View.INVISIBLE);
-                            timerText.setText("");
+                            public void onFinish() {
+                                timerText.setVisibility(View.INVISIBLE);
+                                timerText.setText("");
+                            }
+                        };
+                        timerText.setVisibility(View.VISIBLE);
+                        countDownTimer.start();
+                        walkingAnimation.start();
+                        if (valueAnimator.isPaused()) {
+                            valueAnimator.resume();
+                        } else {
+                            valueAnimator.start();
                         }
-                    };
-                    timerText.setVisibility(View.VISIBLE);
-                    countDownTimer.start();
-                    walkingAnimation.start();
-                    if (valueAnimator.isPaused()) {
-                        valueAnimator.resume();
+                        levelManager.generateQuestions();
+                        showQuestion();
                     }
-                    else {
-                        valueAnimator.start();
-                    }
-                    levelManager.generateQuestions();
-                    showQuestion();
                 }
             }
         });

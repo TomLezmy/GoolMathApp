@@ -159,7 +159,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_gravity="end"
         android:id="@+id/category_cards_layout_3">
 
@@ -176,6 +176,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/decimal_numbers_category_txt"
+                android:gravity="center"
+                android:textSize="@dimen/cards_text_size"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                style="@style/FontLocalized"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:elevation="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="5dp"
+            android:id="@+id/card_Tutorial">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/division_category_txt"
                 android:gravity="center"
                 android:textSize="@dimen/cards_text_size"
                 android:textColor="@color/white"
