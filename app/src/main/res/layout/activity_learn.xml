@@ -7,26 +7,59 @@
     android:weightSum="4"
     android:id="@+id/learn_layout"
     android:background="@drawable/learn_background_design">
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="right"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_settings_black_24dp"
-        android:id="@+id/settings"
-        android:alpha="1"/>
+<!--    <ImageView-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:src="@drawable/ic_settings_black_24dp"-->
+<!--        android:id="@+id/settings"-->
+<!--        android:alpha="1"/>-->
 
-    <TextView
-        android:id="@+id/title"
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="top|center"-->
+<!--        android:gravity="top"-->
+<!--        style="@style/FontLocalized"-->
+<!--        android:text="@string/learn_btn_txt"-->
+<!--        android:textColor="@color/colorStrokeBtn3"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:id="@+id/learn_title"/>-->
+<!--    </LinearLayout>-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        style="@style/FontLocalized"
-        android:gravity="top|center"
-        android:text="@string/learn_btn_txt"
-        android:textStyle="bold"
-        android:textColor="@color/colorBtn3"
-        android:textSize="@dimen/main_title_size" />
+        android:orientation="vertical"
+        android:id="@+id/title_layout"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_settings_black_24dp"
+            android:id="@+id/settings"
+            android:alpha="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/FontLocalized"
+            android:text="@string/learn_btn_txt"
+            android:textColor="@color/colorStrokeBtn3"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:id="@+id/tv_learn"/>
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,11 +77,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_margin="20dp">
+        android:layout_margin="5dp"
+        android:gravity="bottom">
         <Button
             android:id="@+id/back_btn_learn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:background="@drawable/button_3_design"
             style="@style/FontLocalized"
@@ -56,11 +90,11 @@
             android:layout_margin="10dp"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:layout_gravity="left|bottom"/>
+            android:gravity="center"/>
 
         <Button
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_margin="10dp"
             android:textAllCaps="false"
             android:background="@drawable/button_3_design"

@@ -2,7 +2,6 @@ package com.tomlezmy.goolmathapp.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tomlezmy.goolmathapp.R;
-import com.tomlezmy.goolmathapp.activities.SubCategoryAdapter;
+import com.tomlezmy.goolmathapp.adapters.SubCategoryAdapter;
 import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 
 import java.util.List;

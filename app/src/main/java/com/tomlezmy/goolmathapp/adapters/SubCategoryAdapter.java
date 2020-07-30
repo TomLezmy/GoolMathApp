@@ -1,4 +1,4 @@
-package com.tomlezmy.goolmathapp.activities;
+package com.tomlezmy.goolmathapp.adapters;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
