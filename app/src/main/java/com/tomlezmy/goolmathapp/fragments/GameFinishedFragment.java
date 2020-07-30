@@ -53,24 +53,27 @@ public class GameFinishedFragment extends Fragment {
         backButton.setOnTouchListener(new ButtonTouchAnimation());
         continueGameButton.setOnTouchListener(new ButtonTouchAnimation());
 
+        String progressMessage = "";
         // Check if first game
         if (categoryProgressData.getTimesPlayed() != 1) {
             if (improvementCounter > deteriorationCounter) {
-                // TODO Add a "your'e improving" message
+                // TODO Localize
+                progressMessage = "Your'e improving! Keep it up!\n";
             }
             else if (improvementCounter < deteriorationCounter) {
-                // TODO Add a "maybe go to learn" message
+                // TODO Localize
+                progressMessage = "Maybe consider looking at the materials in the learning page\n";
             }
         }
 
         if (levelComplete) {
             continueGameButton.setText(R.string.next_level_txt);
-            gameResultText.setText(R.string.successfully_finished_the_level_txt);
+            gameResultText.setText(progressMessage + getString(R.string.successfully_finished_the_level_txt));
             moveToNextLevel = true;
         }
         else {
             continueGameButton.setText(R.string.start_again_txt);
-            gameResultText.setText(getString(R.string.level_finished_txt) + "\n" + getString(R.string.you_can_do_better_txt));
+            gameResultText.setText(progressMessage + getString(R.string.level_finished_txt) + "\n" + getString(R.string.you_can_do_better_txt));
         }
 
         continueGameButton.setOnClickListener(new View.OnClickListener() {
