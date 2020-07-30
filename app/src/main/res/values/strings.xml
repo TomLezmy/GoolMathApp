@@ -144,6 +144,13 @@
     <string name="you_can_do_better_txt">you can do better!</string>
     <string name="btn_cool_lets_go">Cool, let\'s go</string>
     <string name="txt_welcome">Welcome</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="birth_year">Birth Year</string>
+    <string name="register">Register</string>
+    <string name="tell_about_yourself">Just before we start, tell us about yourself</string>
+
+
 
 
 </resources>

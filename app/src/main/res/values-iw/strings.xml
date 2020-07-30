@@ -29,17 +29,6 @@
 
     <string name="first_diagnostic_instructions">
 שלום %1$s, ברוכים הבאים לאפליקציית חשבכיף! לפני שנתחיל נרצה לעבור איתך על כמה שאלות, השאלון יקח מספר דקות (אי אפשר לצאת בזמן השאלון אחרת המידע ימחק)
-
-
-<!--        שלום "שם משתמש",\n-->
-<!--        ברוכים הבאים לאפליקציית "חשבכיף"!-->
-<!--        \n-->
-<!--        לפני שנתחיל, נשמח לעבור איתך על כמה שאלות,-->
-<!--        \n-->
-<!--        השאלון יקח מספר דקות-->
-<!--        \n-->
-<!--        (אי אפשר לצאת בזמן השאלון אחרת המידע ימחק)-->
-
     </string>
 
 
@@ -158,6 +147,11 @@
     <string name="you_can_do_better_txt">אין ספק שתוכל להשתפר!</string>
     <string name="btn_cool_lets_go">קדימה, בואו נתחיל</string>
     <string name="txt_welcome">ברוכים הבאים</string>
+    <string name="first_name">שם פרטי</string>
+    <string name="last_name">שם משפחה</string>
+    <string name="birth_year">שנת לידה</string>
+    <string name="register">רישום</string>
+    <string name="tell_about_yourself">רגע לפני שנתחיל, ספרו לנו קצת על עצמכם</string>
 
 
 </resources>
