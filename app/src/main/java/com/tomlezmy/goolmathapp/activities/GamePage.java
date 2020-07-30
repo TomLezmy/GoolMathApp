@@ -41,10 +41,17 @@ import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
 import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, SendMessage, IResultFragmentListener {
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.FocusShape;
+import me.toptas.fancyshowcase.listener.DismissListener;
+import me.toptas.fancyshowcase.listener.OnCompleteListener;
+
+public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, SendMessage, IResultFragmentListener, View.OnClickListener {
 
     final String QUESTION_TAG = "QUESTION_TAG", BUTTONS_TAG = "BUTTONS_TAG", RESULT_TAG = "RESULT_TAG";
     float gameSpeed;
@@ -52,7 +59,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     // 0 = banana
     // 1 = rock
     // 2 = puddle
-    // 3 = door
     int test = 0;
     int buttonFragmentColor, score = 0, category, level, collectablesAmount;
     QuestionFragment questionFragment;
@@ -60,14 +66,14 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     GameFinishedFragment gameFinishedFragment;
     boolean userAnswered = false;
     int[] collectableImages = new int[] {R.drawable.orange, R.drawable.apple1, R.drawable.apple2, R.drawable.pineapple, R.drawable.persimmon, R.drawable.peach, R.drawable.plum, R.drawable.cherry, R.drawable.strawberry, R.drawable.pomegranate};
-    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle};//, R.drawable.closed_door};
+    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle};
     ValueAnimator valueAnimator;
     AnimationDrawable walkingAnimation, runningAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;
     RelativeLayout buttonLayout, rootLayout;
     ImageView player, obstacle, backgroundOne, backgroundTwo, collectable;
     TextView scoreText, timerText;
-    Button jumpBtn;
+    Button jumpBtn, walkBtn;
     float screenWidth, screenHeight, timeToCrash, linearValue, objectHeight, userAnswer;
     boolean beforeQuestion = true, isBonus = false;
     LevelManager levelManager;
@@ -80,7 +86,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     List<Integer> weightsBeforeGame;
     CategoryProgressData categoryProgressData;
 
-
+    // For tutorialRun
+    boolean isTutorialRun = false, beforeTutorialQuestionPopup = true, endTutorialInitiated = false;
+    ValueAnimator tutorialValueAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +110,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         gameBackgroundRing.start();
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
-        Button walk = findViewById(R.id.start_walk);
+        walkBtn = findViewById(R.id.start_walk);
         jumpBtn = findViewById(R.id.start_stand);
         jumpBtn.setOnTouchListener(new ButtonTouchAnimation());
         buttonLayout = findViewById(R.id.button_fragment_layout);
@@ -158,7 +166,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     }
                     else {
                         if (!isBonus) {
-                            if(rand.nextInt(5) == 0) {
+                            // Bonus round has a  1 to 5 chance of occurring and a 0 chance after the last question
+                            if(rand.nextInt(5) == 0 && !levelManager.isLastQuestion()) {
 //                                changeGameSpeed(2.5f);
 //                                prepareAnimations("jump");
                                 Animation slideIn = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_in_bottom);
@@ -222,7 +231,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     linearValue = 0;
                 }
                 final float progress = linearValue;
-                //Log.d("TTT", (float) animation.getAnimatedValue() + "," + linearValue);
                 final float width = backgroundOne.getWidth();
                 final float translationX = width * progress;
 
@@ -232,10 +240,26 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             }
         });
 
-        walk.setOnTouchListener(new ButtonTouchAnimation());
-        walk.setOnClickListener(new View.OnClickListener() {
+        walkBtn.setOnTouchListener(new ButtonTouchAnimation());
+        walkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isTutorialRun) {
+                    player.setImageDrawable(walkingAnimation);
+                    walkingAnimation.start();
+                    tutorialValueAnimator.start();
+                    questionFragment = new QuestionFragment("1 + 1 = ?");
+                    List<String> options = new ArrayList<>();
+                    options.add("1");
+                    options.add("2");
+                    options.add("3");
+                    options.add("4");
+                    buttonsFragment = ButtonsFragment.newInstance(options);
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, BUTTONS_TAG).commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
+                }
                 if (!walkingAnimation.isRunning()) {
                     // Save Weights before game
                     weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
@@ -245,16 +269,12 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     player.setImageDrawable(walkingAnimation);
                     // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
                     timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
-//                    Log.d("TTT", timeToCrash + "");
                     countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
-
                         public void onTick(long millisUntilFinished) {
-                            //timerText.animateText((millisUntilFinished / 1000) + "");
                             // Set Clock ticking sound while count down timer
                             clockTickingRing.setVolume(1,1);
                             clockTickingRing.start();
                             timerText.setText((millisUntilFinished / 1000) + "");
-                            //Log.d("TTT","seconds remaining: " + millisUntilFinished / 1000);
                         }
 
                         public void onFinish() {
@@ -285,6 +305,238 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 jumpAnimation.start();
             }
         });
+
+
+        tutorialValueAnimator = ValueAnimator.ofFloat(0.0f, -1.0f);
+        tutorialValueAnimator.setInterpolator(new LinearInterpolator());
+        tutorialValueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        tutorialValueAnimator.setDuration((int)(10000 / gameSpeed));
+        linearValue = 0f;
+        tutorialValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                if (beforeTutorialQuestionPopup) {
+                    if (obstacle.getX() > (screenWidth - obstacle.getWidth())) {
+                        obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
+                    } else {
+                        beforeTutorialQuestionPopup = false;
+                        tutorialValueAnimator.pause();
+                        walkingAnimation.stop();
+                        FancyShowCaseView obstacleSc = new FancyShowCaseView.Builder(GamePage.this)
+                                .focusOn(obstacle)
+                                .title("You need to get over this obstacle")
+                                .build();
+                        FancyShowCaseView questionSc = new FancyShowCaseView.Builder(GamePage.this)
+                                .focusOn(questionFragment.getView())
+                                .title("By answering this question before you reach it")
+                                .build();
+                        FancyShowCaseView buttonsSc = new FancyShowCaseView.Builder(GamePage.this)
+                                .focusOn(buttonsFragment.getView()).focusShape(FocusShape.ROUNDED_RECTANGLE).roundRectRadius(90)
+                                .title("These are your answer options, try answering")
+                                .build();
+                        FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(obstacleSc).add(questionSc).add(buttonsSc);
+                        fancyShowCaseQueue.setCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete() {
+                                timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
+                                countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
+                                    public void onTick(long millisUntilFinished) {
+                                        // Set Clock ticking sound while count down timer
+                                        clockTickingRing.setVolume(1,1);
+                                        clockTickingRing.start();
+                                        timerText.setText((millisUntilFinished / 1000) + "");
+                                    }
+
+                                    public void onFinish() {
+                                        timerText.setVisibility(View.INVISIBLE);
+                                        timerText.setText("");
+                                    }
+                                };
+                                timerText.setVisibility(View.VISIBLE);
+                                countDownTimer.start();
+                                tutorialValueAnimator.resume();
+                                walkingAnimation.start();
+                            }
+                        });
+                        fancyShowCaseQueue.show();
+                    }
+                }
+                else {
+                    if (beforeQuestion) {
+                        if (obstacle.getX() > (player.getWidth() + 25)) {
+                            obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
+                        } else {
+                            // Was correct or not
+                            beforeQuestion = false;
+                            if (userAnswered) {
+                                animationResponse(userAnswer == 2);
+                                changeGameSpeed(1.5f);
+                            } else {
+                                removeQuestion();
+                                animationResponse(false);
+                            }
+                            userAnswered = false;
+                        }
+                    }
+                    else {
+                        // Until object disappears to left screen continue moving it
+                        if (obstacle.getX() > -obstacle.getWidth()) {
+                            obstacle.setX(obstacle.getX() - (3.4f * gameSpeed));
+                        }
+                        else {
+                            if (!isBonus) {
+                                tutorialValueAnimator.pause();
+                                walkingAnimation.stop();
+                                String answerResponse;
+                                if (score == 1) {
+                                    answerResponse = "Good Job! you got a point!\n";
+                                } else {
+                                    answerResponse = "That's ok, you'll get it next time!\n";
+                                }
+                                FancyShowCaseView answerSc = new FancyShowCaseView.Builder(GamePage.this)
+                                        .title(answerResponse + "Each level has 10 questions, but between questions there is a chance for a bonus round")
+                                        .dismissListener(new DismissListener() {
+                                            @Override
+                                            public void onDismiss(String s) {
+                                                Animation slideIn = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_in_bottom);
+                                                jumpBtn.startAnimation(slideIn);
+                                                jumpBtn.setVisibility(View.VISIBLE);
+                                            }
+
+                                            @Override
+                                            public void onSkipped(String s) {
+
+                                            }
+                                        }).build();
+                                FancyShowCaseView jumpSc = new FancyShowCaseView.Builder(GamePage.this)
+                                        .focusOn(jumpBtn)
+                                        .title("When this button appears it means that bonus round has started\nUse this button to jump and collect all the fruits for additional points")
+                                        .build();
+
+                                FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(answerSc).add(jumpSc);
+                                fancyShowCaseQueue.setCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete() {
+                                        tutorialValueAnimator.resume();
+                                        walkingAnimation.start();
+                                        // Set up bonus
+                                        objectHeight = obstacle.getY() + 100;
+                                        isBonus = true;
+                                        collectable = new ImageView(GamePage.this);
+                                        collectable.setImageResource(collectableImages[rand.nextInt(10)]);
+                                        collectable.setScaleType(ImageView.ScaleType.FIT_XY);
+                                        ViewGroup.LayoutParams coinParams = new ViewGroup.LayoutParams(60, 80);
+                                        collectable.setLayoutParams(coinParams);
+                                        rootLayout.addView(collectable);
+                                        collectable.setX(screenWidth);
+                                        collectable.setY(objectHeight - rand.nextInt(191));
+                                        collectable.setDrawingCacheEnabled(true);
+                                        collectablesAmount = 0;
+                                    }
+                                });
+                                fancyShowCaseQueue.show();
+                            }
+                            else {
+                                if (collectable.getX() > -collectable.getWidth()) {
+                                    if (checkCollision()) {
+                                        score++;
+                                        scoreText.setText("Score : " + score);
+                                        new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
+                                                .setSpeedRange(0.2f, 0.5f)
+                                                .oneShot(scoreText, 100);
+                                        collectable.setX(-collectable.getWidth());
+                                    } else {
+                                        collectable.setX(collectable.getX() - (3.4f * gameSpeed));
+                                    }
+                                } else {
+                                    collectablesAmount++;
+                                    if (collectablesAmount < 3) {
+                                        collectable.setY(objectHeight - rand.nextInt(191));
+                                        collectable.setImageResource(collectableImages[rand.nextInt(10)]);
+                                        collectable.setX(screenWidth);
+                                    }
+                                    else {
+                                        if (!endTutorialInitiated) {
+                                            endTutorialInitiated = true;
+                                            new Handler().postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    isBonus = false;
+                                                    Animation slideOut = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_out_bottom);
+                                                    if (jumpBtn.getVisibility() != View.GONE) {
+                                                        jumpBtn.startAnimation(slideOut);
+                                                        jumpBtn.setVisibility(View.GONE);
+                                                    }
+                                                    tutorialValueAnimator.pause();
+                                                    walkingAnimation.stop();
+                                                    new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
+                                                            .setSpeedRange(0.2f, 0.5f)
+                                                            .oneShot(scoreText, 100);
+                                                    new FancyShowCaseView.Builder(GamePage.this)
+                                                            .title("That's all you need to know, happy gaming!")
+                                                            .dismissListener(new DismissListener() {
+                                                                @Override
+                                                                public void onDismiss(String s) {
+                                                                    finish();
+                                                                }
+
+                                                                @Override
+                                                                public void onSkipped(String s) {
+
+                                                                }
+                                                            }).build().show();
+                                                }
+                                            }, 2000);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                linearValue -= valueDelta;
+                if (linearValue < -1) {
+                    linearValue = 0;
+                }
+                final float progress = linearValue;
+                final float width = backgroundOne.getWidth();
+                final float translationX = width * progress;
+
+                // Moving background
+                backgroundOne.setTranslationX(translationX);
+                backgroundTwo.setTranslationX(translationX + width);
+            }
+        });
+
+        if (getIntent().hasExtra("tutorial")) {
+            tutorialRun();
+        }
+    }
+
+    private void tutorialRun() {
+        isTutorialRun = true;
+        FancyShowCaseView playerSc = new FancyShowCaseView.Builder(GamePage.this)
+                .focusOn(player)
+                .title("This is you, your goal is to get through the level with the highest score")
+                .build();
+        FancyShowCaseView noFocusSc = new FancyShowCaseView.Builder(GamePage.this)
+                .title("You get points by answering questions and going through obstacles")
+                .build();
+        FancyShowCaseView scoreSc = new FancyShowCaseView.Builder(GamePage.this)
+                .focusOn(scoreText)
+                .title("Your score is displayed here")
+                .build();
+        FancyShowCaseView clockSc = new FancyShowCaseView.Builder(GamePage.this)
+                .focusOn(findViewById(R.id.timer_image))
+                .title("This timer will display the time left to answer")
+                .build();
+        FancyShowCaseView startSc = new FancyShowCaseView.Builder(GamePage.this)
+                .focusOn(walkBtn)
+                .title("Start by pressing this button")
+                .build();
+        FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(playerSc).add(noFocusSc).add(scoreSc).add(clockSc).add(startSc);
+        fancyShowCaseQueue.show();
     }
 
     private void prepareAnimations(String animation) {
@@ -402,7 +654,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             valueAnimator.pause();
             endLevelAndCheckResults();
         }
-        //Log.d("TTT", timeToCrash + "");
     }
 
     private void endLevelAndCheckResults() {
@@ -453,10 +704,12 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     }
 
     public void animationResponse(boolean wasCorrect) {
-        // Uncomment|Comment this part to toggle learning mode
-        // If weights weren't updated then there was no user improvement
-//        if (!levelManager.updateWeightsFromUserAnswer(wasCorrect)) {
+        //Uncomment|Comment this part to toggle learning mode
+        //If weights weren't updated then there was no user improvement
+//        if (!isTutorialRun) {
+//            if (!levelManager.updateWeightsFromUserAnswer(wasCorrect)) {
 //
+//            }
 //        }
         if (wasCorrect) {
             correctRing.start();
@@ -470,58 +723,37 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             wrongRing.start();
         }
 
-        // Response for every obstacle but the door
-        if (test != 3) {
-            if (wasCorrect) {
-                // Change jump height for banana and rock
-                if (test != 2) {
-                    objectHeight = obstacle.getY() + 200;
-                }
-                else {
-                    objectHeight = obstacle.getY() + 100;
-                }
-                player.setImageDrawable(jumpAnimation);
-                jumpAnimation.start();
+        if (wasCorrect) {
+            // Change jump height for banana and rock
+            if (test != 2) {
+                objectHeight = obstacle.getY() + 200;
             }
             else {
-                player.setImageDrawable(fallingAnimation);
-                fallingAnimation.start();
+                objectHeight = obstacle.getY() + 100;
             }
+            player.setImageDrawable(jumpAnimation);
+            jumpAnimation.start();
         }
-        // Door response
         else {
-            if (wasCorrect) {
-                //Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
-                obstacle.setImageResource(R.drawable.open_door);
-            }
-            else {
-                //Toast.makeText(this, "Wrong Answer", Toast.LENGTH_SHORT).show();
-            }
-            walkingAnimation.start();
+            player.setImageDrawable(fallingAnimation);
+            fallingAnimation.start();
         }
     }
 
     public void showQuestion() {
         questionFragment = new QuestionFragment(levelManager.getCurrentQuestion());
 
-        if (test != 3) {
-            int options = 4;
-            boolean useTwoAnswers = rand.nextBoolean();
-            if (useTwoAnswers) {
-                options = 2;
-            }
-            buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(options));
+        int options = 4;
+        boolean useTwoAnswers = rand.nextBoolean();
+        if (useTwoAnswers) {
+            options = 2;
         }
-        // Door question
-        else {
-            buttonsFragment = ButtonsFragment.newInstance(null);
-        }
+        buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(options));
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, BUTTONS_TAG).commit();
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
-
     }
     public void removeQuestion() {
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(questionFragment)
@@ -657,6 +889,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             }
         }
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
 
