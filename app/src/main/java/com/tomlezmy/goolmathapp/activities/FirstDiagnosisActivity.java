@@ -2,12 +2,16 @@ package com.tomlezmy.goolmathapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,7 @@ import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class FirstDiagnosisActivity extends AppCompatActivity implements Button.OnClickListener{
@@ -48,13 +53,62 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
     List<Integer> levels;
     List<Integer> probabilityTableIndexes;
 
+    // For user instruction
+    TextView tv_welcome;
+    TextView tv_instruction;
+    TextView tv_right_answers;
+    TextView tv_wrong_answers;
+    TextView tvFinished;
+    TextView tv_funBegins;
+    TextView tv_goodLuck;
+    Button btn_letsGo;
+    Button btn_goToMenu;
+    LinearLayout buttons_layout;
+
+    // For result
+    int rightAnswerCount;
+    int wrongAnswerCount;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_diagnosis);
+
+        tv_welcome = findViewById(R.id.welcome_tv);
+        tv_instruction = findViewById(R.id.tv_instruction);
+        tv_right_answers = findViewById(R.id.tv_right_answers);
+        tv_wrong_answers = findViewById(R.id.tv_wrong_answers);
+        tvFinished = findViewById(R.id.tv_quiz_finished);
+        tv_funBegins = findViewById(R.id.tv_fun_begins);
+        tv_goodLuck = findViewById(R.id.tv_good_luck);
+
+
+        Resources res = getResources();
+        String username =  getIntent().getStringExtra("first_name");
+        String text = String.format(res.getString(R.string.first_diagnostic_instructions), username);
+        tv_instruction.setText(text);
+
+        btn_letsGo = findViewById(R.id.btn_lets_go);
+        btn_goToMenu = findViewById(R.id.btn_go_to_menue);
+        buttons_layout= findViewById(R.id.buttons_layout);
+
         rand = new Random();
         questionText = findViewById(R.id.question_text);
         buttons = new Button[4];
+
+
+        btn_letsGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_letsGo.setVisibility(View.GONE);
+                tv_welcome.setVisibility(View.GONE);
+                tv_goodLuck.setVisibility(View.GONE);
+                tv_instruction.setVisibility(View.GONE);
+                questionText.setVisibility(View.VISIBLE);
+                buttons_layout.setVisibility(View.VISIBLE);
+            }
+        });
         buttons[0] = findViewById(R.id.btn_answer_1);
         buttons[0].setOnTouchListener(new ButtonTouchAnimation());
         buttons[0].setOnClickListener(this);
@@ -72,6 +126,8 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
 
         buildQuestionsRepository((Calendar.getInstance().get(Calendar.YEAR) - getIntent().getIntExtra("birth_year",0) > 10));
 
+        rightAnswerCount = 0;
+        wrongAnswerCount = 0;
         nextQuestion(true);
     }
 
@@ -100,11 +156,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
             questionText.setText(currentQuestion);
         }
         else {
-            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-            fileManager.createNewUserDataFile(getIntent().getStringExtra("first_name"),getIntent().getStringExtra("last_name"),getIntent().getIntExtra("birth_year",0));
-            Intent intent = new Intent(FirstDiagnosisActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            showDiagnosisResults();
         }
     }
 
@@ -150,12 +202,12 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
     public void onClick(View v) {
         if (((Button)v).getText().toString().equals(currentAnswer)) {
             // Correct
-            Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+            rightAnswerCount++;
             nextQuestion(true);
         }
         else {
             // False
-            Toast.makeText(this, "False", Toast.LENGTH_SHORT).show();
+            wrongAnswerCount++;
             // Update relevant cell
             int subLevelWeight = fileManager.getSubLevelWeight(ECategory.values()[currentCategory],levelRepository.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), questionsProbabilityTableIndex.get(ECategory.values()[currentCategory]).get(currentQuestionIndex));
             fileManager.updateSubLevelWeight(ECategory.values()[currentCategory], levelRepository.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), questionsProbabilityTableIndex.get(ECategory.values()[currentCategory]).get(currentQuestionIndex), ++subLevelWeight);
@@ -357,4 +409,35 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         probabilityTableIndexes.add(probabilityIndex);
         levels.add(level);
     }
+
+    void showDiagnosisResults() {
+        Resources res = getResources();
+        String rightAnswerMsg;
+        String wrongAnswerMsg;
+        buttons_layout.setVisibility(View.GONE);
+        questionText.setVisibility(View.GONE);
+
+        tvFinished.setVisibility(View.VISIBLE);
+
+        rightAnswerMsg = String.format(res.getString(R.string.msg_right_answer), rightAnswerCount);
+        tv_right_answers.setText(rightAnswerMsg);
+
+        wrongAnswerMsg = String.format(res.getString(R.string.msg_wrong_answer), wrongAnswerCount);
+        tv_wrong_answers.setText(wrongAnswerMsg);
+
+        tv_right_answers.setVisibility(View.VISIBLE);
+        tv_wrong_answers.setVisibility(View.VISIBLE);
+        tv_funBegins.setVisibility(View.VISIBLE);
+        btn_goToMenu.setVisibility(View.VISIBLE);
+        btn_goToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fileManager.createNewUserDataFile(getIntent().getStringExtra("first_name"),getIntent().getStringExtra("last_name"),getIntent().getIntExtra("birth_year",0));
+                Intent intent = new Intent(FirstDiagnosisActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
 }

@@ -20,4 +20,8 @@
         <item name="android:fontFamily">@font/sourcesanspro_bold</item>
     </style>
 
+    <style name="FontNumbers">
+        <item name="android:fontFamily">@font/ganclm</item>
+    </style>
+
 </resources>

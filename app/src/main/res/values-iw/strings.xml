@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">לימוד חשבון מהבסיס</string>
+    <string name="app_name">חשבכיף</string>
     <string name="practice_btn_txt">אימון</string>
     <string name="learn_btn_txt">לימוד</string>
     <string name="progress_btn_txt">התקדמות</string>
@@ -20,6 +20,29 @@
     <string name="subtraction_category_txt">חיסור</string>
     <string name="titleSubSubjectsDialog">בחר בתת נושא אחד</string>
     <string name="btn_start_game_txt">התחל לשחק</string>
+    <string name="to_the_menu">למעבר לתפריט</string>
+    <string name="msg_right_answer">יפה מאוד! ענית נכון על %1d שאלות</string>
+    <string name="msg_wrong_answer">טעית ב %1d שאלות</string>
+    <string name="msg_diagnosis_finished">זהו, סיימנו...</string>
+    <string name="msg_now_can_start">עכשיו כל הכיף מתחיל!</string>
+    <string name="good_luck_txt">בהצלחה</string>
+
+    <string name="first_diagnostic_instructions">
+שלום %1$s, ברוכים הבאים לאפליקציית חשבכיף! לפני שנתחיל נרצה לעבור איתך על כמה שאלות, השאלון יקח מספר דקות (אי אפשר לצאת בזמן השאלון אחרת המידע ימחק)
+
+
+<!--        שלום "שם משתמש",\n-->
+<!--        ברוכים הבאים לאפליקציית "חשבכיף"!-->
+<!--        \n-->
+<!--        לפני שנתחיל, נשמח לעבור איתך על כמה שאלות,-->
+<!--        \n-->
+<!--        השאלון יקח מספר דקות-->
+<!--        \n-->
+<!--        (אי אפשר לצאת בזמן השאלון אחרת המידע ימחק)-->
+
+    </string>
+
+
 
     <string-array name="practice_additionSubCategories">
         <item>חיבור מספרים חד ספרתיים</item>
@@ -133,6 +156,8 @@
     <string name="start_again_txt">התחל מחדש</string>
     <string name="level_finished_txt">השלב הסתיים, כל הכבוד!</string>
     <string name="you_can_do_better_txt">אין ספק שתוכל להשתפר!</string>
+    <string name="btn_cool_lets_go">קדימה, בואו נתחיל</string>
+    <string name="txt_welcome">ברוכים הבאים</string>
 
 
 </resources>
