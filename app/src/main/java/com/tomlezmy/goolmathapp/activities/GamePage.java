@@ -513,18 +513,18 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         isTutorialRun = true;
         FancyShowCaseView playerSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(player)
-                .title("This is you, your goal is to get through the level with the highest score")
+                .title(getString(R.string.tutorial_show_player))
                 .build();
         FancyShowCaseView noFocusSc = new FancyShowCaseView.Builder(GamePage.this)
-                .title("You get points by answering questions and going through obstacles")
+                .title(getString(R.string.tutorial_game_objective))
                 .build();
         FancyShowCaseView scoreSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(scoreText)
-                .title("Your score is displayed here")
+                .title(getString(R.string.tutorial_score))
                 .build();
         FancyShowCaseView clockSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(findViewById(R.id.timer_image))
-                .title("This timer will display the time left to answer")
+                .title(getString(R.string.tutorial_timer))
                 .build();
         FancyShowCaseView startSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(walkBtn)
