@@ -34,14 +34,13 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
-//            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.kalam_regular);
             this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.shortstack_regular);
-            tvQuestion_hanks.setTextSize(35f);
+            tvQuestion_hanks.setTextSize(33f);
         }
         else {
             this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.motek);
-            tvQuestion_hanks.setTextSize(70f);
-            tvQuestion_hanks.setPadding(20,20,20,20);
+            tvQuestion_hanks.setTextSize(65f);
+            tvQuestion_hanks.setPadding(10,10,10,10);
         }
 
         secondTitle = getResources().getString(R.string.title_practice_sub_categores_option2);
@@ -53,7 +52,7 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
     }
 
     public void displaySubjects() {
-        int cardColorId = ContextCompat.getColor(this, R.color.blue_card_option2);
+        int cardColorId = ContextCompat.getColor(this, R.color.blue_card_option3);
         int titleColorId = ContextCompat.getColor(this, R.color.blue_title);
         subjectsFragment = new SubjectsFragment(cardColorId,titleColorId,false);
         getSupportFragmentManager().beginTransaction()
@@ -62,12 +61,7 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
 
     @Override
     public void onSelectedSubCategory(int categoryId) {
-        //Toast.makeText(this, "categoryId=" + " "  + categoryId + " " + "subCategory=" + subCategoryId, Toast.LENGTH_LONG).show();
         this.categorySelected = categoryId;
-//        Intent intent = new Intent(this, GamePage.class);
-//        intent.putExtra("category", this.categorySelected);
-//        intent.putExtra("level", this.subCategorySelected + 1);
-//        startActivity(intent);
     }
 
     @Override

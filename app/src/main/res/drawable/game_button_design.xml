@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners
@@ -11,12 +13,27 @@
         android:top="5dp"
         android:right="5dp"
         android:bottom="5dp" />
-<!--    <size-->
-<!--        android:width="125dp"-->
-<!--        android:height="125dp" />-->
-
     <stroke
         android:width="3dp"
         android:color="@color/colorOrangeRedBtnStoke"/>
-
 </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <corners
+                android:radius="10dp" />
+            <gradient android:angle="45"
+                android:startColor="@color/colorOrangeRedBtnStoke"
+                android:endColor="@color/colorOrangeRedBtnStoke"/>
+            <padding
+                android:left="5dp"
+                android:top="5dp"
+                android:right="5dp"
+                android:bottom="5dp" />
+            <stroke
+                android:width="3dp"
+                android:color="@color/colorOrangeRedBtn"/>
+        </shape>
+    </item>
+</selector>

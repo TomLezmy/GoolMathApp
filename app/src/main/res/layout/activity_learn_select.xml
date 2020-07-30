@@ -42,15 +42,14 @@
         <com.hanks.htextview.typer.TyperTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:padding="10dp"
             android:layout_gravity="start"
             android:text="@string/title_learn_sub_categories_option2"
             app:charIncrease="1"
             android:textColor="@color/green_title_dark"
             android:gravity="center"
             app:typerSpeed="90"
-            android:id="@+id/tv_hanks"
-            />
+            android:id="@+id/tv_hanks" />
 </LinearLayout>
 
     <!--    The Subjects Fragment Will be here-->
