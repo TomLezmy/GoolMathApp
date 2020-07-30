@@ -133,8 +133,8 @@
     <string name="ok_txt">OK</string>
     <string name="title_learn_sub_categories">Choose a topic that you would like to learn!</string>
     <string name="title_practice_sub_categories">Choose a topic that you would like to practice!</string>
-    <string name="title_learn_sub_categories_option2">What are we going to learn?</string>
-    <string name="title_practice_sub_categores_option2">What are we going to practice?</string>
+    <string name="title_learn_sub_categories_option2">What are we going to learn today?</string>
+    <string name="title_practice_sub_categores_option2">What are we going to practice today?</string>
     <string name="game_over_txt">Game Over</string>
     <string name="next_level_txt">Next Level</string>
     <string name="successfully_finished_the_level_txt">Successfully finished the level,\ngood job!</string>
