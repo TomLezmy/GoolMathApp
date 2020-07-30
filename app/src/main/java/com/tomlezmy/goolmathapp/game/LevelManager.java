@@ -80,6 +80,10 @@ public class LevelManager {
         return currentQuestion <= numberOfQuestions;
     }
 
+    public boolean isLastQuestion() {
+        return currentQuestion == numberOfQuestions - 1;
+    }
+
     @Nullable
     public List<String> getCurrentQuestionOptions(int numOfOptions) {
         return LimitFactory.createQuestionOptions(levelCategory, level, numOfOptions, questions.get(currentQuestion - 1));
