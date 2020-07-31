@@ -59,39 +59,38 @@
     </string-array>
 
     <string-array name="practice_fractionsSubCategories">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Level 3</item>
-        <item>Level 4</item>
-        <item>Level 5</item>
-        <item>Level 6</item>
-        <item>Level 7</item>
-        <item>Level 8</item>
-        <item>Level 9</item>
-        <item>Level 10</item>
-        <item>Level 11</item>
-        <item>Level 12</item>
-
+        <item>Fractions Expansion – Part1</item>
+        <item>Fractions Expansion – Part2</item>
+        <item>Fractions Reduction – Part1</item>
+        <item>Fractions Reduction – Part 2</item>
+        <item>Fractions Expansion – Single And Double Digits Numbers</item>
+        <item>Fractions  Reduction  – Single And Double Digits Numbers</item>
+        <item>Addition And Subtraction Of Fractions - Prime Denominator</item>
+        <item>Addition And Subtraction Of Fractions - Single-Digit Denominator</item>
+        <item>Addition And Subtraction Of Fractions - Double-Digit Denominator</item>
+        <item>Multiplication Of Fractions - Prime Denominator</item>
+        <item>Multiplication Of Fractions - Single-Digit Denominator Part 1</item>
+        <item>Multiplication Of Fractions - Single-Digit Denominator Part 2</item>
     </string-array>
 
     <string-array name="practice_percentsSubCategories">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Level 3</item>
-        <item>Level 4</item>
-        <item>Level 5</item>
-        <item>Level 6</item>
-        <item>Level 7</item>
-        <item>Level 8</item>
+        <item>Ejecting 1% From a Number</item>
+        <item>Ejecting 10% From a Number</item>
+        <item>Ejecting 50% From a Number</item>
+        <item>Easy Percentages – Part 1</item>
+        <item>Easy Percentages – Part 2</item>
+        <item>Percent In General</item>
+        <item>Percent In GeneraL - Part 1</item>
+        <item>Percent In GeneraL - Part 2</item>
     </string-array>
 
     <string-array name="practice_decimalsSubCategories">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Level 3</item>
-        <item>Level 4</item>
-        <item>Level 5</item>
-        <item>Level 6</item>
+        <item>From Percentage To Decimal Fraction – Part 1</item>
+        <item>From Percentage To Decimal Fraction – Part 1</item>
+        <item>From Percentage To Decimal Fraction – Part 3</item>
+        <item>From Percentage To Decimal Fraction – Part 4</item>
+        <item>From Standard Fraction To Decimal Fraction</item>
+        <item>From Percentage To Fractions</item>
     </string-array>
 
 

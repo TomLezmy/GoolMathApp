@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_margin="5dp">
+        android:layout_marginTop="5dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:text="@string/you_played_x_times"
             style="@style/FontLocalized"
             android:textSize="15sp"
-            android:padding="10dp"
+            android:padding="5dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:id="@+id/tv_times_played"/>
@@ -48,7 +48,6 @@
             android:text="@string/your_high_score_is_x"
             style="@style/FontLocalized"
             android:textSize="15sp"
-            android:padding="10dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:id="@+id/tv_highScore"/>

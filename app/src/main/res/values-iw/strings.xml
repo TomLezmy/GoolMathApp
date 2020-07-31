@@ -61,39 +61,38 @@
     </string-array>
 
     <string-array name="practice_fractionsSubCategories">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Level 3</item>
-        <item>Level 4</item>
-        <item>Level 5</item>
-        <item>Level 6</item>
-        <item>Level 7</item>
-        <item>Level 8</item>
-        <item>Level 9</item>
-        <item>Level 10</item>
-        <item>Level 11</item>
-        <item>Level 12</item>
-        <item>Level 13</item>
+        <item>הרחבת שברים – חלק 1</item>
+        <item>הרחבת שברים – חלק 2</item>
+        <item>צמצום שברים – חלק 1</item>
+        <item>צמצום שברים – חלק 2</item>
+        <item>הרחבת שברים עם מספרים חד ספרתיים ודו ספרתיים</item>
+        <item>צמצום שברים עם מספרים חד ספרתיים ודו ספרתיים</item>
+        <item>חיבור וחיסור שברים עם מכנה מספר ראשוני</item>
+        <item>חיבור וחיסור שברים עם מכנה חד ספרתי</item>
+        <item>חיבור וחיסור שברים עם מכנה דו ספרתי</item>
+        <item>כפל שברים עם מכנה שהוא מספר ראשוני</item>
+        <item>כפל שברים עם מכנה חד ספרתי – חלק 1</item>
+        <item>כפל שברים עם מכנה חד ספרתי – חלק 2</item>
     </string-array>
 
     <string-array name="practice_percentsSubCategories">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Level 3</item>
-        <item>Level 4</item>
-        <item>Level 5</item>
-        <item>Level 6</item>
-        <item>Level 7</item>
-        <item>Level 8</item>
+        <item>הוצאת 1% ממספר</item>
+        <item>הוצאת 10% ממספר</item>
+        <item>הוצאת 50% ממספר</item>
+        <item>אחוזים קלים – חלק 1</item>
+        <item>אחוזים קלים – חלק 2</item>
+        <item>אחוזים בכללי</item>
+        <item>אחוזים עגולים מעל 100 - חלק 1</item>
+        <item>אחוזים עגולים מעל 100 - חלק 2</item>
     </string-array>
 
     <string-array name="practice_decimalsSubCategories">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Level 3</item>
-        <item>Level 4</item>
-        <item>Level 5</item>
-        <item>Level 6</item>
+        <item>מעבר מאחוזים לשבר עשרוני – חלק 1</item>
+        <item>מעבר מאחוזים לשבר עשרוני – חלק 2</item>
+        <item>מעבר מאחוזים לשבר עשרוני – חלק 3</item>
+        <item>מעבר מאחוזים לשבר עשרוני – חלק 4</item>
+        <item>מעבר משבר רגיל לשבר עשרוני</item>
+        <item>מעבר מאחוזים לשברים</item>
     </string-array>
 
 
