@@ -40,9 +40,7 @@
     <color name="green_sub_title_option2">#c9ecd1</color>
     <color name="disabled_card">#DEE7ED</color>
     <color name="red">#FF3D00</color>
-
-
-
     <color name="blue_title">#63A5D1</color>
+    <color name="progress_title">#ce2158</color>
 
 </resources>

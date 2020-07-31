@@ -1,5 +1,5 @@
 <androidx.cardview.widget.CardView android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="180dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:foreground="?android:attr/selectableItemBackground"
@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_margin="5dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -35,8 +36,8 @@
             android:layout_height="wrap_content"
             android:text="@string/you_played_x_times"
             style="@style/FontLocalized"
-            android:textSize="18sp"
-            android:padding="5dp"
+            android:textSize="15sp"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:id="@+id/tv_times_played"/>
@@ -46,8 +47,8 @@
             android:layout_height="wrap_content"
             android:text="@string/your_high_score_is_x"
             style="@style/FontLocalized"
-            android:textSize="22sp"
-            android:padding="5dp"
+            android:textSize="15sp"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:id="@+id/tv_highScore"/>

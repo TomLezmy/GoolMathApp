@@ -23,54 +23,16 @@ import java.util.List;
 
 public class ProgressActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     ViewPager viewPager;
-    ProgressResultsAdapter progressPagerAdapter;
-    ArrayList<ProgressResult> progressResultList;
-    FileManager fileManager;
-    ECategory category;
-    UserData userData;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
         viewPager = findViewById(R.id.view_pager);
+        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(new ProgressPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
-
-//        recyclerView = findViewById(R.id.recycler);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        // Build the List
-//        progressResultList = new ArrayList<>();
-//        progressResultList.add(new ProgressResult("test levl 1", 3,15));
-//        progressResultList.add(new ProgressResult("test levl 2", 2,10));
-//
-//
-//        progressPagerAdapter = new ProgressResultsAdapter(progressResultList, this);
-//        recyclerView.setAdapter(progressPagerAdapter);
     }
-
-
-//    void buildProgressResultList() {
-//
-//        this.fileManager = FileManager.getInstance(this);
-//        this.category = ECategory.values()[getArguments().getInt("category")];
-//        this.userData = fileManager.getUserData();
-//
-//        userData.getLevelsProgressData().get(category).get(i).getTimesPlayed()
-//
-//        getResources().getStringArray(stringArrays[getArguments().getInt("category")])[i]
-//
-//        userData.getLevelsProgressData().get(category).get(i).getMaxScore()
-//
-//
-//
-//        categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
-//        categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);
-//
-//         for Adding category
-//
-//    }
 }
