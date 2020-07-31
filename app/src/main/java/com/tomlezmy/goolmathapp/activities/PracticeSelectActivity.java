@@ -3,6 +3,8 @@ package com.tomlezmy.goolmathapp.activities;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +31,16 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_select);
-        this.tvQuestion_hanks = (HTextView) findViewById(R.id.tv_hanks);
 
+        ImageView settings = findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PracticeSelectActivity.this, SettingsActivity.class));
+            }
+        });
+
+        this.tvQuestion_hanks = (HTextView) findViewById(R.id.tv_hanks);
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {

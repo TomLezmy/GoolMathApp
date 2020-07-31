@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,15 @@ public class LearnActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_learn);
+
+            ImageView settings = findViewById(R.id.settings);
+            settings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(LearnActivity.this, SettingsActivity.class));
+                }
+            });
+
             youTubePlayerView = findViewById(R.id.video_view);
             videoId = EVideoIds.values()[getIntent().getIntExtra("category",0)].getVideoId(getIntent().getIntExtra("sub_category",0));
 

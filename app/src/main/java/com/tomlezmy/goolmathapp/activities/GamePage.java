@@ -3,6 +3,7 @@ package com.tomlezmy.goolmathapp.activities;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -11,6 +12,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +81,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     FileManager fileManager;
     List<Integer> weightsBeforeGame;
     CategoryProgressData categoryProgressData;
+    SharedPreferences sharedPreferences;
 
     // For Tutorial Run
     boolean isTutorialRun = false, beforeTutorialQuestionPopup = true, endTutorialInitiated = false;
@@ -89,6 +92,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fileManager = FileManager.getInstance(this);
         changeGameSpeed(1.5f);
         //  Set background sound
@@ -98,6 +102,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         wrongRing = MediaPlayer.create(GamePage.this,R.raw.wrong_answer);
         wrongRing.setVolume(0.4f, 0.4f);
         gameBackgroundRing.setVolume(0.5f,0.5f);
+        gameBackgroundRing.setLooping(true);
         gameBackgroundRing.start();
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
@@ -159,14 +164,14 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         if (!isBonus) {
                             // Bonus round has a  1 to 5 chance of occurring and a 0 chance after the last question
                             if(rand.nextInt(5) == 0 && !levelManager.isLastQuestion()) {
+                                isBonus = true;
 //                                changeGameSpeed(2.5f);
-//                                prepareAnimations("jump");
+                                prepareAnimations("jump");
                                 Animation slideIn = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_in_bottom);
                                 jumpBtn.startAnimation(slideIn);
                                 jumpBtn.setVisibility(View.VISIBLE);
                                 // Change jump height
                                 objectHeight = obstacle.getY() + 100;
-                                isBonus = true;
                                 collectable = new ImageView(GamePage.this);
                                 collectable.setImageResource(collectableImages[rand.nextInt(10)]);
                                 collectable.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -204,7 +209,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                 else {
                                     isBonus = false;
 //                                    changeGameSpeed(1.5f);
-//                                    prepareAnimations("jump");
+                                    prepareAnimations("jump");
                                     Animation slideOut = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_out_bottom);
                                     if (jumpBtn.getVisibility() != View.GONE) {
                                         jumpBtn.startAnimation(slideOut);
@@ -268,7 +273,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                             public void onTick(long millisUntilFinished) {
                                 // Set Clock ticking sound while count down timer
                                 clockTickingRing.setVolume(1, 1);
-                                clockTickingRing.start();
+                                playSound(clockTickingRing);
                                 timerText.setText((millisUntilFinished / 1000) + "");
                             }
 
@@ -287,6 +292,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         }
                         levelManager.generateQuestions();
                         showQuestion();
+                        walkBtn.setVisibility(View.GONE);
                     }
                 }
             }
@@ -319,15 +325,15 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         walkingAnimation.stop();
                         FancyShowCaseView obstacleSc = new FancyShowCaseView.Builder(GamePage.this)
                                 .focusOn(obstacle)
-                                .title("You need to get over this obstacle")
+                                .title(getString(R.string.tutorial_obstacle))
                                 .build();
                         FancyShowCaseView questionSc = new FancyShowCaseView.Builder(GamePage.this)
                                 .focusOn(questionFragment.getView())
-                                .title("By answering this question before you reach it")
+                                .title(getString(R.string.tutorial_question))
                                 .build();
                         FancyShowCaseView buttonsSc = new FancyShowCaseView.Builder(GamePage.this)
                                 .focusOn(buttonsFragment.getView()).focusShape(FocusShape.ROUNDED_RECTANGLE).roundRectRadius(90)
-                                .title("These are your answer options, try answering")
+                                .title(getString(R.string.tutorial_options))
                                 .build();
                         FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(obstacleSc).add(questionSc).add(buttonsSc);
                         fancyShowCaseQueue.setCompleteListener(new OnCompleteListener() {
@@ -338,7 +344,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                     public void onTick(long millisUntilFinished) {
                                         // Set Clock ticking sound while count down timer
                                         clockTickingRing.setVolume(1,1);
-                                        clockTickingRing.start();
+                                        playSound(clockTickingRing);
                                         timerText.setText((millisUntilFinished / 1000) + "");
                                     }
 
@@ -384,12 +390,12 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                 walkingAnimation.stop();
                                 String answerResponse;
                                 if (score == 1) {
-                                    answerResponse = "Good Job! you got a point!\n";
+                                    answerResponse = getString(R.string.tutorial_correct_answer) + "\n";
                                 } else {
-                                    answerResponse = "That's ok, you'll get it next time!\n";
+                                    answerResponse = getString(R.string.tutorial_wrong_answer) + "\n";
                                 }
                                 FancyShowCaseView answerSc = new FancyShowCaseView.Builder(GamePage.this)
-                                        .title(answerResponse + "Each level has 10 questions, but between questions there is a chance for a bonus round")
+                                        .title(answerResponse + getString(R.string.tutorial_number_of_levels))
                                         .dismissListener(new DismissListener() {
                                             @Override
                                             public void onDismiss(String s) {
@@ -405,7 +411,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                         }).build();
                                 FancyShowCaseView jumpSc = new FancyShowCaseView.Builder(GamePage.this)
                                         .focusOn(jumpBtn)
-                                        .title("When this button appears it means that bonus round has started\nUse this button to jump and collect all the fruits for additional points")
+                                        .title(getString(R.string.tutorial_jump_button) + "\n" + getString(R.string.tutorial_bonus))
                                         .build();
 
                                 FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(answerSc).add(jumpSc);
@@ -468,7 +474,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                                             .setSpeedRange(0.2f, 0.5f)
                                                             .oneShot(scoreText, 100);
                                                     new FancyShowCaseView.Builder(GamePage.this)
-                                                            .title("That's all you need to know, happy gaming!")
+                                                            .title(getString(R.string.tutorial_end))
                                                             .dismissListener(new DismissListener() {
                                                                 @Override
                                                                 public void onDismiss(String s) {
@@ -528,7 +534,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 .build();
         FancyShowCaseView startSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(walkBtn)
-                .title("Start by pressing this button")
+                .title(getString(R.string.tutorial_start_button))
                 .build();
         FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(playerSc).add(noFocusSc).add(scoreSc).add(clockSc).add(startSc);
         fancyShowCaseQueue.show();
@@ -538,15 +544,26 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         switch (animation) {
             case "jump":
                 AnimationDrawable jump = new AnimationDrawable();
-                jump.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good2, null), (int)(200 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good3, null), (int)(200 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good4, null), (int)(200 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good5, null), (int)(450 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good6, null), (int)(450 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good7, null), (int)(200 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good8, null), (int)(200 / gameSpeed));
-                jump.addFrame(getResources().getDrawable(R.drawable.good9, null), (int)(200 / gameSpeed));
+                if (isBonus) {
+                    jump.addFrame(getResources().getDrawable(R.drawable.good4, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good5, null), (int)(450 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good6, null), (int)(450 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good7, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good8, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good9, null), (int)(200 / gameSpeed));
+                }
+                else {
+                    jump.addFrame(getResources().getDrawable(R.drawable.good1, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good2, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good3, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good4, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good5, null), (int)(450 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good6, null), (int)(450 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good7, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good8, null), (int)(200 / gameSpeed));
+                    jump.addFrame(getResources().getDrawable(R.drawable.good9, null), (int)(200 / gameSpeed));
+
+                }
                 jumpAnimation = new CustomAnimationDrawable(jump) {
                     @Override
                     public void onAnimationFinish() {
@@ -561,7 +578,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     public void onAnimationStart() {
                         ObjectAnimator up = ObjectAnimator.ofFloat(player, "Y", objectHeight - 200);
                         up.setRepeatCount(1);
-                        up.setStartDelay((int)(700 / gameSpeed));
+                        if (!isBonus) {
+                            up.setStartDelay((int)(700 / gameSpeed));
+                        }
                         up.setRepeatMode(ValueAnimator.REVERSE);
                         up.setDuration((int)(900 / gameSpeed));
                         up.start();
@@ -677,7 +696,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 improvementCounter++;
             }
         }
-        gameFinishedFragment = new GameFinishedFragment(correctAnswerCounter == 10 && weightsAreEven, improvementCounter, deteriorationCounter, categoryProgressData);
+        boolean levelComplete = correctAnswerCounter == 10 && weightsAreEven;
+        if (levelComplete) {
+            openNextLevel();
+        }
+        gameFinishedFragment = new GameFinishedFragment(levelComplete, improvementCounter, deteriorationCounter, categoryProgressData);
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();
         new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
@@ -705,7 +728,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             levelManager.updateWeightsFromUserAnswer(wasCorrect);
         }
         if (wasCorrect) {
-            correctRing.start();
+            playSound(correctRing);
             correctAnswerCounter++;
             score++;
             scoreText.setText("Score : " + score);
@@ -714,7 +737,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     .oneShot(scoreText, 200);
         }
         else {
-            wrongRing.start();
+            playSound(wrongRing);
         }
 
         if (wasCorrect) {
@@ -796,6 +819,12 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         return false;
     }
 
+    private void playSound(MediaPlayer sound) {
+        if (sharedPreferences.getBoolean("preference_enable_sound", true)) {
+            sound.start();
+        }
+    }
+
     @Override
     protected void onPause() {
         if (valueAnimator.isRunning()) {
@@ -874,16 +903,58 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
             }
             else {
-                // TODO move outside of return because user might not pick continue
-                // Open next level if needed
-                categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
-                if (!categoryProgressData.isOpen()) {
-                    categoryProgressData.setOpen(true);
-                    fileManager.updateUserDataFile();
+                // Save Weights before game
+                weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
+                levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
+                obstacleIndex = 0;
+                obstacle.setImageResource(objectImages[obstacleIndex]);
+                player.setImageDrawable(walkingAnimation);
+                // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
+                timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f * gameSpeed) * -1 * 16.665f;
+                countDownTimer = new CountDownTimer((long) timeToCrash, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                        // Set Clock ticking sound while count down timer
+                        clockTickingRing.setVolume(1, 1);
+                        playSound(clockTickingRing);
+                        timerText.setText((millisUntilFinished / 1000) + "");
+                    }
+
+                    public void onFinish() {
+                        timerText.setVisibility(View.INVISIBLE);
+                        timerText.setText("");
+                    }
+                };
+                timerText.setVisibility(View.VISIBLE);
+                countDownTimer.start();
+                walkingAnimation.start();
+                if (valueAnimator.isPaused()) {
+                    valueAnimator.resume();
+                } else {
+                    valueAnimator.start();
                 }
+                levelManager.generateQuestions();
+                showQuestion();
             }
         }
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();
+    }
+
+    private void openNextLevel() {
+        int nextLevel = level + 1;
+        int nextCategory = category;
+        if (ECategory.values()[nextCategory].getNumberOfLevels() < nextLevel) {
+            nextLevel = 0;
+            nextCategory++;
+        }
+        // Check for last category
+        if (ECategory.values().length != nextCategory) {
+            // Open next level if needed
+            categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[nextCategory]).get(nextLevel - 1);
+            if (!categoryProgressData.isOpen()) {
+                categoryProgressData.setOpen(true);
+                fileManager.updateUserDataFile();
+            }
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
@@ -25,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         // references
+        ImageView settings = findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            }
+        });
+
         btnPractice = findViewById(R.id.btn_practice);
         btnPractice.setOnTouchListener(new ButtonTouchAnimation());
         btnPractice.setOnClickListener(new View.OnClickListener() {

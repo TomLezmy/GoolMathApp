@@ -162,6 +162,22 @@
     <string name="you_played_x_times">שיחקת %1d פעמים</string>
     <string name="your_high_score_is_x">הניקוד הגבוה שלך הוא %1d</string>
     <string name="progress_main_title">כאן תוכלו לעקוב אחר ההתקדמות שלכם</string>
+    <string name="tutorial_start_button">התחילו בלחיצה על הכפתור הזה</string>
+    <string name="tutorial_obstacle">אתם צריכים לעבור את המכשול הזה</string>
+    <string name="tutorial_question">על ידי פתרון השאלה הזאת לפני שתגיעו למכשול</string>
+    <string name="tutorial_options">אלא הפתרונות האפשריים, תנסו לענות</string>
+    <string name="tutorial_correct_answer">עבודה טובה! השגתם נקודה!</string>
+    <string name="tutorial_wrong_answer">לא נורא, תצליחו פעם הבאה</string>
+    <string name="tutorial_number_of_levels">בכל שלב יש עשר שאלות, אבל בין שאלות יש סיכוי לבונוס</string>
+    <string name="tutorial_jump_button">כשהכפתור הזה מופיע זה אומר שבונוס התחיל</string>
+    <string name="tutorial_bonus">השתמשו בכפתור זה בשביל לקפוץ ולאסוף את כל הפירות בשביל ניקוד נוסף</string>
+    <string name="tutorial_end">זה כל מה שאתם צריכים לדעת, משחק מהנה!</string>
+    <string name="settings_sound_title">צלילים</string>
+    <string name="settings_sound_summary">אפשרו צלילים</string>
+    <string name="settings_first_name_title">שם פרטי</string>
+    <string name="settings_first_name_summary">שנו שם פרטי</string>
+    <string name="settings_last_name_title">שם משפחה</string>
+    <string name="settings_last_name_summary">שנו שם משפחה</string>
 
 
 </resources>

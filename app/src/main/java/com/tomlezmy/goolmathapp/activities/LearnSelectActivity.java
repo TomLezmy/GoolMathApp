@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.hanks.htextview.base.HTextView;
 import com.tomlezmy.goolmathapp.R;
@@ -31,8 +33,15 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn_select);
 
-        this.tvQuestion_hanks = (HTextView) findViewById(R.id.tv_hanks);
+        ImageView settings = findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LearnSelectActivity.this, SettingsActivity.class));
+            }
+        });
 
+        this.tvQuestion_hanks = (HTextView) findViewById(R.id.tv_hanks);
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
@@ -50,14 +59,7 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
         tvQuestion_hanks.setTypeface(this.typeface, Typeface.BOLD);
         tvQuestion_hanks.animateText(secondTitle);
 
-
-
-
-
-
-
         displaySubjectsForLearn();
-
     }
 
 

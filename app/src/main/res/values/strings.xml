@@ -158,6 +158,23 @@
     <string name="in_the_level_x">In The Level %1s</string>
     <string name="you_played_x_times">You Played %1d Times</string>
     <string name="your_high_score_is_x">Your High Score is %1d</string>
+    <string name="tutorial_start_button">Start by pressing this button</string>
+    <string name="progress_main_title">here you can track your progress</string>
+    <string name="tutorial_obstacle">You need to get over this obstacle</string>
+    <string name="tutorial_question">By answering this question before you reach it</string>
+    <string name="tutorial_options">These are your answer options, try answering</string>
+    <string name="tutorial_correct_answer">Good job! you got a point!</string>
+    <string name="tutorial_wrong_answer">That\'s ok, you\'ll get it next time!</string>
+    <string name="tutorial_number_of_levels">Each level has 10 questions, but between questions there is a chance for a bonus round</string>
+    <string name="tutorial_jump_button">When this button appears it means that bonus round has started</string>
+    <string name="tutorial_bonus">Use this button to jump and collect all the fruits for additional points</string>
+    <string name="tutorial_end">That\'s all you need to know, happy gaming!</string>
+    <string name="settings_sound_title">Sound</string>
+    <string name="settings_sound_summary">Enable sound</string>
+    <string name="settings_first_name_title">First Name</string>
+    <string name="settings_first_name_summary">Change first name</string>
+    <string name="settings_last_name_title">Last Name</string>
+    <string name="settings_last_name_summary">Change last name</string>
 
 
 </resources>
