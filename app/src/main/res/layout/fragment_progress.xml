@@ -9,7 +9,8 @@
 <!--        android:id="@+id/progress_table_layout"/>-->
 <!--</RelativeLayout>-->
 
-<LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"

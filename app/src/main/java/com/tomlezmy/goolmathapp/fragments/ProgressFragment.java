@@ -131,6 +131,8 @@ public class ProgressFragment extends Fragment {
 
         progressResultsAdapter = new ProgressResultsAdapter(progressResultList, getContext());
         recyclerView = rootView.findViewById(R.id.recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(progressResultsAdapter);
         return rootView;
     }
