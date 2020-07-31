@@ -1,5 +1,5 @@
 <androidx.cardview.widget.CardView android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="160dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:foreground="?android:attr/selectableItemBackground"
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_leve"
+            android:id="@+id/tv_level"
             android:textSize="20sp"
             android:gravity="center"
             android:textStyle="bold"
