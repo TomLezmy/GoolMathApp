@@ -121,17 +121,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_marginTop="20dp">
         <Button
             android:id="@+id/btn_register"
-            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:text="@string/register"
             style="@style/FontLocalized"
+            android:layout_marginHorizontal="10dp"
             android:background="@drawable/button_4_design"
-            android:layout_marginHorizontal="30dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="10dp"/>
+            android:textColor="@color/white" />
     </LinearLayout>
     </LinearLayout>

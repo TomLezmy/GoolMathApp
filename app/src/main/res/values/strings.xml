@@ -19,7 +19,7 @@
     <string name="subtraction_category_txt">Subtraction</string>
     <string name="titleSubSubjectsDialog">Pick One Sub Category</string>
     <string name="first_diagnostic_instructions">
-        Hello  %1$s, welcome to the Math-For-Fun app! Before we start, we would like to go over some questions with you, the questionnaire will take a few minutes (it is not possible to leave during the questionnaire otherwise the information will be deleted)
+        Hello  %1$s, welcome to the Math-For-Fun app! Before we start, we would like to go over some questions with you, the questionnaire will take a few minutes
     </string>
 
     <string name="to_the_menu">To The Menu</string>

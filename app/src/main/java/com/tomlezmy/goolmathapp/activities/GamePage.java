@@ -105,7 +105,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         wrongRing.setVolume(0.4f, 0.4f);
         gameBackgroundRing.setVolume(0.5f,0.5f);
         gameBackgroundRing.setLooping(true);
-        gameBackgroundRing.start();
+        playSound(gameBackgroundRing);
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
         walkBtn = findViewById(R.id.start_walk);
@@ -428,6 +428,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                         // Set up bonus
                                         objectHeight = obstacle.getY() + 100;
                                         isBonus = true;
+                                        prepareAnimations("jump");
                                         collectable = new ImageView(GamePage.this);
                                         collectable.setImageResource(collectableImages[rand.nextInt(10)]);
                                         collectable.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -469,6 +470,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                                 @Override
                                                 public void run() {
                                                     isBonus = false;
+                                                    prepareAnimations("jump");
                                                     Animation slideOut = AnimationUtils.loadAnimation(GamePage.this, R.anim.slide_out_bottom);
                                                     if (jumpBtn.getVisibility() != View.GONE) {
                                                         jumpBtn.startAnimation(slideOut);
@@ -846,7 +848,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
     @Override
     protected void onResume() {
-        gameBackgroundRing.start();
+        playSound(gameBackgroundRing);
         super.onResume();
     }
 

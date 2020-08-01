@@ -58,6 +58,16 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
         displaySubjects();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int cardColorId = ContextCompat.getColor(this, R.color.blue_card_option3);
+        int titleColorId = ContextCompat.getColor(this, R.color.blue_title);
+        subjectsFragment = new SubjectsFragment(cardColorId,titleColorId,false);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
+    }
+
     public void displaySubjects() {
         int cardColorId = ContextCompat.getColor(this, R.color.blue_card_option3);
         int titleColorId = ContextCompat.getColor(this, R.color.blue_title);
