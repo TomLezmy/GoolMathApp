@@ -197,8 +197,18 @@
     <string name="decimal_to_fraction_question">כמה זה %s כשבר?</string>
     <string name="jump_button">קפוץ</string>
     <string name="no_more_videos">אין עוד סרטונים</string>
-    <string name="about_fruit_asset">איורי פירות מ:</string>
+    <string name="about_fruit_asset">משאב פירות מ:</string>
     <string name="before_we_start">"רגע לפני שנתחיל, "</string>
+    <string name="about_clock">משאב שעון מ:</string>
+    <string name="about_cloud">משאב ענן מ:</string>
+    <string name="about_character">משאב דמות מ:</string>
+    <string name="about_background_music">מוזיקת רקע במשחק מ:</string>
+    <string name="about_clock_sound">רעש שעון מ:</string>
+    <string name="about_game_background">משאב רקע במשחק מ:</string>
+    <string name="about_wrong_answer">רעש תשובה לא נכונה מ:</string>
+    <string name="about_correct_answer">רעש תשובה נכונה מ:</string>
+    <string name="app_desctiption">חשבבכיף, נועדה לספק למשתמש פלטפורמה ללימוד, תרגול וחיזוק יסודות הבסיס במתמטיקה. בשילוב מודל למידה, האפליקציה מציגה למשתמש שאלות בהתאם לרמה שלו ויודעת לחזק ולשפר נושאים רלוונטים.</string>
+    <string name="about_app_title">:אודות חשבכיף</string>
 
 
 </resources>

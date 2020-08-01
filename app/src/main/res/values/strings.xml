@@ -185,7 +185,7 @@
     <string name="settings_first_name_summary">Change first name</string>
     <string name="settings_last_name_title">Last Name</string>
     <string name="settings_last_name_summary">Change last name</string>
-    <string name="score">Score :</string>
+    <string name="score">"Score : "</string>
     <string name="new_highscore">New highscore!</string>
     <string name="last_category_message">There are no more levels, you finished the game!</string>
     <string name="first_diagnostic_important_info">(it is not possible to leave during the questionaire otherwise the information will be deleted)</string>
@@ -196,6 +196,16 @@
     <string name="no_more_videos">No more videos</string>
     <string name="about_fruit_asset">Fruits assets by:</string>
     <string name="before_we_start">Just before we start,</string>
+    <string name="about_clock">Clock asset by:</string>
+    <string name="about_cloud">Cloud asset by:</string>
+    <string name="about_character">Character asset by:</string>
+    <string name="about_background_music">Game background music by:</string>
+    <string name="about_clock_sound">Clock sound by:</string>
+    <string name="about_game_background">Game background asset by:</string>
+    <string name="about_wrong_answer">Wrong answer sound by:</string>
+    <string name="about_correct_answer">Correct answer sound by:</string>
+    <string name="app_desctiption">Math For Fun was designed to provide a platform for learning, practicing and improving the fundamentals of math. Using learning algorithms, the app gives the user questions based on their knowledge and helps in the relevant subjects.</string>
+    <string name="about_app_title">About Math For Fun:</string>
 
 
 </resources>

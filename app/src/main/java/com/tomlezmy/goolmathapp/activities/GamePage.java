@@ -949,7 +949,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         int nextLevel = level + 1;
         int nextCategory = category;
         if (ECategory.values()[nextCategory].getNumberOfLevels() < nextLevel) {
-            nextLevel = 0;
+            nextLevel = 1;
             nextCategory++;
         }
         // Check for last category
