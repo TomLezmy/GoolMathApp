@@ -18,12 +18,14 @@ public class LevelManager {
     private List<Integer> questionsSubLevel;
     private ProbabilityGenerator levelValueLimitsAndProbability;
     private FileManager fileManager;
+    private Context context;
 
     public LevelManager(Context context, int numberOfQuestions, ECategory levelCategory, int level) {
         this.numberOfQuestions = numberOfQuestions;
         this.levelCategory = levelCategory;
         this.level = level;
         this.levelValueLimitsAndProbability = LimitFactory.getLevelValuesAndProbabilities(context, levelCategory, level);
+        this.context = context;
         fileManager = FileManager.getInstance(context);
     }
 
@@ -63,7 +65,7 @@ public class LevelManager {
     }
 
     private Question generateQuestion(int subLevelIndex) {
-        return Question.createQuestion(levelCategory, levelValueLimitsAndProbability.getLevelValueLimit(subLevelIndex).getLevelValueLimits(), level);
+        return Question.createQuestion(levelCategory, levelValueLimitsAndProbability.getLevelValueLimit(subLevelIndex).getLevelValueLimits(), level, context);
     }
 
     public String getCurrentQuestion() {

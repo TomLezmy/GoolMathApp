@@ -29,6 +29,15 @@
     <string name="msg_now_can_start">Now the fun begins!</string>
     <string name="good_luck_txt">Good Luck</string>
 
+    <string-array name="category_names">
+        <item>Addition</item>
+        <item>Subtraction</item>
+        <item>Multiplication</item>
+        <item>Division</item>
+        <item>Fractions</item>
+        <item>Percents</item>
+        <item>Decimals</item>
+    </string-array>
 
     <string-array name="practice_additionSubCategories">
         <item>Adding Single Digit Numbers</item>
@@ -80,8 +89,8 @@
         <item>Easy Percentages – Part 1</item>
         <item>Easy Percentages – Part 2</item>
         <item>Percent In General</item>
-        <item>Percent In GeneraL - Part 1</item>
-        <item>Percent In GeneraL - Part 2</item>
+        <item>Percent In General - Part 1</item>
+        <item>Percent In General - Part 2</item>
     </string-array>
 
     <string-array name="practice_decimalsSubCategories">
@@ -175,6 +184,13 @@
     <string name="settings_first_name_summary">Change first name</string>
     <string name="settings_last_name_title">Last Name</string>
     <string name="settings_last_name_summary">Change last name</string>
+    <string name="score">Score :</string>
+    <string name="last_category_message">No more levels, you finished the game!</string>
+    <string name="new_highscore">New highscore!</string>
+    <string name="percent_of">of</string>
+    <string name="decimal_question">What is %s in decimal?</string>
+    <string name="decimal_to_fraction_question">What is %s in fractions?</string>
+    <string name="jump_button">Jump</string>
 
 
 </resources>

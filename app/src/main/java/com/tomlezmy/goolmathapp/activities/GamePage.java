@@ -14,6 +14,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -191,7 +193,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                             if (collectable.getX() > -collectable.getWidth()) {
                                 if (checkCollision()) {
                                     score++;
-                                    scoreText.setText("Score : " + score);
+                                    scoreText.setText(getString(R.string.score) + score);
+                                    playSound(correctRing);
                                     new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
                                             .setSpeedRange(0.2f, 0.5f)
                                             .oneShot(scoreText, 100);
@@ -255,6 +258,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                             .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, BUTTONS_TAG).commit();
                     getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
+                    //buttonsFragment.disableButtons();
                 }
                 else {
                     if (!walkingAnimation.isRunning()) {
@@ -339,6 +343,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         fancyShowCaseQueue.setCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete() {
+                                //buttonsFragment.enableButtons();
                                 timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
                                 countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
                                     public void onTick(long millisUntilFinished) {
@@ -441,7 +446,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                 if (collectable.getX() > -collectable.getWidth()) {
                                     if (checkCollision()) {
                                         score++;
-                                        scoreText.setText("Score : " + score);
+                                        scoreText.setText(getString(R.string.score) + score);
+                                        playSound(correctRing);
                                         new ParticleSystem(GamePage.this, 100, R.drawable.star_pink, 3000)
                                                 .setSpeedRange(0.2f, 0.5f)
                                                 .oneShot(scoreText, 100);
@@ -517,7 +523,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
     private void tutorialRun() {
         isTutorialRun = true;
-        FancyShowCaseView playerSc = new FancyShowCaseView.Builder(GamePage.this)
+        FancyShowCaseView playerSc = new FancyShowCaseView.Builder(GamePage.this).titleStyle(R.style.FontLocalized, Gravity.CENTER)
                 .focusOn(player)
                 .title(getString(R.string.tutorial_show_player))
                 .build();
@@ -675,9 +681,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
         categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);
         if (categoryProgressData.getMaxScore() < score) {
-            // TODO tell user
             // New High Score
             categoryProgressData.setMaxScore(score);
+            Toast.makeText(this, getString(R.string.new_highscore), Toast.LENGTH_SHORT).show();
         }
         fileManager.updateUserDataFile();
 
@@ -731,7 +737,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             playSound(correctRing);
             correctAnswerCounter++;
             score++;
-            scoreText.setText("Score : " + score);
+            scoreText.setText(getString(R.string.score) + score);
             new ParticleSystem(this, 20, R.drawable.star_pink, 1000)
                     .setSpeedRange(0.2f, 0.5f)
                     .oneShot(scoreText, 200);
@@ -890,17 +896,17 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     public void onPressContinue(boolean moveToNextLevel) {
         score = 0;
         correctAnswerCounter = 0;
-        scoreText.setText("Score : " + score);
+        scoreText.setText(getString(R.string.score) + score);
         if (moveToNextLevel) {
             level++;
             if (ECategory.values()[category].getNumberOfLevels() < level) {
                 level = 1;
                 category++;
             }
-            // TODO Add message to user that there are no more games
             // Check for last category
             if (ECategory.values().length == category) {
-
+                Toast.makeText(this, getString(R.string.last_category_message), Toast.LENGTH_SHORT).show();
+                finish();
             }
             else {
                 // Save Weights before game

@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonsFragment extends Fragment implements View.OnClickListener{
-//    int btnDesigns[] = new int[] {R.drawable.button_4_design, R.drawable.button_4_design, R.drawable.button_4_design};
     ArrayList<String> options;
     IButtonFragmentAnswerListener callBack;
     SendMessage sendMessage;
+    Button[] buttons;
 
     @Override
     public void onAttach(Context context) {
@@ -60,22 +60,23 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         LinearLayout buttonLayout = rootView.findViewById(R.id.buttons_layout);
         options = getArguments().getStringArrayList("options");
         if (options != null) {
+            buttons = new Button[options.size()];
             for (int i = 0; i < options.size(); i++) {
-                Button btn = new Button(getContext());
+                buttons[i] = new Button(getContext());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setMargins(15,20,15,30);
                 lp.weight = 1;
-                btn.setLayoutParams(lp);
-                btn.setText(options.get(i));
-                btn.setOnClickListener(this);
-                btn.setBackgroundResource(R.drawable.button_4_design);
+                buttons[i].setLayoutParams(lp);
+                buttons[i].setText(options.get(i));
+                buttons[i].setOnClickListener(this);
+                buttons[i].setBackgroundResource(R.drawable.button_4_design);
                 Typeface typeface = ResourcesCompat.getFont(this.getContext(),R.font.ganclm);
-                btn.setTypeface(typeface, Typeface.BOLD);
+                buttons[i].setTypeface(typeface, Typeface.BOLD);
 
-                btn.setTextSize(18f);
-                btn.setTextColor(Color.WHITE);
-                btn.setOnTouchListener(new ButtonTouchAnimation());
-                buttonLayout.addView(btn);
+                buttons[i].setTextSize(18f);
+                buttons[i].setTextColor(Color.WHITE);
+                buttons[i].setOnTouchListener(new ButtonTouchAnimation());
+                buttonLayout.addView(buttons[i]);
             }
         }
         else {
@@ -156,4 +157,15 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         callBack.onReturn(Integer.parseInt(result));
     }
 
+    public void enableButtons() {
+        for (Button button : buttons) {
+            button.setEnabled(true);
+        }
+    }
+
+    public void disableButtons() {
+        for (Button button : buttons) {
+            button.setEnabled(false);
+        }
+    }
 }

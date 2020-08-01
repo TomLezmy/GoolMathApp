@@ -356,11 +356,11 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         for (int i = 1; i <= 3; i++) {
             ProbabilityGenerator probabilityGenerator = LimitFactory.getLevelValuesAndProbabilities(this, ECategory.PERCENTS, i);
             int index = probabilityGenerator.getLevelValueLimitIndexByProbability();
-            Question question = Question.createQuestion(ECategory.PERCENTS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), i);
+            Question question = Question.createQuestion(ECategory.PERCENTS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), i, this);
             addToRepositories(question.getQuestionHiddenAnswer(), ((int)question.getResult()) + "", LimitFactory.createQuestionOptions(ECategory.PERCENTS, i - 1, 4, question), index, i - 1);
             do {
                 index = probabilityGenerator.getLevelValueLimitIndexByProbability();
-                question = Question.createQuestion(ECategory.PERCENTS, probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), i);
+                question = Question.createQuestion(ECategory.PERCENTS, probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), i, this);
             } while (questions.get(questions.size() - 1).equals(question.getQuestionHiddenAnswer()));
             addToRepositories(question.getQuestionHiddenAnswer(), ((int)question.getResult()) + "", LimitFactory.createQuestionOptions(ECategory.PERCENTS, i - 1, 4, question), index, i - 1);
         }
@@ -378,21 +378,21 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         probabilityTableIndexes = new ArrayList<>();
         ProbabilityGenerator probabilityGenerator = LimitFactory.getLevelValuesAndProbabilities(this, ECategory.DECIMALS, 1);
         int index = probabilityGenerator.getLevelValueLimitIndexByProbability();
-        Question question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 1);
+        Question question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 1, this);
         addToRepositories(question.getQuestionHiddenAnswer(), question.getResult() + "", LimitFactory.createQuestionOptions(ECategory.DECIMALS, 0, 4, question), index, 0);
         do {
             index = probabilityGenerator.getLevelValueLimitIndexByProbability();
-            question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 1);
+            question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 1, this);
         } while (questions.contains(question.getQuestionHiddenAnswer()));
         addToRepositories(question.getQuestionHiddenAnswer(), question.getResult() + "", LimitFactory.createQuestionOptions(ECategory.DECIMALS, 0, 4, question), index, 0);
         do {
             index = probabilityGenerator.getLevelValueLimitIndexByProbability();
-            question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 2);
+            question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 2, this);
         } while (questions.contains(question.getQuestionHiddenAnswer()));
         addToRepositories(question.getQuestionHiddenAnswer(), question.getResult() + "", LimitFactory.createQuestionOptions(ECategory.DECIMALS, 1, 4, question), index, 1);
         do {
             index = probabilityGenerator.getLevelValueLimitIndexByProbability();
-            question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 2);
+            question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 2, this);
         } while (questions.contains(question.getQuestionHiddenAnswer()));
         addToRepositories(question.getQuestionHiddenAnswer(), question.getResult() + "", LimitFactory.createQuestionOptions(ECategory.DECIMALS, 1, 4, question), index, 1);
         questionsRepository.put(ECategory.DECIMALS, questions);
