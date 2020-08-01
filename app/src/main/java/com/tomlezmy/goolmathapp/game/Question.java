@@ -1,6 +1,10 @@
 package com.tomlezmy.goolmathapp.game;
 
+import android.content.Context;
+
 import androidx.annotation.Nullable;
+
+import com.tomlezmy.goolmathapp.R;
 
 public class Question {
     private ECategory category;
@@ -9,12 +13,13 @@ public class Question {
     protected int numTwo;
     protected float result;
     private String questionHiddenAnswer;
+    protected Context context;
 
-    public static Question createQuestion(ECategory category, LevelValueLimits valueLimits, int level) {
+    public static Question createQuestion(ECategory category, LevelValueLimits valueLimits, int level, Context context) {
         if (category == ECategory.FRACTIONS || (category == ECategory.DECIMALS && level == 6)) {
-            return new FractionQuestion(category, valueLimits, level);
+            return new FractionQuestion(category, valueLimits, level, context);
         }
-        return new Question(category, valueLimits, level);
+        return new Question(category, valueLimits, level, context);
     }
 
     protected Question(LevelValueLimits valueLimits) {
@@ -22,8 +27,9 @@ public class Question {
         this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
     }
 
-    private Question(ECategory category, LevelValueLimits valueLimits, int level) {
+    private Question(ECategory category, LevelValueLimits valueLimits, int level, Context context) {
         this.category = category;
+        this.context = context;
         this.numOne = valueLimits.getFirstNumberLimit().generateValue();
         this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
         buildQuestion(valueLimits, level);
@@ -85,7 +91,7 @@ public class Question {
                 }
 
                 sign = "*";
-                questionHiddenAnswer += "% of " + numOne + " = ?";
+                questionHiddenAnswer += "% " + context.getString(R.string.percent_of) + " " + numOne + " = ?";
                 break;
             case DECIMALS:
                 switch (level) {
@@ -97,12 +103,12 @@ public class Question {
                         if ((int)result != result) {
                             result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
                         }
-                        questionHiddenAnswer = "What is " + numOne + "% in decimal?";
+                        questionHiddenAnswer = String.format(context.getString(R.string.decimal_question), numOne + "%");
                         break;
                     case 5:
                         result = (float)numOne / (float) numTwo;
                         result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
-                        questionHiddenAnswer = "What is " + numOne + "/" + numTwo + " in decimal?";
+                        questionHiddenAnswer = String.format(context.getString(R.string.decimal_question), numOne + "/" + numTwo);
                         break;
                 }
         }

@@ -1,6 +1,10 @@
 package com.tomlezmy.goolmathapp.game;
 
+import android.content.Context;
+
 import androidx.annotation.Nullable;
+
+import com.tomlezmy.goolmathapp.R;
 
 import java.util.Random;
 
@@ -8,8 +12,9 @@ public class FractionQuestion extends Question {
     private int resultDenominator, numThree, numFour;
     private String questionHiddenAnswer;
 
-    public FractionQuestion(ECategory category, LevelValueLimits valueLimits, int level) {
+    public FractionQuestion(ECategory category, LevelValueLimits valueLimits, int level, Context context) {
         super(valueLimits);
+        this.context = context;
         calculateResult(category, level, (LevelValueFractionLimits)valueLimits);
     }
 
@@ -85,7 +90,7 @@ public class FractionQuestion extends Question {
             int gcdResult = gcd(numOne,100);
             result = numOne / gcdResult;
             resultDenominator = 100 / gcdResult;
-            questionHiddenAnswer = "What is " + numOne + "% in fractions?";
+            questionHiddenAnswer = String.format(context.getString(R.string.decimal_to_fraction_question), numOne + "");
         }
     }
 

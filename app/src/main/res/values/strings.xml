@@ -19,9 +19,8 @@
     <string name="subtraction_category_txt">Subtraction</string>
     <string name="titleSubSubjectsDialog">Pick One Sub Category</string>
     <string name="first_diagnostic_instructions">
-        Hello  %1$s, welcome to the Math-For-Fun app! Before we start, we would like to go over some questions with you, the questionnaire will take a few minutes
+        Hello  %1$s, welcome to the Math-For-Fun app! Before we start, we would like to go over some questions with you, the questionnaire will take a few minutes (it is not possible to leave during the questionnaire otherwise the information will be deleted)
     </string>
-    <string name="first_diagnostic_important_info">(it is not possible to leave during the questionnaire otherwise the information will be deleted)</string>
 
     <string name="to_the_menu">To The Menu</string>
     <string name="msg_right_answer">Well done, you answered %1d questions correctly</string>
@@ -30,6 +29,16 @@
     <string name="msg_now_can_start">Now the fun begins!</string>
     <string name="good_luck_txt">Good Luck</string>
 
+
+    <string-array name="category_names">
+        <item>Addition</item>
+        <item>Subtraction</item>
+        <item>Multiplication</item>
+        <item>Division</item>
+        <item>Fractions</item>
+        <item>Percents</item>
+        <item>Decimals</item>
+    </string-array>
 
     <string-array name="practice_additionSubCategories">
         <item>Adding Single Digit Numbers</item>
@@ -148,8 +157,7 @@
     <string name="last_name">Last Name</string>
     <string name="birth_year">Birth Year</string>
     <string name="register">Register</string>
-    <string name="before_we_start">Just before we start,</string>
-    <string name="tell_about_yourself">Tell us about yourself</string>
+    <string name="tell_about_yourself">Just before we start, tell us about yourself</string>
     <string name="tutorial_category_card">Tutorial</string>
     <string name="improvementMessage">Your\'e improving! Keep it up!</string>
     <string name="deteriorationMessage">Maybe consider looking at the materials in the learning page</string>
@@ -161,7 +169,7 @@
     <string name="you_played_x_times">You Played %1d Times</string>
     <string name="your_high_score_is_x">Your High Score is %1d</string>
     <string name="tutorial_start_button">Start by pressing this button</string>
-    <string name="progress_main_title">Here You Can Track Your Progress</string>
+    <string name="progress_main_title">here you can track your progress</string>
     <string name="tutorial_obstacle">You need to get over this obstacle</string>
     <string name="tutorial_question">By answering this question before you reach it</string>
     <string name="tutorial_options">These are your answer options, try answering</string>
@@ -177,4 +185,6 @@
     <string name="settings_first_name_summary">Change first name</string>
     <string name="settings_last_name_title">Last Name</string>
     <string name="settings_last_name_summary">Change last name</string>
+
+
 </resources>

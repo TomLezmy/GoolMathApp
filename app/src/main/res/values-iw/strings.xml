@@ -34,6 +34,16 @@
     <string name="first_diagnostic_important_info">(אי אפשר לצאת בזמן השאלון אחרת המידע ימחק)</string>
 
 
+    <string-array name="category_names">
+        <item>חיבור</item>
+        <item>חיסור</item>
+        <item>כפל</item>
+        <item>חילוק</item>
+        <item>שברים</item>
+        <item>אחוזים</item>
+        <item>מספרים עשרוניים</item>
+    </string-array>
+
     <string-array name="practice_additionSubCategories">
         <item>חיבור מספרים חד ספרתיים</item>
         <item>חיבור מספרים דו ספרתיים</item>
@@ -151,8 +161,7 @@
     <string name="last_name">שם משפחה</string>
     <string name="birth_year">שנת לידה</string>
     <string name="register">רישום</string>
-    <string name="before_we_start">רגע לפני שנתחיל,</string>
-    <string name="tell_about_yourself">ספרו לנו קצת על עצמכם</string>
+    <string name="tell_about_yourself">רגע לפני שנתחיל, ספרו לנו קצת על עצמכם</string>
     <string name="tutorial_category_card">הדרכה</string>
     <string name="improvementMessage">אתם משתפרים! תמשיכו כך!</string>
     <string name="deteriorationMessage">אולי כדאי לכם לחזור על החומר בדף הלימוד</string>
