@@ -44,17 +44,14 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
-            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.shortstack_regular);
             tvQuestion_hanks.setTextSize(33f);
         }
         else {
-            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.motek);
             tvQuestion_hanks.setTextSize(65f);
             tvQuestion_hanks.setPadding(10,10,10,10);
         }
 
         secondTitle = getResources().getString(R.string.title_practice_sub_categores_option2);
-        tvQuestion_hanks.setTypeface(this.typeface, Typeface.BOLD);
         tvQuestion_hanks.animateText(secondTitle);
 
 

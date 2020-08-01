@@ -6,9 +6,8 @@
    </style>
 
 
-   <style name="MainTitles">
-      <item name="android:textSize">60sp</item>
-      <item name="android:fontFamily">@font/hebrew_font</item>
+   <style name="Handwriting">
+      <item name="android:fontFamily">@font/motek</item>
    </style>
 </resources>
 

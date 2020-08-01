@@ -44,6 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            style="@style/Handwriting"
+            android:textStyle="bold"
             android:layout_gravity="start"
             android:text="@string/title_learn_sub_categories_option2"
             app:charIncrease="1"

@@ -1,6 +1,7 @@
 package com.tomlezmy.goolmathapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -32,7 +33,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-public class FirstDiagnosisActivity extends AppCompatActivity implements Button.OnClickListener{
+public class FirstDiagnosisActivity extends AppCompatActivity implements Button.OnClickListener {
+    String language;
     TextView questionText;
     String currentQuestion, currentAnswer;
     Random rand;
@@ -56,6 +58,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
     // For user instruction
     TextView tv_welcome;
     TextView tv_instruction;
+    TextView tv_note;
     TextView tv_right_answers;
     TextView tv_wrong_answers;
     TextView tvFinished;
@@ -77,11 +80,21 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
 
         tv_welcome = findViewById(R.id.welcome_tv);
         tv_instruction = findViewById(R.id.tv_instruction);
+        tv_note = findViewById(R.id.tv_instruction_note);
         tv_right_answers = findViewById(R.id.tv_right_answers);
         tv_wrong_answers = findViewById(R.id.tv_wrong_answers);
         tvFinished = findViewById(R.id.tv_quiz_finished);
         tv_funBegins = findViewById(R.id.tv_fun_begins);
         tv_goodLuck = findViewById(R.id.tv_good_luck);
+        questionText = findViewById(R.id.question_text);
+        btn_letsGo = findViewById(R.id.btn_lets_go);
+        btn_goToMenu = findViewById(R.id.btn_go_to_menue);
+        buttons_layout= findViewById(R.id.buttons_layout);
+
+        this.language = Locale.getDefault().getDisplayLanguage();
+        if ( this.language.equalsIgnoreCase("English")) {
+            questionText.setTextSize(50f);
+        }
 
 
         Resources res = getResources();
@@ -89,12 +102,9 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         String text = String.format(res.getString(R.string.first_diagnostic_instructions), username);
         tv_instruction.setText(text);
 
-        btn_letsGo = findViewById(R.id.btn_lets_go);
-        btn_goToMenu = findViewById(R.id.btn_go_to_menue);
-        buttons_layout= findViewById(R.id.buttons_layout);
+
 
         rand = new Random();
-        questionText = findViewById(R.id.question_text);
         buttons = new Button[4];
 
 
@@ -105,6 +115,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
                 tv_welcome.setVisibility(View.GONE);
                 tv_goodLuck.setVisibility(View.GONE);
                 tv_instruction.setVisibility(View.GONE);
+                tv_note.setVisibility(View.GONE);
                 questionText.setVisibility(View.VISIBLE);
                 buttons_layout.setVisibility(View.VISIBLE);
             }
@@ -425,9 +436,24 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         wrongAnswerMsg = String.format(res.getString(R.string.msg_wrong_answer), wrongAnswerCount);
         tv_wrong_answers.setText(wrongAnswerMsg);
 
+
+        Animation slideIn_first = AnimationUtils.makeInAnimation(this, true);
+        Animation slideIn_second = AnimationUtils.makeInAnimation(this, true);
+        slideIn_first.setDuration(500);
+        slideIn_second.setDuration(500);
+        slideIn_second.setStartOffset(1000);
+        tv_right_answers.startAnimation(slideIn_first);
         tv_right_answers.setVisibility(View.VISIBLE);
+
         tv_wrong_answers.setVisibility(View.VISIBLE);
+        tv_wrong_answers.startAnimation(slideIn_second);
+
+        tv_funBegins.setVisibility(View.GONE);
+        Animation pulse = AnimationUtils.loadAnimation(this,R.anim.pulse);
+        pulse.setStartOffset(1000);
+        tv_funBegins.startAnimation(pulse);
         tv_funBegins.setVisibility(View.VISIBLE);
+
         btn_goToMenu.setVisibility(View.VISIBLE);
         btn_goToMenu.setOnClickListener(new View.OnClickListener() {
             @Override

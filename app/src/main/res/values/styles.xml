@@ -15,9 +15,8 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="MainTitles">
-        <item name="android:textSize">55sp</item>
-        <item name="android:fontFamily">@font/sourcesanspro_bold</item>
+    <style name="Handwriting">
+        <item name="android:fontFamily">@font/shortstack_regular</item>
     </style>
 
     <style name="FontNumbers">
