@@ -79,8 +79,8 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
         holder.levelTv.setText(tv_level_text);
 
         int timesPlayed =  progressResult.getTimesPlayed();
-        String tv_timesPlyed_text = String.format(context.getResources().getString(R.string.you_played_x_times), timesPlayed);
-        holder.timesPlayTv.setText(tv_timesPlyed_text);
+        String tv_timesPlayed_text = String.format(context.getResources().getString(R.string.you_played_x_times), timesPlayed);
+        holder.timesPlayTv.setText(tv_timesPlayed_text);
 
         int highScore =  progressResult.getHighScore();
         String tv_highScore_text = String.format(context.getResources().getString(R.string.your_high_score_is_x), highScore);

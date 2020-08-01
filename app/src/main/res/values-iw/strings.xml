@@ -189,6 +189,12 @@
     <string name="settings_first_name_summary">שנו שם פרטי</string>
     <string name="settings_last_name_title">שם משפחה</string>
     <string name="settings_last_name_summary">שנו שם משפחה</string>
+    <string name="score">"ניקוד : "</string>
+    <string name="new_highscore">שיא חדש!</string>
+    <string name="last_category_message">אין עוד שלבים, סיימתם את המשחק!</string>
+    <string name="percent_of">מ</string>
+    <string name="decimal_question">כמה זה %s בייצוג עשרוני?</string>
+    <string name="decimal_to_fraction_question">כמה זה %s כשבר?</string>
 
 
 </resources>

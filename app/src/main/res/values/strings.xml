@@ -185,6 +185,13 @@
     <string name="settings_first_name_summary">Change first name</string>
     <string name="settings_last_name_title">Last Name</string>
     <string name="settings_last_name_summary">Change last name</string>
+    <string name="score">Score :</string>
+    <string name="new_highscore">New highscore!</string>
+    <string name="last_category_message">There are no more levels, you finished the game!</string>
+    <string name="first_diagnostic_important_info">(it is not possible to leave during the questionaire otherwise the information will be deleted)</string>
+    <string name="percent_of">of</string>
+    <string name="decimal_question">What is %s in decimal?</string>
+    <string name="decimal_to_fraction_question">What is %s in fractions?</string>
 
 
 </resources>
