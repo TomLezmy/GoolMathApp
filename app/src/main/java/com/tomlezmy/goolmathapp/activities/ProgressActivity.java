@@ -48,9 +48,10 @@ public class ProgressActivity extends AppCompatActivity {
             titleTv.setTextSize(50f);
         }
 
-
+        ProgressPagerAdapter progressPagerAdapter = new ProgressPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        progressPagerAdapter.setContext(this);
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setAdapter(new ProgressPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+        viewPager.setAdapter(progressPagerAdapter);
 
     }
 }
