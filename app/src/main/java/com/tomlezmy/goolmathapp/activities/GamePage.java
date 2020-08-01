@@ -253,7 +253,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     options.add("2");
                     options.add("3");
                     options.add("4");
-                    buttonsFragment = ButtonsFragment.newInstance(options);
+                    buttonsFragment = ButtonsFragment.newInstance(options, true);
                     getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, BUTTONS_TAG).commit();
                     getSupportFragmentManager().beginTransaction()
@@ -343,7 +343,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         fancyShowCaseQueue.setCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete() {
-                                //buttonsFragment.enableButtons();
+                                buttonsFragment.enableButtons();
                                 timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
                                 countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
                                     public void onTick(long millisUntilFinished) {
@@ -771,7 +771,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         if (useTwoAnswers) {
             options = 2;
         }
-        buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(options));
+        buttonsFragment = ButtonsFragment.newInstance(levelManager.getCurrentQuestionOptions(options), false);
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, BUTTONS_TAG).commit();

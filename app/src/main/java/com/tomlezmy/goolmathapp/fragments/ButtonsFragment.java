@@ -42,11 +42,12 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public static ButtonsFragment newInstance(List<String> options) {
+    public static ButtonsFragment newInstance(List<String> options, boolean isTutorial) {
         ButtonsFragment buttonsFragment = new ButtonsFragment();
         Bundle bundle = new Bundle();
         if (options != null) {
             bundle.putStringArrayList("options", (ArrayList<String>)options);
+            bundle.putBoolean("isTutorial", isTutorial);
         }
         buttonsFragment.setArguments(bundle);
         return buttonsFragment;
@@ -78,6 +79,9 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 buttons[i].setTextColor(Color.WHITE);
                 buttons[i].setOnTouchListener(new ButtonTouchAnimation());
                 buttonLayout.addView(buttons[i]);
+            }
+            if (getArguments().getBoolean("isTutorial")) {
+                disableButtons();
             }
         }
         else {
