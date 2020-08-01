@@ -4,7 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SplashActivity">
+    android:orientation="vertical"
+    tools:context=".activities.SplashActivity"
+    android:background="@drawable/main_background_design">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/Splash"
+        android:text="@string/app_name"
+        android:textColor="@color/colorMainHeaderPurple"
+        android:textSize="70sp"
+        android:gravity="center"/>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

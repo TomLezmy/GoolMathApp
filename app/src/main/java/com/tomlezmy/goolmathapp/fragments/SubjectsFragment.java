@@ -103,7 +103,8 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
         fractionsCard.setCardBackgroundColor(this.cardColorId);
         percentagesCard.setCardBackgroundColor(this.cardColorId);
         decimal_numbersCard.setCardBackgroundColor(this.cardColorId);
-        tutorialCard.setCardBackgroundColor(this.cardColorId);
+
+        tutorialCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.tutorial_card_color));
 
         // Set unique text size for multiplication Card for english
         tvMultiplicationCard = rootView.findViewById(R.id.tv_multiplicationCard);

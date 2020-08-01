@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Math-For-Fun</string>
+    <string name="app_name">Math For Fun</string>
     <string name="practice_btn_txt">Practice</string>
     <string name="learn_btn_txt">Learn</string>
     <string name="progress_btn_txt">Progress</string>
