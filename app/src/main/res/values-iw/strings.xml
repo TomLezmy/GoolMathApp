@@ -4,11 +4,9 @@
     <string name="practice_btn_txt">אימון</string>
     <string name="learn_btn_txt">לימוד</string>
     <string name="progress_btn_txt">התקדמות</string>
-    <string name="select_subject_btn_txt">בחר נושא</string>
     <string name="next_btn_txt">הבא</string>
     <string name="back_btn_txt">חזור</string>
     <string name="continue_btn_txt">המשך משחק</string>
-    <string name="start_learn_btn_txt">התחל לימוד</string>
     <string name="addition_category_txt">חיבור</string>
     <string name="multiplication_category_txt">כפל</string>
     <string name="division_category_txt">חילוק</string>
@@ -18,7 +16,6 @@
     <string name="score_is_zero_txt">"ניקוד: 0 "</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">חיסור</string>
-    <string name="titleSubSubjectsDialog">בחר בתת נושא אחד</string>
     <string name="btn_start_game_txt">התחל לשחק</string>
     <string name="to_the_menu">למעבר לתפריט</string>
     <string name="msg_right_answer">יפה מאוד! ענית נכון על %1d שאלות</string>
@@ -143,10 +140,6 @@
     </string-array>
 
 
-    <string name="pick_sub_category_txt">בחר בתת נושא:</string>
-    <string name="ok_txt">אישור</string>
-    <string name="title_learn_sub_categories">בחרו נושא שאותו תרצו ללמוד!</string>
-    <string name="title_practice_sub_categories">בחרו נושא שאותו תרצו לתרגל!</string>
     <string name="title_learn_sub_categories_option2">מה נלמד היום?</string>
     <string name="title_practice_sub_categores_option2">מה נתרגל היום?</string>
     <string name="game_over_txt">המשחק הסתיים</string>

@@ -13,7 +13,7 @@
             android:summary="@string/settings_first_name_summary"
             android:key="preference_change_name"/>
         <EditTextPreference
-            android:title="@string/settings_first_name_title"
+            android:title="@string/settings_last_name_title"
             android:summary="@string/settings_last_name_summary"
             android:key="preference_change_last_name"/>
         <extra

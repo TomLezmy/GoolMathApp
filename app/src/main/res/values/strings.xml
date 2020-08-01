@@ -3,11 +3,9 @@
     <string name="practice_btn_txt">Practice</string>
     <string name="learn_btn_txt">Learn</string>
     <string name="progress_btn_txt">Progress</string>
-    <string name="select_subject_btn_txt">Select a Subject</string>
     <string name="next_btn_txt">Next</string>
     <string name="back_btn_txt">Back</string>
     <string name="continue_btn_txt">Continue Game</string>
-    <string name="start_learn_btn_txt">Start Learn_txt</string>
     <string name="addition_category_txt">Addition</string>
     <string name="multiplication_category_txt">Multiplication</string>
     <string name="division_category_txt">Division</string>
@@ -17,7 +15,6 @@
     <string name="score_is_zero_txt">Score: 0</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">Subtraction</string>
-    <string name="titleSubSubjectsDialog">Pick One Sub Category</string>
     <string name="first_diagnostic_instructions">
         Hello  %1$s, welcome to the Math-For-Fun app! Before we start, we would like to go over some questions with you, the questionnaire will take a few minutes
     </string>
@@ -138,10 +135,6 @@
     </string-array>
 
 
-    <string name="pick_sub_category_txt">Pick a Sub Topic:</string>
-    <string name="ok_txt">OK</string>
-    <string name="title_learn_sub_categories">Choose a topic that you would like to learn!</string>
-    <string name="title_practice_sub_categories">Choose a topic that you would like to practice!</string>
     <string name="title_learn_sub_categories_option2">What are we going to learn today?</string>
     <string name="title_practice_sub_categores_option2">What are we going to practice today?</string>
     <string name="game_over_txt">Game Over</string>
