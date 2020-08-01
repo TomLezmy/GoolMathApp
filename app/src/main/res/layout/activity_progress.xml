@@ -17,7 +17,7 @@
         app:tabMode="scrollable"
         app:tabIndicatorColor="@color/white"
         style="@style/FontLocalized"
-        android:background="@color/colorStokeBtn2"
+        android:background="@color/tabs_color"
         app:tabSelectedTextColor="@color/white"
         app:tabGravity="center"/>
 

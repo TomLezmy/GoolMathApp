@@ -23,4 +23,8 @@
         <item name="android:fontFamily">@font/ganclm</item>
     </style>
 
+    <style name="Splash">
+        <item name="android:fontFamily">@font/helsinki</item>
+    </style>
+
 </resources>

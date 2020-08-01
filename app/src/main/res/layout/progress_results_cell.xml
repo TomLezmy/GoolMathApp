@@ -9,7 +9,7 @@
     app:cardCornerRadius="10dp"
     android:layout_gravity="start"
     android:layout_margin="20dp"
-    app:cardBackgroundColor="@color/colorBtn2">
+    app:cardBackgroundColor="@color/progress_result_card">
 
     <LinearLayout
         android:layout_width="match_parent"

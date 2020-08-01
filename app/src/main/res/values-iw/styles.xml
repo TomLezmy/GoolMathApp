@@ -9,5 +9,10 @@
    <style name="Handwriting">
       <item name="android:fontFamily">@font/motek</item>
    </style>
+
+
+   <style name="Splash">
+      <item name="android:fontFamily">@font/ganclm</item>
+   </style>
 </resources>
 
