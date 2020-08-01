@@ -155,9 +155,9 @@
     <string name="txt_welcome">Welcome</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="birth_year">Birth Year</string>
+    <string name="set_birth_year">Set Birth Year</string>
     <string name="register">Register</string>
-    <string name="tell_about_yourself">Just before we start, tell us about yourself</string>
+    <string name="tell_about_yourself">tell us about yourself</string>
     <string name="tutorial_category_card">Tutorial</string>
     <string name="improvementMessage">Your\'e improving! Keep it up!</string>
     <string name="deteriorationMessage">Maybe consider looking at the materials in the learning page</string>
@@ -192,6 +192,10 @@
     <string name="percent_of">of</string>
     <string name="decimal_question">What is %s in decimal?</string>
     <string name="decimal_to_fraction_question">What is %s in fractions?</string>
+    <string name="jump_button">Jump</string>
+    <string name="no_more_videos">No more videos</string>
+    <string name="about_fruit_asset">Fruits assets by:</string>
+    <string name="before_we_start">Just before we start,</string>
 
 
 </resources>

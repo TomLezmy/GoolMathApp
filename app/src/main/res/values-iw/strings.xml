@@ -159,9 +159,9 @@
     <string name="txt_welcome">ברוכים הבאים</string>
     <string name="first_name">שם פרטי</string>
     <string name="last_name">שם משפחה</string>
-    <string name="birth_year">שנת לידה</string>
+    <string name="set_birth_year">בחרו שנת לידה</string>
     <string name="register">רישום</string>
-    <string name="tell_about_yourself">רגע לפני שנתחיל, ספרו לנו קצת על עצמכם</string>
+    <string name="tell_about_yourself">ספרו לנו קצת על עצמכם</string>
     <string name="tutorial_category_card">הדרכה</string>
     <string name="improvementMessage">אתם משתפרים! תמשיכו כך!</string>
     <string name="deteriorationMessage">אולי כדאי לכם לחזור על החומר בדף הלימוד</string>
@@ -195,6 +195,10 @@
     <string name="percent_of">מ</string>
     <string name="decimal_question">כמה זה %s בייצוג עשרוני?</string>
     <string name="decimal_to_fraction_question">כמה זה %s כשבר?</string>
+    <string name="jump_button">קפוץ</string>
+    <string name="no_more_videos">אין עוד סרטונים</string>
+    <string name="about_fruit_asset">איורי פירות מ:</string>
+    <string name="before_we_start">"רגע לפני שנתחיל, "</string>
 
 
 </resources>

@@ -21,7 +21,6 @@ public class PreferenceFragment extends android.preference.PreferenceFragment {
         editTextPreferenceName.setText(userData.getFirstName());
         EditTextPreference editTextPreferenceLastName = (EditTextPreference) findPreference("preference_change_last_name");
         editTextPreferenceLastName.setText(userData.getLastName());
-
         editTextPreferenceName.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {

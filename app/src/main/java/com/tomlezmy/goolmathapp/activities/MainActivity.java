@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageView about = findViewById(R.id.about);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            }
+        });
+
         btnPractice = findViewById(R.id.btn_practice);
         btnPractice.setOnTouchListener(new ButtonTouchAnimation());
         btnPractice.setOnClickListener(new View.OnClickListener() {

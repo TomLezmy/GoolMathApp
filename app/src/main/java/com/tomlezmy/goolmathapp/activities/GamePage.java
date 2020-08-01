@@ -329,15 +329,15 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         walkingAnimation.stop();
                         FancyShowCaseView obstacleSc = new FancyShowCaseView.Builder(GamePage.this)
                                 .focusOn(obstacle)
-                                .title(getString(R.string.tutorial_obstacle))
+                                .title(getString(R.string.tutorial_obstacle)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                                 .build();
                         FancyShowCaseView questionSc = new FancyShowCaseView.Builder(GamePage.this)
                                 .focusOn(questionFragment.getView())
-                                .title(getString(R.string.tutorial_question))
+                                .title(getString(R.string.tutorial_question)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                                 .build();
                         FancyShowCaseView buttonsSc = new FancyShowCaseView.Builder(GamePage.this)
                                 .focusOn(buttonsFragment.getView()).focusShape(FocusShape.ROUNDED_RECTANGLE).roundRectRadius(90)
-                                .title(getString(R.string.tutorial_options))
+                                .title(getString(R.string.tutorial_options)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                                 .build();
                         FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(obstacleSc).add(questionSc).add(buttonsSc);
                         fancyShowCaseQueue.setCompleteListener(new OnCompleteListener() {
@@ -400,7 +400,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                     answerResponse = getString(R.string.tutorial_wrong_answer) + "\n";
                                 }
                                 FancyShowCaseView answerSc = new FancyShowCaseView.Builder(GamePage.this)
-                                        .title(answerResponse + getString(R.string.tutorial_number_of_levels))
+                                        .title(answerResponse + getString(R.string.tutorial_number_of_levels)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                                         .dismissListener(new DismissListener() {
                                             @Override
                                             public void onDismiss(String s) {
@@ -416,7 +416,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                         }).build();
                                 FancyShowCaseView jumpSc = new FancyShowCaseView.Builder(GamePage.this)
                                         .focusOn(jumpBtn)
-                                        .title(getString(R.string.tutorial_jump_button) + "\n" + getString(R.string.tutorial_bonus))
+                                        .title(getString(R.string.tutorial_jump_button) + "\n" + getString(R.string.tutorial_bonus)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                                         .build();
 
                                 FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(answerSc).add(jumpSc);
@@ -480,7 +480,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                                             .setSpeedRange(0.2f, 0.5f)
                                                             .oneShot(scoreText, 100);
                                                     new FancyShowCaseView.Builder(GamePage.this)
-                                                            .title(getString(R.string.tutorial_end))
+                                                            .title(getString(R.string.tutorial_end)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                                                             .dismissListener(new DismissListener() {
                                                                 @Override
                                                                 public void onDismiss(String s) {
@@ -523,24 +523,24 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
     private void tutorialRun() {
         isTutorialRun = true;
-        FancyShowCaseView playerSc = new FancyShowCaseView.Builder(GamePage.this).titleStyle(R.style.FontLocalized, Gravity.CENTER)
+        FancyShowCaseView playerSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(player)
-                .title(getString(R.string.tutorial_show_player))
+                .title(getString(R.string.tutorial_show_player)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                 .build();
         FancyShowCaseView noFocusSc = new FancyShowCaseView.Builder(GamePage.this)
-                .title(getString(R.string.tutorial_game_objective))
+                .title(getString(R.string.tutorial_game_objective)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                 .build();
         FancyShowCaseView scoreSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(scoreText)
-                .title(getString(R.string.tutorial_score))
+                .title(getString(R.string.tutorial_score)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                 .build();
         FancyShowCaseView clockSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(findViewById(R.id.timer_image))
-                .title(getString(R.string.tutorial_timer))
+                .title(getString(R.string.tutorial_timer)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                 .build();
         FancyShowCaseView startSc = new FancyShowCaseView.Builder(GamePage.this)
                 .focusOn(walkBtn)
-                .title(getString(R.string.tutorial_start_button))
+                .title(getString(R.string.tutorial_start_button)).titleStyle(R.style.TutorialFontLocalized, Gravity.TOP | Gravity.CENTER)
                 .build();
         FancyShowCaseQueue fancyShowCaseQueue = new FancyShowCaseQueue().add(playerSc).add(noFocusSc).add(scoreSc).add(clockSc).add(startSc);
         fancyShowCaseQueue.show();

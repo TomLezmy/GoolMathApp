@@ -15,6 +15,20 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="SettingsFontLocalized">
+        <item name="android:fontFamily">@font/sourcesanspro_bold</item>
+        <item name="android:textSize">27sp</item>
+        <item name="android:textAllCaps">false</item>
+<!--        <item name="android:windowBackground">@drawable/main_background_design</item>-->
+    </style>
+
+    <style name="TutorialFontLocalized" parent="@android:style/Widget.TextView">
+        <item name="android:fontFamily">@font/sourcesanspro_bold</item>
+        <item name="android:textSize">27sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
     <style name="Handwriting">
         <item name="android:fontFamily">@font/shortstack_regular</item>
     </style>

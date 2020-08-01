@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,14 +16,20 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.EVideoIds;
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.game.ECategory;
 
 public class LearnActivity extends AppCompatActivity {
     YouTubePlayerView youTubePlayerView;
     String videoId;
+    TextView learnTitle;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_learn);
+
+            learnTitle = findViewById(R.id.tv_learn);
+
+            setVideoTitle();
 
             ImageView settings = findViewById(R.id.settings);
             settings.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +66,7 @@ public class LearnActivity extends AppCompatActivity {
                     int currentCategory = getIntent().getIntExtra("category",0);
                     int nextSubCategory = getIntent().getIntExtra("sub_category",0) + 1;
                     if (EVideoIds.values()[currentCategory].getAllVideoIds().length == nextSubCategory) {
-                        if (EVideoIds.values().length > currentCategory) {
+                        if (EVideoIds.values().length > (currentCategory + 1)) {
                             // Search for subject with videos
                             do {
                                 currentCategory++;
@@ -67,7 +74,7 @@ public class LearnActivity extends AppCompatActivity {
                             nextSubCategory = 0;
                         }
                         else {
-                            Toast.makeText(LearnActivity.this, "No more videos", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LearnActivity.this, getString(R.string.no_more_videos), Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
@@ -84,6 +91,34 @@ public class LearnActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         youTubePlayerView.release();
+    }
+
+    private void  setVideoTitle() {
+            int category = getIntent().getIntExtra("category",0);
+            int subCategory = getIntent().getIntExtra("sub_category",0);
+            ECategory eCategory = ECategory.values()[category];
+            int videoNamesArrayId = 0;
+            switch (eCategory) {
+                case ADDITION:
+                    videoNamesArrayId = R.array.learn_additionSubCategories;
+                    break;
+                case MULTIPLICATION:
+                    videoNamesArrayId = R.array.learn_multiplicationSubCategories;
+                    break;
+                case DIVISION:
+                    videoNamesArrayId = R.array.learn_divisionSubCategories;
+                    break;
+                case FRACTIONS:
+                    videoNamesArrayId = R.array.learn_fractionsSubCategories;
+                    break;
+                case PERCENTS:
+                    videoNamesArrayId = R.array.learn_percentsSubCategories;
+                    break;
+                case DECIMALS:
+                    videoNamesArrayId = R.array.learn_decimalsSubCategories;
+                    break;
+            }
+            learnTitle.setText(getResources().getStringArray(videoNamesArrayId)[subCategory]);
     }
 }
 

@@ -8,14 +8,17 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
+import com.tomlezmy.goolmathapp.fragments.NumberPickerFragmentDialog;
 
-public class RegisterActivity extends AppCompatActivity {
-
+public class RegisterActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
+    TextView birthYearEt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +26,17 @@ public class RegisterActivity extends AppCompatActivity {
 
         final EditText firstNameEt = findViewById(R.id.first_name);
         final EditText lastNameEt = findViewById(R.id.last_name);
-        final EditText birthYearEt = findViewById(R.id.birth_year);
+        birthYearEt = findViewById(R.id.birth_year);
+        Button setBirthYear = findViewById(R.id.btn_set_birth_year);
+        setBirthYear.setOnTouchListener(new ButtonTouchAnimation());
+        setBirthYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NumberPickerFragmentDialog numberPickerFragmentDialog = new NumberPickerFragmentDialog();
+                numberPickerFragmentDialog.setValueChangeListener(RegisterActivity.this);
+                numberPickerFragmentDialog.show(getSupportFragmentManager(), "BIRTH_YEAR_DIALOG_TAG");
+            }
+        });
         Button register = findViewById(R.id.btn_register);
         register.setOnTouchListener(new ButtonTouchAnimation());
         register.setOnClickListener(new View.OnClickListener() {
@@ -45,5 +58,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        birthYearEt.setText(picker.getValue() + "");
     }
 }

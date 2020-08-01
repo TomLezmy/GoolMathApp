@@ -5,6 +5,18 @@
       <item name="android:textSize">22sp</item>
    </style>
 
+   <style name="SettingsFontLocalized">
+      <item name="android:fontFamily">@font/hebrew_font</item>
+      <item name="android:textSize">22sp</item>
+      <item name="android:background">@drawable/main_background_design</item>
+   </style>
+
+
+   <style name="TutorialFontLocalized" parent="@android:style/Widget.TextView">
+      <item name="android:fontFamily">@font/hebrew_font</item>
+      <item name="android:textSize">22sp</item>
+      <item name="android:textColor">#FFFFFF</item>
+   </style>
 
    <style name="Handwriting">
       <item name="android:fontFamily">@font/motek</item>

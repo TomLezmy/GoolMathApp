@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.tomlezmy.goolmathapp.R;
-import com.tomlezmy.goolmathapp.fragments.PreferenceFragment;
 
-public class SettingsActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.SettingsFontLocalized);
         super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction().add(android.R.id.content, new PreferenceFragment()).commit();
+        setContentView(R.layout.activity_about);
     }
 }

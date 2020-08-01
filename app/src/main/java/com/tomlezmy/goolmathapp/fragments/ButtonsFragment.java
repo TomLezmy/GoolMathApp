@@ -70,8 +70,9 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
                 buttons[i].setText(options.get(i));
                 buttons[i].setOnClickListener(this);
                 buttons[i].setBackgroundResource(R.drawable.button_4_design);
-                Typeface typeface = ResourcesCompat.getFont(this.getContext(),R.font.ganclm);
-                buttons[i].setTypeface(typeface, Typeface.BOLD);
+//                Typeface typeface = ResourcesCompat.getFont(this.getContext(),R.font.ganclm);
+//                buttons[i].setTypeface(typeface, Typeface.BOLD);
+                buttons[i].setTextAppearance(R.style.FontNumbers);
 
                 buttons[i].setTextSize(18f);
                 buttons[i].setTextColor(Color.WHITE);

@@ -15,6 +15,7 @@
         android:id="@+id/title_layout"
         android:layout_margin="10dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,21 +79,44 @@
                 android:textColor="@color/colorStrokeBtn4"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/birth_year"
-            android:textColorHint="@color/colorBtn4"
-            android:padding="5dp"
-            app:hintTextAppearance="@style/FontLocalized">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/birth_year"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
+            android:layout_marginTop="20dp">
+            <Button
+                android:id="@+id/btn_set_birth_year"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:text="@string/set_birth_year"
                 style="@style/FontLocalized"
-                android:textColor="@color/colorStrokeBtn4"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/button_4_design"
+                android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBtn4"
+                style="@style/FontLocalized"
+                android:layout_toEndOf="@id/btn_set_birth_year"
+                android:layout_marginStart="30dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/birth_year"/>
+        </RelativeLayout>
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="@string/birth_year"-->
+<!--            android:textColorHint="@color/colorBtn4"-->
+<!--            android:padding="5dp"-->
+<!--            app:hintTextAppearance="@style/FontLocalized">-->
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/birth_year"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:inputType="number"-->
+<!--                style="@style/FontLocalized"-->
+<!--                android:textColor="@color/colorStrokeBtn4"/>-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
