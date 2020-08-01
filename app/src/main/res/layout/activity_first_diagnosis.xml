@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,29 +9,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical">
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="300dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:text="@string/one_plus_one_equal_to_txt"-->
+<!--            style="@style/FontNumbers"-->
+<!--            android:textSize="40sp"-->
+<!--            android:gravity="start"-->
+<!--            android:padding="5dp"-->
+<!--            android:textColor="@color/colorMainHeaderPurple"-->
+<!--            android:id="@+id/question_text"-->
+<!--            android:layoutDirection="ltr"-->
+<!--            android:visibility="gone" />-->
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/one_plus_one_equal_to_txt"
-            style="@style/FontNumbers"
-            android:textSize="40sp"
-            android:gravity="start"
-            android:textColor="@color/colorMainHeaderPurple"
-            android:layout_margin="20dp"
-            android:id="@+id/question_text"
-            android:layoutDirection="ltr"
-            android:visibility="gone" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/txt_welcome"
             style="@style/FontLocalized"
             android:textSize="@dimen/welcome_title_size"
+            android:gravity="center"
             android:textColor="@color/colorMainHeaderPurple"
             android:layout_margin="10dp"
             android:id="@+id/welcome_tv"
@@ -74,16 +77,42 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/good_luck_txt"
-            android:textColor="@color/colorBtn1"
-            android:textSize="22sp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="@string/one_plus_one_equal_to_txt"
             style="@style/FontLocalized"
-            android:padding="10dp"
+            android:textSize="40sp"
             android:gravity="center"
-            android:id="@+id/tv_good_luck"
+            android:padding="5dp"
+            android:textColor="@color/colorMainHeaderPurple"
+            android:id="@+id/question_text"
+            android:layoutDirection="ltr"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/first_diagnostic_important_info"
+            android:textColor="@color/colorMainHeaderPurple"
+            android:textSize="15sp"
+            style="@style/FontLocalized"
+            android:gravity="center"
+            android:id="@+id/tv_instruction_note"
             android:visibility="visible">
         </TextView>
+
+        <TextView
+            android:id="@+id/tv_good_luck"
+            style="@style/FontLocalized"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:text="@string/good_luck_txt"
+            android:textColor="@color/colorBtn1"
+            android:textSize="25sp"
+            android:visibility="visible"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/colorMainHeaderPurple"
+                android:textColor="@color/colorBtn4"
                 android:text="@string/msg_now_can_start"
                 android:textSize="30sp"
                 style="@style/FontLocalized"
@@ -185,7 +214,7 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 style="@style/FontNumbers"
                 android:id="@+id/btn_answer_1"/>
@@ -196,7 +225,7 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 style="@style/FontNumbers"
                 android:id="@+id/btn_answer_2"/>
@@ -211,7 +240,7 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 style="@style/FontNumbers"
                 android:id="@+id/btn_answer_3"/>
@@ -222,7 +251,7 @@
                 android:background="@drawable/button_4_design"
                 android:textColor="@color/white"
                 android:text="120"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 style="@style/FontNumbers"
                 android:id="@+id/btn_answer_4"/>

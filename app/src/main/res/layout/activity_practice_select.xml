@@ -46,6 +46,8 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:layout_gravity="start"
+            style="@style/Handwriting"
+            android:textStyle="bold"
             android:text="@string/title_practice_sub_categores_option2"
             app:charIncrease="1"
             android:textColor="@color/blue_title_dark"

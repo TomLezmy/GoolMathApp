@@ -28,8 +28,11 @@
     <string name="good_luck_txt">בהצלחה</string>
 
     <string name="first_diagnostic_instructions">
-שלום %1$s, ברוכים הבאים לאפליקציית חשבכיף! לפני שנתחיל נרצה לעבור איתך על כמה שאלות, השאלון יקח מספר דקות (אי אפשר לצאת בזמן השאלון אחרת המידע ימחק)
+שלום %1$s, ברוכים הבאים לאפליקציית חשבכיף! לפני שנתחיל נרצה לעבור איתך על כמה שאלות, השאלון יקח מספר דקות
     </string>
+
+    <string name="first_diagnostic_important_info">(אי אפשר לצאת בזמן השאלון אחרת המידע ימחק)</string>
+
 
     <string-array name="category_names">
         <item>חיבור</item>
@@ -186,13 +189,6 @@
     <string name="settings_first_name_summary">שנו שם פרטי</string>
     <string name="settings_last_name_title">שם משפחה</string>
     <string name="settings_last_name_summary">שנו שם משפחה</string>
-    <string name="score">ניקוד :</string>
-    <string name="last_category_message">אין יותר שלבים, סיימתם את המשחק!</string>
-    <string name="new_highscore">שיא חדש!</string>
-    <string name="percent_of">מ</string>
-    <string name="decimal_question">מה הוא %s בייצוג עשרוני?</string>
-    <string name="decimal_to_fraction_question">מה הוא %s כשבר?</string>
-    <string name="jump_button">קפוץ</string>
 
 
 </resources>

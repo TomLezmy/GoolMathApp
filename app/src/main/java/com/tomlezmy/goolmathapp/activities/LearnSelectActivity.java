@@ -23,7 +23,6 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
     int categorySelected;
     int subCategorySelected;
     HTextView tvQuestion_hanks;
-    Typeface typeface;
     String secondTitle;
     String language;
 
@@ -45,18 +44,14 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
-//            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.kalam_regular);
-            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.shortstack_regular);
             tvQuestion_hanks.setTextSize(35f);
         }
         else {
-            this.typeface = ResourcesCompat.getFont(getBaseContext(), R.font.motek);
             tvQuestion_hanks.setTextSize(70f);
             tvQuestion_hanks.setPadding(20,20,20,20);
         }
 
         secondTitle = getResources().getString(R.string.title_learn_sub_categories_option2);
-        tvQuestion_hanks.setTypeface(this.typeface, Typeface.BOLD);
         tvQuestion_hanks.animateText(secondTitle);
 
         displaySubjectsForLearn();
@@ -84,7 +79,6 @@ public class LearnSelectActivity extends AppCompatActivity implements SubjectsFr
 
     @Override
     public void onSelectedSubCategory(int categoryId) {
-//        Toast.makeText(this, "categoryId=" + " "  + categoryId + " " + "subCategory=" + subCategoryId, Toast.LENGTH_LONG).show();
         this.categorySelected = categoryId;
     }
 }
