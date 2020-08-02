@@ -16,8 +16,5 @@
             android:title="@string/settings_last_name_title"
             android:summary="@string/settings_last_name_summary"
             android:key="preference_change_last_name"/>
-        <extra
-            android:name="test"
-            android:value="aa"/>
     </PreferenceCategory>
 </PreferenceScreen>
