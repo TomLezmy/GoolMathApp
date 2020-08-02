@@ -20,7 +20,7 @@ public class NumberPickerFragmentDialog extends DialogFragment {
 
         final NumberPicker numberPicker = new NumberPicker(getActivity());
 
-        numberPicker.setMinValue(Calendar.getInstance().get(Calendar.YEAR) - 120);
+        numberPicker.setMinValue(Calendar.getInstance().get(Calendar.YEAR) - 50);
         numberPicker.setMaxValue(Calendar.getInstance().get(Calendar.YEAR));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

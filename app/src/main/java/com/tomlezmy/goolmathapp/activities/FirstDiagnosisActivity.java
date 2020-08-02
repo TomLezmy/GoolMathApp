@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,13 +41,14 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
     Random rand;
     List<String> currentOptions;
     Button[] buttons;
-    int currentCategory = -1, currentQuestionIndex = -1;
+    int currentCategory = -1, currentQuestionIndex = -1, questionsCounter = 0, currentQuestionProgress = 0;
     Dictionary<ECategory, List<String>> questionsRepository;
     Dictionary<ECategory, List<String>> answersRepository;
     Dictionary<ECategory, List<List<String>>> optionsRepository;
     Dictionary<ECategory, List<Integer>> levelRepository;
     Dictionary<ECategory, List<Integer>> questionsProbabilityTableIndex;
     boolean stopWhenWrong = false, diagnosisDone = false;
+    ProgressBar questionsProgressBar;
     FileManager fileManager;
     // For repository build
     List<String> questions;
@@ -90,6 +92,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         btn_letsGo = findViewById(R.id.btn_lets_go);
         btn_goToMenu = findViewById(R.id.btn_go_to_menue);
         buttons_layout= findViewById(R.id.buttons_layout);
+        questionsProgressBar = findViewById(R.id.question_progress);
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
@@ -136,6 +139,10 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         fileManager.createNewWeightsFile();
 
         buildQuestionsRepository((Calendar.getInstance().get(Calendar.YEAR) - getIntent().getIntExtra("birth_year",0) > 10));
+        for (ECategory category : ECategory.values()) {
+            questionsCounter += questionsRepository.get(category).size();
+        }
+        questionsProgressBar.setMax(questionsCounter);
 
         rightAnswerCount = 0;
         wrongAnswerCount = 0;
@@ -149,10 +156,13 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         }
         else {
             if ((!lastQuestionWasCorrect) && stopWhenWrong) {
+                currentQuestionProgress += questionsRepository.get(ECategory.values()[currentCategory]).size() - currentQuestionIndex;
+                questionsProgressBar.setProgress(currentQuestionProgress,true);
                 moveCategory();
             }
             else {
                 moveQuestionIndex();
+                questionsProgressBar.setProgress(++currentQuestionProgress,true);
             }
         }
 
