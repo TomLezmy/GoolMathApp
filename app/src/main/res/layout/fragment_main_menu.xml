@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="15dp"
+            style="@style/FontLocalized"
+            android:textSize="@dimen/main_title_size"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="#9a8abf"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/learn_layout"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_practice"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_1_design"
+                    android:layout_centerInParent="true"
+                    style="@style/FontLocalized"
+                    android:includeFontPadding="false"
+                    android:text="@string/practice_btn_txt"
+                    android:textColor="@color/white"
+                    android:textSize="40sp"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/practice_layout"
+                android:gravity="center">
+                <Button
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:background="@drawable/button_3_design"
+                    android:layout_gravity="center"
+                    android:layout_toStartOf="@+id/progress_btn"
+                    android:textSize="25sp"
+                    android:layout_margin="5dp"
+                    android:text="@string/learn_btn_txt"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    style="@style/FontLocalized"
+                    android:id="@+id/btn_learn"/>
+
+                <Button
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:background="@drawable/button_2_design"
+                    android:layout_gravity="center"
+                    android:textSize="23sp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/btn_progress"
+                    android:text="@string/progress_btn_txt"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    style="@style/FontLocalized" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -170,7 +170,7 @@
     <string name="tutorial_wrong_answer">That\'s ok, you\'ll get it next time!</string>
     <string name="tutorial_number_of_levels">Each level has 10 questions, but between questions there is a chance for a bonus round</string>
     <string name="tutorial_jump_button">When this button appears it means that bonus round has started</string>
-    <string name="tutorial_bonus">Use this button to jump and collect all the fruits for additional points</string>
+    <string name="tutorial_bonus">Use this button to jump and collect all the fruit for additional points</string>
     <string name="tutorial_end">That\'s all you need to know, happy gaming!</string>
     <string name="settings_sound_title">Sound</string>
     <string name="settings_sound_summary">Enable sound</string>
