@@ -131,7 +131,7 @@ public class FileManager {
 
     public UserData getUserData() { return userData; }
 
-    public void createNewUserDataFile(String firstName, String lastName, int birthYear) {
+    public void createNewUserDataFile(String firstName, int birthYear) {
         boolean userOverTen = (Calendar.getInstance().get(Calendar.YEAR) - birthYear > 10);
         Dictionary<ECategory, List<CategoryProgressData>> levelProgressData = new Hashtable<>();
         levelProgressData.put(ECategory.ADDITION,Arrays.asList(new CategoryProgressData(true), new CategoryProgressData(userOverTen)));
@@ -141,7 +141,7 @@ public class FileManager {
         levelProgressData.put(ECategory.FRACTIONS,Arrays.asList(new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false)));
         levelProgressData.put(ECategory.PERCENTS,Arrays.asList(new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false)));
         levelProgressData.put(ECategory.DECIMALS,Arrays.asList(new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false), new CategoryProgressData(false)));
-        userData = new UserData(firstName,lastName,birthYear,levelProgressData);
+        userData = new UserData(firstName,birthYear,levelProgressData);
         updateUserDataFile();
     }
 

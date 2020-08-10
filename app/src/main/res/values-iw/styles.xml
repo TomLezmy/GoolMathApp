@@ -8,7 +8,6 @@
    <style name="SettingsFontLocalized">
       <item name="android:fontFamily">@font/hebrew_font</item>
       <item name="android:textSize">22sp</item>
-      <item name="android:background">@drawable/main_background_design</item>
    </style>
 
 

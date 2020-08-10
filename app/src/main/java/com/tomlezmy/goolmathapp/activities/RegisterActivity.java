@@ -25,7 +25,6 @@ public class RegisterActivity extends AppCompatActivity implements NumberPicker.
         setContentView(R.layout.activity_register);
 
         final EditText firstNameEt = findViewById(R.id.first_name);
-        final EditText lastNameEt = findViewById(R.id.last_name);
         birthYearEt = findViewById(R.id.birth_year);
         Button setBirthYear = findViewById(R.id.btn_set_birth_year);
         setBirthYear.setOnTouchListener(new ButtonTouchAnimation());
@@ -43,15 +42,13 @@ public class RegisterActivity extends AppCompatActivity implements NumberPicker.
             @Override
             public void onClick(View v) {
                 String firstName = firstNameEt.getText().toString();
-                String lastName = lastNameEt.getText().toString();
                 String birthYear = birthYearEt.getText().toString();
-                if (firstName.isEmpty() || lastName.isEmpty() || birthYear.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                if (firstName.isEmpty() || birthYear.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, getString(R.string.missing_fields), Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Intent intent = new Intent(RegisterActivity.this, FirstDiagnosisActivity.class);
                     intent.putExtra("first_name", firstName);
-                    intent.putExtra("last_name", lastName);
                     intent.putExtra("birth_year", Integer.parseInt(birthYear));
                     startActivity(intent);
                     finish();

@@ -518,7 +518,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             }
         });
 
-        if (getIntent().hasExtra("tutorial")) {
+        if (sharedPreferences.getBoolean("is_first_run",true)) {
+            sharedPreferences.edit().putBoolean("is_first_run",false).apply();
+            tutorialRun();
+        }
+        else if (getIntent().hasExtra("tutorial")) {
             tutorialRun();
         }
     }

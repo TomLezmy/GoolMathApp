@@ -1,9 +1,10 @@
 package com.tomlezmy.goolmathapp.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -68,6 +69,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
     TextView tv_goodLuck;
     Button btn_letsGo;
     Button btn_goToMenu;
+    Button btn_skip;
     LinearLayout buttons_layout;
 
     // For result
@@ -91,6 +93,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         questionText = findViewById(R.id.question_text);
         btn_letsGo = findViewById(R.id.btn_lets_go);
         btn_goToMenu = findViewById(R.id.btn_go_to_menue);
+        btn_skip = findViewById(R.id.btn_skip);
         buttons_layout= findViewById(R.id.buttons_layout);
         questionsProgressBar = findViewById(R.id.question_progress);
 
@@ -147,6 +150,33 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         rightAnswerCount = 0;
         wrongAnswerCount = 0;
         nextQuestion(true);
+
+        btn_skip.setOnTouchListener(new ButtonTouchAnimation());
+        btn_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(FirstDiagnosisActivity.this);
+                builder.setTitle(getString(R.string.skip_title));
+                builder.setMessage(getString(R.string.skip_dialog_message));
+                builder.setCancelable(false);
+                builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fileManager.createNewUserDataFile(getIntent().getStringExtra("first_name"),getIntent().getIntExtra("birth_year",0));
+                        Intent intent = new Intent(FirstDiagnosisActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
     }
 
     private void nextQuestion(boolean lastQuestionWasCorrect) {
@@ -468,7 +498,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         btn_goToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fileManager.createNewUserDataFile(getIntent().getStringExtra("first_name"),getIntent().getStringExtra("last_name"),getIntent().getIntExtra("birth_year",0));
+                fileManager.createNewUserDataFile(getIntent().getStringExtra("first_name"),getIntent().getIntExtra("birth_year",0));
                 Intent intent = new Intent(FirstDiagnosisActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

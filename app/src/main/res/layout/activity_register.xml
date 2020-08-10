@@ -64,20 +64,6 @@
                 android:textColor="@color/colorStrokeBtn4"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/last_name"
-            android:padding="5dp"
-            android:textColorHint="@color/colorBtn4"
-            app:hintTextAppearance="@style/FontLocalized">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/last_name"
-                style="@style/FontLocalized"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorStrokeBtn4"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -150,8 +150,7 @@
     <string name="you_can_do_better_txt">אין ספק שתוכל להשתפר!</string>
     <string name="btn_cool_lets_go">קדימה, בואו נתחיל</string>
     <string name="txt_welcome">ברוכים הבאים</string>
-    <string name="first_name">שם פרטי</string>
-    <string name="last_name">שם משפחה</string>
+    <string name="first_name">שם</string>
     <string name="set_birth_year">בחרו שנת לידה</string>
     <string name="register">רישום</string>
     <string name="tell_about_yourself">ספרו לנו קצת על עצמכם</string>
@@ -178,10 +177,8 @@
     <string name="tutorial_end">זה כל מה שאתם צריכים לדעת, משחק מהנה!</string>
     <string name="settings_sound_title">צלילים</string>
     <string name="settings_sound_summary">אפשרו צלילים</string>
-    <string name="settings_first_name_title">שם פרטי</string>
-    <string name="settings_first_name_summary">שנו שם פרטי</string>
-    <string name="settings_last_name_title">שם משפחה</string>
-    <string name="settings_last_name_summary">שנו שם משפחה</string>
+    <string name="settings_first_name_title">שם</string>
+    <string name="settings_first_name_summary">שנו שם</string>
     <string name="score">"ניקוד : "</string>
     <string name="new_highscore">שיא חדש!</string>
     <string name="last_category_message">אין עוד שלבים, סיימתם את המשחק!</string>
@@ -202,6 +199,10 @@
     <string name="about_correct_answer">רעש תשובה נכונה מ:</string>
     <string name="app_desctiption">חשבבכיף, נועדה לספק למשתמש פלטפורמה ללימוד, תרגול וחיזוק יסודות הבסיס במתמטיקה. בשילוב מודל למידה, האפליקציה מציגה למשתמש שאלות בהתאם לרמה שלו ויודעת לחזק ולשפר נושאים רלוונטים.</string>
     <string name="about_app_title">:אודות חשבכיף</string>
-
+    <string name="settings">הגדרות</string>
+    <string name="missing_fields">בבקשה מלאו את כל השדות</string>
+    <string name="skip">דלג</string>
+    <string name="skip_title">האם אתם בטוחים?</string>
+    <string name="skip_dialog_message">אם תדלגו עכשיו, לא נדע מספיק בכדי להתאים לכם שאלות בהמשך\n לדלג על האבחון?</string>
 
 </resources>

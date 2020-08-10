@@ -146,8 +146,7 @@
     <string name="you_can_do_better_txt">you can do better!</string>
     <string name="btn_cool_lets_go">Cool, let\'s go</string>
     <string name="txt_welcome">Welcome</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
+    <string name="first_name">Name</string>
     <string name="set_birth_year">Set Birth Year</string>
     <string name="register">Register</string>
     <string name="tell_about_yourself">tell us about yourself</string>
@@ -174,10 +173,8 @@
     <string name="tutorial_end">That\'s all you need to know, happy gaming!</string>
     <string name="settings_sound_title">Sound</string>
     <string name="settings_sound_summary">Enable sound</string>
-    <string name="settings_first_name_title">First Name</string>
-    <string name="settings_first_name_summary">Change first name</string>
-    <string name="settings_last_name_title">Last Name</string>
-    <string name="settings_last_name_summary">Change last name</string>
+    <string name="settings_first_name_title">Name</string>
+    <string name="settings_first_name_summary">Change name</string>
     <string name="score">"Score : "</string>
     <string name="new_highscore">New highscore!</string>
     <string name="last_category_message">There are no more levels, you finished the game!</string>
@@ -199,6 +196,10 @@
     <string name="about_correct_answer">Correct answer sound by:</string>
     <string name="app_desctiption">Math For Fun was designed to provide a platform for learning, practicing and improving the fundamentals of math. Using learning algorithms, the app gives the user questions based on their knowledge and helps in the relevant subjects.</string>
     <string name="about_app_title">About Math For Fun:</string>
-
+    <string name="settings">Settings</string>
+    <string name="missing_fields">Please fill all fields</string>
+    <string name="skip">Skip</string>
+    <string name="skip_title">Are you sure?</string>
+    <string name="skip_dialog_message">If you skip now, we will not know enough about you to adjust future questions.\nSkip diagnosis?</string>
 
 </resources>
