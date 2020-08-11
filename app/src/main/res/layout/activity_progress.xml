@@ -7,7 +7,19 @@
     android:background="@drawable/progress_background_design"
     android:orientation="vertical"
     tools:context=".activities.ProgressActivity">
-
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:layout_scrollFlags="scroll|enterAlways"/>
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +29,7 @@
         app:tabMode="scrollable"
         android:layoutDirection="ltr"
         app:tabIndicatorColor="@color/white"
+        app:layout_scrollFlags="scroll|enterAlways"
         style="@style/FontLocalized"
         android:background="@color/tabs_color"
         app:tabSelectedTextColor="@color/white"
@@ -63,12 +76,14 @@
             android:id="@+id/tv_hanks" />
 
     </LinearLayout>
-
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/view_pager"
         android:layout_marginTop="20dp">
     </androidx.viewpager.widget.ViewPager>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

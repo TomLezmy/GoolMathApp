@@ -177,8 +177,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                 collectable = new ImageView(GamePage.this);
                                 collectable.setImageResource(collectableImages[rand.nextInt(10)]);
                                 collectable.setScaleType(ImageView.ScaleType.FIT_XY);
-                                ViewGroup.LayoutParams coinParams = new ViewGroup.LayoutParams(60,80);
-                                collectable.setLayoutParams(coinParams);
+                                ViewGroup.LayoutParams collectableParams = new ViewGroup.LayoutParams(60,80);
+                                collectable.setLayoutParams(collectableParams);
                                 rootLayout.addView(collectable);
                                 collectable.setX(screenWidth);
                                 collectable.setY(objectHeight - rand.nextInt(191));
@@ -268,7 +268,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         // Save Weights before game
                         weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
                         levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
-                        obstacleIndex = 0;
+                        obstacleIndex = rand.nextInt(objectImages.length);
                         obstacle.setImageResource(objectImages[obstacleIndex]);
                         player.setImageDrawable(walkingAnimation);
                         // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
@@ -432,8 +432,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                                         collectable = new ImageView(GamePage.this);
                                         collectable.setImageResource(collectableImages[rand.nextInt(10)]);
                                         collectable.setScaleType(ImageView.ScaleType.FIT_XY);
-                                        ViewGroup.LayoutParams coinParams = new ViewGroup.LayoutParams(60, 80);
-                                        collectable.setLayoutParams(coinParams);
+                                        ViewGroup.LayoutParams collectableParams = new ViewGroup.LayoutParams(60, 80);
+                                        collectable.setLayoutParams(collectableParams);
                                         rootLayout.addView(collectable);
                                         collectable.setX(screenWidth);
                                         collectable.setY(objectHeight - rand.nextInt(191));
@@ -660,7 +660,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
     private void nextQuestion() {
         beforeQuestion = true;
-        obstacleIndex = (obstacleIndex + 1) % 3;
+        obstacleIndex = rand.nextInt(objectImages.length);
         obstacle.setImageResource(objectImages[obstacleIndex]);
         // Move object out of screen
         obstacle.setX(screenWidth);
@@ -803,24 +803,23 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             return false;
         }
         // Bounding box overlap
-        Bitmap coinBitmap = collectable.getDrawingCache();
+        Bitmap collectableBitmap = collectable.getDrawingCache();
         Bitmap playerBitmap = player.getDrawingCache();
         //Bitmap playerBitmap = ((BitmapDrawable)player.getDrawable()).getBitmap();
-        int[] coinLocation = new int[2];
-        collectable.getLocationOnScreen(coinLocation);
-        Rect coinRect = new Rect(coinLocation[0], coinLocation[1], coinLocation[0] + collectable.getWidth(), coinLocation[1] + collectable.getHeight());
+        int[] collectableLocation = new int[2];
+        collectable.getLocationOnScreen(collectableLocation);
+        Rect collectableRect = new Rect(collectableLocation[0], collectableLocation[1], collectableLocation[0] + collectable.getWidth(), collectableLocation[1] + collectable.getHeight());
         int[] playerLocation = new int[2];
         player.getLocationOnScreen(playerLocation);
         Rect playerRect = new Rect(playerLocation[0], playerLocation[1], playerLocation[0] + player.getWidth(), playerLocation[1] + player.getHeight());
         // After intersect playerRect is changed to intersection rect
         Rect playerRectCopy = new Rect(playerRect);
-        playerRect.intersect(coinRect);
+        playerRect.intersect(collectableRect);
         for (int i = playerRect.left; i < playerRect.right; i++) {
             for (int j = playerRect.top; j < playerRect.bottom; j++) {
                 if (playerBitmap.getPixel(i - playerRectCopy.left, j - playerRectCopy.top)!= Color.TRANSPARENT) {
-                    //Log.d("TTT", i +" - " + coinRect.left + "," + j + " - " + coinRect.top);
-                    if ((i - coinRect.left) >= 0 && (i - coinRect.left) < coinBitmap.getWidth() && (j - coinRect.top) >= 0 && (j - coinRect.top) < coinBitmap.getHeight()) {
-                        if (coinBitmap.getPixel(i - coinRect.left, j - coinRect.top) != Color.TRANSPARENT) {
+                    if ((i - collectableRect.left) >= 0 && (i - collectableRect.left) < collectableBitmap.getWidth() && (j - collectableRect.top) >= 0 && (j - collectableRect.top) < collectableBitmap.getHeight()) {
+                        if (collectableBitmap.getPixel(i - collectableRect.left, j - collectableRect.top) != Color.TRANSPARENT) {
                             // Collision
                             return true;
                         }
@@ -918,7 +917,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 // Save Weights before game
                 weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
                 levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
-                obstacleIndex = 0;
+                obstacleIndex = rand.nextInt(objectImages.length);
                 obstacle.setImageResource(objectImages[obstacleIndex]);
                 player.setImageDrawable(walkingAnimation);
                 // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
