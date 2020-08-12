@@ -53,7 +53,7 @@ import me.toptas.fancyshowcase.FocusShape;
 import me.toptas.fancyshowcase.listener.DismissListener;
 import me.toptas.fancyshowcase.listener.OnCompleteListener;
 
-public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, SendMessage, IResultFragmentListener {
+public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, IResultFragmentListener {
 
     final String QUESTION_TAG = "QUESTION_TAG", BUTTONS_TAG = "BUTTONS_TAG", RESULT_TAG = "RESULT_TAG";
     float gameSpeed;
@@ -64,7 +64,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     GameFinishedFragment gameFinishedFragment;
     boolean userAnswered = false;
     int[] collectableImages = new int[] {R.drawable.orange, R.drawable.apple1, R.drawable.apple2, R.drawable.pineapple, R.drawable.persimmon, R.drawable.peach, R.drawable.plum, R.drawable.cherry, R.drawable.strawberry, R.drawable.pomegranate};
-    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle};
+    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle, R.drawable.wheel, R.drawable.log, R.drawable.hurdle, R.drawable.box};
     ValueAnimator valueAnimator;
     AnimationDrawable walkingAnimation, runningAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;
@@ -258,7 +258,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                             .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).replace(R.id.button_fragment_layout, buttonsFragment, BUTTONS_TAG).commit();
                     getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
-                    //buttonsFragment.disableButtons();
                 }
                 else {
                     if (!walkingAnimation.isRunning()) {
@@ -880,16 +879,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     private void changeGameSpeed(float speed) {
         gameSpeed = speed;
         valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
-    }
-
-    @Override
-    public void sendUserInput(char input) {
-        questionFragment.updateUserInput(input);
-    }
-
-    @Override
-    public void sendResult(String result) {
-        buttonsFragment.returnResult(result);
     }
 
     @Override
