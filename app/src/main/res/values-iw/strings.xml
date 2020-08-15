@@ -204,5 +204,6 @@
     <string name="skip">דלג</string>
     <string name="skip_title">האם אתם בטוחים?</string>
     <string name="skip_dialog_message">אם תדלגו עכשיו, לא נדע מספיק בכדי להתאים לכם שאלות בהמשך\n לדלג על האבחון?</string>
-
+    <string name="about_obstacle_wheelbarrow">משאב מכשול מריצה מ:</string>
+    <string name="about_obstacle_ladder">משאב מכשול סולם מ:</string>
 </resources>

@@ -201,5 +201,6 @@
     <string name="skip">Skip</string>
     <string name="skip_title">Are you sure?</string>
     <string name="skip_dialog_message">If you skip now, we will not know enough about you to adjust future questions.\nSkip diagnosis?</string>
-
+    <string name="about_obstacle_wheelbarrow">wheelbarrow asset by:</string>
+    <string name="about_obstacle_ladder">Ladder asset by:</string>
 </resources>
