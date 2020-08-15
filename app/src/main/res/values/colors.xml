@@ -28,4 +28,6 @@
     <color name="tutorial_card_color">#b9def8</color>
     <color name="tabs_color">#BDBBBB</color>
     <color name="progress_result_card">#f1c5c7</color>
+    <color name="splash_color">#7963D2</color>
+    <color name="gray">#8C848E</color>
 </resources>

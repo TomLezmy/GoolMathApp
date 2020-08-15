@@ -44,13 +44,14 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
     CardView subtractionCard;
     CardView multiplicationCard;
     TextView tvMultiplicationCard;
+    TextView tvSubtractionCard;
+    TextView tvPercentageCard;
     CardView divisionCard;
     CardView fractionsCard;
     CardView percentagesCard;
     CardView decimal_numbersCard;
     CardView tutorialCard;
     String language;
-    Typeface typeface;
     List<String> subCategories;
     SubCategoriesFragment subCategoriesFragment;
     FileManager fileManager;
@@ -106,16 +107,17 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
 
         tutorialCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.tutorial_card_color));
 
-        // Set unique text size for multiplication Card for english
+        // Set unique text size for some Card for english
         tvMultiplicationCard = rootView.findViewById(R.id.tv_multiplicationCard);
+        tvSubtractionCard = rootView.findViewById(R.id.tv_subtraction);
+        tvPercentageCard = rootView.findViewById(R.id.tv_percentage);
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
-            this.typeface = ResourcesCompat.getFont(getContext(), R.font.helsinki);
-            tvMultiplicationCard.setTextSize(15f);
+            tvMultiplicationCard.setTextSize(12.5f);
+            tvSubtractionCard.setTextSize(13.5f);
+            tvPercentageCard.setTextSize(14);
         }
-        else {
-            this.typeface = ResourcesCompat.getFont(getContext(), R.font.hebrew_font);
-        }
+
 
         if (this.isCreatedByLearnSelectActivity) {
 

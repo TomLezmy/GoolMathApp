@@ -23,7 +23,6 @@ public class PracticeSelectActivity extends AppCompatActivity implements Subject
     int categorySelected;
     int subCategorySelected;
     HTextView tvQuestion_hanks;
-    Typeface typeface;
     String secondTitle;
     String language;
 

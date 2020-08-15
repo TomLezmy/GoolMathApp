@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <style name="FontLocalized">
-      <item name="android:fontFamily">@font/hebrew_font</item>
+      <item name="android:fontFamily">@font/rubik_black</item>
+<!--      <item name="android:fontFamily">@font/hebrew_font</item>-->
       <item name="android:textSize">22sp</item>
    </style>
 
    <style name="SettingsFontLocalized">
-      <item name="android:fontFamily">@font/hebrew_font</item>
+      <item name="android:fontFamily">@font/rubik_black</item>
       <item name="android:textSize">22sp</item>
    </style>
 
@@ -23,6 +24,12 @@
 
 
    <style name="Splash">
+      <item name="android:fontFamily">@font/ganclm</item>
+   </style>
+
+
+   <style name="line"  parent="@android:style/TextAppearance">
+      <item name="android:textColor">@color/colorBtn4</item>
       <item name="android:fontFamily">@font/ganclm</item>
    </style>
 </resources>

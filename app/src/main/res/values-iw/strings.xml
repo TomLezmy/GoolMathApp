@@ -198,7 +198,7 @@
     <string name="about_wrong_answer">רעש תשובה לא נכונה מ:</string>
     <string name="about_correct_answer">רעש תשובה נכונה מ:</string>
     <string name="app_desctiption">חשבבכיף, נועדה לספק למשתמש פלטפורמה ללימוד, תרגול וחיזוק יסודות הבסיס במתמטיקה. בשילוב מודל למידה, האפליקציה מציגה למשתמש שאלות בהתאם לרמה שלו ויודעת לחזק ולשפר נושאים רלוונטים.</string>
-    <string name="about_app_title">:אודות חשבכיף</string>
+    <string name="about_app_title">אודות חשבכיף</string>
     <string name="settings">הגדרות</string>
     <string name="missing_fields">בבקשה מלאו את כל השדות</string>
     <string name="skip">דלג</string>

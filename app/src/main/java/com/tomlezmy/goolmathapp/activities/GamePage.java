@@ -41,7 +41,6 @@ import com.tomlezmy.goolmathapp.game.ECategory;
 import com.tomlezmy.goolmathapp.game.LevelManager;
 import com.tomlezmy.goolmathapp.interfaces.IButtonFragmentAnswerListener;
 import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
-import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +63,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     GameFinishedFragment gameFinishedFragment;
     boolean userAnswered = false;
     int[] collectableImages = new int[] {R.drawable.orange, R.drawable.apple1, R.drawable.apple2, R.drawable.pineapple, R.drawable.persimmon, R.drawable.peach, R.drawable.plum, R.drawable.cherry, R.drawable.strawberry, R.drawable.pomegranate};
-    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle, R.drawable.wheel, R.drawable.log, R.drawable.hurdle, R.drawable.box};
+    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle, R.drawable.wheel, R.drawable.log, R.drawable.hurdle, R.drawable.box, R.drawable.wheelbarrow, R.drawable.ladder};
     ValueAnimator valueAnimator;
     AnimationDrawable walkingAnimation, runningAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;

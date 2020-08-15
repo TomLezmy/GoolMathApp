@@ -17,8 +17,15 @@ import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.NumberPickerFragmentDialog;
 
+import java.util.Locale;
+
 public class RegisterActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
     TextView birthYearEt;
+    TextView tvMainTtitle;
+    String language;
+    Button btnSetBirth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,15 @@ public class RegisterActivity extends AppCompatActivity implements NumberPicker.
 
         final EditText firstNameEt = findViewById(R.id.first_name);
         birthYearEt = findViewById(R.id.birth_year);
+        tvMainTtitle = findViewById(R.id.register_main_title);
+        btnSetBirth = findViewById(R.id.btn_set_birth_year);
+
+        this.language = Locale.getDefault().getDisplayLanguage();
+        if ( this.language.equalsIgnoreCase("English")) {
+            tvMainTtitle.setTextSize(50f);
+        }
+
+
         Button setBirthYear = findViewById(R.id.btn_set_birth_year);
         setBirthYear.setOnTouchListener(new ButtonTouchAnimation());
         setBirthYear.setOnClickListener(new View.OnClickListener() {

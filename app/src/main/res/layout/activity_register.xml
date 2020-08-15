@@ -33,7 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tell_about_yourself"
-            android:textSize="37sp"
+            android:layout_marginTop="15dp"
+            android:textSize="40sp"
             android:padding="5dp"
             android:gravity="center"
             style="@style/FontLocalized"
@@ -47,21 +48,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp">
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:hint="@string/first_name"
+            android:outlineSpotShadowColor="@color/colorMainHeaderPurple"
+            android:outlineAmbientShadowColor="@color/colorMainHeaderPurple"
+            app:boxStrokeColor="@color/colorMainHeaderPurple"
             android:textColorHint="@color/colorBtn4"
-            app:hintTextAppearance="@style/FontLocalized">
+            app:hintTextAppearance="@style/line">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/first_name"
                 style="@style/FontLocalized"
                 android:layout_width="match_parent"
+                android:textSize="20sp"
+                android:textColorHint="@color/colorBtn4"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:textColor="@color/colorStrokeBtn4"/>
+                android:textColor="@color/colorStrokeBtn4"
+                android:outlineSpotShadowColor="@color/colorMainHeaderPurple"
+                android:outlineAmbientShadowColor="@color/colorMainHeaderPurple"
+                app:boxStrokeColor="@color/colorMainHeaderPurple"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -71,17 +82,20 @@
             android:layout_marginTop="20dp">
             <Button
                 android:id="@+id/btn_set_birth_year"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
                 android:text="@string/set_birth_year"
+                android:background="@drawable/button_register_design"
                 style="@style/FontLocalized"
-                android:background="@drawable/button_4_design"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
                 android:textColor="@color/white" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBtn4"
+                android:textColor="@color/colorStrokeBtn4"
                 style="@style/FontLocalized"
+                android:textSize="20sp"
                 android:layout_toEndOf="@id/btn_set_birth_year"
                 android:layout_marginStart="30dp"
                 android:layout_centerVertical="true"
@@ -106,12 +120,17 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
         <Button
             android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_width="180dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
             android:text="@string/register"
             style="@style/FontLocalized"
             android:layout_marginHorizontal="10dp"

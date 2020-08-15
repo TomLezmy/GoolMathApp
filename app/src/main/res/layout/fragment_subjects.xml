@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layoutDirection="rtl"
+    android:layout_gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -53,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/subtraction_category_txt"
+                android:id="@+id/tv_subtraction"
                 android:gravity="center"
                 android:textSize="@dimen/cards_text_size"
                 android:textColor="@color/white"
@@ -147,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/percentages_category_txt"
                 android:gravity="center"
+                android:id="@+id/tv_percentage"
                 android:textSize="@dimen/cards_text_size"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -215,22 +218,5 @@
         android:orientation="vertical"
         android:id="@+id/subcategories_fragment_layout">
     </LinearLayout>
-
-<!--    <ListView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/FontLocalized"-->
-<!--        android:id="@+id/sub_categories_lv">-->
-<!--    </ListView>-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical">-->
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/recycler"/>-->
-<!--    </LinearLayout>-->
 
 </LinearLayout>

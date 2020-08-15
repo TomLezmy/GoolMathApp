@@ -15,158 +15,221 @@
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
             android:text="@string/about_app_title"
-            android:layout_margin="10dp"/>
+            android:padding="3dp"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/colorMainHeaderPurple"
+            android:layout_margin="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/about_text"
             style="@style/FontLocalized"
-            android:textSize="20sp"
+            android:textSize="25sp"
+            android:padding="3dp"
+            android:gravity="center"
+            android:textColor="@color/colorBtn4"
             android:text="@string/app_desctiption"
-            android:layout_margin="10dp"/>
+            android:layout_margin="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
             android:text="@string/about_fruit_asset"
-            android:layout_margin="10dp"/>
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:textColorLink="@color/gray"
             android:text="https://pngtree.com/freepng/hand-painted-fruit-orange-pomegranate_3917494.html"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
             android:text="@string/about_clock"
-            android:layout_margin="10dp"/>
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:textColorLink="@color/gray"
             android:text="https://www.hiclipart.com/free-transparent-background-png-clipart-iteix"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
             android:text="@string/about_cloud"
-            android:layout_margin="10dp"/>
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
+            android:textColorLink="@color/gray"
             android:autoLink="web"
             android:text="https://www.clipart.email/download/11072012.html"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
             android:text="@string/about_character"
-            android:layout_margin="10dp"/>
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:textColorLink="@color/gray"
             android:text="https://www.dreamstime.com/stock-illustration-jumping-falling-boy-animation-frame-sequence-running-cartoon-style-isolated-vector-illustration-image86333788"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
             android:text="@string/about_game_background"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:textColorLink="@color/gray"
             android:text="https://www.freepik.es/vector-gratis/escena-perfecta-arboles-parque_4866970.htm"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
             android:text="@string/about_background_music"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:textColorLink="@color/gray"
             android:text="https://www.bensound.com/royalty-free-music/track/cute"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
             android:text="@string/about_clock_sound"
-            android:layout_margin="10dp"/>
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
+            android:textColorLink="@color/gray"
             android:linksClickable="true"
             android:autoLink="web"
             android:text="https://www.zapsplat.com/music/clock-ticking/"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
             android:text="@string/about_wrong_answer"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:textColorLink="@color/gray"
             android:text="https://www.zapsplat.com/music/gameshow-buzzer-buzz-short-1/"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
             android:text="@string/about_correct_answer"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontLocalized"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:textColorLink="@color/gray"
             android:text="https://www.zapsplat.com/music/game-sound-synthesized-bright-pluck-good-for-success-award-or-achievement-1/"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
     </LinearLayout>
 </ScrollView>

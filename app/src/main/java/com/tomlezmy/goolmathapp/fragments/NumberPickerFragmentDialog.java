@@ -33,10 +33,10 @@ public class NumberPickerFragmentDialog extends DialogFragment {
         tvSetBirthDay.setPadding(20,20,20,20);
         tvSetBirthDay.setText(R.string.set_birth_year);
         if (Locale.getDefault().getDisplayLanguage().equalsIgnoreCase("English")) {
-            tvSetBirthDay.setTypeface(ResourcesCompat.getFont(getContext(), R.font.shortstack_regular));
+            tvSetBirthDay.setTypeface(ResourcesCompat.getFont(getContext(), R.font.rubik_black));
         }
         else {
-            tvSetBirthDay.setTypeface(ResourcesCompat.getFont(getContext(), R.font.ganclm));
+            tvSetBirthDay.setTypeface(ResourcesCompat.getFont(getContext(), R.font.rubik_black));
         }
         builder.setCustomTitle(tvSetBirthDay);
 //        builder.setMessage(getContext().getString(R.string.set_birth_year));

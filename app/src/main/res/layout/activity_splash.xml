@@ -6,19 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.SplashActivity"
-    android:background="@drawable/main_background_design">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/Splash"
-        android:text="@string/app_name"
-        android:textColor="@color/colorMainHeaderPurple"
-        android:textSize="70sp"
-        android:gravity="center"/>
+    android:background="@color/splash_color">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:src="@mipmap/splash"/>
 </LinearLayout>
