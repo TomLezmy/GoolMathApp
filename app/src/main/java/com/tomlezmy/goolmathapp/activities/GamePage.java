@@ -752,7 +752,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
         if (wasCorrect) {
             // Change jump height for banana and rock
-            if (objectImages[obstacleIndex] != R.drawable.puddle) {
+            if (objectImages[obstacleIndex] == R.drawable.ladder) {
+                objectHeight = obstacle.getY();
+            }
+            else if (objectImages[obstacleIndex] != R.drawable.puddle) {
                 objectHeight = obstacle.getY() + 200;
             }
             else {
