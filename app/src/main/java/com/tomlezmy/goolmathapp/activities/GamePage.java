@@ -618,7 +618,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     @Override
                     public void onAnimationStart() {
                         // Puddle splash
-                        if (obstacleIndex == 2) {
+                        if (objectImages[obstacleIndex] == R.drawable.puddle) {
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -752,7 +752,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
         if (wasCorrect) {
             // Change jump height for banana and rock
-            if (obstacleIndex != 2) {
+            if (objectImages[obstacleIndex] != R.drawable.puddle) {
                 objectHeight = obstacle.getY() + 200;
             }
             else {
