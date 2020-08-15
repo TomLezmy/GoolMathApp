@@ -92,9 +92,6 @@ public class SubCategoriesFragment extends DialogFragment {
         this.dialog = this.getDialog();
         this.window = this.getDialog().getWindow();
         this.window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        wlp.gravity = Gravity.END;
-        window.setAttributes(wlp);
 
         subCategoryAdapter.setListener(new SubCategoryAdapter.SubCategoriesListener() {
             @Override
