@@ -206,4 +206,9 @@
     <string name="skip_dialog_message">אם תדלגו עכשיו, לא נדע מספיק בכדי להתאים לכם שאלות בהמשך\n לדלג על האבחון?</string>
     <string name="about_obstacle_wheelbarrow">משאב מכשול מריצה מ:</string>
     <string name="about_obstacle_ladder">משאב מכשול סולם מ:</string>
+    <string name="about_obstacle_log">משאב בול עץ מ:</string>
+    <string name="about_obstacle_box">משאב קופסאת קרטון מ:</string>
+    <string name="about_obstacle_hurdle">משאב משוכה מ:</string>
+    <string name="about_obstacle_wheel">משאב גלגל מ:</string>
+    <string name="about_obstacle_rock">משאב סלע מ:</string>
 </resources>

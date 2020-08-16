@@ -203,4 +203,9 @@
     <string name="skip_dialog_message">If you skip now, we will not know enough about you to adjust future questions.\nSkip diagnosis?</string>
     <string name="about_obstacle_wheelbarrow">wheelbarrow asset by:</string>
     <string name="about_obstacle_ladder">Ladder asset by:</string>
+    <string name="about_obstacle_log">Log asset by:</string>
+    <string name="about_obstacle_box">Box asset by:</string>
+    <string name="about_obstacle_hurdle">Hurdle asset by:</string>
+    <string name="about_obstacle_wheel">Wheel asset by:</string>
+    <string name="about_obstacle_rock">Rock asset by:</string>
 </resources>

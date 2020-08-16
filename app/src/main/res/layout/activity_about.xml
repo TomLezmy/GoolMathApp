@@ -231,16 +231,16 @@
             android:text="https://www.zapsplat.com/music/game-sound-synthesized-bright-pluck-good-for-success-award-or-achievement-1/"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/FontLocalized"
-        android:padding="3dp"
-        android:textSize="15sp"
-        android:text="@string/about_obstacle_ladder"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="@string/about_obstacle_ladder"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -274,5 +274,115 @@
             android:text="http://clipart-library.com/clipart/269653.htm"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"/>
-</LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="@string/about_obstacle_hurdle"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:textSize="12sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/gray"
+            android:text="https://www.vecteezy.com/vector-art/664315-business-men-in-race-one-hitting-wall-and-one-jumping-over-hurdle"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="@string/about_obstacle_box"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:textSize="12sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/gray"
+            android:text="https://www.vecteezy.com/vector-art/89844-packing-boxes-vector-icons"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="@string/about_obstacle_log"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:textSize="12sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/gray"
+            android:text="https://www.vecteezy.com/vector-art/124058-wood-log-vector-pack"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="@string/about_obstacle_wheel"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:textSize="12sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/gray"
+            android:text="https://www.vecteezy.com/vector-art/151488-alloy-wheels-vector"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="@string/about_obstacle_rock"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:textSize="12sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/gray"
+            android:text="https://webstockreview.net/image/clipart-rock/1237281.html"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+    </LinearLayout>
 </ScrollView>
