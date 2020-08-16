@@ -1,8 +1,6 @@
 package com.tomlezmy.goolmathapp.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tomlezmy.goolmathapp.R;
-import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.model.ProgressResult;
 
 import java.util.List;
@@ -20,7 +17,6 @@ import java.util.List;
 public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResultsAdapter.ProgressResultsViewHolder> {
 
     private List<ProgressResult> progressResults;
-//    private ProgressResultsListener listener;
     private Context context;
 
 
@@ -28,15 +24,6 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
         this.progressResults = progressResults;
         this.context = context;
     }
-
-//    public interface ProgressResultsListener {
-//        void onSubCategoryClicked(int position, View view);
-//    }
-
-//    public void setListener(ProgressResultsListener listener) {
-//        this.listener = listener;
-//    }
-
 
     public class ProgressResultsViewHolder extends RecyclerView.ViewHolder {
         TextView levelTv;
@@ -49,15 +36,6 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
             levelTv = itemView.findViewById(R.id.tv_level);
             timesPlayTv = itemView.findViewById(R.id.tv_times_played);
             highScoreTv = itemView.findViewById(R.id.tv_highScore);
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if (listener != null) {
-//                        listener.onSubCategoryClicked(getAdapterPosition(),view);
-//                    }
-//                }
-//            });
         }
 
     }

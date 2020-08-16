@@ -32,14 +32,8 @@ public class NumberPickerFragmentDialog extends DialogFragment {
         tvSetBirthDay.setTextColor(ContextCompat.getColor(getContext(), R.color.colorMainHeaderPurple));
         tvSetBirthDay.setPadding(20,20,20,20);
         tvSetBirthDay.setText(R.string.set_birth_year);
-        if (Locale.getDefault().getDisplayLanguage().equalsIgnoreCase("English")) {
-            tvSetBirthDay.setTypeface(ResourcesCompat.getFont(getContext(), R.font.rubik_black));
-        }
-        else {
-            tvSetBirthDay.setTypeface(ResourcesCompat.getFont(getContext(), R.font.rubik_black));
-        }
+        tvSetBirthDay.setTypeface(ResourcesCompat.getFont(getContext(), R.font.rubik_black));
         builder.setCustomTitle(tvSetBirthDay);
-//        builder.setMessage(getContext().getString(R.string.set_birth_year));
         
         builder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
             @Override

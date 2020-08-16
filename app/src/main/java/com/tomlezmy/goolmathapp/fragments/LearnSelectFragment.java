@@ -1,7 +1,6 @@
 package com.tomlezmy.goolmathapp.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.hanks.htextview.base.HTextView;
 import com.tomlezmy.goolmathapp.R;
-import com.tomlezmy.goolmathapp.activities.LearnActivity;
 import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
 
 import java.util.Locale;

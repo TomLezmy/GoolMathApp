@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.game.ECategory;
-import com.tomlezmy.goolmathapp.game.LevelSubProbabilities;
 import com.tomlezmy.goolmathapp.game.UserData;
 
 import java.io.File;
@@ -14,8 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Dictionary;

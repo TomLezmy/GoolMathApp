@@ -1,7 +1,6 @@
 package com.tomlezmy.goolmathapp.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
-import com.tomlezmy.goolmathapp.activities.LearnSelectActivity;
-import com.tomlezmy.goolmathapp.activities.PracticeSelectActivity;
-import com.tomlezmy.goolmathapp.activities.ProgressActivity;
-import com.tomlezmy.goolmathapp.interfaces.IButtonFragmentAnswerListener;
 import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
-import com.tomlezmy.goolmathapp.interfaces.SendMessage;
 
 public class MainMenuFragment extends Fragment {
     IFragmentChangeListener callBack;

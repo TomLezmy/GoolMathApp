@@ -4,12 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -79,16 +77,6 @@ public class SubCategoriesFragment extends DialogFragment {
         subCategoryAdapter = new SubCategoryAdapter(this.subCategories, this.colorId, this.categoryProgressDataList);
         recyclerView.setAdapter(subCategoryAdapter);
 
-
-//        TextView titleTv = new TextView(getContext());
-//        titleTv.setText(R.string.pick_sub_category_txt);
-//        titleTv.setTextSize(22f);
-//        titleTv.setGravity(Gravity.CENTER);
-//        titleTv.setPadding(20,5,20,5);
-//        titleTv.setTextColor(this.colorId);
-//        titleTv.setTypeface(this.typeface, Typeface.BOLD);
-
-//        this.getDialog().setTitle(R.string.pick_sub_category_txt);
         this.dialog = this.getDialog();
         this.window = this.getDialog().getWindow();
         this.window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

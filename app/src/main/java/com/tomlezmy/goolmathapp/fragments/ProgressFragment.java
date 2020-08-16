@@ -1,15 +1,9 @@
 package com.tomlezmy.goolmathapp.fragments;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hanks.htextview.base.HTextView;
 import com.tomlezmy.goolmathapp.FileManager;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.adapters.ProgressResultsAdapter;

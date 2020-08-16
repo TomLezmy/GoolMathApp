@@ -1,7 +1,6 @@
 package com.tomlezmy.goolmathapp.adapters;
 
 import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
