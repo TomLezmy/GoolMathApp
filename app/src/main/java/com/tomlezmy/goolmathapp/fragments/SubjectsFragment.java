@@ -1,12 +1,16 @@
 package com.tomlezmy.goolmathapp.fragments;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -148,27 +152,27 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
             fileManager = FileManager.getInstance(getContext());
             Dictionary<ECategory, List<CategoryProgressData>> levelProgressData = fileManager.getUserData().getLevelsProgressData();
             if (!levelProgressData.get(ECategory.SUBTRACTION).get(0).isOpen()) {
-                subtractionCard.setEnabled(false);
+                //subtractionCard.setEnabled(false);
                 subtractionCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.MULTIPLICATION).get(0).isOpen()) {
-                multiplicationCard.setEnabled(false);
+                //multiplicationCard.setEnabled(false);
                 multiplicationCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.DIVISION).get(0).isOpen()) {
-                divisionCard.setEnabled(false);
+                //divisionCard.setEnabled(false);
                 divisionCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.FRACTIONS).get(0).isOpen()) {
-                fractionsCard.setEnabled(false);
+                //fractionsCard.setEnabled(false);
                 fractionsCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.PERCENTS).get(0).isOpen()) {
-                percentagesCard.setEnabled(false);
+                //percentagesCard.setEnabled(false);
                 percentagesCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
             if (!levelProgressData.get(ECategory.DECIMALS).get(0).isOpen()) {
-                decimal_numbersCard.setEnabled(false);
+                //decimal_numbersCard.setEnabled(false);
                 decimal_numbersCard.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.disabled_card));
             }
         }
@@ -201,9 +205,29 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
             this.subCategoriesArray = subCategoriesArray;
         }
         @Override
-        public void onClick(View v) {
-            displaySubCategories(this.categoryIndex,this.subCategoriesArray);
+        public void onClick(final View v) {
+            if (!fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[categoryIndex]).get(0).isOpen()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(R.string.subject_closed_title).setMessage(R.string.subject_closed_message);
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                }).setNegativeButton(R.string.skip, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((CardView)v).setCardBackgroundColor(cardColorId);
+                        fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[categoryIndex]).get(0).setOpen(true);
+                        fileManager.updateUserDataFile();
+                        displaySubCategories(categoryIndex, subCategoriesArray);
+                    }
+                });
+                builder.create().show();
+            }
+            else {
+                displaySubCategories(this.categoryIndex, this.subCategoriesArray);
+            }
         }
     }
 }
