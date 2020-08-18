@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tomlezmy.goolmathapp.R;
@@ -63,6 +65,9 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
         int highScore =  progressResult.getHighScore();
         String tv_highScore_text = String.format(context.getResources().getString(R.string.your_high_score_is_x), highScore);
         holder.highScoreTv.setText(tv_highScore_text);
+        if (timesPlayed == 0) {
+            ((CardView)(holder.itemView)).setCardBackgroundColor(ContextCompat.getColor(context, R.color.disabled_card));
+        }
     }
 
     @Override

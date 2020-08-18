@@ -206,24 +206,28 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
         }
         @Override
         public void onClick(final View v) {
-            if (!fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[categoryIndex]).get(0).isOpen()) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(R.string.subject_closed_title).setMessage(R.string.subject_closed_message);
-                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            if (!isCreatedByLearnSelectActivity) {
+                if (!fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[categoryIndex]).get(0).isOpen()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle(R.string.subject_closed_title).setMessage(R.string.subject_closed_message);
+                    builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                }).setNegativeButton(R.string.skip, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ((CardView)v).setCardBackgroundColor(cardColorId);
-                        fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[categoryIndex]).get(0).setOpen(true);
-                        fileManager.updateUserDataFile();
-                        displaySubCategories(categoryIndex, subCategoriesArray);
-                    }
-                });
-                builder.create().show();
+                        }
+                    }).setNegativeButton(R.string.skip, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ((CardView) v).setCardBackgroundColor(cardColorId);
+                            fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[categoryIndex]).get(0).setOpen(true);
+                            fileManager.updateUserDataFile();
+                            displaySubCategories(categoryIndex, subCategoriesArray);
+                        }
+                    });
+                    builder.create().show();
+                } else {
+                    displaySubCategories(this.categoryIndex, this.subCategoriesArray);
+                }
             }
             else {
                 displaySubCategories(this.categoryIndex, this.subCategoriesArray);
