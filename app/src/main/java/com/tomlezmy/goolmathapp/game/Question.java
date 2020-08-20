@@ -49,7 +49,7 @@ public class Question {
                 break;
             case MULTIPLICATION:
                 this.result = this.numOne * this.numTwo;
-                sign = "*";
+                sign = "X";
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case DIVISION:

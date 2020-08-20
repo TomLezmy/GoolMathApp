@@ -143,7 +143,7 @@
     <string name="start_again_txt">Start Again</string>
     <string name="level_finished_txt">Level finished, nice work!</string>
     <string name="btn_start_game_txt">Start Game</string>
-    <string name="you_can_do_better_txt">you can do better!</string>
+    <string name="you_can_do_better_txt">we think you still need more practice, you can do better!</string>
     <string name="btn_cool_lets_go">Cool, let\'s go</string>
     <string name="txt_welcome">Welcome</string>
     <string name="first_name">Name</string>

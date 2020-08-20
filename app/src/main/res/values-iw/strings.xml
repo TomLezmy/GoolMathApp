@@ -147,7 +147,7 @@
     <string name="successfully_finished_the_level_txt">כל הכבוד! השלב הסתיים בהצלחה</string>
     <string name="start_again_txt">התחל מחדש</string>
     <string name="level_finished_txt">השלב הסתיים, כל הכבוד!</string>
-    <string name="you_can_do_better_txt">אין ספק שתוכל להשתפר!</string>
+    <string name="you_can_do_better_txt">אנחנו חושבים שיש לכם עוד להתאמן, אין ספק שתוכל להשתפר!</string>
     <string name="btn_cool_lets_go">קדימה, בואו נתחיל</string>
     <string name="txt_welcome">ברוכים הבאים</string>
     <string name="first_name">שם</string>
@@ -208,7 +208,7 @@
     <string name="about_obstacle_ladder">משאב מכשול סולם מ:</string>
     <string name="about_obstacle_log">משאב בול עץ מ:</string>
     <string name="about_obstacle_box">משאב קופסאת קרטון מ:</string>
-    <string name="about_obstacle_hurdle">משאב משוכה מ:</string>
+    <string name="about_obstacle_hurdle">משאב משyou_can_do_better_txtוכה מ:</string>
     <string name="about_obstacle_wheel">משאב גלגל מ:</string>
     <string name="about_obstacle_rock">משאב סלע מ:</string>
     <string name="subject_closed_title">קטגוריה סגורה</string>
