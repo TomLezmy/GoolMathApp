@@ -33,10 +33,6 @@
         <activity
             android:name=".activities.GamePage"
             android:screenOrientation="landscape" />
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
