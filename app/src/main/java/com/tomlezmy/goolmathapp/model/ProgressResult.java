@@ -4,11 +4,13 @@ public class ProgressResult {
     private String level;
     private int timesPlayed;
     private int highScore;
+    private boolean isFinished;
 
-    public ProgressResult(String level, int timesPlayed, int highScore) {
+    public ProgressResult(String level, int timesPlayed, int highScore, boolean isFinished) {
         this.level = level;
         this.timesPlayed = timesPlayed;
         this.highScore = highScore;
+        this.isFinished = isFinished;
     }
 
     public String getLevel() {
@@ -23,6 +25,9 @@ public class ProgressResult {
         return highScore;
     }
 
+    public boolean isFinished() {
+        return isFinished;
+    }
 
     public void setLevel(String level) {
         this.level = level;

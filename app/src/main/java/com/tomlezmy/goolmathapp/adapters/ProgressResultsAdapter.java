@@ -31,10 +31,11 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
         TextView levelTv;
         TextView timesPlayTv;
         TextView highScoreTv;
+        TextView finishedTv;
 
         public ProgressResultsViewHolder(View itemView) {
             super(itemView);
-
+            finishedTv = itemView.findViewById(R.id.tv_finished_level);
             levelTv = itemView.findViewById(R.id.tv_level);
             timesPlayTv = itemView.findViewById(R.id.tv_times_played);
             highScoreTv = itemView.findViewById(R.id.tv_highScore);
@@ -67,6 +68,9 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
         holder.highScoreTv.setText(tv_highScore_text);
         if (timesPlayed == 0) {
             ((CardView)(holder.itemView)).setCardBackgroundColor(ContextCompat.getColor(context, R.color.disabled_card));
+        }
+        if (progressResult.isFinished()) {
+            holder.finishedTv.setVisibility(View.VISIBLE);
         }
     }
 

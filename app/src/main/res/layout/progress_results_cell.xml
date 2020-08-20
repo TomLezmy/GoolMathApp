@@ -48,8 +48,21 @@
             android:text="@string/your_high_score_is_x"
             style="@style/FontLocalized"
             android:textSize="15sp"
+            android:padding="5dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:id="@+id/tv_highScore"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/progress_level_finished"
+            style="@style/FontLocalized"
+            android:textSize="15sp"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:id="@+id/tv_finished_level"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -38,7 +38,7 @@
         <Button
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="@string/continue_btn_txt"
+            android:text="@string/start_again_txt"
             android:background="@drawable/game_button_design"
             android:textColor="@color/white"
             style="@style/FontLocalized"
@@ -46,7 +46,19 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_margin="10dp"
-            android:id="@+id/btn_continue_playing"/>
+            android:id="@+id/btn_start_again"/>
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/next_level_txt"
+            android:background="@drawable/game_button_design"
+            android:textColor="@color/white"
+            style="@style/FontLocalized"
+            android:layout_toEndOf="@id/btn_start_again"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:id="@+id/btn_next_level"/>
     </RelativeLayout>
 
 </RelativeLayout>

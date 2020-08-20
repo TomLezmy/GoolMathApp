@@ -49,7 +49,8 @@ public class ProgressFragment extends Fragment {
             String level = getResources().getStringArray(stringArrays[getArguments().getInt("category")])[i];
             int timesPlayed = userData.getLevelsProgressData().get(category).get(i).getTimesPlayed();
             int highScore = userData.getLevelsProgressData().get(category).get(i).getMaxScore();
-            progressResultList.add(new ProgressResult(level,timesPlayed,highScore));
+            boolean isFinished = userData.getLevelsProgressData().get(category).get(i).isFinished();
+            progressResultList.add(new ProgressResult(level,timesPlayed,highScore,isFinished));
         }
         progressResultsAdapter = new ProgressResultsAdapter(progressResultList, getContext());
         recyclerView = rootView.findViewById(R.id.recycler);

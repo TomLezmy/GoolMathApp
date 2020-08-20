@@ -23,7 +23,7 @@
             android:id="@+id/background_two"/>
     </FrameLayout>
     <RelativeLayout
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="200dp"
         android:id="@+id/result_layout"
         android:gravity="center"

@@ -907,6 +907,12 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 finish();
             }
             else {
+                // If user skipped, open level
+                categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+                if (!categoryProgressData.isOpen()) {
+                    categoryProgressData.setOpen(true);
+                    fileManager.updateUserDataFile();
+                }
                 // Save Weights before game
                 weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
                 levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
@@ -977,6 +983,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     }
 
     private void openNextLevel() {
+        categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+        if (!categoryProgressData.isFinished()) {
+            categoryProgressData.setFinished(true);
+            fileManager.updateUserDataFile();
+        }
         int nextLevel = level + 1;
         int nextCategory = category;
         if (ECategory.values()[nextCategory].getNumberOfLevels() < nextLevel) {

@@ -22,7 +22,6 @@ public class GameFinishedFragment extends Fragment {
     Button backButton;
     boolean levelComplete;
     int improvementCounter, deteriorationCounter;
-    boolean moveToNextLevel = false;
     CategoryProgressData categoryProgressData;
     IResultFragmentListener callback;
 
@@ -49,9 +48,11 @@ public class GameFinishedFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_game_finished, container, false);
         TextView gameResultText = rootView.findViewById(R.id.game_result_text);
         backButton = rootView.findViewById(R.id.btn_back);
-        Button continueGameButton = rootView.findViewById(R.id.btn_continue_playing);
+        Button startAgainButton = rootView.findViewById(R.id.btn_start_again);
+        Button nextLevelButton = rootView.findViewById(R.id.btn_next_level);
         backButton.setOnTouchListener(new ButtonTouchAnimation());
-        continueGameButton.setOnTouchListener(new ButtonTouchAnimation());
+        nextLevelButton.setOnTouchListener(new ButtonTouchAnimation());
+        startAgainButton.setOnTouchListener(new ButtonTouchAnimation());
 
         String progressMessage = "";
         // Check if first game
@@ -65,19 +66,23 @@ public class GameFinishedFragment extends Fragment {
         }
 
         if (levelComplete) {
-            continueGameButton.setText(R.string.next_level_txt);
             gameResultText.setText(progressMessage + getString(R.string.successfully_finished_the_level_txt));
-            moveToNextLevel = true;
         }
         else {
-            continueGameButton.setText(R.string.start_again_txt);
             gameResultText.setText(progressMessage + getString(R.string.level_finished_txt) + "\n" + getString(R.string.you_can_do_better_txt));
         }
 
-        continueGameButton.setOnClickListener(new View.OnClickListener() {
+        startAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.onPressContinue(moveToNextLevel);
+                callback.onPressContinue(false);
+            }
+        });
+
+        nextLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onPressContinue(true);
             }
         });
 

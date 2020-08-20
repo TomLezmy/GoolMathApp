@@ -213,4 +213,5 @@
     <string name="about_obstacle_rock">משאב סלע מ:</string>
     <string name="subject_closed_title">קטגוריה סגורה</string>
     <string name="subject_closed_message">קטגוריה זו עדיין לא פתוחה, אתם צריכים לעבור את הקטגוריה הקודמת לפני.\n אם עדיין תרצו לדלג, בחרו דלג</string>
+    <string name="progress_level_finished">סיימתם את השלב!</string>
 </resources>
