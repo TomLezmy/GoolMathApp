@@ -245,11 +245,14 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
 
 
+        // Get level and category
+        category = getIntent().getIntExtra("category",0);
+        level = getIntent().getIntExtra("level",0);
         // Noa Added
         // Show sub game level before the game start
         this.tv_wood_sign = findViewById(R.id.tv_wood_sign_level);
         this.img_wood_sign = findViewById(R.id.wood_sign_img);
-        updateWoodSignOfCurrentLevel(category, level);
+        updateWoodSignOfCurrentLevel(category, level - 1);
 
         walkBtn.setOnTouchListener(new ButtonTouchAnimation());
         walkBtn.setOnClickListener(new View.OnClickListener() {
@@ -275,9 +278,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 }
                 else {
                     if (!walkingAnimation.isRunning()) {
-                        // Get level and category
-                        category = getIntent().getIntExtra("category",0);
-                        level = getIntent().getIntExtra("level",0);
                         // Save Weights before game
                         weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
                         levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
@@ -927,78 +927,13 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     categoryProgressData.setOpen(true);
                     fileManager.updateUserDataFile();
                 }
-                // Save Weights before game
-                weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
-                levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
-                obstacleIndex = rand.nextInt(objectImages.length);
-                obstacle.setImageResource(objectImages[obstacleIndex]);
-                player.setImageDrawable(walkingAnimation);
-                // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
-                timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f * gameSpeed) * -1 * 16.665f;
-                countDownTimer = new CountDownTimer((long) timeToCrash, 1000) {
-                    public void onTick(long millisUntilFinished) {
-                        // Set Clock ticking sound while count down timer
-                        clockTickingRing.setVolume(1, 1);
-                        playSound(clockTickingRing);
-                        timerText.setText((millisUntilFinished / 1000) + "");
-                    }
-
-                    public void onFinish() {
-                        timerText.setVisibility(View.INVISIBLE);
-                        timerText.setText("");
-                    }
-                };
-
-
-
-
-                timerText.setVisibility(View.VISIBLE);
-                countDownTimer.start();
-                walkingAnimation.start();
-                if (valueAnimator.isPaused()) {
-                    valueAnimator.resume();
-                } else {
-                    valueAnimator.start();
-                }
-                // Noa Test
-                updateWoodSignOfCurrentLevel(category,level);
-                levelManager.generateQuestions();
-                showQuestion();
+                updateWoodSignOfCurrentLevel(category,level - 1);
+                this.tv_wood_sign.setText(this.currentLevel);
             }
         }
-        else {
-            // Save Weights before game
-            weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
-            levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
-            obstacleIndex = rand.nextInt(objectImages.length);
-            obstacle.setImageResource(objectImages[obstacleIndex]);
-            player.setImageDrawable(walkingAnimation);
-            // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
-            timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f * gameSpeed) * -1 * 16.665f;
-            countDownTimer = new CountDownTimer((long) timeToCrash, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    // Set Clock ticking sound while count down timer
-                    clockTickingRing.setVolume(1, 1);
-                    playSound(clockTickingRing);
-                    timerText.setText((millisUntilFinished / 1000) + "");
-                }
-
-                public void onFinish() {
-                    timerText.setVisibility(View.INVISIBLE);
-                    timerText.setText("");
-                }
-            };
-            timerText.setVisibility(View.VISIBLE);
-            countDownTimer.start();
-            walkingAnimation.start();
-            if (valueAnimator.isPaused()) {
-                valueAnimator.resume();
-            } else {
-                valueAnimator.start();
-            }
-            levelManager.generateQuestions();
-            showQuestion();
-        }
+        walkBtn.setVisibility(View.VISIBLE);
+        this.tv_wood_sign.setVisibility(View.VISIBLE);
+        this.img_wood_sign.setVisibility(View.VISIBLE);
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();
     }
 
@@ -1014,9 +949,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             nextLevel = 1;
             nextCategory++;
         }
-        // Noa added
-        updateWoodSignOfCurrentLevel(nextCategory, nextLevel);
-        this.tv_wood_sign.setText(this.currentLevel);
 
         // Check for last category
         if (ECategory.values().length != nextCategory) {
@@ -1055,7 +987,5 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         }
         this.tv_wood_sign.setText(this.currentLevel);
     }
-
-
 }
 
