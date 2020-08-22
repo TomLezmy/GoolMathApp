@@ -146,7 +146,7 @@ public class FileManager {
         levelWeights = new Hashtable<>();
         levelWeights.put(ECategory.ADDITION,Arrays.asList(Arrays.asList(1,1,1), Arrays.asList(1,1,1,1,1,1,1,1,1,1)));
         levelWeights.put(ECategory.SUBTRACTION,Arrays.asList(Arrays.asList(1,1,1), Arrays.asList(1,1,1,1,1,1,1,1,1,1), Arrays.asList(1,1,1)));
-        levelWeights.put(ECategory.MULTIPLICATION,Arrays.asList(Arrays.asList(1,1,1),Arrays.asList(1,1,1,1,1,1),Arrays.asList(1,1,1,1,1,1,1,1,1,1),Arrays.asList(1,1,1,1),Arrays.asList(1,1,1,1)));
+        levelWeights.put(ECategory.MULTIPLICATION,Arrays.asList(Arrays.asList(1),Arrays.asList(1,1,1,1,1,1),Arrays.asList(1,1,1,1,1,1,1,1,1,1),Arrays.asList(1,1,1,1),Arrays.asList(1,1,1,1)));
         levelWeights.put(ECategory.DIVISION,Arrays.asList(Arrays.asList(1,1),Arrays.asList(1,1,1),Arrays.asList(1),Arrays.asList(1,1),Arrays.asList(1,1)));
         levelWeights.put(ECategory.FRACTIONS,Arrays.asList(Arrays.asList(1,1), Arrays.asList(1,1), Arrays.asList(1,1), Arrays.asList(1,1), Arrays.asList(1,1,1,1), Arrays.asList(1,1,1,1), Arrays.asList(1,1,1), Arrays.asList(1,1,1), Arrays.asList(1,1,1), Arrays.asList(1,1,1), Arrays.asList(1,1,1,1,1,1), Arrays.asList(1,1,1,1,1,1,1,1,1,1)));
         levelWeights.put(ECategory.PERCENTS,Arrays.asList(Arrays.asList(1), Arrays.asList(1), Arrays.asList(1,1), Arrays.asList(1,1,1,1,1,1), Arrays.asList(1,1,1,1), Arrays.asList(1,1), Arrays.asList(1,1,1), Arrays.asList(1,1)));
