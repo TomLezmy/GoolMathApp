@@ -384,5 +384,29 @@
             android:text="https://webstockreview.net/image/clipart-rock/1237281.html"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="@string/about_wood_sign"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontLocalized"
+            android:textSize="12sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/gray"
+            android:text="http://clipart-library.com/clip-art/wood-sign-transparent-background-8.htm"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
     </LinearLayout>
 </ScrollView>
