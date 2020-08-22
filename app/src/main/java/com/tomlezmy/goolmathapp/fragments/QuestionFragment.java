@@ -30,9 +30,9 @@ public class QuestionFragment extends Fragment {
         questionText.setTextAppearance(R.style.FontLocalized);
         int questionLen = questionText.length();
         if (questionLen < 11) {
-            questionText.setTextSize(20f);
-        } else {
             questionText.setTextSize(17f);
+        } else {
+            questionText.setTextSize(14f);
         }
         return rootView;
     }
