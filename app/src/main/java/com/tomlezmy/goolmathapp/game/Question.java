@@ -45,6 +45,12 @@ public class Question {
             case SUBTRACTION:
                 this.result = this.numOne - this.numTwo;
                 sign = "-";
+                if (level == 1) {
+                    while (numOne - numTwo < 0) {
+                        numOne = valueLimits.getFirstNumberLimit().generateValue();
+                        numTwo = valueLimits.getSecondNumberLimit().generateValue();
+                    }
+                }
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case MULTIPLICATION:
