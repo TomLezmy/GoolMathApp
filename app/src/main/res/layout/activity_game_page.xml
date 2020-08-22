@@ -142,4 +142,29 @@
         android:layout_margin="5dp"
         android:text="@string/jump_button"
         android:id="@+id/start_stand" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:id="@+id/wood_sign_layout"
+        android:gravity="center"
+        android:layout_above="@+id/button_fragment_layout">
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/wood_sign"
+            android:id="@+id/wood_sign_img"/>
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="70dp"
+                android:id="@+id/tv_wood_sign_level"
+                android:textColor="@color/white"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="start"
+                android:layout_marginTop="20dp"
+                style="@style/FontLocalized"
+                android:textSize="10sp"/>
+    </RelativeLayout>
 </RelativeLayout>

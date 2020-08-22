@@ -83,6 +83,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     List<Integer> weightsBeforeGame;
     CategoryProgressData categoryProgressData;
     SharedPreferences sharedPreferences;
+    TextView tv_wood_sign;
+    ImageView img_wood_sign;
+    String currentLevel = "";
+
 
     // For Tutorial Run
     boolean isTutorialRun = false, beforeTutorialQuestionPopup = true, endTutorialInitiated = false;
@@ -239,10 +243,20 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             }
         });
 
+
+
+        // Noa Added
+        // Show sub game level before the game start
+        this.tv_wood_sign = findViewById(R.id.tv_wood_sign_level);
+        this.img_wood_sign = findViewById(R.id.wood_sign_img);
+        updateWoodSignOfCurrentLevel(category, level);
+
         walkBtn.setOnTouchListener(new ButtonTouchAnimation());
         walkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tv_wood_sign.setVisibility(View.GONE);
+                img_wood_sign.setVisibility(View.GONE);
                 if (isTutorialRun) {
                     player.setImageDrawable(walkingAnimation);
                     walkingAnimation.start();
@@ -934,6 +948,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         timerText.setText("");
                     }
                 };
+
+
+
+
                 timerText.setVisibility(View.VISIBLE);
                 countDownTimer.start();
                 walkingAnimation.start();
@@ -942,6 +960,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 } else {
                     valueAnimator.start();
                 }
+                // Noa Test
+                updateWoodSignOfCurrentLevel(category,level);
                 levelManager.generateQuestions();
                 showQuestion();
             }
@@ -994,6 +1014,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             nextLevel = 1;
             nextCategory++;
         }
+        // Noa added
+        updateWoodSignOfCurrentLevel(nextCategory, nextLevel);
+        this.tv_wood_sign.setText(this.currentLevel);
+
         // Check for last category
         if (ECategory.values().length != nextCategory) {
             // Open next level if needed
@@ -1004,5 +1028,34 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             }
         }
     }
+
+    void updateWoodSignOfCurrentLevel(int categoryId, int levelId) {
+        switch (categoryId) {
+            case 0:
+                this.currentLevel = getResources().getStringArray(R.array.practice_additionSubCategories)[levelId];
+                break;
+            case 1:
+                this.currentLevel = getResources().getStringArray(R.array.practice_subtractionSubCategories)[levelId];
+                break;
+            case 2:
+                this.currentLevel = getResources().getStringArray(R.array.practice_multiplicationSubCategories)[levelId];
+                break;
+            case 3:
+                this.currentLevel = getResources().getStringArray(R.array.practice_divisionSubCategories)[levelId];
+                break;
+            case 4:
+                this.currentLevel = getResources().getStringArray(R.array.practice_fractionsSubCategories)[levelId];
+                break;
+            case 5:
+                this.currentLevel = getResources().getStringArray(R.array.practice_percentsSubCategories)[levelId];
+                break;
+            case 6:
+                this.currentLevel = getResources().getStringArray(R.array.practice_decimalsSubCategories)[levelId];
+                break;
+        }
+        this.tv_wood_sign.setText(this.currentLevel);
+    }
+
+
 }
 
