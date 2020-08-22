@@ -74,6 +74,10 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
                 holder.nameTv.setTextColor(Color.GRAY);
                 holder.itemView.setEnabled(false);
             }
+            else {
+                holder.nameTv.setTextColor(colorId);
+                holder.itemView.setEnabled(true);
+            }
         }
     }
 

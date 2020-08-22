@@ -58,7 +58,6 @@
 
 
     <string-array name="practice_divisionSubCategories">
-        <item>Division Up To 5</item>
         <item>Division Up To 10</item>
         <item>Division Of at 10</item>
         <item>Division Double-Digit Numbers In a Single Digit Numbers</item>
@@ -72,12 +71,6 @@
         <item>Fractions Reduction – Part 2</item>
         <item>Fractions Expansion – Single And Double Digits Numbers</item>
         <item>Fractions  Reduction  – Single And Double Digits Numbers</item>
-        <item>Addition And Subtraction Of Fractions - Prime Denominator</item>
-        <item>Addition And Subtraction Of Fractions - Single-Digit Denominator</item>
-        <item>Addition And Subtraction Of Fractions - Double-Digit Denominator</item>
-        <item>Multiplication Of Fractions - Prime Denominator</item>
-        <item>Multiplication Of Fractions - Single-Digit Denominator Part 1</item>
-        <item>Multiplication Of Fractions - Single-Digit Denominator Part 2</item>
     </string-array>
 
     <string-array name="practice_percentsSubCategories">
@@ -181,7 +174,7 @@
     <string name="first_diagnostic_important_info">(it is not possible to leave during the questionaire otherwise the information will be deleted)</string>
     <string name="percent_of">of</string>
     <string name="decimal_question">What is %s in decimal?</string>
-    <string name="decimal_to_fraction_question">What is %s in fractions?</string>
+    <string name="decimal_to_fraction_question">What is %s% in fractions?</string>
     <string name="jump_button">Jump</string>
     <string name="no_more_videos">No more videos</string>
     <string name="about_fruit_asset">Fruits assets by:</string>

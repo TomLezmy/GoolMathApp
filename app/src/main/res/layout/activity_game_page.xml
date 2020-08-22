@@ -22,14 +22,7 @@
             android:src="@drawable/game_image_option_5"
             android:id="@+id/background_two"/>
     </FrameLayout>
-    <RelativeLayout
-        android:layout_width="400dp"
-        android:layout_height="250dp"
-        android:id="@+id/result_layout"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+
     <RelativeLayout
         android:layout_width="180dp"
         android:layout_height="120dp"
@@ -52,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/game_layout">
+
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -104,21 +98,6 @@
                 android:layout_marginTop="33dp"
                 android:textColor="@color/clock_txt"
                 android:textSize="15sp"/>
-<!--            <com.hanks.htextview.line.LineTextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:text="2"-->
-<!--                app:animationDuration="1000"-->
-<!--                android:visibility="invisible"-->
-<!--                android:padding="10dp"-->
-<!--                app:lineColor="#1367bc"-->
-<!--                app:lineWidth="4dp"-->
-<!--                style="@style/FontLocalized"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:id="@+id/timer_text"-->
-<!--                android:layout_margin="10dp"-->
-<!--                android:textSize="20sp"/>-->
         </FrameLayout>
     </RelativeLayout>
     <RelativeLayout
@@ -143,6 +122,14 @@
         android:text="@string/jump_button"
         android:id="@+id/start_stand" />
 
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:id="@+id/result_layout"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -29,7 +29,7 @@ public class FractionQuestion extends Question {
                     mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
                     result = numOne * mul;
                     resultDenominator = numTwo * mul;
-                    questionHiddenAnswer = numOne + "/" + numTwo + " = ?";
+                    questionHiddenAnswer = numOne + "\n- = ?\n" + numTwo;
                     break;
                 case 3:
                 case 4:
@@ -43,45 +43,7 @@ public class FractionQuestion extends Question {
                     temp = resultDenominator;
                     resultDenominator = numTwo;
                     numTwo = temp;
-                    questionHiddenAnswer = numOne + "/" + numTwo + " = ?";
-                    break;
-                case 7:
-                case 8:
-                case 9:
-                    numThree = valueLimits.getThirdNumberLimit().generateValue();
-                    numFour = valueLimits.getFourthNumberLimit().generateValue();
-                    int lcd = lcm(numTwo, numFour);
-                    int numOneAfterLcd = numOne * (lcd / numTwo);
-                    int numThreeAfterLcd = numThree * (lcd / numFour);
-                    resultDenominator = lcd;
-                    if (rand.nextInt(2) == 0) {
-                        sign = "+";
-                        result = numOneAfterLcd + numThreeAfterLcd;
-                    } else {
-                        sign = "-";
-                        result = numOneAfterLcd - numThreeAfterLcd;
-                    }
-                    questionHiddenAnswer = numOne + "/" + numTwo + " " + sign + " " + numThree + "/" + numFour + " = ?";
-                    break;
-                case 10:
-                case 11:
-                    while (numTwo < numOne) {
-                        numTwo = valueLimits.getSecondNumberLimit().generateValue();
-                    }
-                    numThree = valueLimits.getThirdNumberLimit().generateValue();
-                    do {
-                        numFour = valueLimits.getFourthNumberLimit().generateValue();
-                    } while (numFour < numThree);
-                    result = numOne * numThree;
-                    resultDenominator = numTwo * numFour;
-                    questionHiddenAnswer = numOne + "/" + numTwo + " X " + numThree + "/" + numFour + " = ?";
-                    break;
-                case 12:
-                    numThree = valueLimits.getThirdNumberLimit().generateValue();
-                    numFour = valueLimits.getFourthNumberLimit().generateValue();
-                    result = numOne * numThree;
-                    resultDenominator = numTwo * numFour;
-                    questionHiddenAnswer = numOne + "/" + numTwo + " X " + numThree + "/" + numFour + " = ?";
+                    questionHiddenAnswer = numOne + "\n- = ?\n" + numTwo;
                     break;
             }
         }

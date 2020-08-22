@@ -72,7 +72,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     TextView scoreText, timerText;
     Button jumpBtn, walkBtn;
     float screenWidth, screenHeight, timeToCrash, linearValue, objectHeight, userAnswer;
-    boolean beforeQuestion = true, isBonus = false;
+    boolean beforeQuestion = true, isBonus = false, gameRunning = false;
     LevelManager levelManager;
     Random rand;
     CountDownTimer countDownTimer;
@@ -248,18 +248,12 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         // Get level and category
         category = getIntent().getIntExtra("category",0);
         level = getIntent().getIntExtra("level",0);
-        // Noa Added
-        // Show sub game level before the game start
-        this.tv_wood_sign = findViewById(R.id.tv_wood_sign_level);
-        this.img_wood_sign = findViewById(R.id.wood_sign_img);
-        updateWoodSignOfCurrentLevel(category, level - 1);
 
         walkBtn.setOnTouchListener(new ButtonTouchAnimation());
         walkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_wood_sign.setVisibility(View.GONE);
-                img_wood_sign.setVisibility(View.GONE);
+                gameRunning = true;
                 if (isTutorialRun) {
                     player.setImageDrawable(walkingAnimation);
                     walkingAnimation.start();
@@ -277,6 +271,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                             .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
                 }
                 else {
+                    tv_wood_sign.setVisibility(View.GONE);
+                    img_wood_sign.setVisibility(View.GONE);
                     if (!walkingAnimation.isRunning()) {
                         // Save Weights before game
                         weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
@@ -309,9 +305,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         }
                         levelManager.generateQuestions();
                         showQuestion();
-                        walkBtn.setVisibility(View.GONE);
                     }
                 }
+                walkBtn.setVisibility(View.GONE);
             }
         });
 
@@ -539,6 +535,16 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         else if (getIntent().hasExtra("tutorial")) {
             tutorialRun();
         }
+        this.tv_wood_sign = findViewById(R.id.tv_wood_sign_level);
+        this.img_wood_sign = findViewById(R.id.wood_sign_img);
+        if (!isTutorialRun) {
+            // Show sub game level before the game start
+            updateWoodSignOfCurrentLevel(category, level - 1);
+        }
+        else {
+            tv_wood_sign.setVisibility(View.GONE);
+            img_wood_sign.setVisibility(View.GONE);
+        }
     }
 
     private void tutorialRun() {
@@ -627,8 +633,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 fallingAnimation = new CustomAnimationDrawable(fall) {
                     @Override
                     public void onAnimationFinish() {
-                        player.setImageDrawable(walkingAnimation);
-                        walkingAnimation.start();
+                        if (gameRunning) {
+                            player.setImageDrawable(walkingAnimation);
+                            walkingAnimation.start();
+                        }
                     }
 
                     @Override
@@ -688,8 +696,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         }
         else {
             // Level finished
-            walkingAnimation.stop();
+            gameRunning = false;
             fallingAnimation.stop();
+            walkingAnimation.stop();
             player.setImageResource(R.drawable.good1);
             valueAnimator.pause();
             endLevelAndCheckResults();

@@ -71,11 +71,26 @@ public class Question {
                     }
                     this.result = ((float) this.numOne / (float) this.numTwo);
                 }
-//                if ((int)result != result) {
-//                    result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
-//                }
                 sign = "/";
-                questionHiddenAnswer = numOne + sign + numTwo + "= ?";
+                // If numOne is bigger than 1000 then put commas in the number
+                if (level == 3 && numOne >= 1000) {
+                    String bigNumOne = numOne + "";
+                    StringBuilder numOneWithCommas = new StringBuilder();
+                    int numCount = 0;
+                    for (int i = bigNumOne.length() - 1; i >= 0; i--) {
+                        numCount++;
+                        numOneWithCommas.append(bigNumOne.charAt(i));
+                        if (numCount == 3) {
+                            numCount = 0;
+                            numOneWithCommas.append(',');
+                        }
+                    }
+                    numOneWithCommas.reverse();
+                    questionHiddenAnswer = numOneWithCommas.toString() + sign + numTwo + "= ?";
+                }
+                else {
+                    questionHiddenAnswer = numOne + sign + numTwo + "= ?";
+                }
                 break;
             case PERCENTS:
                 int percentDenominator = 100, percentNumerator = numTwo;

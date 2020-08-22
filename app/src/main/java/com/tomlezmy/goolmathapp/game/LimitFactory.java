@@ -157,29 +157,15 @@ public class LimitFactory {
                 switch (level) {
                     case 1:
                         levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(new int[]{0});
-                        levelValues.setSecondNumberLimit(1, 5);
+                        levelValues.setFirstNumberLimit(1, 5);
+                        levelValues.setSecondNumberLimit(2, 10);
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
                         levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(1, 5);
-                        levelValues.setSecondNumberLimit(1, 5);
+                        levelValues.setFirstNumberLimit(6, 10);
+                        levelValues.setSecondNumberLimit(2, 10);
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
                         break;
                     case 2:
-                        levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(new int[]{0});
-                        levelValues.setSecondNumberLimit(1, 10);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
-                        levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(1, 5);
-                        levelValues.setSecondNumberLimit(1, 10);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
-                        levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(6, 10);
-                        levelValues.setSecondNumberLimit(1, 10);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(2)));
-                        break;
-                    case 3:
                         levelValues = new LevelValueLimits();
                         int[] array = new int[10000];
                         int index = 0;
@@ -190,7 +176,7 @@ public class LimitFactory {
                         levelValues.setSecondNumberLimit(new int[]{10});
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
                         break;
-                    case 4:
+                    case 3:
                         levelValues = new LevelValueLimits();
                         levelValues.setFirstNumberLimit(new int[]{10,20,30,40});
                         levelValues.setSecondNumberLimit(1,9);
@@ -200,7 +186,7 @@ public class LimitFactory {
                         levelValues.setSecondNumberLimit(1,9);
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
                         break;
-                    case 5:
+                    case 4:
                         int valueArray[] = new int[31];
                         int valueIndex = 0;
                         levelValues = new LevelValueLimits();
@@ -273,104 +259,6 @@ public class LimitFactory {
                         ((LevelValueFractionLimits)levelValues).setMultiplierLimit(100);
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(3)));
                         break;
-                    case 7:
-                    case 10:
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,9);
-                        levelValues.setSecondNumberLimit(new int[] {2,3,5,7,9});
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,9);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(new int[] {2,3,5,7,9});
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,10);
-                        levelValues.setSecondNumberLimit(new int[] {11,13,17,19});
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(new int[] {11,13,17,19});
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,9);
-                        levelValues.setSecondNumberLimit(new int[] {2,3,5,7,9});
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(new int[] {11,13,17,19});
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(2)));
-                        break;
-                    case 8:
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,10);
-                        levelValues.setSecondNumberLimit(2,5);
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(2,5);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,10);
-                        levelValues.setSecondNumberLimit(6,9);
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(6,9);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,10);
-                        levelValues.setSecondNumberLimit(2,5);
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(6,9);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(2)));
-                        break;
-                    case 9:
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,10);
-                        levelValues.setSecondNumberLimit(10,49);
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(10,49);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,10);
-                        levelValues.setSecondNumberLimit(50,99);
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(50,99);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
-                        levelValues = new LevelValueFractionLimits();
-                        levelValues.setFirstNumberLimit(1,10);
-                        levelValues.setSecondNumberLimit(10,49);
-                        ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(1,10);
-                        ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(50,99);
-                        valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(2)));
-                        break;
-                    case 11: {
-                        arr1 = new int[]{1, 1, 1, 6, 6, 1};
-                        arr2 = new int[]{5, 5, 5, 10, 10, 5};
-                        arr3 = new int[]{1, 1, 1, 6, 6, 6};
-                        arr4 = new int[]{5, 5, 5, 10, 10, 10};
-                        int arr5[] = new int[]{1, 6, 1, 6, 1, 1};
-                        int arr6[] = new int[]{5, 10, 5, 10, 5, 5};
-                        int arr7[] = new int[]{1, 6, 6, 6, 6, 6};
-                        int arr8[] = new int[]{5, 10, 10, 10, 10, 10};
-                        for (int i = 0; i < 6; i++) {
-                            levelValues = new LevelValueFractionLimits();
-                            levelValues.setFirstNumberLimit(arr1[i], arr2[i]);
-                            levelValues.setSecondNumberLimit(arr3[i], arr4[i]);
-                            ((LevelValueFractionLimits) levelValues).setThirdNumberLimit(arr5[i], arr6[i]);
-                            ((LevelValueFractionLimits) levelValues).setFourthNumberLimit(arr7[i], arr8[i]);
-                            valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(i)));
-                        }
-                        break;
-                    }
-                    case 12:
-                        arr1 = new int []{1, 1, 1, 1, 6, 6, 6, 1, 1, 6};
-                        arr2 = new int []{5, 5, 5, 5,10,10,10, 5, 5,10};
-                        arr3 = new int []{1, 1, 1, 1, 6, 6, 6, 6, 6, 1};
-                        arr4 = new int []{5, 5, 5, 5,10,10,10,10,10, 5};
-                        int arr5[] = new int []{1, 6, 1, 6, 6, 1, 6, 1, 6, 6};
-                        int arr6[] = new int []{5,10, 5,10,10, 5,10, 5,10,10};
-                        int arr7[] = new int []{1, 6, 6, 1, 6, 6, 1, 6, 1, 1};
-                        int arr8[] = new int []{5,10,10, 5,10,10, 5,10, 5, 5};
-                        for (int i = 0; i < 10; i++) {
-                            levelValues = new LevelValueFractionLimits();
-                            levelValues.setFirstNumberLimit(arr1[i],arr2[i]);
-                            levelValues.setSecondNumberLimit(arr3[i],arr4[i]);
-                            ((LevelValueFractionLimits)levelValues).setThirdNumberLimit(arr5[i],arr6[i]);
-                            ((LevelValueFractionLimits)levelValues).setFourthNumberLimit(arr7[i],arr8[i]);
-                            valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(i)));
-                        }
-                        break;
                 }
                 break;
             case PERCENTS:
@@ -400,7 +288,6 @@ public class LimitFactory {
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
                         break;
                     case 3:
-                        // TODO maybe only give even numbers
                         levelValues = new LevelValueLimits();
                         levelValues.setFirstNumberLimit(2,1000);
                         levelValues.setSecondNumberLimit(new int[]{50});
@@ -466,25 +353,25 @@ public class LimitFactory {
                         break;
                     case 7:
                         levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(1,1000);
+                        levelValues.setFirstNumberLimit(1,100);
                         levelValues.setSecondNumberLimit(new int[] {101,110,150,99,120,125});
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
                         levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(1,1000);
+                        levelValues.setFirstNumberLimit(1,100);
                         levelValues.setSecondNumberLimit(new int[] {49,19,24});
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
                         levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(1,1000);
+                        levelValues.setFirstNumberLimit(1,100);
                         levelValues.setSecondNumberLimit(new int[] {51,70,21,26,45,75});
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(2)));
                         break;
                     case 8:
                         levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(1,1000);
+                        levelValues.setFirstNumberLimit(1,100);
                         levelValues.setSecondNumberLimit(100,299);
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
                         levelValues = new LevelValueLimits();
-                        levelValues.setFirstNumberLimit(1,1000);
+                        levelValues.setFirstNumberLimit(1,100);
                         levelValues.setSecondNumberLimit(300,500);
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
                         break;
@@ -609,7 +496,7 @@ public class LimitFactory {
                         } else {
                             option = ((int) answer - bounds.generateValue()) + "";
                         }
-                    } while (options.contains(option));
+                    } while (options.contains(option) || Integer.parseInt(option) < 0);
                     options.add(option);
                 }
                 break;

@@ -61,7 +61,6 @@
     </string-array>
 
     <string-array name="practice_divisionSubCategories">
-        <item>חילוק עד 5</item>
         <item>חילוק עד 10</item>
         <item>חילוק ב- 10</item>
         <item>חילוק דו ספרתי בחד ספרתי</item>
@@ -75,12 +74,6 @@
         <item>צמצום שברים – חלק 2</item>
         <item>הרחבת שברים עם מספרים חד ספרתיים ודו ספרתיים</item>
         <item>צמצום שברים עם מספרים חד ספרתיים ודו ספרתיים</item>
-        <item>חיבור וחיסור שברים עם מכנה מספר ראשוני</item>
-        <item>חיבור וחיסור שברים עם מכנה חד ספרתי</item>
-        <item>חיבור וחיסור שברים עם מכנה דו ספרתי</item>
-        <item>כפל שברים עם מכנה שהוא מספר ראשוני</item>
-        <item>כפל שברים עם מכנה חד ספרתי – חלק 1</item>
-        <item>כפל שברים עם מכנה חד ספרתי – חלק 2</item>
     </string-array>
 
     <string-array name="practice_percentsSubCategories">
@@ -184,7 +177,7 @@
     <string name="last_category_message">אין עוד שלבים, סיימתם את המשחק!</string>
     <string name="percent_of">מ</string>
     <string name="decimal_question">כמה זה %s בייצוג עשרוני?</string>
-    <string name="decimal_to_fraction_question">כמה זה %s כשבר?</string>
+    <string name="decimal_to_fraction_question">כמה זה %s% כשבר?</string>
     <string name="jump_button">קפוץ</string>
     <string name="no_more_videos">אין עוד סרטונים</string>
     <string name="about_fruit_asset">משאב פירות מ:</string>
