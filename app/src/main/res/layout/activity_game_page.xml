@@ -107,20 +107,6 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:id="@+id/button_fragment_layout"/>
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_4_design"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="15sp"
-        style="@style/FontLocalized"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_margin="5dp"
-        android:text="@string/jump_button"
-        android:id="@+id/start_stand" />
 
     <RelativeLayout
         android:layout_width="400dp"

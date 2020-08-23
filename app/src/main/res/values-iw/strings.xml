@@ -164,9 +164,7 @@
     <string name="tutorial_options">אלא הפתרונות האפשריים, תנסו לענות</string>
     <string name="tutorial_correct_answer">עבודה טובה! השגתם נקודה!</string>
     <string name="tutorial_wrong_answer">לא נורא, תצליחו פעם הבאה</string>
-    <string name="tutorial_number_of_levels">בכל שלב יש עשר שאלות, אבל בין שאלות יש סיכוי לבונוס</string>
-    <string name="tutorial_jump_button">כשהכפתור הזה מופיע זה אומר שבונוס התחיל</string>
-    <string name="tutorial_bonus">השתמשו בכפתור זה בשביל לקפוץ ולאסוף את כל הפירות בשביל ניקוד נוסף</string>
+    <string name="tutorial_number_of_levels">בכל שלב יש עשר שאלות</string>
     <string name="tutorial_end">זה כל מה שאתם צריכים לדעת, משחק מהנה!</string>
     <string name="settings_sound_title">צלילים</string>
     <string name="settings_sound_summary">אפשרו צלילים</string>
@@ -178,7 +176,6 @@
     <string name="percent_of">מ</string>
     <string name="decimal_question">כמה זה %s בייצוג עשרוני?</string>
     <string name="decimal_to_fraction_question">כמה זה %s% כשבר?</string>
-    <string name="jump_button">קפוץ</string>
     <string name="no_more_videos">אין עוד סרטונים</string>
     <string name="about_fruit_asset">משאב פירות מ:</string>
     <string name="before_we_start">"רגע לפני שנתחיל, "</string>

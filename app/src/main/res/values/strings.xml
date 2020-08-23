@@ -160,9 +160,7 @@
     <string name="tutorial_options">These are your answer options, try answering</string>
     <string name="tutorial_correct_answer">Good job! you got a point!</string>
     <string name="tutorial_wrong_answer">That\'s ok, you\'ll get it next time!</string>
-    <string name="tutorial_number_of_levels">Each level has 10 questions, but between questions there is a chance for a bonus round</string>
-    <string name="tutorial_jump_button">When this button appears it means that bonus round has started</string>
-    <string name="tutorial_bonus">Use this button to jump and collect all the fruit for additional points</string>
+    <string name="tutorial_number_of_levels">Each level has 10 questions</string>
     <string name="tutorial_end">That\'s all you need to know, happy gaming!</string>
     <string name="settings_sound_title">Sound</string>
     <string name="settings_sound_summary">Enable sound</string>
@@ -175,7 +173,6 @@
     <string name="percent_of">of</string>
     <string name="decimal_question">What is %s in decimal?</string>
     <string name="decimal_to_fraction_question">What is %s% in fractions?</string>
-    <string name="jump_button">Jump</string>
     <string name="no_more_videos">No more videos</string>
     <string name="about_fruit_asset">Fruits assets by:</string>
     <string name="before_we_start">Just before we start,</string>
