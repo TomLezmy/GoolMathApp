@@ -511,9 +511,9 @@ public class LimitFactory {
                     for (int i = 0; i < numberOfOptions - 1; i++) {
                         do {
                             if (rand.nextInt(2) == 1) {
-                                option = ((int) numerator + rand.nextInt(16)) + "/" + denominator;
+                                option = ((int) numerator + rand.nextInt(16)) + "\n-\n" + denominator;
                             } else {
-                                option = ((int) numerator - rand.nextInt(16)) + "/" + denominator;
+                                option = ((int) numerator - rand.nextInt(16)) + "\n-\n" + denominator;
                             }
                         } while (options.contains(option));
                         options.add(option);

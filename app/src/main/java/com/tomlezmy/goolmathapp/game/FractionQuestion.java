@@ -9,7 +9,7 @@ import com.tomlezmy.goolmathapp.R;
 import java.util.Random;
 
 public class FractionQuestion extends Question {
-    private int resultDenominator, numThree, numFour;
+    private int resultDenominator;
     private String questionHiddenAnswer;
 
     public FractionQuestion(ECategory category, LevelValueLimits valueLimits, int level, Context context) {
@@ -56,7 +56,7 @@ public class FractionQuestion extends Question {
         }
     }
 
-    public String getFractionAnswer() {return (int)result + "/" + resultDenominator;}
+    public String getFractionAnswer() {return (int)result + "\n-\n" + resultDenominator;}
 
     public int getAnswerDenominator() {return resultDenominator;}
 
@@ -85,10 +85,5 @@ public class FractionQuestion extends Question {
             return b;
 
         return gcd(b % a, a);
-    }
-
-    private int lcm(int a, int b)
-    {
-        return (a * b) / gcd(a, b);
     }
 }
