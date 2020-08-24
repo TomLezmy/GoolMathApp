@@ -3,10 +3,8 @@ package com.tomlezmy.goolmathapp.activities;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,8 +14,6 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -69,7 +65,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     RelativeLayout buttonLayout, rootLayout;
     ImageView player, obstacle, backgroundOne, backgroundTwo;
     TextView scoreText, timerText;
-    Button walkBtn;
+    Button walkBtn, learnBtn, nextLevelBtn;
     float screenWidth, screenHeight, timeToCrash, linearValue, objectHeight, userAnswer;
     boolean beforeQuestion = true, gameRunning = false;
     LevelManager levelManager;
@@ -84,7 +80,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     SharedPreferences sharedPreferences;
     TextView tv_wood_sign;
     ImageView img_wood_sign;
-    String currentLevel = "";
+    String currentLevelText = "";
 
 
     // For Tutorial Run
@@ -111,6 +107,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
         walkBtn = findViewById(R.id.start_walk);
+        learnBtn = findViewById(R.id.btn_go_to_learn);
+        nextLevelBtn = findViewById(R.id.btn_next_level);
         buttonLayout = findViewById(R.id.button_fragment_layout);
         buttonLayout.setBackgroundColor(buttonFragmentColor);
         rootLayout = findViewById(R.id.root_layout);
@@ -165,7 +163,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     }
                     else {
                         changeGameSpeed(1.5f);
-                            nextQuestion();
+                        nextQuestion();
                     }
                 }
                 //final float progress = (float) animation.getAnimatedValue();
@@ -189,7 +187,62 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         category = getIntent().getIntExtra("category",0);
         level = getIntent().getIntExtra("level",0);
 
+        learnBtn.setOnTouchListener(new ButtonTouchAnimation());
+        nextLevelBtn.setOnTouchListener(new ButtonTouchAnimation());
         walkBtn.setOnTouchListener(new ButtonTouchAnimation());
+        learnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GamePage.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("go_to","LearnSelect");
+                startActivity(intent);
+            }
+        });
+
+        nextLevelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                score = 0;
+                scoreText.setText(getString(R.string.score) + score);
+                if (gameRunning) {
+                    gameRunning = false;
+                    fallingAnimation.stop();
+                    walkingAnimation.stop();
+                    player.setImageResource(R.drawable.good1);
+                    valueAnimator.pause();
+                    removeQuestion();
+                    countDownTimer.cancel();
+                    timerText.setText("");
+                    // Move object out of screen
+                    obstacle.setX(screenWidth);
+                    walkBtn.setVisibility(View.VISIBLE);
+                }
+
+                level++;
+                if (ECategory.values()[category].getNumberOfLevels() < level) {
+                    level = 1;
+                    category++;
+                }
+                // Check for last category
+                if (ECategory.values().length == category) {
+                    Toast.makeText(GamePage.this, getString(R.string.last_category_message), Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    // If user skipped, open level
+                    categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
+                    if (!categoryProgressData.isOpen()) {
+                        categoryProgressData.setOpen(true);
+                        fileManager.updateUserDataFile();
+                    }
+                    updateWoodSignOfCurrentLevel(category, level - 1);
+                    tv_wood_sign.setText(currentLevelText);
+                }
+                tv_wood_sign.setVisibility(View.VISIBLE);
+                img_wood_sign.setVisibility(View.VISIBLE);
+            }
+        });
+
         walkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -439,8 +492,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 jumpAnimation = new CustomAnimationDrawable(jump) {
                     @Override
                     public void onAnimationFinish() {
-                        player.setImageDrawable(walkingAnimation);
-                        walkingAnimation.start();
+                        if (gameRunning) {
+                            player.setImageDrawable(walkingAnimation);
+                            walkingAnimation.start();
+                        }
                     }
 
                     @Override
@@ -541,6 +596,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     }
 
     private void endLevelAndCheckResults() {
+        nextLevelBtn.setVisibility(View.GONE);
         // update times played and high score
         categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
         categoryProgressData.setTimesPlayed(categoryProgressData.getTimesPlayed() + 1);
@@ -729,10 +785,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     fileManager.updateUserDataFile();
                 }
                 updateWoodSignOfCurrentLevel(category,level - 1);
-                this.tv_wood_sign.setText(this.currentLevel);
+                this.tv_wood_sign.setText(this.currentLevelText);
             }
         }
         walkBtn.setVisibility(View.VISIBLE);
+        nextLevelBtn.setVisibility(View.VISIBLE);
         this.tv_wood_sign.setVisibility(View.VISIBLE);
         this.img_wood_sign.setVisibility(View.VISIBLE);
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();
@@ -765,28 +822,28 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     void updateWoodSignOfCurrentLevel(int categoryId, int levelId) {
         switch (categoryId) {
             case 0:
-                this.currentLevel = getResources().getStringArray(R.array.practice_additionSubCategories)[levelId];
+                this.currentLevelText = getResources().getStringArray(R.array.practice_additionSubCategories)[levelId];
                 break;
             case 1:
-                this.currentLevel = getResources().getStringArray(R.array.practice_subtractionSubCategories)[levelId];
+                this.currentLevelText = getResources().getStringArray(R.array.practice_subtractionSubCategories)[levelId];
                 break;
             case 2:
-                this.currentLevel = getResources().getStringArray(R.array.practice_multiplicationSubCategories)[levelId];
+                this.currentLevelText = getResources().getStringArray(R.array.practice_multiplicationSubCategories)[levelId];
                 break;
             case 3:
-                this.currentLevel = getResources().getStringArray(R.array.practice_divisionSubCategories)[levelId];
+                this.currentLevelText = getResources().getStringArray(R.array.practice_divisionSubCategories)[levelId];
                 break;
             case 4:
-                this.currentLevel = getResources().getStringArray(R.array.practice_fractionsSubCategories)[levelId];
+                this.currentLevelText = getResources().getStringArray(R.array.practice_fractionsSubCategories)[levelId];
                 break;
             case 5:
-                this.currentLevel = getResources().getStringArray(R.array.practice_percentsSubCategories)[levelId];
+                this.currentLevelText = getResources().getStringArray(R.array.practice_percentsSubCategories)[levelId];
                 break;
             case 6:
-                this.currentLevel = getResources().getStringArray(R.array.practice_decimalsSubCategories)[levelId];
+                this.currentLevelText = getResources().getStringArray(R.array.practice_decimalsSubCategories)[levelId];
                 break;
         }
-        this.tv_wood_sign.setText(this.currentLevel);
+        this.tv_wood_sign.setText(this.currentLevelText);
     }
 }
 

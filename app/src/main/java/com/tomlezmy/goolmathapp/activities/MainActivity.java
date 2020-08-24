@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         // references
         ImageView settings = findViewById(R.id.settings);
         settings.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +54,12 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         menuBackground = findViewById(R.id.menu_background);
 
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).add(R.id.fragment_layout, new MainMenuFragment(), "MAIN_MENU_TAG").commit();
-    }
 
+        // If Activity need to redirect to a specific fragment
+        if (getIntent().hasExtra("go_to")) {
+            onChange(getIntent().getStringExtra("go_to"));
+        }
+    }
 
     @Override
     public void onChange(String dest, int... arguments) {

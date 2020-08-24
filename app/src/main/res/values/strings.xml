@@ -202,5 +202,7 @@
     <string name="subject_closed_message">This subject is not open yet, you need to pass the previous subject.\nIf you still want to skip press skip</string>
     <string name="progress_level_finished">You Finished The Level!</string>
     <string name="about_wood_sign">Wood sign asset by:</string>
+    <string name="btn_go_to_learn">Learn</string>
+    <string name="btn_next_level">Next Level</string>
 
 </resources>
