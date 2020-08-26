@@ -12,6 +12,9 @@ import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.ProgressFragment;
 import com.tomlezmy.goolmathapp.game.ECategory;
 
+/**
+ * A pager adapter for {@link com.tomlezmy.goolmathapp.fragments.ProgressFragmentScreen}  to display progress data in each {@link ECategory}
+ */
 public class ProgressPagerAdapter extends FragmentStatePagerAdapter {
     final int size = ECategory.values().length;
     Context context;

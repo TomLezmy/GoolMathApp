@@ -11,25 +11,34 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.adapters.ProgressResultsAdapter;
 import com.tomlezmy.goolmathapp.game.ECategory;
-import com.tomlezmy.goolmathapp.game.UserData;
-import com.tomlezmy.goolmathapp.model.ProgressResult;
+import com.tomlezmy.goolmathapp.model.UserData;
+import com.tomlezmy.goolmathapp.game.ProgressResult;
 
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * This fragment displays the progress data in all levels of the current category
+ */
 public class ProgressFragment extends Fragment {
 
     RecyclerView recyclerView;
     ProgressResultsAdapter progressResultsAdapter;
     ArrayList<ProgressResult> progressResultList;
 
-    public static ProgressFragment newInstance(int num) {
+    /**
+     * This method creates a new instance of {@link ProgressFragment} with parameters in a {@link Bundle}
+     * @param categoryIndex The category index
+     * @return A new instance of  {@link ProgressFragment}
+     */
+    public static ProgressFragment newInstance(int categoryIndex) {
         ProgressFragment progressFragment = new ProgressFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("category",num);
+        bundle.putInt("category", categoryIndex);
         progressFragment.setArguments(bundle);
         return progressFragment;
     }
@@ -50,7 +59,8 @@ public class ProgressFragment extends Fragment {
             int timesPlayed = userData.getLevelsProgressData().get(category).get(i).getTimesPlayed();
             int highScore = userData.getLevelsProgressData().get(category).get(i).getMaxScore();
             boolean isFinished = userData.getLevelsProgressData().get(category).get(i).isFinished();
-            progressResultList.add(new ProgressResult(level,timesPlayed,highScore,isFinished));
+            List<Integer> weightList = fileManager.getLevelWeights().get(category).get(i);
+            progressResultList.add(new ProgressResult(level,timesPlayed,highScore,isFinished, weightList));
         }
         progressResultsAdapter = new ProgressResultsAdapter(progressResultList, getContext());
         recyclerView = rootView.findViewById(R.id.recycler);

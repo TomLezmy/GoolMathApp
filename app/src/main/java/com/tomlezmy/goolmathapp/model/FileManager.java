@@ -1,10 +1,9 @@
-package com.tomlezmy.goolmathapp;
+package com.tomlezmy.goolmathapp.model;
 
 import android.content.Context;
 
 import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.game.ECategory;
-import com.tomlezmy.goolmathapp.game.UserData;
 
 import java.io.File;
 import java.io.FileInputStream;

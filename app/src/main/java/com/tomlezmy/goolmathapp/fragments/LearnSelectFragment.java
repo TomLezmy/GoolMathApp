@@ -17,18 +17,23 @@ import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
 
 import java.util.Locale;
 
+/**
+ * This fragment displays all category's in {@link com.tomlezmy.goolmathapp.game.ECategory} to pick a subject for {@link LearnFragment}
+ */
 public class LearnSelectFragment extends Fragment {
 
     SubjectsFragment subjectsFragment;
     int categorySelected;
-    int subCategorySelected;
     HTextView tvQuestion_hanks;
     String secondTitle;
     String language;
     IFragmentChangeListener callBack;
 
+    /**
+     * When fragment attaches to the activity, the {@link IFragmentChangeListener} is attached to it
+     */
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         try {
@@ -61,7 +66,9 @@ public class LearnSelectFragment extends Fragment {
         return rootView;
     }
 
-    // Create SubjectFragment in LearnSelectActivity
+    /**
+     * Creates and displays the category's in card views using {@link SubjectsFragment}
+     */
     public void displaySubjectsForLearn() {
         int cardColorId = ContextCompat.getColor(getContext(), R.color.green_card_option3);
         int titleColorId = ContextCompat.getColor(getContext(), R.color.green_title);
@@ -70,15 +77,10 @@ public class LearnSelectFragment extends Fragment {
                 .add(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }
 
-    public void onSubCategory(int subCategoryId) {
-        this.subCategorySelected = subCategoryId;
-
-//        Intent intent = new Intent(getContext(), LearnActivity.class);
-//        intent.putExtra("category", this.categorySelected);
-//        intent.putExtra("sub_category", this.subCategorySelected);
-//        startActivity(intent);
-    }
-
+    /**
+     * Called when a category is selected by the user
+     * @param categoryId The chosen category index
+     */
     public void onSelectedSubCategory(int categoryId) {
         this.categorySelected = categoryId;
     }

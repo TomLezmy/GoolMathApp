@@ -3,6 +3,7 @@ package com.tomlezmy.goolmathapp.activities;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -14,7 +15,6 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.plattysoft.leonids.ParticleSystem;
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.CustomAnimationDrawable;
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.ButtonsFragment;
 import com.tomlezmy.goolmathapp.fragments.GameFinishedFragment;
@@ -48,45 +48,43 @@ import me.toptas.fancyshowcase.FocusShape;
 import me.toptas.fancyshowcase.listener.DismissListener;
 import me.toptas.fancyshowcase.listener.OnCompleteListener;
 
+
+/**
+ * This activity runs the game
+ */
 public class GamePage extends AppCompatActivity implements IButtonFragmentAnswerListener, IResultFragmentListener {
 
     final String QUESTION_TAG = "QUESTION_TAG", BUTTONS_TAG = "BUTTONS_TAG", RESULT_TAG = "RESULT_TAG";
-    float gameSpeed;
-    int obstacleIndex = 0;
-    int buttonFragmentColor, score = 0, category, level;
+    final int NUMBER_OF_QUESTIONS = 10;
+    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle, R.drawable.wheel, R.drawable.log, R.drawable.hurdle, R.drawable.box, R.drawable.wheelbarrow, R.drawable.ladder};
+    float gameSpeed, screenWidth, screenHeight, timeToCrash, linearValue, objectHeight, userAnswer;
+    int obstacleIndex = 0, buttonFragmentColor, score = 0, category, level;
+    double valueDelta, framesPerMilliSec = (double)1000 / 60;
+    boolean beforeQuestion = true, gameRunning = false, userAnswered = false, isTutorialRun = false, beforeTutorialQuestionPopup = true;
+    String currentLevelText = "";
     QuestionFragment questionFragment;
     ButtonsFragment buttonsFragment;
     GameFinishedFragment gameFinishedFragment;
-    boolean userAnswered = false;
-    int[] objectImages = new int []{R.drawable.banana_peel, R.drawable.rock, R.drawable.puddle, R.drawable.wheel, R.drawable.log, R.drawable.hurdle, R.drawable.box, R.drawable.wheelbarrow, R.drawable.ladder};
-    ValueAnimator valueAnimator;
+    ValueAnimator valueAnimator, tutorialValueAnimator;
     AnimationDrawable walkingAnimation, runningAnimation;
     CustomAnimationDrawable jumpAnimation, fallingAnimation;
     RelativeLayout buttonLayout, rootLayout;
-    ImageView player, obstacle, backgroundOne, backgroundTwo;
-    TextView scoreText, timerText;
+    ImageView player, obstacle, backgroundOne, backgroundTwo, img_wood_sign;
+    TextView scoreText, timerText, tv_wood_sign;
     Button walkBtn, learnBtn, nextLevelBtn;
-    float screenWidth, screenHeight, timeToCrash, linearValue, objectHeight, userAnswer;
-    boolean beforeQuestion = true, gameRunning = false;
     LevelManager levelManager;
     Random rand;
     CountDownTimer countDownTimer;
-    double valueDelta, framesPerMilliSec = (double)1000 / 60;
-    MediaPlayer gameBackgroundRing;
-    MediaPlayer clockTickingRing, correctRing, wrongRing;
+    MediaPlayer gameBackgroundRing, clockTickingRing, correctRing, wrongRing;
     FileManager fileManager;
     List<Integer> weightsBeforeGame;
     CategoryProgressData categoryProgressData;
     SharedPreferences sharedPreferences;
-    TextView tv_wood_sign;
-    ImageView img_wood_sign;
-    String currentLevelText = "";
 
-
-    // For Tutorial Run
-    boolean isTutorialRun = false, beforeTutorialQuestionPopup = true, endTutorialInitiated = false;
-    ValueAnimator tutorialValueAnimator;
-
+    /**
+     * This method Sets the current game level and category, the game speed and all required animations.<br/>If this is a tutorial level then the tutorial messages will start immediately using {@link #tutorialRun()}
+     */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +93,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fileManager = FileManager.getInstance(this);
         changeGameSpeed(1.5f);
-        // Set background sound
+
+        // Set game sounds
         clockTickingRing = MediaPlayer.create(GamePage.this,R.raw.clock_ticking);
         gameBackgroundRing = MediaPlayer.create(GamePage.this,R.raw.bensound_cute);
         correctRing = MediaPlayer.create(GamePage.this,R.raw.correct_answer);
@@ -104,6 +103,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         gameBackgroundRing.setVolume(0.5f,0.5f);
         gameBackgroundRing.setLooping(true);
         playSound(gameBackgroundRing);
+
         buttonFragmentColor = getResources().getColor(R.color.green, null);
         rand = new Random();
         walkBtn = findViewById(R.id.start_walk);
@@ -166,7 +166,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                         nextQuestion();
                     }
                 }
-                //final float progress = (float) animation.getAnimatedValue();
                 linearValue -= valueDelta;
                 if (linearValue < -1) {
                     linearValue = 0;
@@ -180,8 +179,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 backgroundTwo.setTranslationX(translationX + width);
             }
         });
-
-
 
         // Get level and category
         category = getIntent().getIntExtra("category",0);
@@ -269,12 +266,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     if (!walkingAnimation.isRunning()) {
                         // Save Weights before game
                         weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));
-                        levelManager = new LevelManager(GamePage.this, 10, ECategory.values()[category], level);
+                        levelManager = new LevelManager(GamePage.this, NUMBER_OF_QUESTIONS, ECategory.values()[category], level);
                         obstacleIndex = rand.nextInt(objectImages.length);
                         obstacle.setImageResource(objectImages[obstacleIndex]);
                         player.setImageDrawable(walkingAnimation);
-                        // Time in seconds until player reaches the obstacle, 16.665 = valueAnimator.duration / update rate
-                        timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f * gameSpeed) * -1 * 16.665f;
+                        timeToCrash = calculateTimeToCrash();
                         countDownTimer = new CountDownTimer((long) timeToCrash, 1000) {
                             public void onTick(long millisUntilFinished) {
                                 // Set Clock ticking sound while count down timer
@@ -336,8 +332,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                             @Override
                             public void onComplete() {
                                 buttonsFragment.enableButtons();
-                                timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
-                                countDownTimer =  new CountDownTimer((long)timeToCrash, 1000) {
+                                timeToCrash = calculateTimeToCrash();
+                                countDownTimer = new CountDownTimer((long)timeToCrash, 1000) {
                                     public void onTick(long millisUntilFinished) {
                                         // Set Clock ticking sound while count down timer
                                         clockTickingRing.setVolume(1,1);
@@ -450,6 +446,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         }
     }
 
+    /**
+     * Displays tutorial messages at the start of the level
+     */
     private void tutorialRun() {
         isTutorialRun = true;
         FancyShowCaseView playerSc = new FancyShowCaseView.Builder(GamePage.this)
@@ -475,6 +474,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         fancyShowCaseQueue.show();
     }
 
+    /**
+     * This is a factory method to set the required animation in the current game speed
+     * @param animation The animation to prepare
+     * @param speed The in-game speed for the animation
+     */
     private void prepareAnimations(String animation, final float speed) {
         switch (animation) {
             case "jump":
@@ -570,6 +574,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         }
     }
 
+    /**
+     * Gets the next question from the level manager, moves the obstacle out of screen to the right while randomly picking a different image and calculates the time left for user to collide with the obstacle
+     */
     private void nextQuestion() {
         beforeQuestion = true;
         obstacleIndex = rand.nextInt(objectImages.length);
@@ -580,7 +587,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         // If there is a next question
         if (levelManager.nextQuestion()) {
             showQuestion();
-            timeToCrash = ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * 16.665f;
+            timeToCrash = calculateTimeToCrash();
             timerText.setVisibility(View.VISIBLE);
             countDownTimer.start();
         }
@@ -595,6 +602,17 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         }
     }
 
+    /**
+     * Calculates the time until the player is 25 pixels away from the obstacle by current game speed and frame rate
+     * @return The time left in milliseconds
+     */
+    private float calculateTimeToCrash() {
+        return ((player.getWidth() + 25) - obstacle.getX()) / (3.4f*gameSpeed) * -1 * (float)framesPerMilliSec;
+    }
+
+    /**
+     * Update's user data tables and opens next level if user finished successfully
+     */
     private void endLevelAndCheckResults() {
         nextLevelBtn.setVisibility(View.GONE);
         // update times played and high score
@@ -634,6 +652,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 .oneShot(scoreText, 100);
     }
 
+    /**
+     * This method is called when the user picks an option from {@link ButtonsFragment}.<br/>The method cancels the timer and increases game speed until user collides with obstacle
+     * @param answer The option picked
+     */
     @Override
     public void onReturn(float answer) {
         countDownTimer.cancel();
@@ -647,6 +669,10 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         userAnswered = true;
     }
 
+    /**
+     * This method animates whether the user answered correctly or not, and updates the weight table accordingly
+     * @param wasCorrect If user answer correctly
+     */
     public void animationResponse(boolean wasCorrect) {
         // Uncomment|Comment this part to toggle learning mode
         // If weights weren't updated then there was no user improvement
@@ -685,6 +711,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         }
     }
 
+    /**
+     * Displays the {@link QuestionFragment} and {@link ButtonsFragment} with the current question
+     */
     public void showQuestion() {
         questionFragment = new QuestionFragment(levelManager.getCurrentQuestion());
 
@@ -700,22 +729,32 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.question_layout, questionFragment, QUESTION_TAG).commit();
     }
+
+    /**
+     * Removes the {@link QuestionFragment} and {@link ButtonsFragment} from the activity
+     */
     public void removeQuestion() {
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(questionFragment)
                 .setCustomAnimations(R.anim.slide_out_bottom, R.anim.slide_out_bottom).remove(buttonsFragment).commit();
     }
 
+    /**
+     * Plays the sound clip if sound isn't disabled in {@link SettingsActivity}
+     * @param sound The sound clip
+     */
     private void playSound(MediaPlayer sound) {
         if (sharedPreferences.getBoolean("preference_enable_sound", true)) {
             sound.start();
         }
     }
 
+    /**
+     * Pauses the game if running
+     */
     @Override
     protected void onPause() {
         if (valueAnimator.isRunning()) {
-            valueAnimator.end();
-            walkingAnimation.stop();
+            valueAnimator.pause();
         }
         gameBackgroundRing.pause();
         if (countDownTimer != null) {
@@ -724,12 +763,24 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         super.onPause();
     }
 
+    /**
+     * If game was running before {@link #onPause()} then resume
+     */
     @Override
     protected void onResume() {
         playSound(gameBackgroundRing);
+        if (gameRunning) {
+            valueAnimator.resume();
+            if (!userAnswered) {
+                countDownTimer.start();
+            }
+        }
         super.onResume();
     }
 
+    /**
+     * Releases media players before closing activity
+     */
     @Override
     protected void onDestroy() {
         if (clockTickingRing != null) {
@@ -752,16 +803,27 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         super.onDestroy();
     }
 
+    /**
+     * This method changes the game speed and recalculates the background movement speed
+     * @param speed The new game speed
+     */
     private void changeGameSpeed(float speed) {
         gameSpeed = speed;
         valueDelta = (double)1 / (int)((int)(10000 / gameSpeed) / framesPerMilliSec);
     }
 
+    /**
+     * Called when user picks back in {@link GameFinishedFragment}
+     */
     @Override
     public void onPressBack() {
         finish();
     }
 
+    /**
+     * Called when user clicks "Next Level" or "Start Again" in {@link GameFinishedFragment}
+     * @param moveToNextLevel True if user picked "Next Level", False if "Start Again"
+     */
     @Override
     public void onPressContinue(boolean moveToNextLevel) {
         score = 0;
@@ -795,6 +857,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_out_top,R.anim.slide_out_top).remove(gameFinishedFragment).commit();
     }
 
+    /**
+     * This method changes the user data file by setting the next level to open and the current level as finished if the user passed it successfully
+     */
     private void openNextLevel() {
         categoryProgressData = fileManager.getUserData().getLevelsProgressData().get(ECategory.values()[category]).get(level - 1);
         if (!categoryProgressData.isFinished()) {
@@ -819,31 +884,36 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         }
     }
 
-    void updateWoodSignOfCurrentLevel(int categoryId, int levelId) {
+    /**
+     * This method updates the current level sign to show the user the name of the level
+     * @param categoryId The current category
+     * @param levelId The current level index (starts at 0)
+     */
+    private void updateWoodSignOfCurrentLevel(int categoryId, int levelId) {
         switch (categoryId) {
             case 0:
-                this.currentLevelText = getResources().getStringArray(R.array.practice_additionSubCategories)[levelId];
+                currentLevelText = getResources().getStringArray(R.array.practice_additionSubCategories)[levelId];
                 break;
             case 1:
-                this.currentLevelText = getResources().getStringArray(R.array.practice_subtractionSubCategories)[levelId];
+                currentLevelText = getResources().getStringArray(R.array.practice_subtractionSubCategories)[levelId];
                 break;
             case 2:
-                this.currentLevelText = getResources().getStringArray(R.array.practice_multiplicationSubCategories)[levelId];
+                currentLevelText = getResources().getStringArray(R.array.practice_multiplicationSubCategories)[levelId];
                 break;
             case 3:
-                this.currentLevelText = getResources().getStringArray(R.array.practice_divisionSubCategories)[levelId];
+                currentLevelText = getResources().getStringArray(R.array.practice_divisionSubCategories)[levelId];
                 break;
             case 4:
-                this.currentLevelText = getResources().getStringArray(R.array.practice_fractionsSubCategories)[levelId];
+                currentLevelText = getResources().getStringArray(R.array.practice_fractionsSubCategories)[levelId];
                 break;
             case 5:
-                this.currentLevelText = getResources().getStringArray(R.array.practice_percentsSubCategories)[levelId];
+                currentLevelText = getResources().getStringArray(R.array.practice_percentsSubCategories)[levelId];
                 break;
             case 6:
-                this.currentLevelText = getResources().getStringArray(R.array.practice_decimalsSubCategories)[levelId];
+                currentLevelText = getResources().getStringArray(R.array.practice_decimalsSubCategories)[levelId];
                 break;
         }
-        this.tv_wood_sign.setText(this.currentLevelText);
+        tv_wood_sign.setText(currentLevelText);
     }
 }
 

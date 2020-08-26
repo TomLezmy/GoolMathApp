@@ -3,6 +3,9 @@ package com.tomlezmy.goolmathapp;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 
+/**
+ * This class is used to add {@link #onAnimationFinish()} to {@link  AnimationDrawable}
+ */
 public abstract class CustomAnimationDrawable extends AnimationDrawable {
     /** Handles the animation callback. */
     Handler mAnimationHandler;

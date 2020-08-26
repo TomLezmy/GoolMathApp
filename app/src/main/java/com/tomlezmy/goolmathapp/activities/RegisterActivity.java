@@ -2,6 +2,7 @@ package com.tomlezmy.goolmathapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,13 +18,16 @@ import com.tomlezmy.goolmathapp.fragments.NumberPickerFragmentDialog;
 
 import java.util.Locale;
 
+/**
+ * This activity is used to register new users
+ */
 public class RegisterActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
-    TextView birthYearEt;
-    TextView tvMainTtitle;
+    final String BIRTH_YEAR_DIALOG_TAG = "BIRTH_YEAR_DIALOG_TAG";
+    TextView birthYearEt, tvMainTitle;
     String language;
     Button btnSetBirth;
 
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,23 +35,21 @@ public class RegisterActivity extends AppCompatActivity implements NumberPicker.
 
         final EditText firstNameEt = findViewById(R.id.first_name);
         birthYearEt = findViewById(R.id.birth_year);
-        tvMainTtitle = findViewById(R.id.register_main_title);
+        tvMainTitle = findViewById(R.id.register_main_title);
         btnSetBirth = findViewById(R.id.btn_set_birth_year);
 
-        this.language = Locale.getDefault().getDisplayLanguage();
-        if ( this.language.equalsIgnoreCase("English")) {
-            tvMainTtitle.setTextSize(50f);
+        language = Locale.getDefault().getDisplayLanguage();
+        if (language.equalsIgnoreCase("English")) {
+            tvMainTitle.setTextSize(50f);
         }
 
-
-        Button setBirthYear = findViewById(R.id.btn_set_birth_year);
-        setBirthYear.setOnTouchListener(new ButtonTouchAnimation());
-        setBirthYear.setOnClickListener(new View.OnClickListener() {
+        btnSetBirth.setOnTouchListener(new ButtonTouchAnimation());
+        btnSetBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NumberPickerFragmentDialog numberPickerFragmentDialog = new NumberPickerFragmentDialog();
                 numberPickerFragmentDialog.setValueChangeListener(RegisterActivity.this);
-                numberPickerFragmentDialog.show(getSupportFragmentManager(), "BIRTH_YEAR_DIALOG_TAG");
+                numberPickerFragmentDialog.show(getSupportFragmentManager(), BIRTH_YEAR_DIALOG_TAG);
             }
         });
         Button register = findViewById(R.id.btn_register);
@@ -71,6 +73,9 @@ public class RegisterActivity extends AppCompatActivity implements NumberPicker.
         });
     }
 
+    /**
+     * Called from {@link NumberPickerFragmentDialog} when user picks a new birth year
+     */
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
         birthYearEt.setText(picker.getValue() + "");

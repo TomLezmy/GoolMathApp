@@ -12,26 +12,34 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tomlezmy.goolmathapp.R;
-import com.tomlezmy.goolmathapp.model.ProgressResult;
+import com.tomlezmy.goolmathapp.game.ProgressResult;
 
 import java.util.List;
 
+/**
+ * An adapter for {@link com.tomlezmy.goolmathapp.fragments.ProgressFragment} to display all progress data in {@link RecyclerView}
+ */
 public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResultsAdapter.ProgressResultsViewHolder> {
 
     private List<ProgressResult> progressResults;
     private Context context;
 
 
+    /**
+     * Class constructor
+     * @param progressResults A list of progress data to display in recycler
+     * @param context Current context
+     */
     public ProgressResultsAdapter(List<ProgressResult> progressResults, Context context) {
         this.progressResults = progressResults;
         this.context = context;
     }
 
+    /**
+     * A {@link androidx.recyclerview.widget.RecyclerView.ViewHolder} to access items in {@link RecyclerView
+     */
     public class ProgressResultsViewHolder extends RecyclerView.ViewHolder {
-        TextView levelTv;
-        TextView timesPlayTv;
-        TextView highScoreTv;
-        TextView finishedTv;
+        TextView levelTv, timesPlayTv, highScoreTv, finishedTv;
 
         public ProgressResultsViewHolder(View itemView) {
             super(itemView);
@@ -40,17 +48,21 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
             timesPlayTv = itemView.findViewById(R.id.tv_times_played);
             highScoreTv = itemView.findViewById(R.id.tv_highScore);
         }
-
     }
 
+    /**
+     * Inflates the recycler item view and instantiates {@link ProgressResultsViewHolder}
+     */
     @NonNull
     @Override
     public ProgressResultsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.progress_results_cell, parent,false);
-        ProgressResultsViewHolder progressResultsViewHolder = new ProgressResultsViewHolder(view);
-        return progressResultsViewHolder;
+        return new ProgressResultsViewHolder(view);
     }
 
+    /**
+     * Fills the {@link ProgressResultsViewHolder} with the current item data
+     */
     @Override
     public void onBindViewHolder(@NonNull ProgressResultsViewHolder holder, int position) {
         ProgressResult progressResult = progressResults.get(position);
@@ -71,6 +83,14 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
         }
         if (progressResult.isFinished()) {
             holder.finishedTv.setVisibility(View.VISIBLE);
+        }
+        // If user made several mistakes in a specific question type then display a "need to practice more" message instead of "level finished"
+        for (int weight : progressResult.getWeightList()) {
+            if (weight > 2) {
+                holder.finishedTv.setVisibility(View.VISIBLE);
+                holder.finishedTv.setText(R.string.need_more_practice);
+                break;
+            }
         }
     }
 

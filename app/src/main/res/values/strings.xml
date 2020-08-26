@@ -12,7 +12,7 @@
     <string name="fractions_category_txt">Fraction</string>
     <string name="percentages_category_txt">Percentage</string>
     <string name="decimal_numbers_category_txt">Decimal Numbers</string>
-    <string name="score_is_zero_txt">Score: 0</string>
+    <string name="score_is_zero_txt">Score : 0</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">Subtraction</string>
     <string name="first_diagnostic_instructions">
@@ -204,5 +204,6 @@
     <string name="about_wood_sign">Wood sign asset by:</string>
     <string name="btn_go_to_learn">Learn</string>
     <string name="btn_next_level">Next Level</string>
+    <string name="need_more_practice">Needs more practice</string>
 
 </resources>

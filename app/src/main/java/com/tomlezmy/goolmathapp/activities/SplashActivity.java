@@ -6,13 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 import com.tomlezmy.goolmathapp.R;
 
+/**
+ * This activity displays a splash of the app logo while checking if user is new to the app
+ */
 public class SplashActivity extends AppCompatActivity {
 
     final int SPLASH_DISPLAY_LENGTH = 1000;
 
+    /**
+     * The splash screen is displayed for {@link #SPLASH_DISPLAY_LENGTH} milliseconds while checking for user data files and redirects accordingly
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

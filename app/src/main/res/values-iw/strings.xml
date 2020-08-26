@@ -13,7 +13,7 @@
     <string name="fractions_category_txt">שברים</string>
     <string name="percentages_category_txt">אחוזים</string>
     <string name="decimal_numbers_category_txt">מספרים עשרוניים</string>
-    <string name="score_is_zero_txt">"ניקוד: 0 "</string>
+    <string name="score_is_zero_txt">"ניקוד : 0 "</string>
     <string name="one_plus_one_equal_to_txt">1 + 1 = ?</string>
     <string name="subtraction_category_txt">חיסור</string>
     <string name="btn_start_game_txt">התחל לשחק</string>
@@ -207,5 +207,6 @@
     <string name="about_wood_sign">משאב שלט עץ מ:</string>
     <string name="btn_go_to_learn">לימוד</string>
     <string name="btn_next_level">שלב הבא</string>
+    <string name="need_more_practice">יש צורך לעבוד על הנושא</string>
 
 </resources>

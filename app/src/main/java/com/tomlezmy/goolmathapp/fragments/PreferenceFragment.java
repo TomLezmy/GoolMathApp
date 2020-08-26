@@ -6,10 +6,13 @@ import android.preference.Preference;
 
 import androidx.annotation.Nullable;
 
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 import com.tomlezmy.goolmathapp.R;
-import com.tomlezmy.goolmathapp.game.UserData;
+import com.tomlezmy.goolmathapp.model.UserData;
 
+/**
+ * This fragment displays the app settings
+ */
 public class PreferenceFragment extends android.preference.PreferenceFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

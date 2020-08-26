@@ -2,11 +2,16 @@ package com.tomlezmy.goolmathapp;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * This class is used to animate button touch in the app
+ */
 public class ButtonTouchAnimation implements View.OnTouchListener {
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {

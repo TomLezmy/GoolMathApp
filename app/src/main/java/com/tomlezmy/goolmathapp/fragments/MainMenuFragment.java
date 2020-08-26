@@ -1,5 +1,6 @@
 package com.tomlezmy.goolmathapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,11 +16,17 @@ import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
 
+/**
+ * This fragment displays the main menu navigation screen for {@link com.tomlezmy.goolmathapp.activities.MainActivity}
+ */
 public class MainMenuFragment extends Fragment {
     IFragmentChangeListener callBack;
 
+    /**
+     * When fragment attaches to the activity, the {@link IFragmentChangeListener} is attached to it
+     */
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         try {
@@ -29,6 +36,8 @@ public class MainMenuFragment extends Fragment {
         }
     }
 
+
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,8 +65,6 @@ public class MainMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 callBack.onChange("Progress");
-//                Intent intent = new Intent(getContext(), ProgressActivity.class);
-//                startActivity(intent);
             }
         });
         return rootView;

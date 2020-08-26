@@ -2,22 +2,33 @@ package com.tomlezmy.goolmathapp.game;
 
 import android.content.Context;
 
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This is a factory class for generating question value limits and question options
+ */
 public class LimitFactory {
+    /**
+     * This method creates value limits for question generation according the current category and level.<br/>
+     * The question level data is hard coded.
+     * @param context The current context
+     * @param category The current category
+     * @param level The current level
+     * @return The current level value limits and probabilities
+     */
     public static ProbabilityGenerator getLevelValuesAndProbabilities(Context context, ECategory category, int level) {
         FileManager fileManager = FileManager.getInstance(context);
         Dictionary<ECategory,List<List<Integer>>> levelSubProbabilities = fileManager.getLevelWeights();
         List<Integer> currentWeights = levelSubProbabilities.get(category).get(level - 1);
-        ProbabilityGenerator probabilities = null;
+        ProbabilityGenerator probabilities;
         List<LevelValueLimitProbabilities> valueLimitProbabilities = new ArrayList<>();
         LevelValueLimits levelValues;
-        int arr1[],arr2[],arr3[],arr4[];
+        int[] arr1,arr2,arr3,arr4;
         switch (category) {
             case ADDITION:
             case SUBTRACTION:
@@ -187,7 +198,7 @@ public class LimitFactory {
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(1)));
                         break;
                     case 4:
-                        int valueArray[] = new int[31];
+                        int[] valueArray = new int[31];
                         int valueIndex = 0;
                         levelValues = new LevelValueLimits();
                         for (int i = 100; i <= 400; i += 10) {
@@ -262,7 +273,7 @@ public class LimitFactory {
                 }
                 break;
             case PERCENTS:
-                int array[];
+                int[] array;
                 int index;
                 switch (level) {
                     case 1:
@@ -398,7 +409,7 @@ public class LimitFactory {
                         levelValues.setSecondNumberLimit(0,0);
                         valueLimitProbabilities.add(new LevelValueLimitProbabilities(levelValues, currentWeights.get(0)));
                         levelValues = new LevelValueLimits();
-                        int arr[] = new int[90];
+                        int[] arr = new int[90];
                         int arrIndex = 0;
                         for (int i = 1; i < 100; i++) {
                             if (i % 10 != 0) {
@@ -464,6 +475,14 @@ public class LimitFactory {
         return probabilities;
     }
 
+    /**
+     * This method creates different answer options for a question
+     * @param category The current category
+     * @param level The current level
+     * @param numberOfOptions The number of options to create
+     * @param currentQuestion The current question
+     * @return A list of answer options
+     */
     public static List<String> createQuestionOptions(ECategory category, int level, int numberOfOptions, Question currentQuestion) {
         List<String> options = new ArrayList<>();
         Random rand = new Random();
@@ -472,10 +491,8 @@ public class LimitFactory {
         switch (category) {
             case ADDITION:
             case SUBTRACTION:
-                switch (level){
-                    case 1:
-                        ((ValueRange)bounds).setUpper(3);
-                        break;
+                if (level == 1) {
+                    ((ValueRange)bounds).setUpper(3);
                 }
             case MULTIPLICATION:
                 switch (level) {
@@ -511,9 +528,9 @@ public class LimitFactory {
                     for (int i = 0; i < numberOfOptions - 1; i++) {
                         do {
                             if (rand.nextInt(2) == 1) {
-                                option = ((int) numerator + rand.nextInt(16)) + "\n-\n" + denominator;
+                                option = (numerator + rand.nextInt(16)) + "\n-\n" + denominator;
                             } else {
-                                option = ((int) numerator - rand.nextInt(16)) + "\n-\n" + denominator;
+                                option = (numerator - rand.nextInt(16)) + "\n-\n" + denominator;
                             }
                         } while (options.contains(option));
                         options.add(option);

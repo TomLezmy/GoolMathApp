@@ -21,6 +21,9 @@ import com.tomlezmy.goolmathapp.fragments.SubCategoriesFragment;
 import com.tomlezmy.goolmathapp.fragments.SubjectsFragment;
 import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
 
+/**
+ * This activity is the main menu where the user navigates through the app
+ */
 public class MainActivity extends AppCompatActivity implements IFragmentChangeListener, SubjectsFragment.OnSelectedSubCategoryListener, SubCategoriesFragment.OnSubCategoryListener {
 
     boolean isLearnSelectFragment = false, isMainMenuFragment = true, isLearnFragment = false;
@@ -29,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
     RelativeLayout titleLayout;
     ImageView menuBackground;
 
+    /**
+     * The method sets the current fragment to {@link MainMenuFragment}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +61,17 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
 
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom).add(R.id.fragment_layout, new MainMenuFragment(), "MAIN_MENU_TAG").commit();
 
-        // If Activity need to redirect to a specific fragment
+        // Redirect to a specific fragment
         if (getIntent().hasExtra("go_to")) {
             onChange(getIntent().getStringExtra("go_to"));
         }
     }
 
+    /**
+     * Called when moving between menu fragments
+     * @param dest The new fragment to load
+     * @param arguments Additional arguments for destination fragment
+     */
     @Override
     public void onChange(String dest, int... arguments) {
         switch (dest) {
@@ -96,10 +107,12 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
                     }
                 });
                 break;
+            // When next button is pressed inside Learn Fragment
             case "ReloadLearn":
                 getSupportFragmentManager().popBackStackImmediate();
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom, R.anim.slide_in_top, R.anim.slide_out_bottom).replace(R.id.fragment_layout, new LearnFragment(arguments[0], arguments[1]), "LEARN_TAG").addToBackStack(null).commit();
                 break;
+            // When back button is pressed inside Learn Fragment
             case "LearnBack":
                 isLearnFragment = false;
                 getSupportFragmentManager().popBackStackImmediate();
@@ -107,6 +120,10 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         }
     }
 
+    /**
+     * Called when a sub category is chosen in {@link SubCategoriesFragment}
+     * @param subCategoryId The index of the sub category
+     */
     @Override
     public void onSubCategory(int subCategoryId) {
         if (isLearnSelectFragment) {
@@ -118,6 +135,10 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         }
     }
 
+    /**
+     * Called when a sub category is chosen in {@link SubjectsFragment}
+     * @param categoryId The index of the category
+     */
     @Override
     public void onSelectedSubCategory(int categoryId) {
         if (isLearnSelectFragment) {
@@ -128,6 +149,10 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
         }
     }
 
+    /**
+     * This method changes the main background image with a fading effect
+     * @param backgroundResource The new resource
+     */
     private void changeBackground(final int backgroundResource) {
         Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_out);
         menuBackground.startAnimation(fadeOut);

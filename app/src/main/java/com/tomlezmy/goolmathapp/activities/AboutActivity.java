@@ -9,23 +9,24 @@ import com.tomlezmy.goolmathapp.R;
 
 import java.util.Locale;
 
+/**
+ * This activity explains the app's purpose and gives asset attributes
+ */
 public class AboutActivity extends AppCompatActivity {
-
     TextView tvAbout;
     String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        tvAbout = findViewById(R.id.about_text);
 
-        this.tvAbout = findViewById(R.id.about_text);
-        this.language = Locale.getDefault().getDisplayLanguage();
-        if ( this.language.equalsIgnoreCase("English")) {
+        // Sets text size by locale
+        language = Locale.getDefault().getDisplayLanguage();
+        if (language.equalsIgnoreCase("English")) {
             tvAbout.setTextSize(20f);
         }
-
     }
 }

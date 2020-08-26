@@ -1,5 +1,8 @@
 package com.tomlezmy.goolmathapp.game;
 
+/**
+ * This class holds the value limits of the numbers in a question
+ */
 public class LevelValueLimits {
     protected ValueLimit firstNumberLimit, secondNumberLimit;
 

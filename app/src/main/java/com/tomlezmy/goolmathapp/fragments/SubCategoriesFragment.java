@@ -21,7 +21,9 @@ import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 
 import java.util.List;
 
-
+/**
+ * This fragment displays all sub categories of the category chosen in {@link SubjectsFragment}
+ */
 public class SubCategoriesFragment extends DialogFragment {
 
     List<String> subCategories;
@@ -32,29 +34,46 @@ public class SubCategoriesFragment extends DialogFragment {
     Dialog dialog;
     List<CategoryProgressData> categoryProgressDataList;
 
+    /**
+     * This interface is used to notify the listener when a sub category is clicked
+     */
     public interface OnSubCategoryListener {
+        /**
+         * @param subCategoryId The clicked sub category index
+         */
         void onSubCategory(int subCategoryId);
     }
 
     OnSubCategoryListener callback;
 
 
-
-    // constructor
+    /**
+     * Class constructor without {@link #categoryProgressDataList}
+     * @param subCategories A list of sub categories to display
+     * @param colorId The text color of the items
+     */
     SubCategoriesFragment(List<String> subCategories, int colorId) {
         this.subCategories = subCategories;
         this.colorId = colorId;
         this.categoryProgressDataList = null;
     }
+    /**
+     * Class constructor
+     * @param subCategories A list of sub categories to display
+     * @param colorId The text color of the items
+     * @param categoryProgressDataList  A list of the progress data in each level of the category
+     */
     SubCategoriesFragment(List<String> subCategories, int colorId, List<CategoryProgressData> categoryProgressDataList) {
         this.subCategories = subCategories;
         this.colorId = colorId;
         this.categoryProgressDataList =categoryProgressDataList;
     }
 
-
+    /**
+     * When fragment attaches to the activity, the {@link OnSubCategoryListener} is attached to it
+     */
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         try {
             callback = (OnSubCategoryListener) context;
@@ -83,7 +102,7 @@ public class SubCategoriesFragment extends DialogFragment {
 
         subCategoryAdapter.setListener(new SubCategoryAdapter.SubCategoriesListener() {
             @Override
-            public void onSubCategoryClicked(int position, View view) {
+            public void onSubCategoryClicked(int position) {
                 callback.onSubCategory(position);
                 dismiss();
             }

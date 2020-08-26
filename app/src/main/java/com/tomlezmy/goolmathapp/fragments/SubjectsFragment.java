@@ -2,7 +2,6 @@ package com.tomlezmy.goolmathapp.fragments;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.game.ECategory;
@@ -30,50 +28,58 @@ import java.util.List;
 import java.util.Locale;
 
 
+/**
+ * This fragment displays all categories in {@link ECategory} for {@link LearnSelectFragment} and {@link PracticeSelectFragment}
+ */
 public class SubjectsFragment extends Fragment implements SubCategoriesFragment.OnSubCategoryListener {
-    @Override
-    public void onSubCategory(int subCategoryId) {
-        callback.onSelectedSubCategory(this.currentCategoryIndex);
-    }
-
     // Data members
-    int cardColorId;
-    int titleColorId;
-    int currentCategoryIndex;
+    int cardColorId, titleColorId, currentCategoryIndex;
     boolean isCreatedByLearnSelectActivity;
-    CardView additionCard;
-    CardView subtractionCard;
-    CardView multiplicationCard;
-    TextView tvMultiplicationCard;
-    TextView tvSubtractionCard;
-    TextView tvPercentageCard;
-    CardView divisionCard;
-    CardView fractionsCard;
-    CardView percentagesCard;
-    CardView decimal_numbersCard;
-    CardView tutorialCard;
+    CardView additionCard, subtractionCard, multiplicationCard, divisionCard, fractionsCard, percentagesCard, decimal_numbersCard, tutorialCard;
+    TextView tvMultiplicationCard, tvSubtractionCard, tvPercentageCard;
     String language;
     List<String> subCategories;
     SubCategoriesFragment subCategoriesFragment;
     FileManager fileManager;
 
-
-    // interface
+    /**
+     * This interface is used to notify the listener when a sub category is clicked
+     */
     public interface OnSelectedSubCategoryListener {
+        /**
+         * @param categoryId The clicked sub category index
+         */
         void onSelectedSubCategory(int categoryId);
     }
 
     OnSelectedSubCategoryListener callback;
 
-    // Constructor
+    /**
+     * Class constructor
+     * @param cardColorId The card view color
+     * @param titleColorId The text color of the item
+     * @param isCreatedByLearnSelectActivity True if called from {@link LearnSelectFragment}
+     */
     public SubjectsFragment(int cardColorId, int titleColorId, boolean isCreatedByLearnSelectActivity) {
         this.cardColorId = cardColorId;
         this.titleColorId = titleColorId;
         this.isCreatedByLearnSelectActivity = isCreatedByLearnSelectActivity;
     }
 
+    /**
+     * Called when a sub category is clicked by the user
+     * @param subCategoryId The clicked sub category index
+     */
     @Override
-    public void onAttach(Context context) {
+    public void onSubCategory(int subCategoryId) {
+        callback.onSelectedSubCategory(this.currentCategoryIndex);
+    }
+
+    /**
+     * When fragment attaches to the activity, the {@link OnSelectedSubCategoryListener} is attached to it
+     */
+    @Override
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         try {
             callback = (OnSelectedSubCategoryListener)context;
@@ -121,7 +127,6 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
 
 
         if (this.isCreatedByLearnSelectActivity) {
-
             /* Set On click listener using private class named CategoryCardsOnClickListener */
             additionCard.setOnClickListener(new CategoryCardsOnClickListener(0, getResources().getStringArray(R.array.learn_additionSubCategories)));
             subtractionCard.setEnabled(false);
@@ -180,7 +185,11 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
         return rootView;
     }
 
-    // Set Card's Style and create list view to show all sub categories each time we click on a category
+    /**
+     * Set Card's Style and create list view to show all sub categories
+     * @param categoryIndex The selected category index
+     * @param subCategoriesArray An array of all sub categories in the selected category
+     */
     void displaySubCategories(final int categoryIndex, String[] subCategoriesArray) {
         this.currentCategoryIndex = categoryIndex;
         this.subCategories = Arrays.asList(subCategoriesArray);
@@ -195,15 +204,23 @@ public class SubjectsFragment extends Fragment implements SubCategoriesFragment.
         callback.onSelectedSubCategory(categoryIndex);
     }
 
-    // Private class for handling cards on click listener
+    /**
+     * This class is used to handle card clicks by the user
+     */
     private class CategoryCardsOnClickListener implements View.OnClickListener {
         String[] subCategoriesArray;
         int categoryIndex;
-        // constructor
+
+        /**
+         * Class constructor
+         * @param categoryIndex The selected category index
+         * @param subCategoriesArray An array of all sub categories in the selected category
+         */
         CategoryCardsOnClickListener(int categoryIndex, String[] subCategoriesArray) {
             this.categoryIndex = categoryIndex;
             this.subCategoriesArray = subCategoriesArray;
         }
+
         @Override
         public void onClick(final View v) {
             if (!isCreatedByLearnSelectActivity) {

@@ -4,22 +4,38 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class manages the run of each game, and generates questions for each round
+ */
 public class LevelManager {
     private int numberOfQuestions;
     private ECategory levelCategory;
     private int level;
     private int currentQuestion;
+    /**
+     * A list of all the questions in the round
+     */
     private List<Question> questions;
+    /**
+     * A list containing each question's sub index used to access correct index in the weight file
+     */
     private List<Integer> questionsSubLevel;
     private ProbabilityGenerator levelValueLimitsAndProbability;
     private FileManager fileManager;
     private Context context;
 
+    /**
+     * Class constructor
+     * @param context The current context
+     * @param numberOfQuestions The number of questions to generate
+     * @param levelCategory The current level category
+     * @param level The current level
+     */
     public LevelManager(Context context, int numberOfQuestions, ECategory levelCategory, int level) {
         this.numberOfQuestions = numberOfQuestions;
         this.levelCategory = levelCategory;
@@ -29,6 +45,9 @@ public class LevelManager {
         fileManager = FileManager.getInstance(context);
     }
 
+    /**
+     * Generates questions using {@link #levelValueLimitsAndProbability} without duplicates, the amount of questions is set by {@link #numberOfQuestions}
+     */
     public void generateQuestions() {
         questions = new ArrayList<>();
         questionsSubLevel = new ArrayList<>();
@@ -45,25 +64,29 @@ public class LevelManager {
         currentQuestion = 1;
     }
 
-    public boolean updateWeightsFromUserAnswer(boolean wasCorrect) {
-        boolean weightsUpdated = false;
+    /**
+     * Called after user answers a question and increases or decreases the relevant weight depending on the users answer
+     * @param wasCorrect Whether the user answered correctly or not
+     */
+    public void updateWeightsFromUserAnswer(boolean wasCorrect) {
         int subLevelWeight;
         if (wasCorrect) {
             subLevelWeight = fileManager.getSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1));
             if (subLevelWeight != 1) {
                 fileManager.updateSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1), --subLevelWeight);
-                weightsUpdated = true;
             }
         }
         else {
             subLevelWeight = fileManager.getSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1));
             fileManager.updateSubLevelWeight(levelCategory,level - 1, questionsSubLevel.get(currentQuestion - 1), ++subLevelWeight);
-            weightsUpdated = true;
         }
-
-        return weightsUpdated;
     }
 
+    /**
+     * This method uses {@link #levelValueLimitsAndProbability} to generate a question in a specific range of values
+     * @param subLevelIndex The sub level index used to get the value ranges
+     * @return A new instance of question
+     */
     private Question generateQuestion(int subLevelIndex) {
         return Question.createQuestion(levelCategory, levelValueLimitsAndProbability.getLevelValueLimit(subLevelIndex).getLevelValueLimits(), level, context);
     }
@@ -72,15 +95,20 @@ public class LevelManager {
         return questions.get(currentQuestion - 1).getQuestionHiddenAnswer();
     }
 
+    /**
+     * Moves to the next question in the list
+     * @return True if there is a next question
+     */
     public boolean nextQuestion() {
         currentQuestion++;
         return currentQuestion <= numberOfQuestions;
     }
 
-    public boolean isLastQuestion() {
-        return currentQuestion == numberOfQuestions;
-    }
-
+    /**
+     * This method creates options to the current question
+     * @param numOfOptions The number of options to create
+     * @return A list of answer options
+     */
     @Nullable
     public List<String> getCurrentQuestionOptions(int numOfOptions) {
         return LimitFactory.createQuestionOptions(levelCategory, level, numOfOptions, questions.get(currentQuestion - 1));
@@ -88,13 +116,6 @@ public class LevelManager {
 
     public Boolean checkCorrectAnswer(float guess) {
         return guess == questions.get(currentQuestion - 1).getResult();
-    }
-    public int getNumberOfQuestions() {
-        return numberOfQuestions;
-    }
-
-    public ECategory getLevelCategory() {
-        return levelCategory;
     }
 
     public int getLevel() {

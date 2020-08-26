@@ -2,24 +2,25 @@ package com.tomlezmy.goolmathapp.game;
 
 import java.io.Serializable;
 
+/**
+ * This class stores information about user progression in a subject level
+ */
 public class CategoryProgressData implements Serializable {
     private int timesPlayed;
     private int maxScore;
     private boolean isOpen;
     private boolean isFinished;
 
+    /**
+     * Class constructor
+     * @param isOpen True if the level open to play
+     */
     public CategoryProgressData(boolean isOpen) {
         timesPlayed = 0;
         maxScore = 0;
         this.isFinished = false;
         this.isOpen = isOpen;
     }
-
-//    public CategoryProgressData(int timesPlayed, int maxScore, boolean isOpen) {
-//        this.timesPlayed = timesPlayed;
-//        this.maxScore = maxScore;
-//        this.isOpen = isOpen;
-//    }
 
     public int getTimesPlayed() {
         return timesPlayed;

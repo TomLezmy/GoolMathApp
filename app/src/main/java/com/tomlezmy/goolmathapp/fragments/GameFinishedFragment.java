@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.game.CategoryProgressData;
 import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
 
+/**
+ * This fragment is displayed at the end of a game in {@link com.tomlezmy.goolmathapp.activities.GamePage} and shows the game result
+ */
 public class GameFinishedFragment extends Fragment {
 
     Button backButton;
@@ -25,6 +29,13 @@ public class GameFinishedFragment extends Fragment {
     CategoryProgressData categoryProgressData;
     IResultFragmentListener callback;
 
+    /**
+     * Class constructor
+     * @param levelComplete True if the level was finished successfully
+     * @param improvementCounter Number of improvements in weights
+     * @param deteriorationCounter Number of deterioration's in weights
+     * @param categoryProgressData The current level progress
+     */
     public GameFinishedFragment(boolean levelComplete, int improvementCounter, int deteriorationCounter, CategoryProgressData categoryProgressData) {
         this.levelComplete = levelComplete;
         this.improvementCounter = improvementCounter;
@@ -32,6 +43,9 @@ public class GameFinishedFragment extends Fragment {
         this.categoryProgressData = categoryProgressData;
     }
 
+    /**
+     * When fragment attaches to the activity, the {@link IResultFragmentListener} is attached to it
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -42,6 +56,7 @@ public class GameFinishedFragment extends Fragment {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

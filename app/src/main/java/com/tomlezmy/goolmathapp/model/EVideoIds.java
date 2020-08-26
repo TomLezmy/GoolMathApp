@@ -1,4 +1,4 @@
-package com.tomlezmy.goolmathapp;
+package com.tomlezmy.goolmathapp.model;
 
 import java.util.List;
 

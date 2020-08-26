@@ -3,6 +3,7 @@ package com.tomlezmy.goolmathapp.activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -16,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
-import com.tomlezmy.goolmathapp.FileManager;
+import com.tomlezmy.goolmathapp.model.FileManager;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.game.ECategory;
 import com.tomlezmy.goolmathapp.game.LimitFactory;
@@ -32,6 +33,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+/**
+ * This activity Tests the user's knowledge and updates the question level weights
+ */
 public class FirstDiagnosisActivity extends AppCompatActivity implements Button.OnClickListener {
     String language;
     TextView questionText;
@@ -48,32 +52,31 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
     boolean stopWhenWrong = false, diagnosisDone = false;
     ProgressBar questionsProgressBar;
     FileManager fileManager;
-    // For repository build
-    List<String> questions;
-    List<String> answers;
-    List<List<String>> options;
-    List<Integer> levels;
-    List<Integer> probabilityTableIndexes;
 
-    // For user instruction
-    TextView tv_welcome;
-    TextView tv_instruction;
-    TextView tv_note;
-    TextView tv_right_answers;
-    TextView tv_wrong_answers;
-    TextView tvFinished;
-    TextView tv_funBegins;
-    TextView tv_goodLuck;
-    Button btn_letsGo;
-    Button btn_goToMenu;
-    Button btn_skip;
+    /**
+     * For repository build
+     */
+    List<String> tempQuestions, tempAnswers;
+    /**
+     * For repository build
+     */
+    List<List<String>> tempOptions;
+    /**
+     * For repository build
+     */
+    List<Integer> levels, probabilityTableIndexes;
+
+    /**
+     * For user instruction
+     */
+    TextView tv_welcome, tv_instruction, tv_note, tv_right_answers, tv_wrong_answers, tvFinished, tv_funBegins, tv_goodLuck;
+    Button btn_letsGo, btn_goToMenu, btn_skip;
     LinearLayout buttons_layout;
 
-    // For result
-    int rightAnswerCount;
-    int wrongAnswerCount;
+    int rightAnswerCount, wrongAnswerCount;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,17 +102,13 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
             questionText.setTextSize(50f);
         }
 
-
         Resources res = getResources();
         String username =  getIntent().getStringExtra("first_name");
         String text = String.format(res.getString(R.string.first_diagnostic_instructions), username);
         tv_instruction.setText(text);
 
-
-
         rand = new Random();
         buttons = new Button[4];
-
 
         btn_letsGo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,12 +175,18 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         });
     }
 
+    /**
+     * Moves to next question and displays the question
+     * @param lastQuestionWasCorrect if user answered last question correctly
+     */
     private void nextQuestion(boolean lastQuestionWasCorrect) {
+        // At the start of the diagnosis currentCategory and currentQuestionIndex will be -1
         if (currentCategory == -1 && currentQuestionIndex == -1) {
             currentCategory = 0;
             currentQuestionIndex = 0;
         }
         else {
+            // Move to next category if user was wrong
             if ((!lastQuestionWasCorrect) && stopWhenWrong) {
                 currentQuestionProgress += questionsRepository.get(ECategory.values()[currentCategory]).size() - currentQuestionIndex;
                 questionsProgressBar.setProgress(currentQuestionProgress,true);
@@ -199,8 +204,7 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
             currentOptions = optionsRepository.get(ECategory.values()[currentCategory]).get(currentQuestionIndex);
             randomizeOptions();
             setOptions();
-            Animation slideIn = AnimationUtils.makeInAnimation(this, true);
-            questionText.startAnimation(slideIn);
+            questionText.startAnimation(AnimationUtils.makeInAnimation(this, true));
             questionText.setText(currentQuestion);
         }
         else {
@@ -208,6 +212,10 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         }
     }
 
+
+    /**
+     * Moves to next question in category.<br/>If last question in category then move category
+     */
     private void moveQuestionIndex() {
         currentQuestionIndex++;
         if (currentCategory == ECategory.values().length) {
@@ -219,6 +227,9 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         }
     }
 
+    /**
+     * Moves to next category
+     */
     private void moveCategory() {
         currentQuestionIndex = 0;
         currentCategory++;
@@ -226,17 +237,24 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
             diagnosisDone = true;
             return;
         }
+        // Set stopWhenWrong to true for category's you want to move from when the user makes a mistake
         if (ECategory.values()[currentCategory] == ECategory.PERCENTS) {
             stopWhenWrong = true;
         }
     }
 
+    /**
+     * Puts current question options in option buttons
+     */
     private void setOptions() {
         for (int i = 0; i < 4; i++) {
             buttons[i].setText(currentOptions.get(i));
         }
     }
 
+    /**
+     * Takes the current question options list and randomizes the order
+     */
     private void randomizeOptions() {
         for (int i = currentOptions.size() - 1; i > 0; i--) {
             int index = rand.nextInt(i + 1);
@@ -246,6 +264,11 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         }
     }
 
+
+    /**
+     * Used to check if user picked the correct answer to the question
+     * @param v The question option button pressed
+     */
     @Override
     public void onClick(View v) {
         if (((Button)v).getText().toString().equals(currentAnswer)) {
@@ -263,6 +286,10 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         }
     }
 
+    /**
+     * This method sets all questions, answers and answer options for each level and category. Then puts then in hash tables for future use
+     * @param isOverTen If user age is above ten then single number addition and subtraction questions are not included in the repositories
+     */
     private void buildQuestionsRepository(boolean isOverTen) {
         questionsRepository = new Hashtable<>();
         answersRepository = new Hashtable<>();
@@ -271,9 +298,9 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         questionsProbabilityTableIndex = new Hashtable<>();
 
         // Addition
-        questions = new ArrayList<>();
-        answers = new ArrayList<>();
-        options = new ArrayList<>();
+        tempQuestions = new ArrayList<>();
+        tempAnswers = new ArrayList<>();
+        tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
         if (!isOverTen) {
@@ -283,16 +310,16 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         addToRepositories("10 + 20 = ?", "30", Arrays.asList("30","25","40","31"), 0, 1);
         addToRepositories("30 + 15 = ?", "45", Arrays.asList("33","45","35","40"), 0, 1);
         addToRepositories("40 + 26 = ?", "66", Arrays.asList("66","64","56","60"), 4, 1);
-        questionsRepository.put(ECategory.ADDITION, questions);
-        optionsRepository.put(ECategory.ADDITION, options);
-        answersRepository.put(ECategory.ADDITION, answers);
+        questionsRepository.put(ECategory.ADDITION, tempQuestions);
+        optionsRepository.put(ECategory.ADDITION, tempOptions);
+        answersRepository.put(ECategory.ADDITION, tempAnswers);
         questionsProbabilityTableIndex.put(ECategory.ADDITION, probabilityTableIndexes);
         levelRepository.put(ECategory.ADDITION, levels);
 
         // Subtraction
-        questions = new ArrayList<>();
-        answers = new ArrayList<>();
-        options = new ArrayList<>();
+        tempQuestions = new ArrayList<>();
+        tempAnswers = new ArrayList<>();
+        tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
         if (!isOverTen) {
@@ -304,16 +331,16 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         addToRepositories("27 - 13 = ?", "14", Arrays.asList("14","15","12","16"), 0, 1);
         addToRepositories("28 - 19 = ?", "9", Arrays.asList("9","8","10","7"), 0, 1);
         addToRepositories("78 - 39 = ?", "39", Arrays.asList("39","38","28","49"), 8, 1);
-        questionsRepository.put(ECategory.SUBTRACTION, questions);
-        optionsRepository.put(ECategory.SUBTRACTION, options);
-        answersRepository.put(ECategory.SUBTRACTION, answers);
+        questionsRepository.put(ECategory.SUBTRACTION, tempQuestions);
+        optionsRepository.put(ECategory.SUBTRACTION, tempOptions);
+        answersRepository.put(ECategory.SUBTRACTION, tempAnswers);
         questionsProbabilityTableIndex.put(ECategory.SUBTRACTION, probabilityTableIndexes);
         levelRepository.put(ECategory.SUBTRACTION, levels);
 
         // Multiplication
-        questions = new ArrayList<>();
-        answers = new ArrayList<>();
-        options = new ArrayList<>();
+        tempQuestions = new ArrayList<>();
+        tempAnswers = new ArrayList<>();
+        tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
         addToRepositories("2 * 3 = ?", "6", Arrays.asList("6","3","5","4"), 1, 0);
@@ -333,16 +360,16 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         addToRepositories("200 * 8 = ?", "1600", Arrays.asList("1600","1500","1580","1660"), 1, 4);
         addToRepositories("600 * 9 = ?", "5400", Arrays.asList("5400","5000","4400","5500"), 3, 4);
         addToRepositories("800 * 7 = ?", "5600", Arrays.asList("5400","5600","4400","4600"), 3, 4);
-        questionsRepository.put(ECategory.MULTIPLICATION, questions);
-        optionsRepository.put(ECategory.MULTIPLICATION, options);
-        answersRepository.put(ECategory.MULTIPLICATION, answers);
+        questionsRepository.put(ECategory.MULTIPLICATION, tempQuestions);
+        optionsRepository.put(ECategory.MULTIPLICATION, tempOptions);
+        answersRepository.put(ECategory.MULTIPLICATION, tempAnswers);
         questionsProbabilityTableIndex.put(ECategory.MULTIPLICATION, probabilityTableIndexes);
         levelRepository.put(ECategory.MULTIPLICATION, levels);
 
         // Division
-        questions = new ArrayList<>();
-        answers = new ArrayList<>();
-        options = new ArrayList<>();
+        tempQuestions = new ArrayList<>();
+        tempAnswers = new ArrayList<>();
+        tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
         addToRepositories("25 / 5 = ?", "5", Arrays.asList("6","5","3","4"), 1, 0);
@@ -369,15 +396,15 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         addToRepositories("420 / 6 = ?", "70", Arrays.asList("50","80","70","60"), 0, 4);
         addToRepositories("540 / 9 = ?", "60", Arrays.asList("50","80","70","60"), 1, 4);
         addToRepositories("810 / 9 = ?", "90", Arrays.asList("90","80","70","60"), 1, 4);
-        questionsRepository.put(ECategory.DIVISION, questions);
-        optionsRepository.put(ECategory.DIVISION, options);
-        answersRepository.put(ECategory.DIVISION, answers);
+        questionsRepository.put(ECategory.DIVISION, tempQuestions);
+        optionsRepository.put(ECategory.DIVISION, tempOptions);
+        answersRepository.put(ECategory.DIVISION, tempAnswers);
         questionsProbabilityTableIndex.put(ECategory.DIVISION, probabilityTableIndexes);
         levelRepository.put(ECategory.DIVISION, levels);
         // Fractions
-        questions = new ArrayList<>();
-        answers = new ArrayList<>();
-        options = new ArrayList<>();
+        tempQuestions = new ArrayList<>();
+        tempAnswers = new ArrayList<>();
+        tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
         addToRepositories("1 / 2 = ?", "3 / 6", Arrays.asList("3 / 6","2 / 6","4 / 2","3 / 4"), 0, 1);
@@ -389,16 +416,16 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         addToRepositories("2 / 6 = ?", "1 / 3", Arrays.asList("1 / 2","2 / 3","1 / 4","1 / 3"), 0, 3);
         addToRepositories("3 / 9 = ?", "1 / 3", Arrays.asList("1 / 5","2 / 3","1 / 4","1 / 3"), 0, 3);
         addToRepositories("12 / 24 = ?", "1 / 2", Arrays.asList("3 / 4","2 / 3","1 / 4","1 / 2"), 0, 3);
-        questionsRepository.put(ECategory.FRACTIONS, questions);
-        optionsRepository.put(ECategory.FRACTIONS, options);
-        answersRepository.put(ECategory.FRACTIONS, answers);
+        questionsRepository.put(ECategory.FRACTIONS, tempQuestions);
+        optionsRepository.put(ECategory.FRACTIONS, tempOptions);
+        answersRepository.put(ECategory.FRACTIONS, tempAnswers);
         questionsProbabilityTableIndex.put(ECategory.FRACTIONS, probabilityTableIndexes);
         levelRepository.put(ECategory.FRACTIONS, levels);
 
         // Percents
-        questions = new ArrayList<>();
-        answers = new ArrayList<>();
-        options = new ArrayList<>();
+        tempQuestions = new ArrayList<>();
+        tempAnswers = new ArrayList<>();
+        tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
@@ -409,19 +436,19 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
             do {
                 index = probabilityGenerator.getLevelValueLimitIndexByProbability();
                 question = Question.createQuestion(ECategory.PERCENTS, probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), i, this);
-            } while (questions.get(questions.size() - 1).equals(question.getQuestionHiddenAnswer()));
+            } while (tempQuestions.get(tempQuestions.size() - 1).equals(question.getQuestionHiddenAnswer()));
             addToRepositories(question.getQuestionHiddenAnswer(), ((int)question.getResult()) + "", LimitFactory.createQuestionOptions(ECategory.PERCENTS, i - 1, 4, question), index, i - 1);
         }
-        questionsRepository.put(ECategory.PERCENTS, questions);
-        optionsRepository.put(ECategory.PERCENTS, options);
-        answersRepository.put(ECategory.PERCENTS, answers);
+        questionsRepository.put(ECategory.PERCENTS, tempQuestions);
+        optionsRepository.put(ECategory.PERCENTS, tempOptions);
+        answersRepository.put(ECategory.PERCENTS, tempAnswers);
         questionsProbabilityTableIndex.put(ECategory.PERCENTS, probabilityTableIndexes);
         levelRepository.put(ECategory.PERCENTS, levels);
 
         // Decimals
-        questions = new ArrayList<>();
-        answers = new ArrayList<>();
-        options = new ArrayList<>();
+        tempQuestions = new ArrayList<>();
+        tempAnswers = new ArrayList<>();
+        tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
         ProbabilityGenerator probabilityGenerator = LimitFactory.getLevelValuesAndProbabilities(this, ECategory.DECIMALS, 1);
@@ -431,34 +458,46 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         do {
             index = probabilityGenerator.getLevelValueLimitIndexByProbability();
             question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 1, this);
-        } while (questions.contains(question.getQuestionHiddenAnswer()));
+        } while (tempQuestions.contains(question.getQuestionHiddenAnswer()));
         addToRepositories(question.getQuestionHiddenAnswer(), question.getResult() + "", LimitFactory.createQuestionOptions(ECategory.DECIMALS, 0, 4, question), index, 0);
         do {
             index = probabilityGenerator.getLevelValueLimitIndexByProbability();
             question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 2, this);
-        } while (questions.contains(question.getQuestionHiddenAnswer()));
+        } while (tempQuestions.contains(question.getQuestionHiddenAnswer()));
         addToRepositories(question.getQuestionHiddenAnswer(), question.getResult() + "", LimitFactory.createQuestionOptions(ECategory.DECIMALS, 1, 4, question), index, 1);
         do {
             index = probabilityGenerator.getLevelValueLimitIndexByProbability();
             question = Question.createQuestion(ECategory.DECIMALS,probabilityGenerator.getLevelValueLimit(index).getLevelValueLimits(), 2, this);
-        } while (questions.contains(question.getQuestionHiddenAnswer()));
+        } while (tempQuestions.contains(question.getQuestionHiddenAnswer()));
         addToRepositories(question.getQuestionHiddenAnswer(), question.getResult() + "", LimitFactory.createQuestionOptions(ECategory.DECIMALS, 1, 4, question), index, 1);
-        questionsRepository.put(ECategory.DECIMALS, questions);
-        optionsRepository.put(ECategory.DECIMALS, options);
-        answersRepository.put(ECategory.DECIMALS, answers);
+        questionsRepository.put(ECategory.DECIMALS, tempQuestions);
+        optionsRepository.put(ECategory.DECIMALS, tempOptions);
+        answersRepository.put(ECategory.DECIMALS, tempAnswers);
         questionsProbabilityTableIndex.put(ECategory.DECIMALS, probabilityTableIndexes);
         levelRepository.put(ECategory.DECIMALS, levels);
     }
 
+
+    /**
+     * Adds all question information to the temp repositories
+     * @param question The question displayed to the user
+     * @param answer The correct answer
+     * @param optionsList The answer options
+     * @param probabilityIndex The weight table index of the question
+     * @param level The question level
+     */
     private void addToRepositories(String question, String answer, List<String> optionsList, int probabilityIndex, int level) {
-        questions.add(question);
-        answers.add(answer);
-        options.add(optionsList);
+        tempQuestions.add(question);
+        tempAnswers.add(answer);
+        tempOptions.add(optionsList);
         probabilityTableIndexes.add(probabilityIndex);
         levels.add(level);
     }
 
-    void showDiagnosisResults() {
+    /**
+     * Shows the user his result at the end of the diagnosis
+     */
+    private void showDiagnosisResults() {
         Resources res = getResources();
         String rightAnswerMsg;
         String wrongAnswerMsg;

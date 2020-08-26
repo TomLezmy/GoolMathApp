@@ -18,6 +18,9 @@ import com.tomlezmy.goolmathapp.adapters.ProgressPagerAdapter;
 
 import java.util.Locale;
 
+/**
+ * This fragment displays progress data in all category's
+ */
 public class ProgressFragmentScreen extends Fragment {
 
     ViewPager viewPager;
@@ -30,7 +33,7 @@ public class ProgressFragmentScreen extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_progress_screen, container, false);
 
-        titleTv = (HTextView) rootView.findViewById(R.id.tv_hanks);
+        titleTv = rootView.findViewById(R.id.tv_hanks);
         viewPager = rootView.findViewById(R.id.view_pager);
         tabLayout = rootView.findViewById(R.id.tab_layout);
 

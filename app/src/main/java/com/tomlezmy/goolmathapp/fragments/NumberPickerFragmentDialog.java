@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
@@ -14,15 +15,19 @@ import androidx.fragment.app.DialogFragment;
 import com.tomlezmy.goolmathapp.R;
 
 import java.util.Calendar;
-import java.util.Locale;
 
+/**
+ * This fragment displays a {@link NumberPicker} to pick a birth year
+ */
 public class NumberPickerFragmentDialog extends DialogFragment {
     private NumberPicker.OnValueChangeListener valueChangeListener;
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final NumberPicker numberPicker = new NumberPicker(getActivity());
 
+        // Users up to age 50
         numberPicker.setMinValue(Calendar.getInstance().get(Calendar.YEAR) - 50);
         numberPicker.setMaxValue(Calendar.getInstance().get(Calendar.YEAR));
 
@@ -51,10 +56,6 @@ public class NumberPickerFragmentDialog extends DialogFragment {
 
         builder.setView(numberPicker);
         return builder.create();
-    }
-
-    public NumberPicker.OnValueChangeListener getValueChangeListener() {
-        return valueChangeListener;
     }
 
     public void setValueChangeListener(NumberPicker.OnValueChangeListener valueChangeListener) {

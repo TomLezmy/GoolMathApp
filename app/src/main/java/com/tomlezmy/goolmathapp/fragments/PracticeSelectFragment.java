@@ -17,6 +17,9 @@ import com.tomlezmy.goolmathapp.activities.GamePage;
 
 import java.util.Locale;
 
+/**
+ * This fragment displays all category's in {@link com.tomlezmy.goolmathapp.game.ECategory} to pick a subject for {@link GamePage}
+ */
 public class PracticeSelectFragment extends Fragment {
 
     public SubjectsFragment subjectsFragment;
@@ -31,7 +34,7 @@ public class PracticeSelectFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_practice_select, container, false);
 
-        this.tvQuestion_hanks = (HTextView) rootView.findViewById(R.id.tv_hanks);
+        this.tvQuestion_hanks = rootView.findViewById(R.id.tv_hanks);
 
         this.language = Locale.getDefault().getDisplayLanguage();
         if ( this.language.equalsIgnoreCase("English")) {
@@ -51,6 +54,9 @@ public class PracticeSelectFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * When resuming fragment, reload {@link SubjectsFragment} to display changes
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -61,6 +67,9 @@ public class PracticeSelectFragment extends Fragment {
                 .replace(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }
 
+    /**
+     * Creates and displays the category's in card views using {@link SubjectsFragment}
+     */
     public void displaySubjects() {
         int cardColorId = ContextCompat.getColor(getContext(), R.color.blue_card_option3);
         int titleColorId = ContextCompat.getColor(getContext(), R.color.blue_title);
@@ -69,6 +78,10 @@ public class PracticeSelectFragment extends Fragment {
                 .add(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }
 
+    /**
+     * Called when a category is selected by the user
+     * @param categoryId The chosen category index, is -1 when level is tutorial level
+     */
     public void onSelectedSubCategory(int categoryId) {
         this.categorySelected = categoryId;
         if (categoryId == -1) {
@@ -78,6 +91,10 @@ public class PracticeSelectFragment extends Fragment {
         }
     }
 
+    /**
+     * Called when a sub category is selected by the user
+     * @param subCategoryId The chosen sub category index
+     */
     public void onSubCategory(int subCategoryId) {
         this.subCategorySelected = subCategoryId;
         Intent intent = new Intent(getContext(), GamePage.class);

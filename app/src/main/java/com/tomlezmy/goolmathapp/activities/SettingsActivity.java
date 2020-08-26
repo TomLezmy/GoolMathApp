@@ -7,6 +7,9 @@ import android.os.Bundle;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.fragments.PreferenceFragment;
 
+/**
+ * This activity sets the user settings
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override

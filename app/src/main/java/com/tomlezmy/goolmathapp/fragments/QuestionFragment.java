@@ -12,11 +12,18 @@ import androidx.fragment.app.Fragment;
 
 import com.tomlezmy.goolmathapp.R;
 
+/**
+ * This fragment displays the questions during the game in activity {@link com.tomlezmy.goolmathapp.activities.GamePage}
+ */
 public class QuestionFragment extends Fragment {
 
     String question;
     TextView questionText;
 
+    /**
+     * Class constructor
+     * @param question The current question to display
+     */
     public QuestionFragment(String question) {
         this.question = question;
     }
@@ -32,6 +39,10 @@ public class QuestionFragment extends Fragment {
         if (questionLen < 11) {
             questionText.setTextSize(17f);
         } else {
+            questionText.setTextSize(14f);
+        }
+        // For fractions
+        if (question.contains("\n")) {
             questionText.setTextSize(14f);
         }
         return rootView;

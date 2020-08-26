@@ -6,6 +6,9 @@ import androidx.annotation.Nullable;
 
 import com.tomlezmy.goolmathapp.R;
 
+/**
+ * This class holds the data of a question and it's answer
+ */
 public class Question {
     private ECategory category;
     protected String sign;
@@ -15,6 +18,14 @@ public class Question {
     private String questionHiddenAnswer;
     protected Context context;
 
+    /**
+     * This method creates a new instance of {@link Question}, if the current question contains fractions then an instance of {@link FractionQuestion} is created instead
+     * @param category The current category
+     * @param valueLimits The value limits of the question
+     * @param level The current level
+     * @param context The current context
+     * @return A new instance of {@link Question}
+     */
     public static Question createQuestion(ECategory category, LevelValueLimits valueLimits, int level, Context context) {
         if (category == ECategory.FRACTIONS || (category == ECategory.DECIMALS && level == 6)) {
             return new FractionQuestion(category, valueLimits, level, context);
@@ -22,11 +33,22 @@ public class Question {
         return new Question(category, valueLimits, level, context);
     }
 
+    /**
+     * Protected class constructor. if you want to create an instance use {@link #createQuestion(ECategory, LevelValueLimits, int, Context)}
+     * @param valueLimits The value limits of the question
+     */
     protected Question(LevelValueLimits valueLimits) {
         this.numOne = valueLimits.getFirstNumberLimit().generateValue();
         this.numTwo = valueLimits.getSecondNumberLimit().generateValue();
     }
 
+    /**
+     * Protected class constructor. if you want to create an instance use {@link #createQuestion(ECategory, LevelValueLimits, int, Context)}
+     * @param category The current category
+     * @param valueLimits The value limits of the question
+     * @param level The current level
+     * @param context The current context
+     */
     private Question(ECategory category, LevelValueLimits valueLimits, int level, Context context) {
         this.category = category;
         this.context = context;
@@ -35,6 +57,11 @@ public class Question {
         buildQuestion(valueLimits, level);
     }
 
+    /**
+     * Calculates values for the question according to the current level and category
+     * @param valueLimits The value limits of the question
+     * @param level The current level
+     */
     private void buildQuestion(LevelValueLimits valueLimits, int level) {
         switch (category) {
             case ADDITION:
@@ -59,7 +86,7 @@ public class Question {
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case DIVISION:
-                if (level == 1 && level == 2) {
+                if (level == 1 || level == 2) {
                     int temp = numOne * numTwo;
                     result = numOne;
                     numOne = temp;
@@ -145,10 +172,16 @@ public class Question {
 
     public float getResult()  { return result; }
 
+    /**
+     * @return Current question without the answer
+     */
     public String getQuestionHiddenAnswer() {
         return questionHiddenAnswer;
     }
 
+    /**
+     * @return True if question and answer of object are the same as the current question
+     */
     @Override
     public boolean equals(@Nullable Object obj) {
         Question questionToCompare = (Question) obj;

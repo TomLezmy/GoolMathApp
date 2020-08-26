@@ -8,16 +8,32 @@ import com.tomlezmy.goolmathapp.R;
 
 import java.util.Random;
 
+/**
+ * This class holds additional info for questions containing fractions
+ */
 public class FractionQuestion extends Question {
     private int resultDenominator;
     private String questionHiddenAnswer;
 
+    /**
+     * Class constructor
+     * @param category The current category
+     * @param valueLimits The range of values to generate the question from
+     * @param level The current level
+     * @param context The current context
+     */
     public FractionQuestion(ECategory category, LevelValueLimits valueLimits, int level, Context context) {
         super(valueLimits);
         this.context = context;
         calculateResult(category, level, (LevelValueFractionLimits)valueLimits);
     }
 
+    /**
+     * Calculates values for the question according to the current level and category
+     * @param category - The current category
+     * @param level The current level
+     * @param valueLimits The range of values to generate the question from
+     */
     private void calculateResult(ECategory category, int level, LevelValueFractionLimits valueLimits) {
         Random rand = new Random();
         int mul;
@@ -56,22 +72,40 @@ public class FractionQuestion extends Question {
         }
     }
 
+    /**
+     * @return Answer in fraction format
+     */
     public String getFractionAnswer() {return (int)result + "\n-\n" + resultDenominator;}
 
+    /**
+     * @return Current answer denominator
+     */
     public int getAnswerDenominator() {return resultDenominator;}
 
+    /**
+     * @return Current answer numerator
+     */
     public int getAnswerNumerator() {return (int)result;}
 
+    /**
+     * @return Current answer
+     */
     @Override
     public float getResult() {
         return result/(float)resultDenominator;
     }
 
+    /**
+     * @return Current question without the answer
+     */
     @Override
     public String getQuestionHiddenAnswer() {
         return questionHiddenAnswer;
     }
 
+    /**
+     * @return True if question and answer of object are the same as the current question
+     */
     @Override
     public boolean equals(@Nullable Object obj) {
         FractionQuestion questionToCompare = (FractionQuestion) obj;
@@ -79,6 +113,12 @@ public class FractionQuestion extends Question {
                 result == questionToCompare.getAnswerNumerator() && resultDenominator == questionToCompare.getAnswerDenominator() );
     }
 
+    /**
+     * Finds the greatest common denominator between the two integers
+     * @param a First integer
+     * @param b Second integer
+     * @return The greatest common denominator
+     */
     private int gcd(int a, int b)
     {
         if (a == 0)

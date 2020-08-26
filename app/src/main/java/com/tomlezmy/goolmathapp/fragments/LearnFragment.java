@@ -1,5 +1,6 @@
 package com.tomlezmy.goolmathapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,25 +18,35 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.tomlezmy.goolmathapp.ButtonTouchAnimation;
-import com.tomlezmy.goolmathapp.EVideoIds;
+import com.tomlezmy.goolmathapp.model.EVideoIds;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.game.ECategory;
 import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
 
+/**
+ * This fragment displays a youtube video in the selected subject using {@link YouTubePlayerView}
+ */
 public class LearnFragment extends Fragment {
 
     YouTubePlayerView youTubePlayerView;
     String videoId;
     TextView learnTitle;
-    int category;
-    int subCategory;
+    int category, subCategory;
     IFragmentChangeListener callBack;
 
+    /**
+     * Class constructor
+     * @param category The current category index
+     * @param subCategory The current sub category index
+     */
     public LearnFragment(int category, int subCategory) {
         this.category = category;
         this.subCategory = subCategory;
     }
 
+    /**
+     * When fragment attaches to the activity, the {@link IFragmentChangeListener} is attached to it
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -47,6 +58,7 @@ public class LearnFragment extends Fragment {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +73,7 @@ public class LearnFragment extends Fragment {
 
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
-            public void onReady(YouTubePlayer youTubePlayer) {
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 youTubePlayer.cueVideo(videoId, 0);
             }
         });
@@ -102,13 +114,19 @@ public class LearnFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * When called releases {@link YouTubePlayerView} before closing fragment
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         youTubePlayerView.release();
     }
 
-    private void  setVideoTitle() {
+    /**
+     * Sets the current video title {@link #learnTitle}
+     */
+    private void setVideoTitle() {
         ECategory eCategory = ECategory.values()[category];
         int videoNamesArrayId = 0;
         switch (eCategory) {
