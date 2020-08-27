@@ -343,8 +343,8 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         tempOptions = new ArrayList<>();
         levels = new ArrayList<>();
         probabilityTableIndexes = new ArrayList<>();
-        addToRepositories("2 * 3 = ?", "6", Arrays.asList("6","3","5","4"), 1, 0);
-        addToRepositories("3 * 4 = ?", "12", Arrays.asList("7","12","13","10"), 1, 0);
+        addToRepositories("2 * 3 = ?", "6", Arrays.asList("6","3","5","4"), 0, 0);
+        addToRepositories("3 * 4 = ?", "12", Arrays.asList("7","12","13","10"), 0, 0);
         addToRepositories("5 * 4 = ?", "20", Arrays.asList("20","24","25","15"), 3, 1);
         addToRepositories("6 * 5 = ?", "30", Arrays.asList("30","35","25","20"), 5, 1);
         addToRepositories("9 * 5 = ?", "45", Arrays.asList("45","35","40","50"), 5, 1);
