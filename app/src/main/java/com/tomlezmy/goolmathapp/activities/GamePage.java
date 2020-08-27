@@ -40,6 +40,7 @@ import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import me.toptas.fancyshowcase.FancyShowCaseQueue;
@@ -80,6 +81,9 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     List<Integer> weightsBeforeGame;
     CategoryProgressData categoryProgressData;
     SharedPreferences sharedPreferences;
+    String language;
+    TextView tv_fractionsInstructions, tv_fraction1, tv_fraction2, tv_fraction3;
+    ImageView img_fractionsInstructions;
 
     /**
      * This method Sets the current game level and category, the game speed and all required animations.<br/>If this is a tutorial level then the tutorial messages will start immediately using {@link #tutorialRun()}
@@ -123,6 +127,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
+        tv_fractionsInstructions = findViewById(R.id.tv_fractions_instruction);
+        tv_fraction1 = findViewById(R.id.f1);
+        tv_fraction2 = findViewById(R.id.f2);
+        tv_fraction3 = findViewById(R.id.f3);
+        img_fractionsInstructions = findViewById(R.id.img_fractionsvisible_instruction);
 
         prepareAnimations("walk",gameSpeed);
         prepareAnimations("run",gameSpeed);
@@ -183,6 +192,24 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         // Get level and category
         category = getIntent().getIntExtra("category",0);
         level = getIntent().getIntExtra("level",0);
+
+        // Noa added
+        language = Locale.getDefault().getDisplayLanguage();
+        if (language.equalsIgnoreCase("English")) {
+            tv_fractionsInstructions.setTextSize(9f);
+            tv_fraction1.setTextSize(8f);
+            tv_fraction2.setTextSize(8f);
+            tv_fraction3.setTextSize(8f);
+        }
+        // If category is fractions, show instructions
+        if (category == 4) {
+            tv_fractionsInstructions.setVisibility(View.VISIBLE);
+            tv_fraction1.setVisibility(View.VISIBLE);
+            tv_fraction2.setVisibility(View.VISIBLE);
+            tv_fraction3.setVisibility(View.VISIBLE);
+            img_fractionsInstructions.setVisibility(View.VISIBLE);
+        }
+
 
         learnBtn.setOnTouchListener(new ButtonTouchAnimation());
         nextLevelBtn.setOnTouchListener(new ButtonTouchAnimation());
@@ -263,6 +290,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 else {
                     tv_wood_sign.setVisibility(View.GONE);
                     img_wood_sign.setVisibility(View.GONE);
+                    tv_fractionsInstructions.setVisibility(View.GONE);
+                    tv_fraction1.setVisibility(View.GONE);
+                    tv_fraction2.setVisibility(View.GONE);
+                    tv_fraction3.setVisibility(View.GONE);
+                    img_fractionsInstructions.setVisibility(View.GONE);
                     if (!walkingAnimation.isRunning()) {
                         // Save Weights before game
                         weightsBeforeGame = new ArrayList<>(fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1));

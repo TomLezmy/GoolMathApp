@@ -65,30 +65,30 @@
     </string-array>
 
     <string-array name="practice_fractionsSubCategories">
-        <item>Fractions Expansion – Part1</item>
-        <item>Fractions Expansion – Part2</item>
-        <item>Fractions Reduction – Part1</item>
-        <item>Fractions Reduction – Part 2</item>
-        <item>Fractions Expansion – Single And Double Digits Numbers</item>
-        <item>Fractions  Reduction  – Single And Double Digits Numbers</item>
+        <item>Fractions Expansion Part1</item>
+        <item>Fractions Expansion Part2</item>
+        <item>Fractions Reduction Part1</item>
+        <item>Fractions Reduction Part 2</item>
+        <item>Fractions Expansion Single And Double Digits Numbers</item>
+        <item>Fractions  Reduction  Single And Double Digits Numbers</item>
     </string-array>
 
     <string-array name="practice_percentsSubCategories">
         <item>Ejecting 1% From a Number</item>
         <item>Ejecting 10% From a Number</item>
         <item>Ejecting 50% From a Number</item>
-        <item>Easy Percentages – Part 1</item>
-        <item>Easy Percentages – Part 2</item>
+        <item>Easy Percentages Part 1</item>
+        <item>Easy Percentages Part 2</item>
         <item>Percent In General</item>
-        <item>Percent In GeneraL - Part 1</item>
-        <item>Percent In GeneraL - Part 2</item>
+        <item>Percent In GeneraL Part 1</item>
+        <item>Percent In GeneraL Part 2</item>
     </string-array>
 
     <string-array name="practice_decimalsSubCategories">
-        <item>From Percentage To Decimal Fraction – Part 1</item>
-        <item>From Percentage To Decimal Fraction – Part 1</item>
-        <item>From Percentage To Decimal Fraction – Part 3</item>
-        <item>From Percentage To Decimal Fraction – Part 4</item>
+        <item>From Percentage To Decimal Fraction Part 1</item>
+        <item>From Percentage To Decimal Fraction Part 1</item>
+        <item>From Percentage To Decimal Fraction Part 3</item>
+        <item>From Percentage To Decimal Fraction Part 4</item>
         <item>From Standard Fraction To Decimal Fraction</item>
         <item>From Percentage To Fractions</item>
     </string-array>
@@ -112,8 +112,8 @@
     </string-array>
 
     <string-array name="learn_fractionsSubCategories">
-        <item>Fractions - Part 1</item>
-        <item>Fractions - Part 2</item>
+        <item>Fractions Part 1</item>
+        <item>Fractions Part 2</item>
         <item>Reduce and Expand Fractions</item>
     </string-array>
 
@@ -179,6 +179,7 @@
     <string name="about_clock">Clock asset by:</string>
     <string name="about_cloud">Cloud asset by:</string>
     <string name="about_character">Character asset by:</string>
+    <string name="about_scroll">Scroll asset by:</string>
     <string name="about_background_music">Game background music by:</string>
     <string name="about_clock_sound">Clock sound by:</string>
     <string name="about_game_background">Game background asset by:</string>
@@ -205,5 +206,10 @@
     <string name="btn_go_to_learn">Learn</string>
     <string name="btn_next_level">Next Level</string>
     <string name="need_more_practice">Needs more practice</string>
+    <string name="fractionLevelInstructions_part_1">
+       In the game, a fraction will be presented,you will need to choose a fraction that is equal.\nFor example\n</string>
 
+    <string name="f1">1\n-\n2</string>
+    <string name="f2"> \n=\n </string>
+    <string name="f3">2\n-\n4</string>
 </resources>

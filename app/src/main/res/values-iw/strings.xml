@@ -68,10 +68,10 @@
     </string-array>
 
     <string-array name="practice_fractionsSubCategories">
-        <item>הרחבת שברים – חלק 1</item>
-        <item>הרחבת שברים – חלק 2</item>
-        <item>צמצום שברים – חלק 1</item>
-        <item>צמצום שברים – חלק 2</item>
+        <item>הרחבת שברים חלק 1</item>
+        <item>הרחבת שברים חלק 2</item>
+        <item>צמצום שברים חלק 1</item>
+        <item>צמצום שברים חלק 2</item>
         <item>הרחבת שברים עם מספרים חד ספרתיים ודו ספרתיים</item>
         <item>צמצום שברים עם מספרים חד ספרתיים ודו ספרתיים</item>
     </string-array>
@@ -83,15 +83,15 @@
         <item>אחוזים קלים – חלק 1</item>
         <item>אחוזים קלים – חלק 2</item>
         <item>אחוזים בכללי</item>
-        <item>אחוזים עגולים מעל 100 - חלק 1</item>
-        <item>אחוזים עגולים מעל 100 - חלק 2</item>
+        <item>אחוזים עגולים מעל 100 חלק 1</item>
+        <item>אחוזים עגולים מעל 100 חלק 2</item>
     </string-array>
 
     <string-array name="practice_decimalsSubCategories">
-        <item>מעבר מאחוזים לשבר עשרוני – חלק 1</item>
-        <item>מעבר מאחוזים לשבר עשרוני – חלק 2</item>
-        <item>מעבר מאחוזים לשבר עשרוני – חלק 3</item>
-        <item>מעבר מאחוזים לשבר עשרוני – חלק 4</item>
+        <item>מעבר מאחוזים לשבר עשרוני חלק 1</item>
+        <item>מעבר מאחוזים לשבר עשרוני חלק 2</item>
+        <item>מעבר מאחוזים לשבר עשרוני חלק 3</item>
+        <item>מעבר מאחוזים לשבר עשרוני חלק 4</item>
         <item>מעבר משבר רגיל לשבר עשרוני</item>
         <item>מעבר מאחוזים לשברים</item>
     </string-array>
@@ -116,8 +116,8 @@
     </string-array>
 
     <string-array name="learn_fractionsSubCategories">
-        <item>שברים - חלק 1</item>
-        <item>שברים - חלק 2</item>
+        <item>שברים חלק 1</item>
+        <item>שברים חלק 2</item>
         <item>צמצום והרחבת שברים</item>
 
     </string-array>
@@ -187,6 +187,7 @@
     <string name="about_game_background">משאב רקע במשחק מ:</string>
     <string name="about_wrong_answer">רעש תשובה לא נכונה מ:</string>
     <string name="about_correct_answer">רעש תשובה נכונה מ:</string>
+    <string name="about_scroll">משאב מגילה מ:</string>
     <string name="app_desctiption">חשבבכיף, נועדה לספק למשתמש פלטפורמה ללימוד, תרגול וחיזוק יסודות הבסיס במתמטיקה. בשילוב מודל למידה, האפליקציה מציגה למשתמש שאלות בהתאם לרמה שלו ויודעת לחזק ולשפר נושאים רלוונטים.</string>
     <string name="about_app_title">אודות חשבכיף</string>
     <string name="settings">הגדרות</string>
@@ -208,5 +209,10 @@
     <string name="btn_go_to_learn">לימוד</string>
     <string name="btn_next_level">שלב הבא</string>
     <string name="need_more_practice">יש צורך לעבוד על הנושא</string>
-
+    <string name="fractionLevelInstructions_part_1">
+        במשחק יוצג לך שבר, עלייך לבחור שבר אחר ששווה לו.\nלדוגמא
+        </string>
+    <string name="f1">1\n-\n2</string>
+    <string name="f2"> \n=\n </string>
+    <string name="f3">2\n-\n4</string>
 </resources>
