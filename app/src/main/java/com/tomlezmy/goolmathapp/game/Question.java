@@ -156,7 +156,8 @@ public class Question {
                     case 5:
                         result = (float)numOne / (float) numTwo;
                         result = Float.parseFloat(String.format("%.3f", result).replaceAll("0*$", ""));
-                        questionHiddenAnswer = String.format(context.getString(R.string.decimal_question), numOne + "/" + numTwo);
+                        // This level contains fractions in the question, in order to display them properly "_ToDecimal" is added so QuestionFragment can identify the question type
+                        questionHiddenAnswer = numOne + "_" + numTwo + "_ToDecimal";
                         break;
                 }
         }

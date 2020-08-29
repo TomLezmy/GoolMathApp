@@ -172,6 +172,8 @@
     <string name="first_diagnostic_important_info">(it is not possible to leave during the questionnaire otherwise the information will be deleted)</string>
     <string name="percent_of">of</string>
     <string name="decimal_question">What is %s in decimal?</string>
+    <string name="decimal_question_start">\nWhat is </string>
+    <string name="decimal_question_end">\n in decimal?</string>
     <string name="decimal_to_fraction_question">What is %s%% in fractions?</string>
     <string name="no_more_videos">No more videos</string>
     <string name="about_fruit_asset">Fruits assets by:</string>
