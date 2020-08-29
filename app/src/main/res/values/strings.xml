@@ -169,10 +169,10 @@
     <string name="score">"Score : "</string>
     <string name="new_highscore">New highscore!</string>
     <string name="last_category_message">There are no more levels, you finished the game!</string>
-    <string name="first_diagnostic_important_info">(it is not possible to leave during the questionaire otherwise the information will be deleted)</string>
+    <string name="first_diagnostic_important_info">(it is not possible to leave during the questionnaire otherwise the information will be deleted)</string>
     <string name="percent_of">of</string>
     <string name="decimal_question">What is %s in decimal?</string>
-    <string name="decimal_to_fraction_question">What is %s% in fractions?</string>
+    <string name="decimal_to_fraction_question">What is %s%% in fractions?</string>
     <string name="no_more_videos">No more videos</string>
     <string name="about_fruit_asset">Fruits assets by:</string>
     <string name="before_we_start">Just before we start,</string>
