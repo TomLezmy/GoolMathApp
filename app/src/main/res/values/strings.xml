@@ -174,7 +174,7 @@
     <string name="decimal_question">What is %s in decimal?</string>
     <string name="decimal_question_start">\nWhat is </string>
     <string name="decimal_question_end">\n in decimal?</string>
-    <string name="decimal_to_fraction_question">What is %s%% in fractions?</string>
+    <string name="decimal_to_fraction_question">What is %d%% in fractions?</string>
     <string name="no_more_videos">No more videos</string>
     <string name="about_fruit_asset">Fruits assets by:</string>
     <string name="before_we_start">Just before we start,</string>

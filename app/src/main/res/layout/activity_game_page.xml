@@ -24,11 +24,11 @@
     </FrameLayout>
 
     <RelativeLayout
-        android:layout_width="180dp"
-        android:layout_height="120dp"
+        android:layout_width="205dp"
+        android:layout_height="130dp"
         android:id="@+id/question_layout"
         android:gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
     <ImageView
@@ -155,7 +155,7 @@
             android:id="@+id/wood_sign_img"/>
             <TextView
                 android:layout_width="110dp"
-                android:layout_height="70dp"
+                android:layout_height="75dp"
                 android:id="@+id/tv_wood_sign_level"
                 android:textColor="@color/white"
                 android:layout_marginStart="15dp"

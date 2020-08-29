@@ -193,7 +193,6 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         category = getIntent().getIntExtra("category",0);
         level = getIntent().getIntExtra("level",0);
 
-        // Noa added
         language = Locale.getDefault().getDisplayLanguage();
         if (language.equalsIgnoreCase("English")) {
             tv_fractionsInstructions.setTextSize(9f);
@@ -467,6 +466,11 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
             tutorialRun();
         }
         this.tv_wood_sign = findViewById(R.id.tv_wood_sign_level);
+        if (language.equalsIgnoreCase("English")) {
+            this.tv_wood_sign.setTextSize(12.3f);
+        } else {
+            this.tv_wood_sign.setTextSize(14f);
+        }
         this.img_wood_sign = findViewById(R.id.wood_sign_img);
         if (!isTutorialRun) {
             // Show sub game level before the game start

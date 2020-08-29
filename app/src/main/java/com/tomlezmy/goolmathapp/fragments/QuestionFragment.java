@@ -87,6 +87,9 @@ public class QuestionFragment extends Fragment {
             questionText1.setText(R.string.decimal_question_start);
             questionText2.setText(String.format(getResources().getString(R.string.f1_param), numOne,"", numTwo));
             questionText3.setText(R.string.decimal_question_end);
+            questionText1.setTextSize(12f);
+            questionText2.setTextSize(12f);
+            questionText3.setTextSize(12f);
             questionText1.setVisibility(View.VISIBLE);
             questionText2.setVisibility(View.VISIBLE);
             questionText3.setVisibility(View.VISIBLE);
@@ -103,9 +106,9 @@ public class QuestionFragment extends Fragment {
         questionText.setTextAppearance(R.style.FontLocalized);
         int questionLen = questionText.length();
         if (questionLen < 11) {
-            questionText.setTextSize(17f);
+            questionText.setTextSize(16f);
         } else {
-            questionText.setTextSize(14f);
+            questionText.setTextSize(13f);
         }
         return rootView;
     }
