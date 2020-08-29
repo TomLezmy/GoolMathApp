@@ -45,7 +45,7 @@ public class FractionQuestion extends Question {
                     mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
                     result = numOne * mul;
                     resultDenominator = numTwo * mul;
-                    questionHiddenAnswer = numOne + "\n- = ?\n" + numTwo;
+                    questionHiddenAnswer = numOne + "_" + numTwo;
                     break;
                 case 3:
                 case 4:
@@ -59,7 +59,7 @@ public class FractionQuestion extends Question {
                     temp = resultDenominator;
                     resultDenominator = numTwo;
                     numTwo = temp;
-                    questionHiddenAnswer = numOne + "\n- = ?\n" + numTwo;
+                    questionHiddenAnswer = numOne + "_" + numTwo;
                     break;
             }
         }

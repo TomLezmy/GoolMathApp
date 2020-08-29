@@ -106,10 +106,10 @@ public class ButtonsFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         String buttonText = ((Button) v).getText().toString();
-        if (!buttonText.contains("/")) {
+        if (!buttonText.contains("\n-\n")) {
             callBack.onReturn(Float.parseFloat(buttonText));
         } else {
-            String[] split = buttonText.split("/");
+            String[] split = buttonText.split("\n-\n");
             callBack.onReturn(Float.parseFloat(split[0]) / Float.parseFloat(split[1]));
         }
     }
