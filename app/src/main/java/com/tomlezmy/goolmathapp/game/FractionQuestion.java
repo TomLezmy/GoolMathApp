@@ -74,7 +74,7 @@ public class FractionQuestion extends Question {
             int gcdResult = gcd(numOne,100);
             result = numOne / gcdResult;
             resultDenominator = 100 / gcdResult;
-            questionHiddenAnswer = String.format(context.getString(R.string.decimal_to_fraction_question), numOne);
+            questionHiddenAnswer = String.format(context.getString(R.string.decimal_to_fraction_question), numOne, "%");
         }
     }
 

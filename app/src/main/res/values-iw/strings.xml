@@ -80,8 +80,8 @@
         <item>הוצאת 1% ממספר</item>
         <item>הוצאת 10% ממספר</item>
         <item>הוצאת 50% ממספר</item>
-        <item>אחוזים קלים – חלק 1</item>
-        <item>אחוזים קלים – חלק 2</item>
+        <item>אחוזים קלים חלק 1</item>
+        <item>אחוזים קלים חלק 2</item>
         <item>אחוזים בכללי</item>
         <item>אחוזים עגולים מעל 100 חלק 1</item>
         <item>אחוזים עגולים מעל 100 חלק 2</item>
@@ -177,7 +177,7 @@
     <string name="decimal_question">כמה זה %s בייצוג עשרוני?</string>
     <string name="decimal_question_start">\nכמה זה </string>
     <string name="decimal_question_end">\n בייצוג עשרוני?</string>
-    <string name="decimal_to_fraction_question">כמה זה %%d% כשבר?</string>
+    <string name="decimal_to_fraction_question">כמה זה %d%s כשבר?</string>
     <string name="no_more_videos">אין עוד סרטונים</string>
     <string name="about_fruit_asset">משאב פירות מ:</string>
     <string name="before_we_start">"רגע לפני שנתחיל, "</string>
