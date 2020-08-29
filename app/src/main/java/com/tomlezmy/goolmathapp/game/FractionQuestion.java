@@ -37,12 +37,18 @@ public class FractionQuestion extends Question {
     private void calculateResult(ECategory category, int level, LevelValueFractionLimits valueLimits) {
         Random rand = new Random();
         int mul;
+
         if (category == ECategory.FRACTIONS) {
+            int multiplierRange = ((valueLimits.getMultiplierLimit() - 1) / numTwo);
+            // Random range can't be zero
+            if (multiplierRange == 0) {
+                multiplierRange = 1;
+            }
             switch (level) {
                 case 1:
                 case 2:
                 case 5:
-                    mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
+                    mul = rand.nextInt(multiplierRange) + 2;
                     result = numOne * mul;
                     resultDenominator = numTwo * mul;
                     questionHiddenAnswer = numOne + "_" + numTwo;
@@ -50,7 +56,7 @@ public class FractionQuestion extends Question {
                 case 3:
                 case 4:
                 case 6:
-                    mul = rand.nextInt(((valueLimits.getMultiplierLimit() - 1) / numTwo)) + 2;
+                    mul = rand.nextInt(multiplierRange) + 2;
                     result = numOne * mul;
                     resultDenominator = numTwo * mul;
                     int temp = (int) result;
