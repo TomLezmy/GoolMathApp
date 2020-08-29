@@ -212,4 +212,8 @@
     <string name="f1">1\n-\n2</string>
     <string name="f2"> \n=\n </string>
     <string name="f3">2\n-\n4</string>
+
+    <string name="f1_param">%s\n%s-\n%s</string>
+    <string name="f2_param"> \n=\n </string>
+    <string name="f3_param"> \n?\n </string>
 </resources>
