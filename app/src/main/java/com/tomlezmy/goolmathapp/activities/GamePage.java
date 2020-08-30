@@ -230,6 +230,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 scoreText.setText(getString(R.string.score) + score);
                 if (gameRunning) {
                     gameRunning = false;
+                    changeGameSpeed(1.5f);
+                    beforeQuestion = true;
                     fallingAnimation.stop();
                     walkingAnimation.stop();
                     player.setImageResource(R.drawable.good1);
@@ -260,6 +262,21 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                     }
                     updateWoodSignOfCurrentLevel(category, level - 1);
                     tv_wood_sign.setText(currentLevelText);
+                }
+                // If category is fractions, show instructions
+                if (category == 4) {
+                    tv_fractionsInstructions.setVisibility(View.VISIBLE);
+                    tv_fraction1.setVisibility(View.VISIBLE);
+                    tv_fraction2.setVisibility(View.VISIBLE);
+                    tv_fraction3.setVisibility(View.VISIBLE);
+                    img_fractionsInstructions.setVisibility(View.VISIBLE);
+                }
+                else {
+                    tv_fractionsInstructions.setVisibility(View.GONE);
+                    tv_fraction1.setVisibility(View.GONE);
+                    tv_fraction2.setVisibility(View.GONE);
+                    tv_fraction3.setVisibility(View.GONE);
+                    img_fractionsInstructions.setVisibility(View.GONE);
                 }
                 tv_wood_sign.setVisibility(View.VISIBLE);
                 img_wood_sign.setVisibility(View.VISIBLE);

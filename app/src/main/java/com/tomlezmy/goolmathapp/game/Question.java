@@ -70,7 +70,6 @@ public class Question {
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case SUBTRACTION:
-                this.result = this.numOne - this.numTwo;
                 sign = "-";
                 if (level == 1) {
                     while (numOne - numTwo < 0) {
@@ -78,6 +77,7 @@ public class Question {
                         numTwo = valueLimits.getSecondNumberLimit().generateValue();
                     }
                 }
+                this.result = this.numOne - this.numTwo;
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case MULTIPLICATION:
@@ -86,7 +86,7 @@ public class Question {
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case DIVISION:
-                if (level == 1 || level == 2) {
+                if (level == 1) {
                     int temp = numOne * numTwo;
                     result = numOne;
                     numOne = temp;
@@ -100,7 +100,7 @@ public class Question {
                 }
                 sign = "/";
                 // If numOne is bigger than 1000 then put commas in the number
-                if (level == 3 && numOne >= 1000) {
+                if (level == 2 && numOne >= 1000) {
                     String bigNumOne = numOne + "";
                     StringBuilder numOneWithCommas = new StringBuilder();
                     int numCount = 0;
