@@ -70,7 +70,6 @@ public class Question {
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case SUBTRACTION:
-                this.result = this.numOne - this.numTwo;
                 sign = "-";
                 if (level == 1) {
                     while (numOne - numTwo < 0) {
@@ -78,6 +77,7 @@ public class Question {
                         numTwo = valueLimits.getSecondNumberLimit().generateValue();
                     }
                 }
+                this.result = this.numOne - this.numTwo;
                 questionHiddenAnswer = numOne + sign + numTwo + "= ?";
                 break;
             case MULTIPLICATION:
