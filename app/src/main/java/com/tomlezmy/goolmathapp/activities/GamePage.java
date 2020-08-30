@@ -230,6 +230,8 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
                 scoreText.setText(getString(R.string.score) + score);
                 if (gameRunning) {
                     gameRunning = false;
+                    changeGameSpeed(1.5f);
+                    beforeQuestion = true;
                     fallingAnimation.stop();
                     walkingAnimation.stop();
                     player.setImageResource(R.drawable.good1);

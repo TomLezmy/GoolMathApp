@@ -59,9 +59,9 @@
 
     <string-array name="practice_divisionSubCategories">
         <item>Division Up To 10</item>
-        <item>Division Of at 10</item>
-        <item>Division Double-Digit Numbers In a Single Digit Numbers</item>
-        <item>Division Three-Digit Numbers In a Double-Digit Numbers</item>
+        <item>Division By 10</item>
+        <item>Division Double-Digit Numbers By Single Digit Numbers</item>
+        <item>Division Three-Digit Numbers By Double-Digit Numbers</item>
     </string-array>
 
     <string-array name="practice_fractionsSubCategories">
@@ -74,14 +74,14 @@
     </string-array>
 
     <string-array name="practice_percentsSubCategories">
-        <item>Ejecting 1% From a Number</item>
-        <item>Ejecting 10% From a Number</item>
-        <item>Ejecting 50% From a Number</item>
+        <item>Extracting 1% From a Number</item>
+        <item>Extracting 10% From a Number</item>
+        <item>Extracting 50% From a Number</item>
         <item>Easy Percentages Part 1</item>
         <item>Easy Percentages Part 2</item>
         <item>Percent In General</item>
-        <item>Percent In GeneraL Part 1</item>
-        <item>Percent In GeneraL Part 2</item>
+        <item>Percent In General Part 1</item>
+        <item>Percent In General Part 2</item>
     </string-array>
 
     <string-array name="practice_decimalsSubCategories">
