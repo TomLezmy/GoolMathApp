@@ -37,7 +37,6 @@ import java.util.Random;
  * This activity Tests the user's knowledge and updates the question level weights
  */
 public class FirstDiagnosisActivity extends AppCompatActivity implements Button.OnClickListener {
-    String language;
     TextView questionText;
     String currentQuestion, currentAnswer;
     Random rand;
@@ -96,11 +95,6 @@ public class FirstDiagnosisActivity extends AppCompatActivity implements Button.
         btn_skip = findViewById(R.id.btn_skip);
         buttons_layout= findViewById(R.id.buttons_layout);
         questionsProgressBar = findViewById(R.id.question_progress);
-
-        this.language = Locale.getDefault().getDisplayLanguage();
-        if ( this.language.equalsIgnoreCase("English")) {
-            questionText.setTextSize(50f);
-        }
 
         Resources res = getResources();
         String username =  getIntent().getStringExtra("first_name");
