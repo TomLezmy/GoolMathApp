@@ -51,7 +51,7 @@
     <string-array name="practice_multiplicationSubCategories">
         <item>Multiplication Up To 5</item>
         <item>Multiplication Up To 10</item>
-        <item>Multiplication at 11</item>
+        <item>Multiplication By 11</item>
         <item>Multiplication In a Double-Digit Numbers</item>
         <item>Multiplication In a Three-Digit numbers</item>
     </string-array>
