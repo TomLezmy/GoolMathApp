@@ -1,7 +1,8 @@
 package com.tomlezmy.goolmathapp.model;
 
-import java.util.List;
-
+/**
+ * An enum that holds the video id's of all categories
+ */
 public enum EVideoIds {
     ADDITION(new String[] {"mNfOSN6WmOc"}), SUBTRACTION(new String[] {}),
     MULTIPLICATION(new String[] {"JDEGZQbF9sY", "xdX49SjS_Y0", "kg-9riR93lE", "JxMNGksh92o"}),

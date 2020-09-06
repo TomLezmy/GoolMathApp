@@ -1,7 +1,7 @@
 package com.tomlezmy.goolmathapp.game;
 
 /**
- * An enum that holds all category's and the number of levels in each category
+ * An enum that holds all level categories and the number of levels in each category
  */
 public enum ECategory {
     ADDITION(2), SUBTRACTION(3),
