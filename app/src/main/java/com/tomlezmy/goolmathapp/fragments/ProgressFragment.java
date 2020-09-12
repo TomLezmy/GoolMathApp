@@ -1,5 +1,6 @@
 package com.tomlezmy.goolmathapp.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,11 @@ public class ProgressFragment extends Fragment {
     RecyclerView recyclerView;
     ProgressResultsAdapter progressResultsAdapter;
     ArrayList<ProgressResult> progressResultList;
+    OnLevelResultClickListener callback;
+
+    public interface OnLevelResultClickListener {
+        void onLevelResultClick(int categoryIndex, int levelIndex);
+    }
 
     /**
      * This method creates a new instance of {@link ProgressFragment} with parameters in a {@link Bundle}
@@ -41,6 +47,16 @@ public class ProgressFragment extends Fragment {
         bundle.putInt("category", categoryIndex);
         progressFragment.setArguments(bundle);
         return progressFragment;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            callback = (OnLevelResultClickListener) context;
+        } catch (ClassCastException ex) {
+            throw new ClassCastException("The activity must implement on OnLevelResultClickListener interface");
+        }
     }
 
     @Nullable
@@ -60,9 +76,17 @@ public class ProgressFragment extends Fragment {
             int highScore = userData.getLevelsProgressData().get(category).get(i).getMaxScore();
             boolean isFinished = userData.getLevelsProgressData().get(category).get(i).isFinished();
             List<Integer> weightList = fileManager.getLevelWeights().get(category).get(i);
-            progressResultList.add(new ProgressResult(level,timesPlayed,highScore,isFinished, weightList));
+            int categoryIndex = getArguments().getInt("category");
+            int levelIndex = i;
+            progressResultList.add(new ProgressResult(level,timesPlayed,highScore,isFinished, weightList, categoryIndex, levelIndex));
         }
         progressResultsAdapter = new ProgressResultsAdapter(progressResultList, getContext());
+        progressResultsAdapter.setListener(new ProgressResultsAdapter.ProgressResultsListener() {
+            @Override
+            public void onLevelResultClick(int categoryIndex, int levelIndex) {
+                callback.onLevelResultClick(categoryIndex, levelIndex);
+            }
+        });
         recyclerView = rootView.findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

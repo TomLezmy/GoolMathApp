@@ -21,7 +21,6 @@ import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
  */
 public class MainMenuFragment extends Fragment {
     IFragmentChangeListener callBack;
-
     /**
      * When fragment attaches to the activity, the {@link IFragmentChangeListener} is attached to it
      */

@@ -1,6 +1,8 @@
 package com.tomlezmy.goolmathapp.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.hanks.htextview.base.HTextView;
 import com.tomlezmy.goolmathapp.R;
 import com.tomlezmy.goolmathapp.adapters.ProgressPagerAdapter;
+import com.tomlezmy.goolmathapp.model.GameRecord;
+import com.tomlezmy.goolmathapp.model.RecordDatabase;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -27,6 +32,8 @@ public class ProgressFragmentScreen extends Fragment {
     TabLayout tabLayout;
     HTextView titleTv;
     String language;
+    RecordDatabase recordDatabase;
+    Handler handler;
 
     @Nullable
     @Override
@@ -51,6 +58,38 @@ public class ProgressFragmentScreen extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(progressPagerAdapter);
 
+        recordDatabase = RecordDatabase.getInstance(getContext());
+        handler = new Handler();
+
         return rootView;
+    }
+
+    /**
+     * This method gets the game records of the current category and level from the database and displays them to the user
+     * @param categoryIndex The chosen category index
+     * @param levelIndex The chosen level index
+     */
+    public void displayGameRecords(final int categoryIndex, final int levelIndex) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final List<GameRecord> records = recordDatabase.gameRecordDao().getAllRecordsFromLevel(categoryIndex, levelIndex);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        showAlert(records);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    /**
+     * This method creates a {@link GameRecordsFragmentDialog} to display the game records
+     * @param records A list of game records to display
+     */
+    public void showAlert(List<GameRecord> records) {
+        GameRecordsFragmentDialog gameRecordsFragmentDialog = new GameRecordsFragmentDialog(records);
+        gameRecordsFragmentDialog.show(getActivity().getSupportFragmentManager(), "GAME_RECORDS_TAG");
     }
 }

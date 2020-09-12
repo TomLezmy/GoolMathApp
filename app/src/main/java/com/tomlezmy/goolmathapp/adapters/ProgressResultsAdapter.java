@@ -23,7 +23,26 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
 
     private List<ProgressResult> progressResults;
     private Context context;
+    private ProgressResultsListener listener;
 
+    /**
+     * This interface is used to notify the listener when a level is clicked
+     */
+    public interface ProgressResultsListener {
+        /**
+         * @param categoryIndex The chosen category index
+         * @param levelIndex The chosen level index
+         */
+        void onLevelResultClick(int categoryIndex, int levelIndex);
+    }
+
+    /**
+     * Set a listener for level click events
+     * @param listener The listener to set
+     */
+    public void setListener(ProgressResultsListener listener) {
+        this.listener = listener;
+    }
 
     /**
      * Class constructor
@@ -36,7 +55,7 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
     }
 
     /**
-     * A {@link androidx.recyclerview.widget.RecyclerView.ViewHolder} to access items in {@link RecyclerView
+     * A {@link androidx.recyclerview.widget.RecyclerView.ViewHolder} to access items in {@link RecyclerView}
      */
     public class ProgressResultsViewHolder extends RecyclerView.ViewHolder {
         TextView levelTv, timesPlayTv, highScoreTv, finishedTv;
@@ -64,8 +83,8 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
      * Fills the {@link ProgressResultsViewHolder} with the current item data
      */
     @Override
-    public void onBindViewHolder(@NonNull ProgressResultsViewHolder holder, int position) {
-        ProgressResult progressResult = progressResults.get(position);
+    public void onBindViewHolder(@NonNull final ProgressResultsViewHolder holder, int position) {
+        final ProgressResult progressResult = progressResults.get(position);
 
         String level =  progressResult.getLevel();
         String tv_level_text = String.format(context.getResources().getString(R.string.in_the_level_x), level);
@@ -78,8 +97,20 @@ public class ProgressResultsAdapter extends RecyclerView.Adapter<ProgressResults
         int highScore =  progressResult.getHighScore();
         String tv_highScore_text = String.format(context.getResources().getString(R.string.your_high_score_is_x), highScore);
         holder.highScoreTv.setText(tv_highScore_text);
+        // If level was never played, gray out the cardView
         if (timesPlayed == 0) {
             ((CardView)(holder.itemView)).setCardBackgroundColor(ContextCompat.getColor(context, R.color.disabled_card));
+        }
+        // If game was played, enable click to show game records
+        else {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onLevelResultClick(progressResult.getCategoryIndex(), progressResult.getLevelIndex());
+                    }
+                }
+            });
         }
         if (progressResult.isFinished()) {
             holder.finishedTv.setVisibility(View.VISIBLE);

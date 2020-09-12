@@ -157,6 +157,7 @@
     <string name="in_the_level_x">בשלב %1s</string>
     <string name="you_played_x_times">שיחקת %1d פעמים</string>
     <string name="your_high_score_is_x">הניקוד הגבוה שלך הוא %1d</string>
+    <string name="score_is_x">ניקוד = %1d</string>
     <string name="progress_main_title">כאן תוכלו לעקוב אחר ההתקדמות שלכם</string>
     <string name="tutorial_start_button">התחילו בלחיצה על הכפתור הזה</string>
     <string name="tutorial_obstacle">אתם צריכים לעבור את המכשול הזה</string>

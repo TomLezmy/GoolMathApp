@@ -16,6 +16,7 @@ import com.tomlezmy.goolmathapp.fragments.LearnFragment;
 import com.tomlezmy.goolmathapp.fragments.LearnSelectFragment;
 import com.tomlezmy.goolmathapp.fragments.MainMenuFragment;
 import com.tomlezmy.goolmathapp.fragments.PracticeSelectFragment;
+import com.tomlezmy.goolmathapp.fragments.ProgressFragment;
 import com.tomlezmy.goolmathapp.fragments.ProgressFragmentScreen;
 import com.tomlezmy.goolmathapp.fragments.SubCategoriesFragment;
 import com.tomlezmy.goolmathapp.fragments.SubjectsFragment;
@@ -24,11 +25,12 @@ import com.tomlezmy.goolmathapp.interfaces.IFragmentChangeListener;
 /**
  * This activity is the main menu where the user navigates through the app
  */
-public class MainActivity extends AppCompatActivity implements IFragmentChangeListener, SubjectsFragment.OnSelectedSubCategoryListener, SubCategoriesFragment.OnSubCategoryListener {
+public class MainActivity extends AppCompatActivity implements IFragmentChangeListener, SubjectsFragment.OnSelectedSubCategoryListener, SubCategoriesFragment.OnSubCategoryListener, ProgressFragment.OnLevelResultClickListener {
 
     boolean isLearnSelectFragment = false, isMainMenuFragment = true, isLearnFragment = false;
     LearnSelectFragment learnSelectFragment;
     PracticeSelectFragment practiceSelectFragment;
+    ProgressFragmentScreen progressFragmentScreen;
     RelativeLayout titleLayout;
     ImageView menuBackground;
 
@@ -95,7 +97,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
                 titleLayout.setVisibility(View.GONE);
                 changeBackground(R.drawable.progress_background_design);
                 final int currentBackStack = getSupportFragmentManager().getBackStackEntryCount();
-                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top, R.anim.slide_in_top, R.anim.slide_out_bottom).replace(R.id.fragment_layout, new ProgressFragmentScreen(), "PROGRESS_TAG").addToBackStack(null).commit();
+                progressFragmentScreen = new ProgressFragmentScreen();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top, R.anim.slide_in_top, R.anim.slide_out_bottom).replace(R.id.fragment_layout, progressFragmentScreen, "PROGRESS_TAG").addToBackStack(null).commit();
                 getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
                     @Override
                     public void onBackStackChanged() {
@@ -185,5 +188,15 @@ public class MainActivity extends AppCompatActivity implements IFragmentChangeLi
             }
         }
         super.onBackPressed();
+    }
+
+    /**
+     * Called when a level is chosen in {@link ProgressFragment}
+     * @param categoryIndex The index of the chosen category
+     * @param levelIndex The index of the chosen level
+     */
+    @Override
+    public void onLevelResultClick(int categoryIndex, int levelIndex) {
+        progressFragmentScreen.displayGameRecords(categoryIndex, levelIndex);
     }
 }

@@ -37,6 +37,8 @@ import com.tomlezmy.goolmathapp.game.ECategory;
 import com.tomlezmy.goolmathapp.game.LevelManager;
 import com.tomlezmy.goolmathapp.interfaces.IButtonFragmentAnswerListener;
 import com.tomlezmy.goolmathapp.interfaces.IResultFragmentListener;
+import com.tomlezmy.goolmathapp.model.GameRecord;
+import com.tomlezmy.goolmathapp.model.RecordDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +80,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
     CountDownTimer countDownTimer;
     MediaPlayer gameBackgroundRing, clockTickingRing, correctRing, wrongRing;
     FileManager fileManager;
+    RecordDatabase recordDatabase;
     List<Integer> weightsBeforeGame;
     CategoryProgressData categoryProgressData;
     SharedPreferences sharedPreferences;
@@ -96,6 +99,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fileManager = FileManager.getInstance(this);
+        recordDatabase = RecordDatabase.getInstance(this);
         changeGameSpeed(1.5f);
 
         // Set game sounds
@@ -679,7 +683,7 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         fileManager.updateUserDataFile();
 
         boolean weightsAreEven = true;
-        // level complete only when weights are even and correctAnswerCounter == 10
+        // level complete only when weights are even and score == 10
         int improvementCounter = 0, deteriorationCounter = 0;
         List<Integer> weightsAfterGame = fileManager.getLevelWeights().get(ECategory.values()[category]).get(level - 1);
         for (int i = 0; i < weightsAfterGame.size(); i++) {
@@ -697,6 +701,16 @@ public class GamePage extends AppCompatActivity implements IButtonFragmentAnswer
         if (levelComplete) {
             openNextLevel();
         }
+
+        // Insert game data into database, can only run async
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                recordDatabase.gameRecordDao().insertRecord(new GameRecord(System.currentTimeMillis(), category, level - 1, score));
+            }
+        }).start();
+
+        // Open fragment to display the game results
         gameFinishedFragment = new GameFinishedFragment(levelComplete, improvementCounter, deteriorationCounter, categoryProgressData);
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top).replace(R.id.result_layout, gameFinishedFragment, RESULT_TAG).commit();

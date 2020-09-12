@@ -48,9 +48,6 @@ public class PracticeSelectFragment extends Fragment {
         secondTitle = getResources().getString(R.string.title_practice_sub_categores_option2);
         tvQuestion_hanks.animateText(secondTitle);
 
-
-        displaySubjects();
-
         return rootView;
     }
 
@@ -60,11 +57,7 @@ public class PracticeSelectFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        int cardColorId = ContextCompat.getColor(getContext(), R.color.blue_card_option3);
-        int titleColorId = ContextCompat.getColor(getContext(), R.color.blue_title);
-        subjectsFragment = new SubjectsFragment(cardColorId,titleColorId,false);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
+        displaySubjects();
     }
 
     /**

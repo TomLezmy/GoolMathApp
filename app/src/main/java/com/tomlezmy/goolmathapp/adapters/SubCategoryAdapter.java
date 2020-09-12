@@ -56,7 +56,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     }
 
     /**
-     * A {@link androidx.recyclerview.widget.RecyclerView.ViewHolder} to access items in {@link RecyclerView
+     * A {@link androidx.recyclerview.widget.RecyclerView.ViewHolder} to access items in {@link RecyclerView}
      */
     public class SubCategoryViewHolder extends RecyclerView.ViewHolder {
         TextView nameTv;

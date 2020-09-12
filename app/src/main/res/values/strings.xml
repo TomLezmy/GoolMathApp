@@ -153,6 +153,7 @@
     <string name="in_the_level_x">In The Level %1s</string>
     <string name="you_played_x_times">You Played %1d Times</string>
     <string name="your_high_score_is_x">Your High Score is %1d</string>
+    <string name="score_is_x">Score : %1d</string>
     <string name="tutorial_start_button">Start by pressing this button</string>
     <string name="progress_main_title">Here you can track your progress</string>
     <string name="tutorial_obstacle">You need to get over this obstacle</string>
