@@ -68,7 +68,7 @@ public class PracticeSelectFragment extends Fragment {
         int titleColorId = ContextCompat.getColor(getContext(), R.color.blue_title);
         subjectsFragment = new SubjectsFragment(cardColorId,titleColorId,false);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
+                .replace(R.id.subjects_display_layout, subjectsFragment, "Subjects_TAG").commit();
     }
 
     /**
